@@ -119,15 +119,15 @@
     "oil": "oil",
     "unknown": "unknown",
 
-    "electricityComesFrom": "<b>%1$s %%</b> of electricity available in <img id=\"country-flag\"></img> <b>%2$s</b> comes from %3$s",
-    "emissionsComeFrom": "<b>%1$s %%</b> of emissions from electricity available in <img id=\"country-flag\"></img> <b>%2$s</b> come from %3$s",
-    "electricityStoredUsing": "<b>%1$s %%</b> of electricity available in <img id=\"country-flag\"></img> <b>%2$s</b> is stored using %3$s",
-    "emissionsStoredUsing": "<b>%1$s %%</b> of emissions from electricity available in <img id=\"country-flag\"></img> <b>%2$s</b> are stored using %3$s",
+    "electricityComesFrom": "<b>%1$s %%</b> of energy %2$s in <img id=\"country-flag\"></img> <b>%3$s</b> comes from %4$s",
+    "emissionsComeFrom": "<b>%1$s %%</b> of emissions from energy %2$s in <img id=\"country-flag\"></img> <b>%3$s</b> come from %4$s",
+    "electricityStoredUsing": "<b>%1$s %%</b> of energy %2$s in <img id=\"country-flag\"></img> <b>%3$s</b> is stored using %4$s",
+    "emissionsStoredUsing": "<b>%1$s %%</b> of emissions from energy %2$s in <img id=\"country-flag\"></img> <b>%3$s</b> are stored using %4$s",
 
-    "electricityExportedTo": "<b>%1$s %%</b> of electricity available in <img id=\"country-flag\"></img> <b>%2$s</b> is exported to <img id=\"country-exchange-flag\"></img> <b>%3$s</b>",
-    "emissionsExportedTo": "<b>%1$s %%</b> of emissions from electricity available in <img id=\"country-flag\"></img> <b>%2$s</b> are exported to <img id=\"country-exchange-flag\"></img> <b>%3$s</b>",
-    "electricityImportedFrom": "<b>%1$s %%</b> of electricity available in <img id=\"country-flag\"></img> <b>%2$s</b> is imported from <img id=\"country-exchange-flag\"></img> <b>%3$s</b>",
-    "emissionsImportedFrom": "<b>%1$s %%</b> of emissions from electricity available in <img id=\"country-flag\"></img> <b>%2$s</b> are imported from <img id=\"country-exchange-flag\"></img> <b>%3$s</b>",
+    "electricityExportedTo": "<b>%1$s %%</b> of energy %2$s in <img id=\"country-flag\"></img> <b>%3$s</b> is exported to <img id=\"country-exchange-flag\"></img> <b>%4$s</b>",
+    "emissionsExportedTo": "<b>%1$s %%</b> of emissions from energy %2$s in <img id=\"country-flag\"></img> <b>%3$s</b> are exported to <img id=\"country-exchange-flag\"></img> <b>%4$s</b>",
+    "electricityImportedFrom": "<b>%1$s %%</b> of energy %2$s in <img id=\"country-flag\"></img> <b>%3$s</b> is imported from <img id=\"country-exchange-flag\"></img> <b>%4$s</b>",
+    "emissionsImportedFrom": "<b>%1$s %%</b> of emissions from energy %2$s in <img id=\"country-flag\"></img> <b>%3$s</b> are imported from <img id=\"country-exchange-flag\"></img> <b>%4$s</b>",
 
     "ofCO2eqPerMinute": "of CO₂eq per minute",
     "theMap": {

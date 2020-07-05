@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 
 import { __ } from '../../helpers/translation';
 import { useCo2ColorScale } from '../../hooks/theme';
+import { useCarbonIntensityDomain } from '../../hooks/redux';
+import { getZoneCarbonIntensity, getRenewableRatio, getLowcarbonRatio } from '../../helpers/zonedata';
+import { formatCarbonIntensityShortUnit } from '../../helpers/formatting';
+import { CARBON_INTENSITY_DOMAIN } from '../../helpers/constants';
 
 import CircularGauge from '../circulargauge';
 import Tooltip from '../tooltip';
@@ -18,23 +22,18 @@ const MapCountryTooltip = ({
   zoneData,
 }) => {
   const co2ColorScale = useCo2ColorScale();
+  const carbonIntensityDomain = useCarbonIntensityDomain();
 
   if (!zoneData) return null;
 
-  const co2intensity = electricityMixMode === 'consumption'
-    ? zoneData.co2intensity
-    : zoneData.co2intensityProduction;
+  const co2intensity = getZoneCarbonIntensity(carbonIntensityDomain, electricityMixMode, zoneData);
 
-  const fossilFuelRatio = electricityMixMode === 'consumption'
-    ? zoneData.fossilFuelRatio
-    : zoneData.fossilFuelRatioProduction;
+  const fossilFuelRatio = getLowcarbonRatio(electricityMixMode, zoneData);
   const fossilFuelPercentage = fossilFuelRatio !== null
     ? Math.round(100 * (1 - fossilFuelRatio))
     : '?';
 
-  const renewableRatio = electricityMixMode === 'consumption'
-    ? zoneData.renewableRatio
-    : zoneData.renewableRatioProduction;
+  const renewableRatio = getRenewableRatio(electricityMixMode, zoneData);
   const renewablePercentage = renewableRatio !== null
     ? Math.round(100 * renewableRatio)
     : '?';
@@ -44,7 +43,7 @@ const MapCountryTooltip = ({
       <div className="zone-name-header">
         <ZoneName zone={zoneData.countryCode} />
       </div>
-      {zoneData.hasParser ? (
+      {true ? (
         co2intensity ? (
           <div className="zone-details">
             <div className="country-table-header-inner">
@@ -56,27 +55,31 @@ const MapCountryTooltip = ({
                 >
                   <div>
                     <span className="country-emission-intensity">
-                      {Math.round(co2intensity) || '?'}
+                      {co2intensity != null ? Math.round(co2intensity) : '?'}
                     </span>
-                    g
+                    {formatCarbonIntensityShortUnit(carbonIntensityDomain)}
                   </div>
                 </div>
                 <div className="country-col-headline">{__('country-panel.carbonintensity')}</div>
               </div>
-              <div className="country-col country-lowcarbon-wrap">
-                <div id="tooltip-country-lowcarbon-gauge" className="country-gauge-wrap">
-                  <CircularGauge percentage={fossilFuelPercentage} />
-                </div>
-                <div className="country-col-headline">{__('country-panel.lowcarbon')}</div>
-                <div className="country-col-subtext" />
+              {carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.ENERGY ? (
+                <React.Fragment>
+                  <div className="country-col country-lowcarbon-wrap">
+                    <div id="tooltip-country-lowcarbon-gauge" className="country-gauge-wrap">
+                      <CircularGauge percentage={fossilFuelPercentage} />
+                    </div>
+                    <div className="country-col-headline">{__('country-panel.lowcarbon')}</div>
+                    <div className="country-col-subtext" />
+                  </div>
+                  <div className="country-col country-renewable-wrap">
+                    <div id="tooltip-country-renewable-gauge" className="country-gauge-wrap">
+                      <CircularGauge percentage={renewablePercentage} />
+                    </div>
+                    <div className="country-col-headline">{__('country-panel.renewable')}</div>
+                  </div>
+                </React.Fragment>
+              ) : null}
               </div>
-              <div className="country-col country-renewable-wrap">
-                <div id="tooltip-country-renewable-gauge" className="country-gauge-wrap">
-                  <CircularGauge percentage={renewablePercentage} />
-                </div>
-                <div className="country-col-headline">{__('country-panel.renewable')}</div>
-              </div>
-            </div>
           </div>
         ) : (
           <div className="temporary-outage-text">

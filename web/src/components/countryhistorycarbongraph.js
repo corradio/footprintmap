@@ -12,16 +12,20 @@ import {
 import { dispatchApplication } from '../store';
 
 import MapCountryTooltip from './tooltips/mapcountrytooltip';
+import { formatCarbonIntensityUnit } from '../helpers/formatting';
 import AreaGraph from './graph/areagraph';
+import { getZoneCarbonIntensity } from '../helpers/zonedata';
 
-const prepareGraphData = (historyData, co2ColorScale, electricityMixMode) => {
+const prepareGraphData = (historyData, co2ColorScale, electricityMixMode, carbonIntensityDomain) => {
   if (!historyData || !historyData[0]) return {};
 
   const data = historyData.map(d => ({
-    carbonIntensity: electricityMixMode === 'consumption'
-      ? d.co2intensity
-      : d.co2intensityProduction,
-    datetime: moment(d.stateDatetime).toDate(),
+    carbonIntensity: getZoneCarbonIntensity(
+      carbonIntensityDomain,
+      electricityMixMode,
+      d,
+    ),
+    datetime: moment(d.year.toString()).toDate(),
     // Keep a pointer to original data
     meta: d,
   }));
@@ -34,12 +38,15 @@ const mapStateToProps = state => ({
   electricityMixMode: state.application.electricityMixMode,
   isMobile: state.application.isMobile,
   selectedTimeIndex: state.application.selectedZoneTimeIndex,
+  carbonIntensityDomain: state.application.carbonIntensityDomain,
 });
 
 const CountryHistoryCarbonGraph = ({
   electricityMixMode,
   isMobile,
   selectedTimeIndex,
+
+  carbonIntensityDomain,
 }) => {
   const [tooltip, setTooltip] = useState(null);
   const [selectedLayerIndex, setSelectedLayerIndex] = useState(null);
@@ -51,8 +58,8 @@ const CountryHistoryCarbonGraph = ({
 
   // Recalculate graph data only when the history data is changed
   const { data, layerKeys, layerFill } = useMemo(
-    () => prepareGraphData(historyData, co2ColorScale, electricityMixMode),
-    [historyData, co2ColorScale, electricityMixMode],
+    () => prepareGraphData(historyData, co2ColorScale, electricityMixMode, carbonIntensityDomain),
+    [historyData, co2ColorScale, electricityMixMode, carbonIntensityDomain],
   );
 
   // Mouse action handlers
@@ -95,7 +102,7 @@ const CountryHistoryCarbonGraph = ({
         layerFill={layerFill}
         startTime={startTime}
         endTime={endTime}
-        valueAxisLabel="g / kWh"
+        valueAxisLabel={formatCarbonIntensityUnit(carbonIntensityDomain)}
         backgroundMouseMoveHandler={mouseMoveHandler}
         backgroundMouseOutHandler={mouseOutHandler}
         layerMouseMoveHandler={mouseMoveHandler}

@@ -21,7 +21,8 @@ import ContributorList from '../../components/contributorlist';
 import CountryHistoryCarbonGraph from '../../components/countryhistorycarbongraph';
 import CountryHistoryEmissionsGraph from '../../components/countryhistoryemissionsgraph';
 import CountryHistoryMixGraph from '../../components/countryhistorymixgraph';
-import CountryHistoryPricesGraph from '../../components/countryhistorypricesgraph';
+import CountryHistoryGdpGraph from '../../components/countryhistorygdpgraph';
+import CountryHistoryPopulationGraph from '../../components/countryhistorypopulationgraph';
 import CountryTable from '../../components/countrytable';
 import LoadingPlaceholder from '../../components/loadingplaceholder';
 
@@ -33,6 +34,9 @@ import { useCo2ColorScale } from '../../hooks/theme';
 import { useTrackEvent } from '../../hooks/tracking';
 import { flagUri } from '../../helpers/flags';
 import { getFullZoneName, __ } from '../../helpers/translation';
+import { getZoneCarbonIntensity, getRenewableRatio, getLowcarbonRatio } from '../../helpers/zonedata';
+import { formatCarbonIntensityUnit, formatCarbonIntensityShortUnit } from '../../helpers/formatting';
+import { CARBON_INTENSITY_DOMAIN } from '../../helpers/constants';
 
 // TODO: Move all styles from styles.css to here
 // TODO: Remove all unecessary id and class tags
@@ -45,12 +49,7 @@ const CountryLowCarbonGauge = () => {
     return <CircularGauge />;
   }
 
-  const fossilFuelRatio = electricityMixMode === 'consumption'
-    ? d.fossilFuelRatio
-    : d.fossilFuelRatioProduction;
-  const countryLowCarbonPercentage = fossilFuelRatio !== null
-    ? 100 - (fossilFuelRatio * 100)
-    : null;
+  const countryLowCarbonPercentage = getLowcarbonRatio(electricityMixMode, d) * 100;
 
   return <CircularGauge percentage={countryLowCarbonPercentage} />;
 };
@@ -63,12 +62,7 @@ const CountryRenewableGauge = () => {
     return <CircularGauge />;
   }
 
-  const renewableRatio = electricityMixMode === 'consumption'
-    ? d.renewableRatio
-    : d.renewableRatioProduction;
-  const countryRenewablePercentage = renewableRatio !== null
-    ? renewableRatio * 100
-    : null;
+  const countryRenewablePercentage = getRenewableRatio(electricityMixMode, d) * 100;
 
   return <CircularGauge percentage={countryRenewablePercentage} />;
 };
@@ -78,6 +72,9 @@ const mapStateToProps = state => ({
   isMobile: state.application.isMobile,
   tableDisplayEmissions: state.application.tableDisplayEmissions,
   zones: state.data.grid.zones,
+
+  carbonIntensityDomain: state.application.carbonIntensityDomain,
+  currentYear: state.application.currentYear,
 });
 
 const CountryPanel = ({
@@ -85,6 +82,8 @@ const CountryPanel = ({
   isMobile,
   tableDisplayEmissions,
   zones,
+
+  carbonIntensityDomain,
 }) => {
   const [tooltip, setTooltip] = useState(null);
 
@@ -125,10 +124,12 @@ const CountryPanel = ({
   }
 
   const { hasParser } = data;
-  const datetime = data.stateDatetime || data.datetime;
-  const co2Intensity = electricityMixMode === 'consumption'
-    ? data.co2intensity
-    : data.co2intensityProduction;
+  const datetime = data.year.toString();
+  const co2Intensity = getZoneCarbonIntensity(
+    carbonIntensityDomain,
+    electricityMixMode,
+    data,
+  );
 
   const switchToZoneEmissions = () => {
     dispatchApplication('tableDisplayEmissions', true);
@@ -160,14 +161,14 @@ const CountryPanel = ({
                   {getFullZoneName(zoneId)}
                 </div>
                 <div className="country-time">
-                  {datetime ? moment(datetime).format('LL LT') : ''}
+                  {datetime ? moment(datetime).format('YYYY') : ''}
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {hasParser && (
+        {data && (
           <React.Fragment>
             <div className="country-table-header-inner">
               <div className="country-col country-emission-intensity-wrap">
@@ -178,31 +179,92 @@ const CountryPanel = ({
                 >
                   <div>
                     <span className="country-emission-intensity">
-                      {Math.round(co2Intensity) || '?'}
+                      {co2Intensity != null ? Math.round(co2Intensity) : '?'}
                     </span>
-                    g
+                    {formatCarbonIntensityShortUnit(carbonIntensityDomain)}
                   </div>
                 </div>
                 <div className="country-col-headline">{__('country-panel.carbonintensity')}</div>
-                <div className="country-col-subtext">(gCO₂eq/kWh)</div>
-              </div>
-              <div className="country-col country-lowcarbon-wrap">
-                <div id="country-lowcarbon-gauge" className="country-gauge-wrap">
-                  <CountryLowCarbonGauge
-                    onMouseMove={(x, y) => setTooltip({ position: { x, y } })}
-                    onMouseOut={() => setTooltip(null)}
-                  />
-                  {tooltip && <LowCarbonInfoTooltip position={tooltip.position} />}
+                <div className="country-col-subtext">
+                  ({formatCarbonIntensityUnit(carbonIntensityDomain)})
                 </div>
-                <div className="country-col-headline">{__('country-panel.lowcarbon')}</div>
-                <div className="country-col-subtext" />
               </div>
-              <div className="country-col country-renewable-wrap">
-                <div id="country-renewable-gauge" className="country-gauge-wrap">
-                  <CountryRenewableGauge />
-                </div>
-                <div className="country-col-headline">{__('country-panel.renewable')}</div>
-              </div>
+
+              {carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.ENERGY ? (
+                <React.Fragment>
+                  <div className="country-col country-lowcarbon-wrap">
+                    <div id="country-lowcarbon-gauge" className="country-gauge-wrap">
+                      <CountryLowCarbonGauge
+                        onMouseMove={(x, y) => setTooltip({ position: { x, y } })}
+                        onMouseOut={() => setTooltip(null)}
+                      />
+                      {tooltip && <LowCarbonInfoTooltip position={tooltip.position} />}
+                    </div>
+                    <div className="country-col-headline">{__('country-panel.lowcarbon')}</div>
+                    <div className="country-col-subtext" />
+                  </div>
+                  <div className="country-col country-renewable-wrap">
+                    <div id="country-renewable-gauge" className="country-gauge-wrap">
+                      <CountryRenewableGauge />
+                    </div>
+                    <div className="country-col-headline">{__('country-panel.renewable')}</div>
+                  </div>
+                </React.Fragment>
+              ) : null}
+            </div>
+          </React.Fragment>
+        )}
+      </div>
+
+      <div className="country-panel-wrap">
+        {data && (
+          <React.Fragment>
+            <div className="country-history">
+              {null && <div className="loading overlay" />}
+              <span className="country-history-title">
+                {!tableDisplayEmissions
+                  ? `Carbon intensity (${electricityMixMode !== 'consumption' ? 'territorial' : 'incl. imported'})`
+                  : `Emissions (${electricityMixMode !== 'consumption' ? 'territorial' : 'incl. imported'})`
+                }
+              </span>
+              <br />
+
+              {tableDisplayEmissions ? <CountryHistoryEmissionsGraph /> : <CountryHistoryCarbonGraph />}
+
+              {carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.ENERGY ? (
+                <React.Fragment>
+                  <CountryHistoryMixGraph />
+                  <br />
+                  {null && (
+                    <div className="bysource">
+                      {__('country-panel.bysource')}
+                    </div>
+                  )}
+                  <span className="country-history-title">
+                    by source
+                  </span>
+                  <CountryTable />
+                </React.Fragment>
+              ) : null}
+
+              {carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.GDP ? (
+                <React.Fragment>
+                  {null && <div className="loading overlay" />}
+                  <span className="country-history-title">
+                    Gross domestic product
+                  </span>
+                  <CountryHistoryGdpGraph />
+                </React.Fragment>
+              ) : null}
+
+              {carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.POPULATION ? (
+                <React.Fragment>
+                  <span className="country-history-title">
+                    Population
+                  </span>
+                  <CountryHistoryPopulationGraph />
+                </React.Fragment>
+              ) : null}
             </div>
             <div className="country-show-emissions-wrap">
               <div className="menu">
@@ -216,82 +278,6 @@ const CountryPanel = ({
               </div>
             </div>
           </React.Fragment>
-        )}
-      </div>
-
-      <div className="country-panel-wrap">
-        {hasParser ? (
-          <React.Fragment>
-            <div className="bysource">
-              {__('country-panel.bysource')}
-            </div>
-
-            <CountryTable />
-
-            <hr />
-            <div className="country-history">
-              <span className="country-history-title">
-                {__(tableDisplayEmissions ? 'country-history.emissions24h' : 'country-history.carbonintensity24h')}
-              </span>
-              <br />
-              <small className="small-screen-hidden">
-                <i className="material-icons" aria-hidden="true">file_download</i> <a href="https://data.electricitymap.org/?utm_source=electricitymap.org&utm_medium=referral&utm_campaign=country_panel" target="_blank">{__('country-history.Getdata')}</a>
-                <span className="pro"><i className="material-icons" aria-hidden="true">lock</i> pro</span>
-              </small>
-              {/* TODO: Make the loader part of AreaGraph component with inferred height */}
-              {isLoadingHistories ? <LoadingPlaceholder height="9.2em" /> : (
-                tableDisplayEmissions ? <CountryHistoryEmissionsGraph /> : <CountryHistoryCarbonGraph />
-              )}
-
-              <span className="country-history-title">
-                {tableDisplayEmissions
-                  ? __(`country-history.emissions${electricityMixMode === 'consumption' ? 'origin' : 'production'}24h`)
-                  : __(`country-history.electricity${electricityMixMode === 'consumption' ? 'origin' : 'production'}24h`)
-                }
-              </span>
-              <br />
-              <small className="small-screen-hidden">
-                <i className="material-icons" aria-hidden="true">file_download</i> <a href="https://data.electricitymap.org/?utm_source=electricitymap.org&utm_medium=referral&utm_campaign=country_panel" target="_blank">{__('country-history.Getdata')}</a>
-                <span className="pro"><i className="material-icons" aria-hidden="true">lock</i> pro</span>
-              </small>
-              {/* TODO: Make the loader part of AreaGraph component with inferred height */}
-              {isLoadingHistories ? <LoadingPlaceholder height="11.2em" /> : <CountryHistoryMixGraph />}
-
-              <span className="country-history-title">
-                {__('country-history.electricityprices24h')}
-              </span>
-              {/* TODO: Make the loader part of AreaGraph component with inferred height */}
-              {isLoadingHistories ? <LoadingPlaceholder height="7.2em" /> : <CountryHistoryPricesGraph />}
-            </div>
-            <hr />
-            <div>
-              {__('country-panel.source')}
-              {': '}
-              <a href="https://github.com/tmrowco/electricitymap-contrib#real-time-electricity-data-sources" target="_blank">
-                <span className="country-data-source">{data.source || '?'}</span>
-              </a>
-              <small>
-                {' '}
-                (
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: __(
-                      'country-panel.addeditsource',
-                      'https://github.com/tmrowco/electricitymap-contrib/tree/master/parsers',
-                    ),
-                  }}
-                />
-                )
-              </small>
-              {' '}
-              {__('country-panel.helpfrom')}
-              <ContributorList />
-            </div>
-          </React.Fragment>
-        ) : (
-          <div className="zone-details-no-parser-message">
-            <span dangerouslySetInnerHTML={{ __html: __('country-panel.noParserInfo', 'https://github.com/tmrowco/electricitymap-contrib#adding-a-new-region') }} />
-          </div>
         )}
 
         <div className="social-buttons large-screen-hidden">

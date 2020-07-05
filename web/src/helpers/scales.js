@@ -26,7 +26,6 @@ export const solarColor = scaleLinear()
   .clamp(true);
 
 // ** Exchange
-
 export const quantizedCo2IntensityScale = scaleQuantize()
   .domain([0, 800])
   .range([0, 80, 160, 240, 320, 400, 480, 560, 640, 720, 800])
@@ -37,3 +36,16 @@ export const quantizedExchangeSpeedScale = scaleLinear()
   .rangeRound([0, 2])
   .unknown(0)
   .clamp(true);
+
+// ** CO2
+export const getCo2Scale = (colorBlindModeEnabled, carbonIntensityDomain) => {
+  const theme = colorBlindModeEnabled
+    ? themes.colorblindScale
+    : themes.co2Scale;
+
+  return scaleLinear()
+    .domain(theme.steps(carbonIntensityDomain))
+    .range(theme.colors)
+    .unknown('gray')
+    .clamp(true);
+};

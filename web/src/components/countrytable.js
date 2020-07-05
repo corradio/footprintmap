@@ -39,13 +39,17 @@ const RECT_OPACITY = 0.8;
 const X_AXIS_HEIGHT = 15;
 const SCALE_TICKS = 4;
 
-const getProductionData = data => modeOrder.map((mode) => {
+const getProductionData = (data, electricityMixMode) => modeOrder.map((mode) => {
   const isStorage = mode.indexOf('storage') !== -1;
   const resource = mode.replace(' storage', '');
 
+  const key = electricityMixMode === 'consumption'
+    ? 'primaryEnergyConsumptionTWh'
+    : 'primaryEnergyProductionTWh';
+
   // Power in MW
   const capacity = (data.capacity || {})[mode];
-  const production = (data.production || {})[resource];
+  const production = (data[key] || {})[resource]; // TODO: rename `production`
   const storage = (data.storage || {})[resource];
 
   // Production CO₂ intensity
@@ -88,7 +92,7 @@ const getDataBlockPositions = (productionData, exchangeData) => {
 
   const exchangeFlagX = LABEL_MAX_WIDTH - 4.0 * PADDING_X - DEFAULT_FLAG_SIZE - d3Max(exchangeData, d => d.mode.length) * 8;
   const exchangeHeight = exchangeData.length * (ROW_HEIGHT + PADDING_Y);
-  const exchangeY = productionY + productionHeight + ROW_HEIGHT + PADDING_Y;
+  const exchangeY = productionY + productionHeight;// + ROW_HEIGHT + PADDING_Y;
 
   return {
     productionHeight,
@@ -222,6 +226,7 @@ const CountryCarbonEmissionsTable = React.memo(({
   onExchangeRowMouseOver,
   onExchangeRowMouseOut,
   width,
+  carbonIntensityDomain,
 }) => {
   const { productionY, exchangeFlagX, exchangeY } = getDataBlockPositions(productionData, exchangeData);
 
@@ -322,6 +327,7 @@ const CountryElectricityProductionTable = React.memo(({
   onExchangeRowMouseOver,
   onExchangeRowMouseOut,
   width,
+  carbonIntensityDomain,
 }) => {
   const co2ColorScale = useCo2ColorScale();
 
@@ -343,15 +349,17 @@ const CountryElectricityProductionTable = React.memo(({
         data.maxStorageCapacity || 0,
         data.maxImport || 0,
         data.maxImportCapacity || 0,
+        d3Max(productionData, d => d.production),
       ),
     ])
     .range([0, width - LABEL_MAX_WIDTH - PADDING_X]);
 
   const formatTick = (t) => {
     const [x1, x2] = powerScale.domain();
-    if (x2 - x1 <= 1) return `${t * 1e3} kW`;
-    if (x2 - x1 <= 1e3) return `${t} MW`;
-    return `${t * 1e-3} GW`;
+    // Assumes TWh as entry
+    if (x2 - x1 <= 1) return `${t * 1e3} GWh`;
+    if (x2 - x1 <= 1e3) return `${t} TWh`;
+    return `${t * 1e-3} PWh`;
   };
 
   return (
@@ -430,12 +438,15 @@ const mapStateToProps = state => ({
   displayByEmissions: state.application.tableDisplayEmissions,
   electricityMixMode: state.application.electricityMixMode,
   isMobile: state.application.isMobile,
+  carbonIntensityDomain: state.application.carbonIntensityDomain,
 });
 
 const CountryTable = ({
   displayByEmissions,
   electricityMixMode,
   isMobile,
+  
+  carbonIntensityDomain,
 }) => {
   const ref = useRef(null);
   const width = useWidthObserver(ref);
@@ -444,8 +455,8 @@ const CountryTable = ({
   const data = useCurrentZoneData();
 
   const productionData = useMemo(
-    () => getProductionData(data),
-    [data],
+    () => getProductionData(data, electricityMixMode),
+    [data, electricityMixMode]
   );
   const exchangeData = useMemo(
     () => getExchangeData(data, exchangeKeys, electricityMixMode),

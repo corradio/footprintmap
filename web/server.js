@@ -225,6 +225,7 @@ app.use('/', (req, res) => {
 });
 
 // Start the application
-server.listen(process.env['PORT'], () => {
-  console.log(`Listening on *:${process.env['PORT']}`);
+const port = process.env['PORT'] || 8000;
+server.listen(port, () => {
+  console.log(`Listening on *:${port}`);
 });

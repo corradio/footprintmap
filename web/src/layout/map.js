@@ -21,6 +21,9 @@ import MapCountryTooltip from '../components/tooltips/mapcountrytooltip';
 import ExchangeLayer from '../components/layers/exchangelayer';
 import SolarLayer from '../components/layers/solarlayer';
 import WindLayer from '../components/layers/windlayer';
+import { CarbonIntensity } from '../components/tooltips/common';
+import { useCarbonIntensityDomain } from '../hooks/redux';
+import { getZoneCarbonIntensity } from '../helpers/zonedata';
 
 const debouncedReleaseMoving = debounce(() => { dispatchApplication('isMovingMap', false); }, 200);
 
@@ -39,6 +42,7 @@ export default () => {
   const trackEvent = useTrackEvent();
   const location = useLocation();
   const history = useHistory();
+  const carbonIntensityDomain = useCarbonIntensityDomain();
   // TODO: Replace with useParams().zoneId once this component gets
   // put in the right render context and has this param available.
   const zoneId = getZoneId();
@@ -128,9 +132,7 @@ export default () => {
     () => (data) => {
       dispatchApplication(
         'co2ColorbarValue',
-        electricityMixMode === 'consumption'
-          ? data.co2intensity
-          : data.co2intensityProduction,
+        getZoneCarbonIntensity(carbonIntensityDomain, electricityMixMode, data),
       );
       setTooltipZoneData(data);
     },

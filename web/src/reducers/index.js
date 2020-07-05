@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 
+import { CARBON_INTENSITY_DOMAIN } from '../helpers/constants';
 import { getKey } from '../helpers/storage';
 import { isLocalhost, isProduction } from '../helpers/environment';
 
@@ -51,6 +52,7 @@ const initialApplicationState = {
   webGLSupported: true,
   windColorbarValue: null,
 
+  carbonIntensityDomain: CARBON_INTENSITY_DOMAIN.POPULATION,
   // TODO(olc): move this to countryPanel once all React components have been made
   tableDisplayEmissions: false,
 };

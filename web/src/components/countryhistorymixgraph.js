@@ -26,7 +26,7 @@ const getValuesInfo = (historyData, displayByEmissions) => {
       ? (d.totalCo2Production + d.totalCo2Import + d.totalCo2Discharge) / 1e6 / 60.0 // in tCO₂eq/min
       : (d.totalProduction + d.totalImport + d.totalDischarge) // in MW
   ));
-  const format = formatting.scalePower(maxTotalValue);
+  const format = formatting.scaleEnergy(maxTotalValue);
 
   const valueAxisLabel = displayByEmissions ? 'tCO₂eq / min' : format.unit;
   const valueFactor = format.formattingFactor;
@@ -38,39 +38,43 @@ const prepareGraphData = (historyData, co2ColorScale, displayByEmissions, electr
 
   const { valueAxisLabel, valueFactor } = getValuesInfo(historyData, displayByEmissions);
 
+  const key = electricityMixMode === 'consumption'
+    ? 'primaryEnergyConsumptionTWh'
+    : 'primaryEnergyProductionTWh';
+
   // Format history data received by the API
   // TODO: Simplify this function and make it more readable
   const data = historyData.map((d) => {
     const obj = {
-      datetime: moment(d.stateDatetime).toDate(),
+      datetime: moment(d.year.toString()).toDate(),
     };
     // Add production
     modeOrder.forEach((k) => {
       const isStorage = k.indexOf('storage') !== -1;
       const value = isStorage
         ? -1 * Math.min(0, (d.storage || {})[k.replace(' storage', '')])
-        : (d.production || {})[k];
+        : (d[key] || {})[k];
       // in GW or MW
       obj[k] = value / valueFactor;
       if (Number.isFinite(value) && displayByEmissions && obj[k] != null) {
         // in tCO₂eq/min
-        if (isStorage && obj[k] >= 0) {
-          obj[k] *= (d.dischargeCo2Intensities || {})[k.replace(' storage', '')] / 1e3 / 60.0;
-        } else {
-          obj[k] *= (d.productionCo2Intensities || {})[k] / 1e3 / 60.0;
-        }
+        // if (isStorage && obj[k] >= 0) {
+        //   obj[k] *= (d.dischargeCo2Intensities || {})[k.replace(' storage', '')] / 1e3 / 60.0;
+        // } else {
+        //   obj[k] *= (d.productionCo2Intensities || {})[k] / 1e3 / 60.0;
+        // }
       }
     });
     if (electricityMixMode === 'consumption') {
       // Add exchange
-      forEach(d.exchange, (value, key) => {
-        // in GW or MW
-        obj[key] = Math.max(0, value / valueFactor);
-        if (Number.isFinite(value) && displayByEmissions && obj[key] != null) {
-          // in tCO₂eq/min
-          obj[key] *= (d.exchangeCo2Intensities || {})[key] / 1e3 / 60.0;
-        }
-      });
+      // forEach(d.exchange, (value, key) => {
+      //   // in GW or MW
+      //   obj[key] = Math.max(0, value / valueFactor);
+      //   if (Number.isFinite(value) && displayByEmissions && obj[key] != null) {
+      //     // in tCO₂eq/min
+      //     obj[key] *= (d.exchangeCo2Intensities || {})[key] / 1e3 / 60.0;
+      //   }
+      // });
     }
     // Keep a pointer to original data
     obj.meta = d;
@@ -102,6 +106,7 @@ const mapStateToProps = state => ({
   electricityMixMode: state.application.electricityMixMode,
   isMobile: state.application.isMobile,
   selectedTimeIndex: state.application.selectedZoneTimeIndex,
+  carbonIntensityDomain: state.application.carbonIntensityDomain,
 });
 
 const CountryHistoryMixGraph = ({
@@ -109,6 +114,8 @@ const CountryHistoryMixGraph = ({
   electricityMixMode,
   isMobile,
   selectedTimeIndex,
+
+  carbonIntensityDomain,
 }) => {
   const [tooltip, setTooltip] = useState(null);
   const [selectedLayerIndex, setSelectedLayerIndex] = useState(null);

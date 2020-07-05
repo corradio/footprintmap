@@ -103,7 +103,7 @@
 /* override mapbox styling */
 .mapboxgl-zoom-controls {
     right: 16px !important;
-    top: 119px !important;
+    top: 170px !important;
 
     @include respond-to('small') {
         top: 66px !important;

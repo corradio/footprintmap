@@ -7,6 +7,7 @@ import { useCo2ColorScale } from '../hooks/theme';
 import { getCenteredZoneViewport } from '../helpers/map';
 import { __, getFullZoneName } from '../helpers/translation';
 import { flagUri } from '../helpers/flags';
+import { getZoneCarbonIntensity } from '../helpers/zonedata';
 
 const d3 = Object.assign(
   {},
@@ -24,10 +25,8 @@ function withZoneRankings(zones) {
   });
 }
 
-function getCo2IntensityAccessor(electricityMixMode) {
-  return d => (electricityMixMode === 'consumption'
-    ? d.co2intensity
-    : d.co2intensityProduction);
+function getCo2IntensityAccessor(electricityMixMode, carbonIntensityDomain) {
+  return d => getZoneCarbonIntensity(carbonIntensityDomain, electricityMixMode, d);
 }
 
 function sortAndValidateZones(zones, accessor) {
@@ -67,15 +66,19 @@ const mapStateToProps = state => ({
   electricityMixMode: state.application.electricityMixMode,
   gridZones: state.data.grid.zones,
   searchQuery: state.application.searchQuery,
+
+  carbonIntensityDomain: state.application.carbonIntensityDomain,
 });
 
 const ZoneList = ({
   electricityMixMode,
   gridZones,
   searchQuery,
+
+  carbonIntensityDomain,
 }) => {
   const co2ColorScale = useCo2ColorScale();
-  const co2IntensityAccessor = getCo2IntensityAccessor(electricityMixMode);
+  const co2IntensityAccessor = getCo2IntensityAccessor(electricityMixMode, carbonIntensityDomain);
   const zones = processZones(gridZones, co2IntensityAccessor)
     .filter(z => zoneMatchesQuery(z, searchQuery));
 
@@ -143,7 +146,7 @@ const ZoneList = ({
           to={zonePage(zone)}
           onClick={() => enterZone(zone)}
           className={selectedItemIndex === ind ? 'selected' : ''}
-          key={zone.shortname}
+          key={zone.countryCode}
         >
           <div className="ranking">{zone.ranking}</div>
           <img className="flag" src={flagUri(zone.countryCode, 32)} alt={zone.countryCode} />

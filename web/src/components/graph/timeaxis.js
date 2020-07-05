@@ -9,7 +9,7 @@ import { __ } from '../../helpers/translation';
 const renderTickValue = v => (
   moment().diff(moment(v), 'minutes') <= 15
     ? __('country-panel.now')
-    : moment(v).format('LT')
+    : moment(v).format('YYYY')
 );
 
 const roundUp = (number, base) => Math.ceil(number / base) * base;
@@ -20,7 +20,7 @@ const getTicksValuesFromTimeScale = (scale, count) => {
   const startTime = scale.domain()[0].valueOf();
   const endTime = scale.domain()[1].valueOf();
 
-  const precision = moment.duration(15, 'minutes').valueOf();
+  const precision = moment.duration(1, 'year').valueOf();
   const step = (endTime - startTime) / (count - 1);
 
   return range(count).map(ind => (

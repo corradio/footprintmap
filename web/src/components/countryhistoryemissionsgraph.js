@@ -17,12 +17,13 @@ import { dispatchApplication } from '../store';
 import CountryPanelEmissionsTooltip from './tooltips/countrypanelemissionstooltip';
 import AreaGraph from './graph/areagraph';
 
-const prepareGraphData = (historyData) => {
+const prepareGraphData = (historyData, colorBlindModeEnabled, electricityMixMode, carbonIntensityDomain) => {
   if (!historyData || !historyData[0]) return {};
-
   const data = historyData.map(d => ({
-    emissions: tonsPerHourToGramsPerMinute(getTotalElectricity(d, true)),
-    datetime: moment(d.stateDatetime).toDate(),
+    emissions: electricityMixMode === 'consumption'
+      ? d['totalFootprintMegatonsCO2']
+      : d['totalEmissionsMegatonsCO2'],
+    datetime: moment(d.year.toString()).toDate(),
     // Keep a pointer to original data
     meta: d,
   }));
@@ -40,11 +41,14 @@ const prepareGraphData = (historyData) => {
 const mapStateToProps = state => ({
   isMobile: state.application.isMobile,
   selectedTimeIndex: state.application.selectedZoneTimeIndex,
+  carbonIntensityDomain: state.application.carbonIntensityDomain,
 });
 
 const CountryHistoryEmissionsGraph = ({
   isMobile,
   selectedTimeIndex,
+
+  carbonIntensityDomain,
 }) => {
   const [tooltip, setTooltip] = useState(null);
   const [selectedLayerIndex, setSelectedLayerIndex] = useState(null);
@@ -99,7 +103,7 @@ const CountryHistoryEmissionsGraph = ({
         layerFill={layerFill}
         startTime={startTime}
         endTime={endTime}
-        valueAxisLabel="tCO₂eq / min"
+        valueAxisLabel="MtCO2eq / year"
         backgroundMouseMoveHandler={mouseMoveHandler}
         backgroundMouseOutHandler={mouseOutHandler}
         layerMouseMoveHandler={mouseMoveHandler}

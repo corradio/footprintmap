@@ -1,4 +1,5 @@
 import { isFinite } from 'lodash';
+import { CARBON_INTENSITY_DOMAIN, FOSSIL_FUEL_KEYS } from './constants';
 
 export function getElectricityProductionValue({
   capacity,
@@ -48,8 +49,58 @@ export function getExchangeCo2Intensity(mode, zoneData, electricityMixMode) {
     );
 }
 
-export function getTotalElectricity(zoneData, displayByEmissions) {
-  return displayByEmissions
-    ? (zoneData.totalCo2Production + zoneData.totalCo2Discharge + zoneData.totalCo2Import) // gCO₂eq/h
-    : (zoneData.totalProduction + zoneData.totalDischarge + zoneData.totalImport);
+export function getTotalElectricity(data, displayByEmissions, electricityMixMode) {
+  if (electricityMixMode === 'consumption') {
+    return displayByEmissions ? data['totalFootprintMegatonsCO2'] : data['totalPrimaryEnergyConsumptionTWh'];
+  }
+  return displayByEmissions ? data['totalEmissionsMegatonsCO2'] : data['totalPrimaryEnergyProductionTWh'];
+}
+
+export function getZoneCarbonIntensity(carbonIntensityDomain, electricityMixMode, data) {
+  if (!data) { return null; }
+  if (carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.ENERGY) {
+    if (electricityMixMode === 'consumption') {
+      return data['totalFootprintMegatonsCO2'] / data['totalPrimaryEnergyConsumptionTWh'] * 1000;
+    } else {
+      return data['totalEmissionsMegatonsCO2'] / data['totalPrimaryEnergyProductionTWh'] * 1000;
+    }
+  }
+  if (carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.POPULATION) {
+    if (electricityMixMode === 'consumption') {
+      return data['totalFootprintTonsCO2PerCapita'];
+    } else {
+      return data['totalEmissionsTonsCO2PerCapita'];
+    }
+  }
+  if (carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.GDP) {
+    if (electricityMixMode === 'consumption') {
+      return data['totalFootprintMegatonsCO2'] / data['gdpMillionsCurrentUSD'] * 1e6;
+    } else {
+      return data['totalEmissionsMegatonsCO2'] / data['gdpMillionsCurrentUSD'] * 1e6;
+    }
+  }
+  throw new Error('Not implemented yet');
+}
+
+function getEnergyRatio(electricityMixMode, data, filter) {
+  const key = electricityMixMode === 'consumption'
+    ? 'primaryEnergyConsumptionTWh'
+    : 'primaryEnergyProductionTWh';
+  const keyTotal = electricityMixMode === 'consumption'
+    ? 'totalPrimaryEnergyConsumptionTWh'
+    : 'totalPrimaryEnergyProductionTWh';
+  if (!data || !data[key]) {
+    return { percentage: null };
+  }
+  return Object.keys(data[key])
+    .filter(filter)
+    .map(k => data[key][k])
+    .reduce((a, b) => a + b, 0) / data[keyTotal];
+}
+
+export function getRenewableRatio(electricityMixMode, data) {
+  return getEnergyRatio(electricityMixMode, data, k => !FOSSIL_FUEL_KEYS.includes(k) && k !== 'nuclear');
+}
+export function getLowcarbonRatio(electricityMixMode, data) {
+  return getEnergyRatio(electricityMixMode, data, k => !FOSSIL_FUEL_KEYS.includes(k));
 }

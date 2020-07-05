@@ -1,0 +1,254 @@
+linked_country,iso3,iso2,country
+Georgia,,,Abkhazia
+,AFG,AF,Afganistan
+Finland,ALA,AX,Öland Islands
+,ALB,AL,Albania
+,DZA,DZ,Algeria
+United States of America,ASM,AS,American Samoa
+,AND,AD,Andorra
+,AGO,AO,Angola
+United Kingdom,AIA,AI,Anguilla
+,ATG,AG,Antigua & Barbuda
+,ARG,AR,Argentina
+,ARM,AM,Armenia
+Netherlands,ABW,AW,Aruba
+,AUS,AU,Australia
+,AUT,AT,Austria
+,AZE,AZ,Azerbaijan
+,BHS,BS,Bahamas
+,BHR,BH,Bahrain
+,BGD,BD,Bangladesh
+,BRB,BB,Barbados
+,BLR,BY,Belarus
+,BEL,BE,Belgium
+,BLZ,BZ,Belize
+,BEN,BJ,Benin
+United Kingdom,BMU,BM,Bermuda
+,BTN,BT,Bhutan
+,BOL,BO,Bolivia
+Netherlands,BES,BQ,Bonaire
+,BIH,BA,Bosnia-Herzegovina
+,BWA,BW,Botswana
+,BRA,BR,Brazil
+"United Kingdom, United States of America",IOT,IO,British Indian Ocean Territory
+United Kingdom,VGB,VG,British Virgin Islands
+,BRN,BN,Brunei Darussalam
+,BGR,BG,Bulgaria
+,BFA,BF,Burkina Faso
+,BDI,BI,Burundi
+,KHM,KH,Cambodia
+,CMR,CM,Cameroon
+,CAN,CA,Canada
+,CPV,CV,Cape Verde Islands
+United Kingdom,CYM,KY,Cayman Islands
+,CAF,CF,Central African Republic
+,TCD,TD,Chad
+,CHL,CL,Chile
+,CHN,CN,China
+Australia,CXR,CX,Christmas Island
+Australia,CCK,CC,Cocos (Keeling) Islands
+,COL,CO,Colombia
+,COM,KM,Comoros
+,COG,CG,Congo (Brazzaville)
+,ZAR,CD,Congo (Kinshasa)
+New Zealand,COK,CK,Cook Islands
+,CRI,CR,Costa Rica
+,HRV,HR,Croatia
+,CUB,CU,Cuba
+Netherlands,CUW,CW,Cura√ßao
+,CYP,CY,Cyprus
+,CZE,CZ,Czech Republic
+,DNK,DK,Denmark
+,DJI,DJ,Djibouti
+,DMA,DM,Dominica
+,DOM,DO,Dominican Republic
+,TLS,TL,East Timor
+,ECU,EC,Ecuador
+,EGY,EG,Egypt
+,SLV,SV,El Salvador
+,GNQ,GQ,Equatorial Guinea
+,ERI,ER,Eritrea
+,EST,EE,Estonia
+,ETH,ET,Ethiopia
+,FRO,FO,Faeroe Islands
+United Kingdom,FLK,FK,Falkland Islands
+,FJI,FJ,Fiji
+,FIN,FI,Finland
+,FRA,FR,France
+France,GUF,GF,French Guiana
+France,PYF,PF,French Polynesia
+France,ATF,TF,French Southern Territories
+,GAB,GA,Gabon
+,GMB,GM,Gambia
+,GEO,GE,Georgia
+,DEU,DE,Germany
+,GHA,GH,Ghana
+United Kingdom,GIB,GI,Gibralter
+,GRC,GR,Greece
+Denmark,GRL,GL,Greenland
+,GRD,GD,Grenada
+France,GLP,GP,Guadeloupe
+United States of America,GUM,GU,Guam
+,GTM,GT,Guatemala
+United Kingdom,GGY,GG,Guernsey
+,GIN,GN,Guinea
+,GNB,GW,Guinea-Bissau
+,GUY,GY,Guyana
+,HTI,HT,Haiti
+,VAT,VA,Holy See
+,HND,HN,Honduras
+China,HKG,HK,Hong Kong
+,HUN,HU,Hungary
+,ISL,IS,Iceland
+,IND,IN,India
+,IDN,ID,Indonesia
+,IRN,IR,Iran
+,IRQ,IQ,Iraq
+,IRL,IE,Ireland
+United Kingdom,IMN,IM,Isle of Man
+,ISR,IL,Israel
+,ITA,IT,Italy
+,CIV,CI,Ivory Coast
+,JAM,JM,Jamaica
+,JPN,JP,Japan
+United Kingdom,JEY,JE,Jersey
+,JOR,JO,Jordan
+,KAZ,KZ,Kazakhstan
+,KEN,KE,Kenya
+,KIR,KI,Kiribati
+Serbia,,,Kosovo
+,KWT,KW,Kuwait
+,KGZ,KG,Kyrgyzstan
+,LAO,LA,Laos
+,LVA,LV,Latvia
+,LBN,LB,Lebanon
+,LSO,LS,Lesotho
+,LBR,LR,Liberia
+,LBY,LY,Libya
+,LIE,LI,Liechtenstein
+,LTU,LT,Lithuania
+,LUX,LU,Luxembourg
+China,MAC,MO,Macau
+,MKD,MK,Macedonia
+,MDG,MG,Madagascar
+,MWI,MW,Malawi
+,MYS,MY,Malaysia
+,MDV,MV,Maldives
+,MLI,ML,Mali
+,MLT,MT,Malta
+,MHL,MH,Marshall Islands
+France,MTQ,MQ,Martinique
+,MRT,MR,Mauritania
+,MUS,MU,Mauritius
+France,MYT,YT,Mayotte
+,MEX,MX,Mexico
+,FSM,FM,Micronesia
+,MDA,MD,Moldova
+,MCO,MC,Monaco
+,MNG,MN,Mongolia
+,MNE,ME,Montenegro
+United Kingdom,MSR,MS,Montserrat
+,MAR,MA,Morocco
+,MOZ,MZ,Mozambique
+,MMR,MM,Myanmar
+Azerbaijan,,,Nagorno-Karabakh
+,NAM,NA,Namibia
+,NRU,NR,Nauru
+,NPL,NP,Nepal
+,ANT,AN,Netherlands Antilles
+,NLD,NL,Netherlands
+France,NCL,NC,New Caledonia
+,NZL,NZ,New Zealand
+,NIC,NI,Nicaragua
+,NER,NE,Niger
+,NGA,NG,Nigeria
+,NIU,NU,Niue
+Australia,NFK,NF,Norfolk Island
+,PRK,KP,North Korea
+Cyprus,,,Northern Cyprus
+United States of America,MNP,MP,Northern Mariana Islands
+,NOR,NO,Norway
+,OMN,OM,Oman
+,PAK,PK,Pakistan
+,PLW,PW,Palau
+Israel,PSE,PS,Palestinian Territories
+,PAN,PA,Panama
+,PNG,PG,Papua New Guinea
+,PRY,PY,Paraguay
+,PER,PE,Peru
+,PHL,PH,Philippines
+United Kingdom,PCN,PN,Pitcairn Islands
+,POL,PL,Poland
+,PRT,PT,Portugal
+United States,PRI,PR,Puerto Rico
+,QAT,QA,Qatar
+,ROU,RO,Romania
+,RUS,RU,Russia
+,RWA,RW,Rwanda
+France,REU,RE,R√©union
+The Netherlands,BES,BQ,Saba
+France,BLM,BL,Saint Barth√©lemy
+,KNA,KN,Saint Christopher & Nevis
+United Kingdom,SHN,SH,Saint Helena
+,LCA,LC,Saint Lucia
+France,MAF,MF,Saint Martin
+France,SPM,PM,Saint Pierre & Miquelon
+,VCT,VC,Saint Vincent & The Grenadines
+,WSM,WS,Samoa
+,SMR,SM,San Marino
+,STP,ST,Sao Tome & Principe
+,SAU,SA,Saudi Arabia
+,SEN,SN,Senegal
+,SRB,RS,Serbia
+,SYC,SC,Seychelles
+,SLE,SL,Sierra Leone
+,SGP,SG,Singapore
+The Netherlands,BES,BQ,Sint Eustatius
+The Netherlands,SXM,SX,Sint Maarten
+,SVK,SK,Slovakia
+,SVN,SI,Slovenia
+,SLB,SB,Solomon Islands
+,SOM,SO,Somalia
+,ZAF,ZA,South Africa
+United Kingdom,SGS,GS,South Georgia & The South Sandwish Islands
+,KOR,KR,South Korea
+Georgia,,,South Ossetia
+,SSD,SS,South Sudan
+,ESP,ES,Spain
+,LKA,LK,Sri Lanka
+,SDN,SD,Sudan
+,SUR,SR,Suriname
+,SWZ,SZ,Swaziland
+,SWE,SE,Sweden
+,CHE,CH,Switzerland
+,SYR,SY,Syria
+China,TWN,TW,Taiwan
+,TJK,TJ,Tajikistan
+,TZA,TZ,Tanzania
+,THA,TH,Thailand
+,TGO,TG,Togo
+New Zealand,TKL,TK,Tokelau
+,TON,TO,Tonga
+Moldova,,,Transdniestria
+,TTO,TT,Trinidad & Tobago
+,TUN,TN,Tunisia
+,TUR,TR,Turkey
+,TKM,TM,Turkmenistan
+United Kingdom,TCA,TC,Turks & Caicos Islands
+,TUV,TV,Tuvalu
+,UGA,UG,Uganda
+,UKR,UA,Ukraine
+,ARE,AE,United Arab Emirates
+,GBR,GB,United Kingdom
+,USA,US,United States
+United States of America,VIR,VI,United States Virgin Islands
+,URY,UY,Uruguay
+,UZB,UZ,Uzbekistan
+,VUT,VU,Vanuatu
+,VEN,VE,Venezuela
+,VNM,VN,Vietnam
+France,WLF,WF,Wallis & Futuna
+Morocco,ESH,EH,Western Sahara
+,YEM,YE,Yemen
+,ZMB,ZM,Zambia
+,ZWE,ZW,Zimbabwe

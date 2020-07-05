@@ -99,11 +99,11 @@ function* trackEvent(action) {
 
 export default function* () {
   // Data fetching
-  yield takeLatest('GRID_DATA_FETCH_REQUESTED', fetchGridData);
-  yield takeLatest('WIND_DATA_FETCH_REQUESTED', fetchWindData);
-  yield takeLatest('SOLAR_DATA_FETCH_REQUESTED', fetchSolarData);
+  // yield takeLatest('GRID_DATA_FETCH_REQUESTED', fetchGridData);
+  // yield takeLatest('WIND_DATA_FETCH_REQUESTED', fetchWindData);
+  // yield takeLatest('SOLAR_DATA_FETCH_REQUESTED', fetchSolarData);
   yield takeLatest('ZONE_HISTORY_FETCH_REQUESTED', fetchZoneHistory);
-  yield takeLatest('CLIENT_VERSION_FETCH_REQUESTED', fetchClientVersion);
+  // yield takeLatest('CLIENT_VERSION_FETCH_REQUESTED', fetchClientVersion);
   // Analytics
   yield takeLatest('TRACK_EVENT', trackEvent);
 }

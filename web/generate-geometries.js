@@ -230,25 +230,25 @@ const zoneDefinitions = [
   // { zoneName: 'AQ', type: 'country', id: 'AT},
   { zoneName: 'AM', type: 'country', id: 'ARM'},
   { zoneName: 'AT', type: 'country', id: 'AUT'},
-  { zoneName: 'AUS-NSW', type: 'states', countryId: 'AUS', states: ['AU.NS', 'AU.AC']},
-  { zoneName: 'AUS-NT', countryId: 'AUS', stateId: 'AU.NT', type: 'state' },
+  // { zoneName: 'AUS-NSW', type: 'states', countryId: 'AUS', states: ['AU.NS', 'AU.AC']},
+  // { zoneName: 'AUS-NT', countryId: 'AUS', stateId: 'AU.NT', type: 'state' },
   // { zoneName: 'AU', type: 'country', id: 'AUS'},
   // { zoneName: 'AUS-ACT', countryId: 'AUS', stateId: 'AU.AC', type: 'state' },
-  { zoneName: 'AUS-QLD', countryId: 'AUS', stateId: 'AU.QL', type: 'state' },
-  { zoneName: 'AUS-SA', countryId: 'AUS', stateId: 'AU.SA', type: 'state' },
+  // { zoneName: 'AUS-QLD', countryId: 'AUS', stateId: 'AU.QL', type: 'state' },
+  // { zoneName: 'AUS-SA', countryId: 'AUS', stateId: 'AU.SA', type: 'state' },
   // { zoneName: 'AUS-TAS', countryId: 'AUS', stateId: 'AU.TS', type: 'state' },
-  { zoneName: 'AUS-TAS', type: 'subZone', id: 'AUS-TAS'},
-  { zoneName: 'AUS-TAS-KI', type: 'subZone', id: 'AUS-TAS-KI'},
-  { zoneName: 'AUS-VIC', countryId: 'AUS', stateId: 'AU.VI', type: 'state' },
-  { zoneName: 'AUS-WA', countryId: 'AUS', stateId: 'AU.WA', type: 'state' },
+  // { zoneName: 'AUS-TAS', type: 'subZone', id: 'AUS-TAS'},
+  // { zoneName: 'AUS-TAS-KI', type: 'subZone', id: 'AUS-TAS-KI'},
+  // { zoneName: 'AUS-VIC', countryId: 'AUS', stateId: 'AU.VI', type: 'state' },
+  // { zoneName: 'AUS-WA', countryId: 'AUS', stateId: 'AU.WA', type: 'state' },
   { zoneName: 'AW', type: 'country', id: 'ABW', moreDetails: true},
   { zoneName: 'AX', type: 'country', id: 'ALA'},
   { zoneName: 'AZ', type: 'administrations', administrations: ['AZE-1684', 'AZE-1676', 'AZE-1687', 'AZE-1678', 'AZE-1677', 'AZE-2419', 'AZE-2415', 'AZE-5567', 'AZE-2420', 'AZE-2423', 'AZE-2421', 'AZE-2418', 'AZE-1723', 'AZE-1731', 'AZE-1730', 'AZE-1729', 'AZE-1725', 'AZE-1727', 'AZE-1726', 'AZE-1724', 'AZE-1686', 'AZE-1704', 'AZE-1698', 'AZE-1700', 'AZE-1720', 'AZE-1709', 'AZE-1702', 'AZE-1697', 'AZE-1695', 'AZE-1701', 'AZE-1712', 'AZE-1719', 'AZE-1717', 'AZE-1689', 'AZE-1715', 'AZE-1710', 'AZE-1707', 'AZE-1708', 'AZE-5562', 'AZE-2422', 'AZE-1681', 'AZE-1694', 'AZE-1690', 'AZE-1680', 'AZE-1706', 'AZE-1721', 'AZE-1714', 'AZE-5563', 'AZE-1713', 'AZE-1696', 'AZE-1685', 'AZE-1693', 'AZE-1716', 'AZE-1728', 'AZE-1718', 'AZE-1711', 'AZE-1705', 'AZE-1688', 'AZE-1679', 'AZE-1683', 'AZE-1703', 'AZE-1692', 'AZE-1722', 'AZE-5566', 'AZE-5561', 'AZE-5564']},
-  //{ zoneName: 'BA', type: 'country', id: 'BIH'},
-  { zoneName: 'BA', type: 'administrations', administrations: [
-      'BIH-4801', 'BIH-4802', 'BIH-2225', 'BIH-2224', 'BIH-2226', 'BIH-2227', 'BIH-2228', 'BIH-4807',
-      'BIH-4808', 'BIH-4805', 'BIH-4806', 'BIH-2890', 'BIH-2891', 'BIH-2889', 'BIH-2887',
-      'BIH-4804', 'BIH-3153', 'BIH-4803']},
+  { zoneName: 'BA', type: 'country', id: 'BIH'},
+  // { zoneName: 'BA', type: 'administrations', administrations: [
+  //     'BIH-4801', 'BIH-4802', 'BIH-2225', 'BIH-2224', 'BIH-2226', 'BIH-2227', 'BIH-2228', 'BIH-4807',
+  //     'BIH-4808', 'BIH-4805', 'BIH-4806', 'BIH-2890', 'BIH-2891', 'BIH-2889', 'BIH-2887',
+  //     'BIH-4804', 'BIH-3153', 'BIH-4803']},
   { zoneName: 'BB', type: 'country', id: 'BRB'},
   { zoneName: 'BD', type: 'country', id: 'BGD'},
   { zoneName: 'BE', type: 'country', id: 'BEL'},
@@ -257,11 +257,11 @@ const zoneDefinitions = [
   { zoneName: 'BL', type: 'country', id: 'BLM'},
   { zoneName: 'BO', type: 'country', id: 'BOL'},
   { zoneName: 'BM', type: 'country', id: 'BMU'},
-  //{ zoneName: 'BR', type: 'country', id: 'BRA'},
-  { zoneName: 'BR-CS', type: 'states', countryId: 'BRA', states: ['BR.', 'BR.AC', 'BR.GO', 'BR.SP', 'BR.DF', 'BR.MS', 'BR.MG', 'BR.MT', 'BR.ES', 'BR.RJ', 'BR.RO']},
-  { zoneName: 'BR-N', type: 'states', countryId: 'BRA', states: ['BR.AM', 'BR.PA', 'BR.TO', 'BR.RR', 'BR.AP']},
-  { zoneName: 'BR-NE', type: 'states', countryId: 'BRA', states: ['BR.PE', 'BR.MA', 'BR.CE', 'BR.PI', 'BR.AL', 'BR.BA', 'BR.PB', 'BR.RN', 'BR.SE']},
-  { zoneName: 'BR-S', type: 'states', countryId: 'BRA', states: ['BR.RS', 'BR.SC', 'BR.PR']},
+  { zoneName: 'BR', type: 'country', id: 'BRA'},
+  // { zoneName: 'BR-CS', type: 'states', countryId: 'BRA', states: ['BR.', 'BR.AC', 'BR.GO', 'BR.SP', 'BR.DF', 'BR.MS', 'BR.MG', 'BR.MT', 'BR.ES', 'BR.RJ', 'BR.RO']},
+  // { zoneName: 'BR-N', type: 'states', countryId: 'BRA', states: ['BR.AM', 'BR.PA', 'BR.TO', 'BR.RR', 'BR.AP']},
+  // { zoneName: 'BR-NE', type: 'states', countryId: 'BRA', states: ['BR.PE', 'BR.MA', 'BR.CE', 'BR.PI', 'BR.AL', 'BR.BA', 'BR.PB', 'BR.RN', 'BR.SE']},
+  // { zoneName: 'BR-S', type: 'states', countryId: 'BRA', states: ['BR.RS', 'BR.SC', 'BR.PR']},
   { zoneName: 'BS', type: 'country', id: 'BHS'},
   { zoneName: 'BT', type: 'country', id: 'BTN'},
   { zoneName: 'BV', type: 'country', id: 'BVT'},
@@ -272,31 +272,31 @@ const zoneDefinitions = [
   { zoneName: 'BG', type: 'country', id: 'BGR'},
   { zoneName: 'BF', type: 'country', id: 'BFA'},
   { zoneName: 'BI', type: 'country', id: 'BDI'},
-  { zoneName: 'CA-AB', countryId: 'CAN', stateId: 'CA.AB', type: 'state' },
-  // { zoneName: 'CA', type: 'country', id: 'CAN'},
-  { zoneName: 'CA-BC', countryId: 'CAN', stateId: 'CA.BC', type: 'state' },
-  { zoneName: 'CA-MB', countryId: 'CAN', stateId: 'CA.MB', type: 'state' },
-  { zoneName: 'CA-NB', countryId: 'CAN', stateId: 'CA.NB', type: 'state' },
+  // { zoneName: 'CA-AB', countryId: 'CAN', stateId: 'CA.AB', type: 'state' },
+  { zoneName: 'CA', type: 'country', id: 'CAN'},
+  // { zoneName: 'CA-BC', countryId: 'CAN', stateId: 'CA.BC', type: 'state' },
+  // { zoneName: 'CA-MB', countryId: 'CAN', stateId: 'CA.MB', type: 'state' },
+  // { zoneName: 'CA-NB', countryId: 'CAN', stateId: 'CA.NB', type: 'state' },
   // since 2002, ISO 3166-2 is "CA-NL", code_hasc in naturalearth is "CA.NF"
-  { zoneName: 'CA-NL', countryId: 'CAN', stateId: 'CA.NF', type: 'state' },
-  { zoneName: 'CA-NS', countryId: 'CAN', stateId: 'CA.NS', type: 'state' },
-  { zoneName: 'CA-ON', countryId: 'CAN', stateId: 'CA.ON', type: 'state' },
-  { zoneName: 'CA-PE', countryId: 'CAN', stateId: 'CA.PE', type: 'state' },
-  { zoneName: 'CA-QC', countryId: 'CAN', stateId: 'CA.QC', type: 'state' },
-  { zoneName: 'CA-SK', countryId: 'CAN', stateId: 'CA.SK', type: 'state' },
-  { zoneName: 'CA-NT', countryId: 'CAN', stateId: 'CA.NT', type: 'state' },
-  { zoneName: 'CA-NU', countryId: 'CAN', stateId: 'CA.NU', type: 'state' },
-  { zoneName: 'CA-YT', countryId: 'CAN', stateId: 'CA.YT', type: 'state' },
+  // { zoneName: 'CA-NL', countryId: 'CAN', stateId: 'CA.NF', type: 'state' },
+  // { zoneName: 'CA-NS', countryId: 'CAN', stateId: 'CA.NS', type: 'state' },
+  // { zoneName: 'CA-ON', countryId: 'CAN', stateId: 'CA.ON', type: 'state' },
+  // { zoneName: 'CA-PE', countryId: 'CAN', stateId: 'CA.PE', type: 'state' },
+  // { zoneName: 'CA-QC', countryId: 'CAN', stateId: 'CA.QC', type: 'state' },
+  // { zoneName: 'CA-SK', countryId: 'CAN', stateId: 'CA.SK', type: 'state' },
+  // { zoneName: 'CA-NT', countryId: 'CAN', stateId: 'CA.NT', type: 'state' },
+  // { zoneName: 'CA-NU', countryId: 'CAN', stateId: 'CA.NU', type: 'state' },
+  // { zoneName: 'CA-YT', countryId: 'CAN', stateId: 'CA.YT', type: 'state' },
   { zoneName: 'CC', type: 'country', id: 'CCK'},
   { zoneName: 'CF', type: 'country', id: 'CAF'},
   { zoneName: 'CG', type: 'country', id: 'COG'},
   { zoneName: 'CH', type: 'country', id: 'CHE'},
   { zoneName: 'CI', type: 'country', id: 'CIV'},
   //{ zoneName: 'CL-SING', type: 'states', countryId: 'CHL', states: ['CL.AP', 'CL.TA', 'CL.AN']},
-  //{ zoneName: 'CL', type: 'country', id: 'CHL'},
-  { zoneName: 'CL-SEN', type: 'administrations', administrations: ['CHL-2693', 'CHL-2694', 'CHL-2695', 'CHL-2696', 'CHL-2697', 'CHL-2699', 'CHL-2698', 'CHL-2703', 'CHL-2705', 'CHL-2702', 'CHL-2700', 'CHL-2701', 'CHL-2704']},
-  { zoneName: 'CL-SEM', countryId: 'CHL', stateId: 'CL.MA', type: 'state' },
-  { zoneName: 'CL-SEA', countryId: 'CHL', stateId: 'CL.AI', type: 'state' },
+  { zoneName: 'CL', type: 'country', id: 'CHL'},
+  // { zoneName: 'CL-SEN', type: 'administrations', administrations: ['CHL-2693', 'CHL-2694', 'CHL-2695', 'CHL-2696', 'CHL-2697', 'CHL-2699', 'CHL-2698', 'CHL-2703', 'CHL-2705', 'CHL-2702', 'CHL-2700', 'CHL-2701', 'CHL-2704']},
+  // { zoneName: 'CL-SEM', countryId: 'CHL', stateId: 'CL.MA', type: 'state' },
+  // { zoneName: 'CL-SEA', countryId: 'CHL', stateId: 'CL.AI', type: 'state' },
   { zoneName: 'CM', type: 'country', id: 'CMR'},
   { zoneName: 'CN', type: 'country', id: 'CHN'},
   { zoneName: 'CO', type: 'country', id: 'COL'},
@@ -310,10 +310,10 @@ const zoneDefinitions = [
   { zoneName: 'CZ', type: 'country', id: 'CZE'},
   { zoneName: 'DE', type: 'country', id: 'DEU'},
   { zoneName: 'DJ', type: 'country', id: 'DJI'},
-  // { zoneName: 'DK', type: 'subunits', subunits: ['DNK']},
-  { zoneName: 'DK-DK1', type: 'states', countryId: 'DNK', states: ['DK.MJ', 'DK.ND', 'DK.SD'] },
-  { zoneName: 'DK-DK2', type: 'subZone', id: 'DK-DK2' },
-  { zoneName: 'DK-BHM', type: 'subunits', subunits: ['DNB']},
+  { zoneName: 'DK', type: 'subunits', subunits: ['DNK']},
+  // { zoneName: 'DK-DK1', type: 'states', countryId: 'DNK', states: ['DK.MJ', 'DK.ND', 'DK.SD'] },
+  // { zoneName: 'DK-DK2', type: 'subZone', id: 'DK-DK2' },
+  // { zoneName: 'DK-BHM', type: 'subunits', subunits: ['DNB']},
   { zoneName: 'DM', type: 'country', id: 'DMA'},
   { zoneName: 'DO', type: 'country', id: 'DOM'},
   { zoneName: 'DZ', type: 'country', id: 'DZA'},
@@ -322,34 +322,36 @@ const zoneDefinitions = [
   { zoneName: 'EG', type: 'country', id: 'EGY'},
   { zoneName: 'EH', type: 'country', id: 'ESH'},
   { zoneName: 'ER', type: 'country', id: 'ERI'},
-  { zoneName: 'ES', type: 'subunits', subunits: ['ESX', 'SEC', 'SEM']}, //Spain Peninsula
+  { zoneName: 'ES', type: 'country', id: 'ESP' },
+  // { zoneName: 'ES', type: 'subunits', subunits: ['ESX', 'SEC', 'SEM']}, //Spain Peninsula
   // spain canaries islands
-  { zoneName: 'ES-CN-LP', type: 'country', id: 'La Palma'},
-  { zoneName: 'ES-CN-HI', type: 'country', id: 'Hierro'},
-  { zoneName: 'ES-CN-IG', type: 'country', id: 'Isla de la Gomera'},
-  { zoneName: 'ES-CN-TE', type: 'country', id: 'Tenerife'},
-  { zoneName: 'ES-CN-GC', type: 'country', id: 'Gran Canaria'},
-  { zoneName: 'ES-CN-FVLZ', type: 'countries', countries: ['Fuerteventura', 'Lanzarote']},
+  // { zoneName: 'ES-CN-LP', type: 'country', id: 'La Palma'},
+  // { zoneName: 'ES-CN-HI', type: 'country', id: 'Hierro'},
+  // { zoneName: 'ES-CN-IG', type: 'country', id: 'Isla de la Gomera'},
+  // { zoneName: 'ES-CN-TE', type: 'country', id: 'Tenerife'},
+  // { zoneName: 'ES-CN-GC', type: 'country', id: 'Gran Canaria'},
+  // { zoneName: 'ES-CN-FVLZ', type: 'countries', countries: ['Fuerteventura', 'Lanzarote']},
   // { zoneName: 'ES-IB', type: 'subunits', subunits: ['ESI']}, //Spain Balearic islands
-  { zoneName: 'ES-IB-FO', type: 'subZone', id: 'ES-IB-FO', moreDetails: true},
-  { zoneName: 'ES-IB-IZ', type: 'subZone', id: 'ES-IB-IZ'},
-  { zoneName: 'ES-IB-MA', type: 'subZone', id: 'ES-IB-MA'},
-  { zoneName: 'ES-IB-ME', type: 'subZone', id: 'ES-IB-ME'},
+  // { zoneName: 'ES-IB-FO', type: 'subZone', id: 'ES-IB-FO', moreDetails: true},
+  // { zoneName: 'ES-IB-IZ', type: 'subZone', id: 'ES-IB-IZ'},
+  // { zoneName: 'ES-IB-MA', type: 'subZone', id: 'ES-IB-MA'},
+  // { zoneName: 'ES-IB-ME', type: 'subZone', id: 'ES-IB-ME'},
   { zoneName: 'ET', type: 'country', id: 'ETH'},
   { zoneName: 'FI', type: 'country', id: 'FIN'},
   { zoneName: 'FJ', type: 'country', id: 'FJI'},
   { zoneName: 'FK', type: 'country', id: 'FLK'},
   { zoneName: 'FM', type: 'country', id: 'FSM'},
-  // { zoneName: 'FR', type: 'country', id: 'FRA'},
-  { zoneName: 'FO', type: 'country', id: 'FRO'},
-  { zoneName: 'FR', type: 'subunits', subunits: ['FXX']},
-  { zoneName: 'FR-COR', type: 'subunits', subunits: ['FXC']},
+  { zoneName: 'FR', type: 'country', id: 'FRA'},
+  // { zoneName: 'FO', type: 'country', id: 'FRO'},
+  // { zoneName: 'FR', type: 'subunits', subunits: ['FXX']},
+  // { zoneName: 'FR-COR', type: 'subunits', subunits: ['FXC']},
   { zoneName: 'GA', type: 'country', id: 'GAB'},
   // see https://github.com/tmrowco/electricitymap-contrib/pull/1615 for how SCT-no-islands is generated
-  { zoneName: 'GB', type: 'subunits', subunits: ['SCT-no-islands', 'ENG', 'WLS']},
-  { zoneName: 'GB-NIR', type: 'subunits', subunits: ['NIR']},
-  { zoneName: 'GB-ORK', type: 'administrations', administrations: ['GBR-2744']},
-  { zoneName: 'GB-SHI', type: 'administrations', administrations: ['GBR-2747']},
+  { zoneName: 'GB', type: 'country', id: 'GBR' },
+  // { zoneName: 'GB', type: 'subunits', subunits: ['SCT-no-islands', 'ENG', 'WLS']},
+  // { zoneName: 'GB-NIR', type: 'subunits', subunits: ['NIR']},
+  // { zoneName: 'GB-ORK', type: 'administrations', administrations: ['GBR-2744']},
+  // { zoneName: 'GB-SHI', type: 'administrations', administrations: ['GBR-2747']},
   { zoneName: 'GD', type: 'country', id: 'GRD'},
   { zoneName: 'GE', type: 'country', id: 'GEO'},
   { zoneName: 'GF', type: 'country', id: 'GUF'},
@@ -361,10 +363,10 @@ const zoneDefinitions = [
   { zoneName: 'GN', type: 'country', id: 'GIN'},
   { zoneName: 'GP', type: 'country', id: 'GLP'},
   { zoneName: 'GQ', type: 'country', id: 'GNQ'},
-  // { zoneName: 'GR', type: 'country', id: 'GRC'},
-  { zoneName: 'GR', type: 'states', countryId: 'GRC', states: ['GR.AT', 'GR.EP', 'GR.GC','GR.GW',
-      'GR.II', 'GR.MA', 'GR.MC', 'GR.MT', 'GR.MW', 'GR.PP', 'GR.TS']},
-  { zoneName: 'GR-IS', type: 'states', countryId: 'GRC', states: ['GR.AN', 'GR.AS', 'GR.CR']},
+  { zoneName: 'GR', type: 'country', id: 'GRC'},
+  // { zoneName: 'GR', type: 'states', countryId: 'GRC', states: ['GR.AT', 'GR.EP', 'GR.GC','GR.GW',
+      // 'GR.II', 'GR.MA', 'GR.MC', 'GR.MT', 'GR.MW', 'GR.PP', 'GR.TS']},
+  // { zoneName: 'GR-IS', type: 'states', countryId: 'GRC', states: ['GR.AN', 'GR.AS', 'GR.CR']},
   { zoneName: 'GS', type: 'country', id: 'SGS' },
   { zoneName: 'GT', type: 'country', id: 'GTM' },
   { zoneName: 'GU', type: 'country', id: 'GUM' },
@@ -380,75 +382,76 @@ const zoneDefinitions = [
   { zoneName: 'IE', type: 'country', id: 'IRL' },
   { zoneName: 'IL', type: 'country', id: 'ISR' },
   { zoneName: 'IM', type: 'country', id: 'IMN' },
+  { zoneName: 'IN', type: 'country', id: 'IND' },
   // TODO: Use iso_3166_2 field instead
-  { zoneName: 'IN-AN', countryId: 'IND', stateId: 'IN.AN', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-AP', countryId: 'IND', stateId: 'IN.AD', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-AR', countryId: 'IND', stateId: 'IN.AR', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-AS', countryId: 'IND', stateId: 'IN.AS', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-BR', countryId: 'IND', stateId: 'IN.BR', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-CT', countryId: 'IND', stateId: 'IN.CT', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-CH', countryId: 'IND', stateId: 'IN.CH', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-DD', countryId: 'IND', stateId: 'IN.DD', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-DN', countryId: 'IND', stateId: 'IN.DN', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-DL', countryId: 'IND', stateId: 'IN.DL', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-GA', countryId: 'IND', stateId: 'IN.GA', useMaybe: true, type: 'state' },
-  // For some reason IN.GJ is not a code_hasc in database, use FIPS code instead.
-  // { zoneName: 'IN-GJ', countryId: 'IND', stateId: 'IN.GJ', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-GJ', type: 'fips', fips:['IND', 'IN32']},
-  { zoneName: 'IN-HR', countryId: 'IND', stateId: 'IN.HR', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-HP', countryId: 'IND', stateId: 'IN.HP', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-JK', countryId: 'IND', stateId: 'IN.JK', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-JH', countryId: 'IND', stateId: 'IN.JH', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-KA', countryId: 'IND', stateId: 'IN.KA', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-KL', countryId: 'IND', stateId: 'IN.KL', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-LD', countryId: 'IND', stateId: 'IN.LD', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-MP', countryId: 'IND', stateId: 'IN.MP', useMaybe: false, type: 'state' },
-  { zoneName: 'IN-MH', countryId: 'IND', stateId: 'IN.MH', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-MN', countryId: 'IND', stateId: 'IN.MN', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-ML', countryId: 'IND', stateId: 'IN.ML', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-MZ', countryId: 'IND', stateId: 'IN.MZ', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-NL', countryId: 'IND', stateId: 'IN.NL', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-OR', countryId: 'IND', stateId: 'IN.OR', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-PB', countryId: 'IND', stateId: 'IN.PB', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-PY', countryId: 'IND', stateId: 'IN.PY', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-RJ', countryId: 'IND', stateId: 'IN.RJ', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-SK', countryId: 'IND', stateId: 'IN.SK', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-TN', countryId: 'IND', stateId: 'IN.TN', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-TG', countryId: 'IND', stateId: 'IN.TG', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-TR', countryId: 'IND', stateId: 'IN.TR', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-UT', countryId: 'IND', stateId: 'IN.UT', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-UP', countryId: 'IND', stateId: 'IN.UP', useMaybe: true, type: 'state' },
-  { zoneName: 'IN-WB', countryId: 'IND', stateId: 'IN.WB', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-AN', countryId: 'IND', stateId: 'IN.AN', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-AP', countryId: 'IND', stateId: 'IN.AD', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-AR', countryId: 'IND', stateId: 'IN.AR', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-AS', countryId: 'IND', stateId: 'IN.AS', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-BR', countryId: 'IND', stateId: 'IN.BR', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-CT', countryId: 'IND', stateId: 'IN.CT', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-CH', countryId: 'IND', stateId: 'IN.CH', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-DD', countryId: 'IND', stateId: 'IN.DD', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-DN', countryId: 'IND', stateId: 'IN.DN', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-DL', countryId: 'IND', stateId: 'IN.DL', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-GA', countryId: 'IND', stateId: 'IN.GA', useMaybe: true, type: 'state' },
+  // // For some reason IN.GJ is not a code_hasc in database, use FIPS code instead.
+  // // { zoneName: 'IN-GJ', countryId: 'IND', stateId: 'IN.GJ', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-GJ', type: 'fips', fips:['IND', 'IN32']},
+  // { zoneName: 'IN-HR', countryId: 'IND', stateId: 'IN.HR', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-HP', countryId: 'IND', stateId: 'IN.HP', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-JK', countryId: 'IND', stateId: 'IN.JK', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-JH', countryId: 'IND', stateId: 'IN.JH', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-KA', countryId: 'IND', stateId: 'IN.KA', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-KL', countryId: 'IND', stateId: 'IN.KL', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-LD', countryId: 'IND', stateId: 'IN.LD', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-MP', countryId: 'IND', stateId: 'IN.MP', useMaybe: false, type: 'state' },
+  // { zoneName: 'IN-MH', countryId: 'IND', stateId: 'IN.MH', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-MN', countryId: 'IND', stateId: 'IN.MN', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-ML', countryId: 'IND', stateId: 'IN.ML', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-MZ', countryId: 'IND', stateId: 'IN.MZ', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-NL', countryId: 'IND', stateId: 'IN.NL', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-OR', countryId: 'IND', stateId: 'IN.OR', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-PB', countryId: 'IND', stateId: 'IN.PB', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-PY', countryId: 'IND', stateId: 'IN.PY', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-RJ', countryId: 'IND', stateId: 'IN.RJ', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-SK', countryId: 'IND', stateId: 'IN.SK', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-TN', countryId: 'IND', stateId: 'IN.TN', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-TG', countryId: 'IND', stateId: 'IN.TG', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-TR', countryId: 'IND', stateId: 'IN.TR', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-UT', countryId: 'IND', stateId: 'IN.UT', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-UP', countryId: 'IND', stateId: 'IN.UP', useMaybe: true, type: 'state' },
+  // { zoneName: 'IN-WB', countryId: 'IND', stateId: 'IN.WB', useMaybe: true, type: 'state' },
   { zoneName: 'IO', type: 'country', id: 'IOT'},
   { zoneName: 'IQ', type: 'subunits', subunits: ['IRR']},
   { zoneName: 'IQ-KUR', type: 'subunits', subunits: ['IRK']},
   { zoneName: 'IR', type: 'country', id: 'IRN'},
   { zoneName: 'IS', type: 'country', id: 'ISL'},
-  // { zoneName: 'IT', type: 'country', id: 'ITA'},
-  { zoneName: 'IT-CNO', type: 'region_cod', region_cod: ['IT-57', 'IT-52', 'IT-55'] },
-  { zoneName: 'IT-CSO', type: 'region_cod', region_cod: ['IT-65', 'IT-72', 'IT-62'] },
-  { zoneName: 'IT-NO', type: 'region_cod',
-    region_cod: ['IT-45', 'IT-36', 'IT-42', 'IT-25', 'IT-21', 'IT-32', 'IT-23', 'IT-34'],
-  },
-  { zoneName: 'IT-SAR', type: 'region_cod', region_cod: ['IT-88'] },
-  { zoneName: 'IT-SIC', type: 'region_cod', region_cod: ['IT-82'] },
-  { zoneName: 'IT-SO', type: 'region_cod', region_cod: ['IT-75', 'IT-77', 'IT-78', 'IT-67'] },
+  { zoneName: 'IT', type: 'country', id: 'ITA'},
+  // { zoneName: 'IT-CNO', type: 'region_cod', region_cod: ['IT-57', 'IT-52', 'IT-55'] },
+  // { zoneName: 'IT-CSO', type: 'region_cod', region_cod: ['IT-65', 'IT-72', 'IT-62'] },
+  // { zoneName: 'IT-NO', type: 'region_cod',
+  //   region_cod: ['IT-45', 'IT-36', 'IT-42', 'IT-25', 'IT-21', 'IT-32', 'IT-23', 'IT-34'],
+  // },
+  // { zoneName: 'IT-SAR', type: 'region_cod', region_cod: ['IT-88'] },
+  // { zoneName: 'IT-SIC', type: 'region_cod', region_cod: ['IT-82'] },
+  // { zoneName: 'IT-SO', type: 'region_cod', region_cod: ['IT-75', 'IT-77', 'IT-78', 'IT-67'] },
   { zoneName: 'JE', type: 'country', id: 'JEY'},
   { zoneName: 'JM', type: 'country', id: 'JAM'},
-  //{ zoneName: 'JP', type: 'country', id: 'JPN'},
-  { zoneName: 'JP-CB', type: 'subZone', id: 'JP-CB' },
-  { zoneName: 'JP-CG', type: 'administrations', administrations: [
-    'JPN-1824', 'JPN-1826', 'JPN-1825', 'JPN-1822', 'JPN-1821'] },
-  { zoneName: 'JP-HKD', type: 'administrations', administrations: ['JPN-1847'] },
-  { zoneName: 'JP-HR', type: 'subZone', id: 'JP-HR' },
-  { zoneName: 'JP-KN', type: 'subZone', id: 'JP-KN' },
-  { zoneName: 'JP-KY', type: 'subZone', id: 'JP-KY' },
-  { zoneName: 'JP-ON', type: 'subZone', id: 'JP-ON' },
-  { zoneName: 'JP-SK', type: 'administrations', administrations: [
-    'JPN-1836', 'JPN-1833', 'JPN-1832', 'JPN-1834'] },
-  { zoneName: 'JP-TH', type: 'administrations', administrations: [
-    'JPN-1867', 'JPN-1868', 'JPN-1862', 'JPN-1863', 'JPN-1865', 'JPN-1866', 'JPN-1864'] },
-  { zoneName: 'JP-TK', type: 'subZone', id: 'JP-TK' },
+  { zoneName: 'JP', type: 'country', id: 'JPN'},
+  // { zoneName: 'JP-CB', type: 'subZone', id: 'JP-CB' },
+  // { zoneName: 'JP-CG', type: 'administrations', administrations: [
+  //   'JPN-1824', 'JPN-1826', 'JPN-1825', 'JPN-1822', 'JPN-1821'] },
+  // { zoneName: 'JP-HKD', type: 'administrations', administrations: ['JPN-1847'] },
+  // { zoneName: 'JP-HR', type: 'subZone', id: 'JP-HR' },
+  // { zoneName: 'JP-KN', type: 'subZone', id: 'JP-KN' },
+  // { zoneName: 'JP-KY', type: 'subZone', id: 'JP-KY' },
+  // { zoneName: 'JP-ON', type: 'subZone', id: 'JP-ON' },
+  // { zoneName: 'JP-SK', type: 'administrations', administrations: [
+  //   'JPN-1836', 'JPN-1833', 'JPN-1832', 'JPN-1834'] },
+  // { zoneName: 'JP-TH', type: 'administrations', administrations: [
+  //   'JPN-1867', 'JPN-1868', 'JPN-1862', 'JPN-1863', 'JPN-1865', 'JPN-1866', 'JPN-1864'] },
+  // { zoneName: 'JP-TK', type: 'subZone', id: 'JP-TK' },
   { zoneName: 'JO', type: 'country', id: 'JOR'},
   { zoneName: 'KE', type: 'country', id: 'KEN'},
   { zoneName: 'KG', type: 'country', id: 'KGZ'},
@@ -491,20 +494,20 @@ const zoneDefinitions = [
   { zoneName: 'MR', type: 'country', id: 'MRT'},
   { zoneName: 'MS', type: 'country', id: 'MSR'},
   { zoneName: 'MU', type: 'country', id: 'MUS'},
-  // { zoneName: 'MX', type: 'country', id: 'MEX'},
+  { zoneName: 'MX', type: 'country', id: 'MEX'},
   // { zoneName: 'MX', type: 'administrations', administrations: [
   //   'MEX-2714', 'MEX-2716', 'MEX-2713', 'MEX-2715',
   //   'MEX-2734', 'MEX-2721', 'MEX-2719', 'MEX-2717', 'MEX-2728', 'MEX-2728', 'MEX-2733','MEX-2730',
   //   'MEX-2724', 'MEX-2726', 'MEX-2731', 'MEX-2718', 'MEX-2720', 'MEX-2727', 'MEX-2732', 'MEX-2724',
   //   'MEX-2729', 'MEX-2723', 'MEX-2735', 'MEX-2725', 'MEX-2722', 'MEX-2737', 'MEX-2736']},
-  { zoneName: 'MX-BC', type: 'administrations', administrations: ['MEX-2706', 'MEX-2707']},
-  { zoneName: 'MX-CE', type: 'administrations', administrations: ['MEX-2724', 'MEX-2726', 'MEX-2727', 'MEX-2732']},
-  { zoneName: 'MX-NW', type: 'administrations', administrations: ['MEX-2711', 'MEX-2712']},
-  { zoneName: 'MX-NO', type: 'administrations', administrations: ['MEX-2708', 'MEX-2709', 'MEX-2710']},
-  { zoneName: 'MX-NE', type: 'administrations', administrations: ['MEX-2714', 'MEX-2716']},
-  { zoneName: 'MX-OC', type: 'administrations', administrations: ['MEX-2713', 'MEX-2715', 'MEX-2717', 'MEX-2718', 'MEX-2719', 'MEX-2720', 'MEX-2721', 'MEX-2728', 'MEX-2730', 'MEX-2731', 'MEX-2733']},
-  { zoneName: 'MX-OR', type: 'administrations', administrations: ['MEX-2723', 'MEX-2725', 'MEX-2729', 'MEX-2734', 'MEX-2735']},
-  { zoneName: 'MX-PN', type: 'administrations', administrations: ['MEX-2722', 'MEX-2736', 'MEX-2737']},
+  // { zoneName: 'MX-BC', type: 'administrations', administrations: ['MEX-2706', 'MEX-2707']},
+  // { zoneName: 'MX-CE', type: 'administrations', administrations: ['MEX-2724', 'MEX-2726', 'MEX-2727', 'MEX-2732']},
+  // { zoneName: 'MX-NW', type: 'administrations', administrations: ['MEX-2711', 'MEX-2712']},
+  // { zoneName: 'MX-NO', type: 'administrations', administrations: ['MEX-2708', 'MEX-2709', 'MEX-2710']},
+  // { zoneName: 'MX-NE', type: 'administrations', administrations: ['MEX-2714', 'MEX-2716']},
+  // { zoneName: 'MX-OC', type: 'administrations', administrations: ['MEX-2713', 'MEX-2715', 'MEX-2717', 'MEX-2718', 'MEX-2719', 'MEX-2720', 'MEX-2721', 'MEX-2728', 'MEX-2730', 'MEX-2731', 'MEX-2733']},
+  // { zoneName: 'MX-OR', type: 'administrations', administrations: ['MEX-2723', 'MEX-2725', 'MEX-2729', 'MEX-2734', 'MEX-2735']},
+  // { zoneName: 'MX-PN', type: 'administrations', administrations: ['MEX-2722', 'MEX-2736', 'MEX-2737']},
   // { zoneName: 'MY', type: 'country', id: 'MYS'},
   { zoneName: 'MW', type: 'country', id: 'MWI'},
   { zoneName: 'MY-EM', type: 'administrations', administrations: ['MYS-1186', 'MYS-1187']},
@@ -520,21 +523,21 @@ const zoneDefinitions = [
   { zoneName: 'NI', type: 'country', id: 'NIC'},
   { zoneName: 'NKR', type: 'administrations', administrations: ['AZE-1691', 'AZE-1699', 'AZE-1682', 'AZE-1735', 'AZE-1736', 'AZE-1737', 'AZE-5565', 'AZE-1738', 'AZE-4838', 'AZE-1739', 'AZE-1734', 'AZE-1740']},
   { zoneName: 'NL', type: 'country', id: 'NLD'},
-  // { zoneName: 'NO', type: 'country', id: 'NOR'},
-  { zoneName: 'NO-NO1', type: 'subZone', id: 'NO-NO1' },
-  { zoneName: 'NO-NO2', type: 'subZone', id: 'NO-NO2' },
-  { zoneName: 'NO-NO3', type: 'subZone', id: 'NO-NO3' },
-  { zoneName: 'NO-NO4', type: 'subZone', id: 'NO-NO4' },
-  { zoneName: 'NO-NO5', type: 'subZone', id: 'NO-NO5' },
+  { zoneName: 'NO', type: 'country', id: 'NOR'},
+  // { zoneName: 'NO-NO1', type: 'subZone', id: 'NO-NO1' },
+  // { zoneName: 'NO-NO2', type: 'subZone', id: 'NO-NO2' },
+  // { zoneName: 'NO-NO3', type: 'subZone', id: 'NO-NO3' },
+  // { zoneName: 'NO-NO4', type: 'subZone', id: 'NO-NO4' },
+  // { zoneName: 'NO-NO5', type: 'subZone', id: 'NO-NO5' },
   { zoneName: 'NP', type: 'country', id: 'NPL'},
-  // { zoneName: 'NZ', type: 'country', id: 'NZL'},
+  { zoneName: 'NZ', type: 'country', id: 'NZL'},
   { zoneName: 'NU', type: 'country', id: 'NIU'},
   { zoneName: 'NR', type: 'country', id: 'NRU'},
-  { zoneName: 'NZ-NZA', type: 'subunits', subunits: ['NZA']},
-  { zoneName: 'NZ-NZC', type: 'subunits', subunits: ['NZC']},
-  { zoneName: 'NZ-NZN', type: 'subunits', subunits: ['NZN']},
-  { zoneName: 'NZ-NZS', type: 'subunits', subunits: ['NZS']},
-  { zoneName: 'OM', type: 'country', id: 'OMN'},
+  // { zoneName: 'NZ-NZA', type: 'subunits', subunits: ['NZA']},
+  // { zoneName: 'NZ-NZC', type: 'subunits', subunits: ['NZC']},
+  // { zoneName: 'NZ-NZN', type: 'subunits', subunits: ['NZN']},
+  // { zoneName: 'NZ-NZS', type: 'subunits', subunits: ['NZS']},
+  // { zoneName: 'OM', type: 'country', id: 'OMN'},
   { zoneName: 'PA', type: 'country', id: 'PAN'},
   { zoneName: 'PE', type: 'country', id: 'PER'},
   { zoneName: 'PF', type: 'country', id: 'PYF'},
@@ -546,15 +549,17 @@ const zoneDefinitions = [
   { zoneName: 'PN', type: 'country', id: 'PCN'},
   { zoneName: 'PR', type: 'country', id: 'PRI'},
   { zoneName: 'PS', type: 'country', id: 'PSX'},
-  { zoneName: 'PT', type: 'subunits', subunits: ['PRX']}, // Portugal Mainland,
-  { zoneName: 'PT-MA', type: 'subunits', subunits: ['PMD']}, // Madeira Island,
-  { zoneName: 'PT-AC', type: 'subunits', subunits: ['PAZ']}, // Azores Islands,
+  { zoneName: 'PT', type: 'country', id: 'PRT'},
+  // { zoneName: 'PT', type: 'subunits', subunits: ['PRX']}, // Portugal Mainland,
+  // { zoneName: 'PT-MA', type: 'subunits', subunits: ['PMD']}, // Madeira Island,
+  // { zoneName: 'PT-AC', type: 'subunits', subunits: ['PAZ']}, // Azores Islands,
   { zoneName: 'PW', type: 'country', id: 'PLW'},
   { zoneName: 'PY', type: 'country', id: 'PRY'},
   { zoneName: 'QA', type: 'country', id: 'QAT'},
   { zoneName: 'RE', type: 'country', id: 'REU'},
   { zoneName: 'RO', type: 'country', id: 'ROU'},
   { zoneName: 'RS', type: 'countries', countries: ['SRB', 'KOS']},
+  { zoneName: 'RU', type: 'country', id: 'RUS'},
   //{ zoneName: 'RU', type: 'administrations', administrations: [
   //  'RUS-2280', 'RUS-2416', 'RUS-3200', 'RUS-2356', 'RUS-2359', 'RUS-2343', 'RUS-2377', 'RUS-2397',
   //  'RUS-2366', 'RUS-2391', 'RUS-2167', 'RUS-2603', 'RUS-2401', 'RUS-2360', 'RUS-2602', 'RUS-2385',
@@ -565,21 +570,21 @@ const zoneDefinitions = [
   //  'RUS-2372', 'RUS-2392', 'RUS-2378', 'RUS-2402', 'RUS-2333', 'RUS-2362', 'RUS-2399',
   //  'RUS-2387', 'RUS-2396', 'RUS-2337', 'RUS-2367', 'RUS-2606', 'RUS-2364', 'RUS-2306',
   //  'RUS-2374', 'RUS-2353', 'RUS-2355', 'RUS-2384', 'RUS-2393', 'RUS-2335', 'RUS-2369', 'RUS-2279']},
-  { zoneName: 'RU-1', type: 'administrations', administrations: [
-    'RUS-2280', 'RUS-2416', 'RUS-3200', 'RUS-2356', 'RUS-2359', 'RUS-2343', 'RUS-2377', 'RUS-2366',
-    'RUS-2391', 'RUS-2360', 'RUS-2385', 'RUS-2365', 'RUS-2375', 'RUS-2358', 'RUS-2334', 'RUS-2305',
-    'RUS-2368', 'RUS-2388', 'RUS-2357', 'RUS-2361', 'RUS-2342', 'RUS-2373', 'RUS-2371', 'RUS-2379',
-    'RUS-2303', 'RUS-2390', 'RUS-2382', 'RUS-2304', 'RUS-2389', 'RUS-2336', 'RUS-2386', 'RUS-2376',
-    'RUS-2394', 'RUS-2395', 'RUS-2363', 'RUS-2398', 'RUS-2380', 'RUS-2370', 'RUS-2417', 'RUS-2372',
-    'RUS-2392', 'RUS-2378', 'RUS-2333', 'RUS-2362', 'RUS-2387', 'RUS-2396', 'RUS-2337', 'RUS-2367',
-    'RUS-2364', 'RUS-2306', 'RUS-2374', 'RUS-2353', 'RUS-2355', 'RUS-2384', 'RUS-2393', 'RUS-2335',
-    'RUS-2369', 'RUS-2279']},
-  { zoneName: 'RU-2', type: 'administrations', administrations: [
-    'RUS-2400', 'RUS-2606', 'RUS-2605', 'RUS-2610', 'RUS-2397', 'RUS-2403',
-    'RUS-2399', 'RUS-2603', 'RUS-2167', 'RUS-2401', 'RUS-2602', 'RUS-2402']},
-  { zoneName: 'RU-EU', type: 'administrations', administrations: ['RUS-2354', 'RUS-2383', 'RUS-2381']},
-  { zoneName: 'RU-AS', type: 'administrations', administrations: ['RUS-2321', 'RUS-2609', 'RUS-2611', 'RUS-2612', 'RUS-2613', 'RUS-2614', 'RUS-2615', 'RUS-2616', 'RUS-3468']},
-  { zoneName: 'RU-KGD', type: 'administrations', administrations: ['RUS-2324']},
+  // { zoneName: 'RU-1', type: 'administrations', administrations: [
+  //   'RUS-2280', 'RUS-2416', 'RUS-3200', 'RUS-2356', 'RUS-2359', 'RUS-2343', 'RUS-2377', 'RUS-2366',
+  //   'RUS-2391', 'RUS-2360', 'RUS-2385', 'RUS-2365', 'RUS-2375', 'RUS-2358', 'RUS-2334', 'RUS-2305',
+  //   'RUS-2368', 'RUS-2388', 'RUS-2357', 'RUS-2361', 'RUS-2342', 'RUS-2373', 'RUS-2371', 'RUS-2379',
+  //   'RUS-2303', 'RUS-2390', 'RUS-2382', 'RUS-2304', 'RUS-2389', 'RUS-2336', 'RUS-2386', 'RUS-2376',
+  //   'RUS-2394', 'RUS-2395', 'RUS-2363', 'RUS-2398', 'RUS-2380', 'RUS-2370', 'RUS-2417', 'RUS-2372',
+  //   'RUS-2392', 'RUS-2378', 'RUS-2333', 'RUS-2362', 'RUS-2387', 'RUS-2396', 'RUS-2337', 'RUS-2367',
+  //   'RUS-2364', 'RUS-2306', 'RUS-2374', 'RUS-2353', 'RUS-2355', 'RUS-2384', 'RUS-2393', 'RUS-2335',
+  //   'RUS-2369', 'RUS-2279']},
+  // { zoneName: 'RU-2', type: 'administrations', administrations: [
+  //   'RUS-2400', 'RUS-2606', 'RUS-2605', 'RUS-2610', 'RUS-2397', 'RUS-2403',
+  //   'RUS-2399', 'RUS-2603', 'RUS-2167', 'RUS-2401', 'RUS-2602', 'RUS-2402']},
+  // { zoneName: 'RU-EU', type: 'administrations', administrations: ['RUS-2354', 'RUS-2383', 'RUS-2381']},
+  // { zoneName: 'RU-AS', type: 'administrations', administrations: ['RUS-2321', 'RUS-2609', 'RUS-2611', 'RUS-2612', 'RUS-2613', 'RUS-2614', 'RUS-2615', 'RUS-2616', 'RUS-3468']},
+  // { zoneName: 'RU-KGD', type: 'administrations', administrations: ['RUS-2324']},
   { zoneName: 'RW', type: 'country', id: 'RWA'},
   { zoneName: 'SA', type: 'country', id: 'SAU'},
   { zoneName: 'SB', type: 'country', id: 'SLB'},
@@ -626,81 +631,82 @@ const zoneDefinitions = [
   { zoneName: 'UA-CR', type: 'administrations', administrations: ['RUS-283', 'RUS-5482']},
   { zoneName: 'UG', type: 'country', id: 'UGA'},
   { zoneName: 'UM', type: 'country', id: 'UMI'},
-  { zoneName: 'US-AK', countryId: 'USA', stateId: 'US.AK', type: 'state' }, //Alaska
-  { zoneName: 'US-CAL-BANC', type: 'subZone', countryId: 'USA', id: 'US-CAL-BANC' }, //Balancing Authority Of Northern California
-  { zoneName: 'US-CAL-CISO', type: 'subZone', countryId: 'USA', id: 'US-CAL-CISO' }, //California Independent System Operator
-  { zoneName: 'US-CAL-IID', type: 'subZone', countryId: 'USA', id: 'US-CAL-IID' }, //Imperial Irrigation District
-  { zoneName: 'US-CAL-LDWP', type: 'subZone', countryId: 'USA', id: 'US-CAL-LDWP' }, //Los Angeles Department Of Water And Power
-  { zoneName: 'US-CAL-TIDC', type: 'subZone', countryId: 'USA', id: 'US-CAL-TIDC' }, //Turlock Irrigation District
-  { zoneName: 'US-CAR-CPLE', type: 'subZone', countryId: 'USA', id: 'US-CAR-CPLE' }, //Duke Energy Progress East
-  { zoneName: 'US-CAR-CPLW', type: 'subZone', countryId: 'USA', id: 'US-CAR-CPLW' }, //Duke Energy Progress West
-  { zoneName: 'US-CAR-DUK', type: 'subZone', countryId: 'USA', id: 'US-CAR-DUK' }, //Duke Energy Carolinas
-  { zoneName: 'US-CAR-SC', type: 'subZone', countryId: 'USA', id: 'US-CAR-SC' }, //South Carolina Public Service Authority
-  { zoneName: 'US-CAR-SCEG', type: 'subZone', countryId: 'USA', id: 'US-CAR-SCEG' }, //South Carolina Electric & Gas Company
-  { zoneName: 'US-CAR-YAD', type: 'subZone', countryId: 'USA', id: 'US-CAR-YAD' }, //Alcoa Power Generating, Inc. - Yadkin Division
-  { zoneName: 'US-CENT-SPA', type: 'subZone', countryId: 'USA', id: 'US-CENT-SPA' }, //Southwestern Power Administration
-  { zoneName: 'US-CENT-SWPP', type: 'subZone', countryId: 'USA', id: 'US-CENT-SWPP' }, //Southwest Power Pool
-  { zoneName: 'US-FLA-FMPP', type: 'subZone', countryId: 'USA', id: 'US-FLA-FMPP' }, //Florida Municipal Power Pool
-  { zoneName: 'US-FLA-FPC', type: 'subZone', countryId: 'USA', id: 'US-FLA-FPC' }, //Duke Energy Florida Inc
-  { zoneName: 'US-FLA-FPL', type: 'subZone', countryId: 'USA', id: 'US-FLA-FPL' }, //Florida Power & Light Company
-  { zoneName: 'US-FLA-GVL', type: 'subZone', countryId: 'USA', id: 'US-FLA-GVL' }, //Gainesville Regional Utilities
-  { zoneName: 'US-FLA-HST', type: 'subZone', countryId: 'USA', id: 'US-FLA-HST' }, //City Of Homestead
-  { zoneName: 'US-FLA-JEA', type: 'subZone', countryId: 'USA', id: 'US-FLA-JEA' }, //Jea
-  { zoneName: 'US-FLA-NSB', type: 'subZone', countryId: 'USA', id: 'US-FLA-NSB' }, //New Smyrna Beach, Utilities Commission Of
-  { zoneName: 'US-FLA-SEC', type: 'subZone', countryId: 'USA', id: 'US-FLA-SEC' }, //Seminole Electric Cooperative
-  { zoneName: 'US-FLA-TAL', type: 'subZone', countryId: 'USA', id: 'US-FLA-TAL' }, //City Of Tallahassee
-  { zoneName: 'US-FLA-TEC', type: 'subZone', countryId: 'USA', id: 'US-FLA-TEC' }, //Tampa Electric Company
-  { zoneName: 'US-HI-HA', type: 'subZone', id: 'US-HI-HA'}, //Hawaii
-  { zoneName: 'US-HI-KA', type: 'subZone', id: 'US-HI-KA'},
-  { zoneName: 'US-HI-KH', type: 'subZone', id: 'US-HI-KH', moreDetails: true},
-  { zoneName: 'US-HI-LA', type: 'subZone', id: 'US-HI-LA'},
-  { zoneName: 'US-HI-MA', type: 'subZone', id: 'US-HI-MA'},
-  { zoneName: 'US-HI-MO', type: 'subZone', id: 'US-HI-MO'},
-  { zoneName: 'US-HI-NI', type: 'subZone', id: 'US-HI-NI'},
-  { zoneName: 'US-HI-OA', type: 'subZone', id: 'US-HI-OA'},
-  { zoneName: 'US-MIDA-OVEC', type: 'subZone', countryId: 'USA', id: 'US-MIDA-OVEC' }, //Ohio Valley Electric Corporation
-  { zoneName: 'US-MIDA-PJM', type: 'subZone', countryId: 'USA', id: 'US-MIDA-PJM' }, //Pjm Interconnection, Llc
-  { zoneName: 'US-MIDW-AECI', type: 'subZone', countryId: 'USA', id: 'US-MIDW-AECI' }, //Associated Electric Cooperative, Inc.
-  { zoneName: 'US-MIDW-EEI', type: 'subZone', countryId: 'USA', id: 'US-MIDW-EEI' }, //Electric Energy, Inc.
-  { zoneName: 'US-MIDW-LGEE', type: 'subZone', countryId: 'USA', id: 'US-MIDW-LGEE' }, //Louisville Gas And Electric Company And Kentucky Utilities
-  { zoneName: 'US-MIDW-MISO', type: 'subZone', countryId: 'USA', id: 'US-MIDW-MISO' }, //Midcontinent Independent Transmission System Operator, Inc..
-  { zoneName: 'US-NE-ISNE', type: 'subZone', countryId: 'USA', id: 'US-NE-ISNE' }, //Iso New England Inc.
-  { zoneName: 'US-NW-AVA', type: 'subZone', countryId: 'USA', id: 'US-NW-AVA' }, //Avista Corporation
-  { zoneName: 'US-NW-BPAT', type: 'subZone', countryId: 'USA', id: 'US-NW-BPAT' }, //Bonneville Power Administration
-  { zoneName: 'US-NW-CHPD', type: 'subZone', countryId: 'USA', id: 'US-NW-CHPD' }, //Public Utility District No. 1 Of Chelan County
-  { zoneName: 'US-NW-DOPD', type: 'subZone', countryId: 'USA', id: 'US-NW-DOPD' }, //Pud No. 1 Of Douglas County
-  { zoneName: 'US-NW-GCPD', type: 'subZone', countryId: 'USA', id: 'US-NW-GCPD' }, //Public Utility District No. 2 Of Grant County, Washington
-  { zoneName: 'US-NW-GRID', type: 'subZone', countryId: 'USA', id: 'US-NW-GRID' }, //Gridforce Energy Management, Llc
-  { zoneName: 'US-NW-GWA', type: 'subZone', countryId: 'USA', id: 'US-NW-GWA' }, //Naturener Power Watch, Llc (Gwa)
-  { zoneName: 'US-NW-IPCO', type: 'subZone', countryId: 'USA', id: 'US-NW-IPCO' }, //Idaho Power Company
-  { zoneName: 'US-NW-NEVP', type: 'subZone', countryId: 'USA', id: 'US-NW-NEVP' }, //Nevada Power Company
-  { zoneName: 'US-NW-NWMT', type: 'subZone', countryId: 'USA', id: 'US-NW-NWMT' }, //Northwestern Energy (Nwmt)
-  { zoneName: 'US-NW-PACE', type: 'subZone', countryId: 'USA', id: 'US-NW-PACE' }, //Pacificorp - East
-  { zoneName: 'US-NW-PACW', type: 'subZone', countryId: 'USA', id: 'US-NW-PACW' }, //Pacificorp - West
-  { zoneName: 'US-NW-PGE', type: 'subZone', countryId: 'USA', id: 'US-NW-PGE' }, //Portland General Electric Company
-  { zoneName: 'US-NW-PSCO', type: 'subZone', countryId: 'USA', id: 'US-NW-PSCO' }, //Public Service Company Of Colorado
-  { zoneName: 'US-NW-PSEI', type: 'subZone', countryId: 'USA', id: 'US-NW-PSEI' }, //Puget Sound Energy
-  { zoneName: 'US-NW-SCL', type: 'subZone', countryId: 'USA', id: 'US-NW-SCL' }, //Seattle City Light
-  { zoneName: 'US-NW-TPWR', type: 'subZone', countryId: 'USA', id: 'US-NW-TPWR' }, //City Of Tacoma, Department Of Public Utilities, Light Division
-  { zoneName: 'US-NW-WACM', type: 'subZone', countryId: 'USA', id: 'US-NW-WACM' }, //Western Area Power Administration - Rocky Mountain Region
-  { zoneName: 'US-NW-WAUW', type: 'subZone', countryId: 'USA', id: 'US-NW-WAUW' }, //Western Area Power Administration Ugp West
-  { zoneName: 'US-NW-WWA', type: 'subZone', countryId: 'USA', id: 'US-NW-WWA' }, //Naturener Wind Watch, Llc
-  { zoneName: 'US-NY-NYIS', type: 'subZone', countryId: 'USA', id: 'US-NY-NYIS' }, //New York Independent System Operator
-  { zoneName: 'US-SE-AEC', type: 'subZone', countryId: 'USA', id: 'US-SE-AEC' }, //Powersouth Energy Cooperative
-  { zoneName: 'US-SE-SEPA', type: 'subZone', countryId: 'USA', id: 'US-SE-SEPA' }, //Southeastern Power Administration
-  { zoneName: 'US-SE-SOCO', type: 'subZone', countryId: 'USA', id: 'US-SE-SOCO' }, //Southern Company Services, Inc. - Trans
-  { zoneName: 'US-SW-AZPS', type: 'subZone', countryId: 'USA', id: 'US-SW-AZPS' }, //Arizona Public Service Company
-  { zoneName: 'US-SW-DEAA', type: 'subZone', countryId: 'USA', id: 'US-SW-DEAA' }, //Arlington Valley, Llc - Avba
-  { zoneName: 'US-SW-EPE', type: 'subZone', countryId: 'USA', id: 'US-SW-EPE' }, //El Paso Electric Company
-  { zoneName: 'US-SW-GRIF', type: 'subZone', countryId: 'USA', id: 'US-SW-GRIF' }, //Griffith Energy, Llc
-  { zoneName: 'US-SW-GRMA', type: 'subZone', countryId: 'USA', id: 'US-SW-GRMA' }, //Gila River Power, Llc
-  { zoneName: 'US-SW-HGMA', type: 'subZone', countryId: 'USA', id: 'US-SW-HGMA' }, //New Harquahala Generating Company, Llc - Hgba
-  { zoneName: 'US-SW-PNM', type: 'subZone', countryId: 'USA', id: 'US-SW-PNM' }, //Public Service Company Of New Mexico
-  { zoneName: 'US-SW-SRP', type: 'subZone', countryId: 'USA', id: 'US-SW-SRP' }, //Salt River Project
-  { zoneName: 'US-SW-TEPC', type: 'subZone', countryId: 'USA', id: 'US-SW-TEPC' }, //Tucson Electric Power Company
-  { zoneName: 'US-SW-WALC', type: 'subZone', countryId: 'USA', id: 'US-SW-WALC' }, //Western Area Power Administration - Desert Southwest Region
-  { zoneName: 'US-TEN-TVA', type: 'subZone', countryId: 'USA', id: 'US-TEN-TVA' }, //Tennessee Valley Authority
-  { zoneName: 'US-TEX-ERCO', type: 'subZone', countryId: 'USA', id: 'US-TEX-ERCO' }, //Electric Reliability Council Of Texas, Inc.
+  { zoneName: 'US', type: 'country', id: 'USA' },
+  // { zoneName: 'US-AK', countryId: 'USA', stateId: 'US.AK', type: 'state' }, //Alaska
+  // { zoneName: 'US-CAL-BANC', type: 'subZone', countryId: 'USA', id: 'US-CAL-BANC' }, //Balancing Authority Of Northern California
+  // { zoneName: 'US-CAL-CISO', type: 'subZone', countryId: 'USA', id: 'US-CAL-CISO' }, //California Independent System Operator
+  // { zoneName: 'US-CAL-IID', type: 'subZone', countryId: 'USA', id: 'US-CAL-IID' }, //Imperial Irrigation District
+  // { zoneName: 'US-CAL-LDWP', type: 'subZone', countryId: 'USA', id: 'US-CAL-LDWP' }, //Los Angeles Department Of Water And Power
+  // { zoneName: 'US-CAL-TIDC', type: 'subZone', countryId: 'USA', id: 'US-CAL-TIDC' }, //Turlock Irrigation District
+  // { zoneName: 'US-CAR-CPLE', type: 'subZone', countryId: 'USA', id: 'US-CAR-CPLE' }, //Duke Energy Progress East
+  // { zoneName: 'US-CAR-CPLW', type: 'subZone', countryId: 'USA', id: 'US-CAR-CPLW' }, //Duke Energy Progress West
+  // { zoneName: 'US-CAR-DUK', type: 'subZone', countryId: 'USA', id: 'US-CAR-DUK' }, //Duke Energy Carolinas
+  // { zoneName: 'US-CAR-SC', type: 'subZone', countryId: 'USA', id: 'US-CAR-SC' }, //South Carolina Public Service Authority
+  // { zoneName: 'US-CAR-SCEG', type: 'subZone', countryId: 'USA', id: 'US-CAR-SCEG' }, //South Carolina Electric & Gas Company
+  // { zoneName: 'US-CAR-YAD', type: 'subZone', countryId: 'USA', id: 'US-CAR-YAD' }, //Alcoa Power Generating, Inc. - Yadkin Division
+  // { zoneName: 'US-CENT-SPA', type: 'subZone', countryId: 'USA', id: 'US-CENT-SPA' }, //Southwestern Power Administration
+  // { zoneName: 'US-CENT-SWPP', type: 'subZone', countryId: 'USA', id: 'US-CENT-SWPP' }, //Southwest Power Pool
+  // { zoneName: 'US-FLA-FMPP', type: 'subZone', countryId: 'USA', id: 'US-FLA-FMPP' }, //Florida Municipal Power Pool
+  // { zoneName: 'US-FLA-FPC', type: 'subZone', countryId: 'USA', id: 'US-FLA-FPC' }, //Duke Energy Florida Inc
+  // { zoneName: 'US-FLA-FPL', type: 'subZone', countryId: 'USA', id: 'US-FLA-FPL' }, //Florida Power & Light Company
+  // { zoneName: 'US-FLA-GVL', type: 'subZone', countryId: 'USA', id: 'US-FLA-GVL' }, //Gainesville Regional Utilities
+  // { zoneName: 'US-FLA-HST', type: 'subZone', countryId: 'USA', id: 'US-FLA-HST' }, //City Of Homestead
+  // { zoneName: 'US-FLA-JEA', type: 'subZone', countryId: 'USA', id: 'US-FLA-JEA' }, //Jea
+  // { zoneName: 'US-FLA-NSB', type: 'subZone', countryId: 'USA', id: 'US-FLA-NSB' }, //New Smyrna Beach, Utilities Commission Of
+  // { zoneName: 'US-FLA-SEC', type: 'subZone', countryId: 'USA', id: 'US-FLA-SEC' }, //Seminole Electric Cooperative
+  // { zoneName: 'US-FLA-TAL', type: 'subZone', countryId: 'USA', id: 'US-FLA-TAL' }, //City Of Tallahassee
+  // { zoneName: 'US-FLA-TEC', type: 'subZone', countryId: 'USA', id: 'US-FLA-TEC' }, //Tampa Electric Company
+  // { zoneName: 'US-HI-HA', type: 'subZone', id: 'US-HI-HA'}, //Hawaii
+  // { zoneName: 'US-HI-KA', type: 'subZone', id: 'US-HI-KA'},
+  // { zoneName: 'US-HI-KH', type: 'subZone', id: 'US-HI-KH', moreDetails: true},
+  // { zoneName: 'US-HI-LA', type: 'subZone', id: 'US-HI-LA'},
+  // { zoneName: 'US-HI-MA', type: 'subZone', id: 'US-HI-MA'},
+  // { zoneName: 'US-HI-MO', type: 'subZone', id: 'US-HI-MO'},
+  // { zoneName: 'US-HI-NI', type: 'subZone', id: 'US-HI-NI'},
+  // { zoneName: 'US-HI-OA', type: 'subZone', id: 'US-HI-OA'},
+  // { zoneName: 'US-MIDA-OVEC', type: 'subZone', countryId: 'USA', id: 'US-MIDA-OVEC' }, //Ohio Valley Electric Corporation
+  // { zoneName: 'US-MIDA-PJM', type: 'subZone', countryId: 'USA', id: 'US-MIDA-PJM' }, //Pjm Interconnection, Llc
+  // { zoneName: 'US-MIDW-AECI', type: 'subZone', countryId: 'USA', id: 'US-MIDW-AECI' }, //Associated Electric Cooperative, Inc.
+  // { zoneName: 'US-MIDW-EEI', type: 'subZone', countryId: 'USA', id: 'US-MIDW-EEI' }, //Electric Energy, Inc.
+  // { zoneName: 'US-MIDW-LGEE', type: 'subZone', countryId: 'USA', id: 'US-MIDW-LGEE' }, //Louisville Gas And Electric Company And Kentucky Utilities
+  // { zoneName: 'US-MIDW-MISO', type: 'subZone', countryId: 'USA', id: 'US-MIDW-MISO' }, //Midcontinent Independent Transmission System Operator, Inc..
+  // { zoneName: 'US-NE-ISNE', type: 'subZone', countryId: 'USA', id: 'US-NE-ISNE' }, //Iso New England Inc.
+  // { zoneName: 'US-NW-AVA', type: 'subZone', countryId: 'USA', id: 'US-NW-AVA' }, //Avista Corporation
+  // { zoneName: 'US-NW-BPAT', type: 'subZone', countryId: 'USA', id: 'US-NW-BPAT' }, //Bonneville Power Administration
+  // { zoneName: 'US-NW-CHPD', type: 'subZone', countryId: 'USA', id: 'US-NW-CHPD' }, //Public Utility District No. 1 Of Chelan County
+  // { zoneName: 'US-NW-DOPD', type: 'subZone', countryId: 'USA', id: 'US-NW-DOPD' }, //Pud No. 1 Of Douglas County
+  // { zoneName: 'US-NW-GCPD', type: 'subZone', countryId: 'USA', id: 'US-NW-GCPD' }, //Public Utility District No. 2 Of Grant County, Washington
+  // { zoneName: 'US-NW-GRID', type: 'subZone', countryId: 'USA', id: 'US-NW-GRID' }, //Gridforce Energy Management, Llc
+  // { zoneName: 'US-NW-GWA', type: 'subZone', countryId: 'USA', id: 'US-NW-GWA' }, //Naturener Power Watch, Llc (Gwa)
+  // { zoneName: 'US-NW-IPCO', type: 'subZone', countryId: 'USA', id: 'US-NW-IPCO' }, //Idaho Power Company
+  // { zoneName: 'US-NW-NEVP', type: 'subZone', countryId: 'USA', id: 'US-NW-NEVP' }, //Nevada Power Company
+  // { zoneName: 'US-NW-NWMT', type: 'subZone', countryId: 'USA', id: 'US-NW-NWMT' }, //Northwestern Energy (Nwmt)
+  // { zoneName: 'US-NW-PACE', type: 'subZone', countryId: 'USA', id: 'US-NW-PACE' }, //Pacificorp - East
+  // { zoneName: 'US-NW-PACW', type: 'subZone', countryId: 'USA', id: 'US-NW-PACW' }, //Pacificorp - West
+  // { zoneName: 'US-NW-PGE', type: 'subZone', countryId: 'USA', id: 'US-NW-PGE' }, //Portland General Electric Company
+  // { zoneName: 'US-NW-PSCO', type: 'subZone', countryId: 'USA', id: 'US-NW-PSCO' }, //Public Service Company Of Colorado
+  // { zoneName: 'US-NW-PSEI', type: 'subZone', countryId: 'USA', id: 'US-NW-PSEI' }, //Puget Sound Energy
+  // { zoneName: 'US-NW-SCL', type: 'subZone', countryId: 'USA', id: 'US-NW-SCL' }, //Seattle City Light
+  // { zoneName: 'US-NW-TPWR', type: 'subZone', countryId: 'USA', id: 'US-NW-TPWR' }, //City Of Tacoma, Department Of Public Utilities, Light Division
+  // { zoneName: 'US-NW-WACM', type: 'subZone', countryId: 'USA', id: 'US-NW-WACM' }, //Western Area Power Administration - Rocky Mountain Region
+  // { zoneName: 'US-NW-WAUW', type: 'subZone', countryId: 'USA', id: 'US-NW-WAUW' }, //Western Area Power Administration Ugp West
+  // { zoneName: 'US-NW-WWA', type: 'subZone', countryId: 'USA', id: 'US-NW-WWA' }, //Naturener Wind Watch, Llc
+  // { zoneName: 'US-NY-NYIS', type: 'subZone', countryId: 'USA', id: 'US-NY-NYIS' }, //New York Independent System Operator
+  // { zoneName: 'US-SE-AEC', type: 'subZone', countryId: 'USA', id: 'US-SE-AEC' }, //Powersouth Energy Cooperative
+  // { zoneName: 'US-SE-SEPA', type: 'subZone', countryId: 'USA', id: 'US-SE-SEPA' }, //Southeastern Power Administration
+  // { zoneName: 'US-SE-SOCO', type: 'subZone', countryId: 'USA', id: 'US-SE-SOCO' }, //Southern Company Services, Inc. - Trans
+  // { zoneName: 'US-SW-AZPS', type: 'subZone', countryId: 'USA', id: 'US-SW-AZPS' }, //Arizona Public Service Company
+  // { zoneName: 'US-SW-DEAA', type: 'subZone', countryId: 'USA', id: 'US-SW-DEAA' }, //Arlington Valley, Llc - Avba
+  // { zoneName: 'US-SW-EPE', type: 'subZone', countryId: 'USA', id: 'US-SW-EPE' }, //El Paso Electric Company
+  // { zoneName: 'US-SW-GRIF', type: 'subZone', countryId: 'USA', id: 'US-SW-GRIF' }, //Griffith Energy, Llc
+  // { zoneName: 'US-SW-GRMA', type: 'subZone', countryId: 'USA', id: 'US-SW-GRMA' }, //Gila River Power, Llc
+  // { zoneName: 'US-SW-HGMA', type: 'subZone', countryId: 'USA', id: 'US-SW-HGMA' }, //New Harquahala Generating Company, Llc - Hgba
+  // { zoneName: 'US-SW-PNM', type: 'subZone', countryId: 'USA', id: 'US-SW-PNM' }, //Public Service Company Of New Mexico
+  // { zoneName: 'US-SW-SRP', type: 'subZone', countryId: 'USA', id: 'US-SW-SRP' }, //Salt River Project
+  // { zoneName: 'US-SW-TEPC', type: 'subZone', countryId: 'USA', id: 'US-SW-TEPC' }, //Tucson Electric Power Company
+  // { zoneName: 'US-SW-WALC', type: 'subZone', countryId: 'USA', id: 'US-SW-WALC' }, //Western Area Power Administration - Desert Southwest Region
+  // { zoneName: 'US-TEN-TVA', type: 'subZone', countryId: 'USA', id: 'US-TEN-TVA' }, //Tennessee Valley Authority
+  // { zoneName: 'US-TEX-ERCO', type: 'subZone', countryId: 'USA', id: 'US-TEX-ERCO' }, //Electric Reliability Council Of Texas, Inc.
   { zoneName: 'VC', type: 'country', id: 'VCT'},
   { zoneName: 'UY', type: 'country', id: 'URY'},
   { zoneName: 'UZ', type: 'country', id: 'UZB'},

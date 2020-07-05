@@ -16,14 +16,14 @@ const modeColor = {
 };
 const modeOrder = [
   'nuclear',
-  'geothermal',
+  // 'geothermal',
   'biomass',
   'coal',
   'wind',
   'solar',
   'hydro',
-  'hydro storage',
-  'battery storage',
+  // 'hydro storage',
+  // 'battery storage',
   'gas',
   'oil',
   'unknown',
@@ -33,7 +33,11 @@ const STORAGE_MODES = modeOrder.filter(d => d.indexOf('storage') !== -1).map(d =
 
 const DEFAULT_FLAG_SIZE = 16;
 
-const DATA_FETCH_INTERVAL = 5 * 60 * 1000; // 5 minutes
+const FOSSIL_FUEL_KEYS = [
+  'oil',
+  'gas',
+  'coal',
+];
 
 module.exports = {
   modeColor,
@@ -41,5 +45,10 @@ module.exports = {
   PRODUCTION_MODES,
   STORAGE_MODES,
   DEFAULT_FLAG_SIZE,
-  DATA_FETCH_INTERVAL,
+  CARBON_INTENSITY_DOMAIN: {
+    ENERGY: 'ENERGY',
+    POPULATION: 'POPULATION',
+    GDP: 'GDP',
+  },
+  FOSSIL_FUEL_KEYS,
 };

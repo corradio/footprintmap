@@ -20,11 +20,12 @@ export function useTheme() {
 
 export function useCo2ColorScale() {
   const theme = useTheme();
+  const carbonIntensityDomain = useSelector(state => state.application.carbonIntensityDomain);
 
   return useMemo(
     () => (
       scaleLinear()
-        .domain(theme.co2Scale.steps)
+        .domain(theme.co2Scale.steps(carbonIntensityDomain))
         .range(theme.co2Scale.colors)
         .unknown('gray')
         .clamp(true)

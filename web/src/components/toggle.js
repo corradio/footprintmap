@@ -34,6 +34,8 @@ const Options = styled.div`
   height: 28px;
   justify-content: flex-end;
   margin: 0 4px;
+  flex-grow: 1;
+  justify-content: space-between;
 `;
 
 const OptionItem = styled.div`

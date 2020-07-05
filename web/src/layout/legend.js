@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import { dispatchApplication } from '../store';
 import { __ } from '../helpers/translation';
+import { formatCarbonIntensityUnit } from '../helpers/formatting';
 
 import HorizontalColorbar from '../components/horizontalcolorbar';
 import { solarColor, windColor } from '../helpers/scales';

@@ -18,7 +18,7 @@ import Map from './map';
 import { __ } from '../helpers/translation';
 import { isNewClientVersion } from '../helpers/environment';
 import { useCustomDatetime } from '../hooks/router';
-import { useLoadingOverlayVisible } from '../hooks/redux';
+import { useLoadingOverlayVisible, useCarbonIntensityDomain } from '../hooks/redux';
 import {
   useClientVersionFetch,
   useGridDataPolling,
@@ -29,6 +29,7 @@ import { dispatchApplication } from '../store';
 import OnboardingModal from '../components/onboardingmodal';
 import LoadingOverlay from '../components/loadingoverlay';
 import Toggle from '../components/toggle';
+import { CARBON_INTENSITY_DOMAIN } from '../helpers/constants';
 
 // TODO: Move all styles from styles.css to here
 // TODO: Remove all unecessary id and class tags
@@ -51,6 +52,7 @@ const Main = ({
   const datetime = useCustomDatetime();
 
   const showLoadingOverlay = useLoadingOverlayVisible();
+  const carbonIntensityDomain = useCarbonIntensityDomain();
 
   // Check for the latest client version once initially.
   useClientVersionFetch();
@@ -97,6 +99,16 @@ const Main = ({
                   { value: 'consumption', label: __('tooltips.consumption') },
                 ]}
                 value={electricityMixMode}
+              />
+              <br />
+              <Toggle
+                onChange={value => dispatchApplication('carbonIntensityDomain', value)}
+                options={[
+                  { value: CARBON_INTENSITY_DOMAIN.POPULATION, label: 'population' },
+                  { value: CARBON_INTENSITY_DOMAIN.GDP, label: 'gdp' },
+                  { value: CARBON_INTENSITY_DOMAIN.ENERGY, label: 'energy' },
+                ]}
+                value={carbonIntensityDomain}
               />
             </div>
             <LayerButtons />

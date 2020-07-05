@@ -20,7 +20,7 @@ export function useCurrentZoneHistoryDatetimes() {
   const zoneHistory = useCurrentZoneHistory();
 
   return useMemo(
-    () => zoneHistory.map(d => moment(d.stateDatetime).toDate()),
+    () => zoneHistory.map(d => moment(d.year.toString()).toDate()),
     [zoneHistory],
   );
 }
@@ -90,4 +90,8 @@ export function useSmallLoaderVisible() {
   const solarLoading = useSelector(state => state.data.isLoadingSolar);
   const windLoading = useSelector(state => state.data.isLoadingWind);
   return gridLoading || solarLoading || windLoading;
+}
+
+export function useCarbonIntensityDomain() {
+  return useSelector(state => state.application.carbonIntensityDomain);
 }

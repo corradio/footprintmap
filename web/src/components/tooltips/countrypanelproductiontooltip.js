@@ -17,6 +17,7 @@ import {
 
 const mapStateToProps = state => ({
   displayByEmissions: state.application.tableDisplayEmissions,
+  electricityMixMode: state.application.electricityMixMode,
 });
 
 const CountryPanelProductionTooltip = ({
@@ -24,6 +25,8 @@ const CountryPanelProductionTooltip = ({
   mode,
   position,
   zoneData,
+
+  electricityMixMode,
 }) => {
   if (!zoneData) return null;
 
@@ -34,8 +37,12 @@ const CountryPanelProductionTooltip = ({
   const isStorage = mode.indexOf('storage') !== -1;
   const resource = mode.replace(' storage', '');
 
+  const key = electricityMixMode === 'consumption'
+    ? 'primaryEnergyConsumptionTWh'
+    : 'primaryEnergyProductionTWh';
+
   const capacity = (zoneData.capacity || {})[mode];
-  const production = (zoneData.production || {})[resource];
+  const production = (zoneData[key] || {})[resource];
   const storage = (zoneData.storage || {})[resource];
 
   const electricity = getElectricityProductionValue({
@@ -46,8 +53,8 @@ const CountryPanelProductionTooltip = ({
   });
   const isExport = electricity < 0;
 
-  const usage = isFinite(electricity) && Math.abs(displayByEmissions ? (electricity * co2Intensity * 1000) : electricity);
-  const totalElectricity = getTotalElectricity(zoneData, displayByEmissions);
+  const usage = Math.abs(displayByEmissions ? (electricity * co2Intensity * 1000) : electricity);
+  const totalElectricity = getTotalElectricity(zoneData, displayByEmissions, electricityMixMode);
 
   const co2IntensitySource = isStorage
     ? (zoneData.dischargeCo2IntensitySources || {})[resource]
@@ -58,6 +65,7 @@ const CountryPanelProductionTooltip = ({
       ? (displayByEmissions ? 'emissionsStoredUsing' : 'electricityStoredUsing')
       : (displayByEmissions ? 'emissionsComeFrom' : 'electricityComesFrom'),
     getRatioPercent(usage, totalElectricity),
+    electricityMixMode === 'consumption' ? 'consumed' : 'produced',
     getFullZoneName(zoneData.countryCode),
     __(mode),
   );
@@ -72,7 +80,7 @@ const CountryPanelProductionTooltip = ({
         total={totalElectricity}
         format={format}
       />
-      {!displayByEmissions && (
+      {null && (
         <React.Fragment>
           <br />
           <br />
