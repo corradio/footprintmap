@@ -57,11 +57,14 @@ export function getTotalElectricity(data, displayByEmissions, electricityMixMode
 }
 
 export function getZoneCarbonIntensity(carbonIntensityDomain, electricityMixMode, data) {
-  if (!data) { return null; }
+  if (!data) { return undefined; }
   if (carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.ENERGY) {
+    if (data.totalPrimaryEnergyConsumptionTWh == null) { return undefined; }
     if (electricityMixMode === 'consumption') {
+      if (data.totalFootprintMegatonsCO2 == null ) { return undefined; }
       return data['totalFootprintMegatonsCO2'] / data['totalPrimaryEnergyConsumptionTWh'] * 1000;
     } else {
+      if (data.totalEmissionsMegatonsCO2 == null) { return undefined; }
       return data['totalEmissionsMegatonsCO2'] / data['totalPrimaryEnergyProductionTWh'] * 1000;
     }
   }
@@ -73,9 +76,12 @@ export function getZoneCarbonIntensity(carbonIntensityDomain, electricityMixMode
     }
   }
   if (carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.GDP) {
+    if (data.gdpMillionsCurrentUSD == null) { return undefined; }
     if (electricityMixMode === 'consumption') {
+      if (data.totalFootprintMegatonsCO2 == null) { return undefined; }
       return data['totalFootprintMegatonsCO2'] / data['gdpMillionsCurrentUSD'] * 1e6;
     } else {
+      if (data.totalEmissionsMegatonsCO2 == null) { return undefined; }
       return data['totalEmissionsMegatonsCO2'] / data['gdpMillionsCurrentUSD'] * 1e6;
     }
   }

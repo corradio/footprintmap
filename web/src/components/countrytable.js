@@ -349,7 +349,7 @@ const CountryElectricityProductionTable = React.memo(({
         data.maxStorageCapacity || 0,
         data.maxImport || 0,
         data.maxImportCapacity || 0,
-        d3Max(productionData, d => d.production),
+        d3Max(productionData, d => d.production) || 0,
       ),
     ])
     .range([0, width - LABEL_MAX_WIDTH - PADDING_X]);

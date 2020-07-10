@@ -89,9 +89,9 @@
         "toggleDarkMode": "Toggle dark-mode",
         "noParserInfo": "No data available",
         "temporaryDataOutage": "Live data temporarily unavailable",
-        "production": "production",
-        "consumption": "consumption",
-        "cpinfo": "<b>consumption</b> takes imports and exports into account, <b>production</b> ignores them",
+        "production": "territorial",
+        "consumption": "footprint",
+        "cpinfo": "<b>footprint</b> takes imports into account, <b>territorial</b> ignores them",
         "selectLanguage": "Select language",
         "lowCarbDescription": "Includes renewables and nuclear"
     },
@@ -580,22 +580,7 @@
             "zoneName": "Gabon"
           },
           "GB": {
-            "zoneName": "Great Britain"
-          },
-          "GB-NIR": {
-            "zoneName": "Northern Ireland"
-          },
-          "GB-ORK": {
-            "countryName": "Great Britain",
-            "zoneName": "Orkney Islands"
-          },
-          "GB-SHI": {
-            "countryName": "Great Britain",
-            "zoneName": "Shetland Islands"
-          },
-          "GB-ZET": {
-            "countryName": "Great Britain",
-            "zoneName": "Shetland Islands"
+            "zoneName": "United Kingdom"
           },
           "GD": {
             "zoneName": "Grenada"

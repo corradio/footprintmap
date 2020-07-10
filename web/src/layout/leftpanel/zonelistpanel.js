@@ -7,6 +7,8 @@ import SearchBar from '../../components/searchbar';
 import ZoneList from '../../components/zonelist';
 
 import InfoText from './infotext';
+import { useCarbonIntensityDomain } from '../../hooks/redux';
+import { formatCarbonIntensityUnit } from '../../helpers/formatting';
 
 const documentSearchKeyUpHandler = (key, searchRef) => {
   if (key === '/') {
@@ -31,7 +33,11 @@ const ZoneListPanel = () => (
         {' '}
         {__('left-panel.zone-list-header-title')}
       </div>
-      <div className="subtitle">{__('left-panel.zone-list-header-subtitle')}</div>
+      <div
+        className="subtitle"
+      >
+        {`Ranked by carbon intensity of ... (${formatCarbonIntensityUnit(useCarbonIntensityDomain())})`}
+      </div>
     </div>
 
     <SearchBar

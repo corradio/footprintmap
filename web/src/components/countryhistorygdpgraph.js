@@ -1,55 +1,63 @@
 import moment from 'moment';
 import React, { useMemo, useState } from 'react';
-import getSymbolFromCurrency from 'currency-symbol-map';
+import { connect } from 'react-redux';
 import { max as d3Max } from 'd3-array';
 import { scaleLinear } from 'd3-scale';
-import { connect } from 'react-redux';
-import { first } from 'lodash';
 
-import { GDP_GRAPH_LAYER_KEY } from '../helpers/constants';
-import formatting from '../helpers/formatting';
+import { getTooltipPosition } from '../helpers/graph';
+import { scaleGdp } from '../helpers/formatting';
+import { dispatchApplication } from '../store';
+import {
+  useCurrentZoneHistory,
+  useCurrentZoneHistoryStartTime,
+  useCurrentZoneHistoryEndTime,
+} from '../hooks/redux';
 
 import AreaGraph from './graph/areagraph';
 import Tooltip from './tooltip';
 
-const GdpTooltip = connect((state) => {
-  const { tooltipData, tooltipDisplayMode } = state.application;
-  const visible = tooltipDisplayMode === GDP_GRAPH_LAYER_KEY;
-  if (!visible) return { visible };
-  const { year } = tooltipData;
-  const value = tooltipData.gdpMillionsCurrentUSD;
-  const format = formatting.scaleGdp(value);
+const GdpTooltip = ({ position, zoneData }) => {
+  if (!zoneData) return null;
+
+  const { year } = zoneData;
+  const value = zoneData.gdpMillionsCurrentUSD;
+  const format = scaleGdp(value);
   const valueAxisLabel = `${format.unit} (current)`;
   const valueFactor = format.formattingFactor;
-  return { visible, value: `${year}: ${Math.round(value / valueFactor)} ${valueAxisLabel}` };
-})(({ visible, value }) => (visible ? <Tooltip>{value}</Tooltip> : null));
 
-const prepareGraphData = (historyData, colorBlindModeEnabled, electricityMixMode) => {
+  return (
+    <Tooltip id="price-tooltip" position={position}>
+      {year}: {Math.round(value / valueFactor)} {valueAxisLabel}
+    </Tooltip>
+  );
+};
+
+const prepareGraphData = (historyData) => {
   if (!historyData || !historyData[0]) return {};
 
   // const currencySymbol = getSymbolFromCurrency(((first(historyData) || {}).price || {}).currency);
 
   const priceMaxValue = d3Max(historyData.map(d => d.gdpMillionsCurrentUSD));
-  const priceColorScale = scaleLinear()
+  const colorScale = scaleLinear()
     .domain([0, priceMaxValue])
     .range(['yellow', 'red']);
 
 
-  const format = formatting.scaleGdp(priceMaxValue);
+  const format = scaleGdp(priceMaxValue);
   const valueAxisLabel = `${format.unit} (current)`;
   const valueFactor = format.formattingFactor;
 
   const data = historyData.map(d => ({
-    [GDP_GRAPH_LAYER_KEY]: d.gdpMillionsCurrentUSD / valueFactor,
+    gdp: d.gdpMillionsCurrentUSD / valueFactor,
     datetime: moment(d.year.toString()).toDate(),
     // Keep a pointer to original data
-    _countryData: d,
+    meta: d,
   }));
 
-  const layerKeys = [GDP_GRAPH_LAYER_KEY];
+  const layerKeys = ['gdp'];
   const layerStroke = () => 'darkgray';
   const layerFill = () => '#616161';
-  const markerFill = key => d => priceColorScale(d.data[key]);
+  const markerFill = key => d => colorScale(d.data[key]);
 
   return {
     data,
@@ -62,25 +70,23 @@ const prepareGraphData = (historyData, colorBlindModeEnabled, electricityMixMode
 };
 
 const mapStateToProps = state => ({
-  colorBlindModeEnabled: state.application.colorBlindModeEnabled,
+  displayByEmissions: state.application.tableDisplayEmissions,
   electricityMixMode: state.application.electricityMixMode,
-  startTime: getZoneHistoryStartTime(state),
-  endTime: getZoneHistoryEndTime(state),
-  historyData: getSelectedZoneHistory(state),
   isMobile: state.application.isMobile,
   selectedTimeIndex: state.application.selectedZoneTimeIndex,
+  carbonIntensityDomain: state.application.carbonIntensityDomain,
 });
 
 const CountryHistoryPricesGraph = ({
-  colorBlindModeEnabled,
-  electricityMixMode,
-  startTime,
-  endTime,
-  historyData,
   isMobile,
   selectedTimeIndex,
 }) => {
+  const [tooltip, setTooltip] = useState(null);
   const [selectedLayerIndex, setSelectedLayerIndex] = useState(null);
+
+  const historyData = useCurrentZoneHistory();
+  const startTime = useCurrentZoneHistoryStartTime();
+  const endTime = useCurrentZoneHistoryEndTime();
 
   // Recalculate graph data only when the history data is changed
   const {
@@ -91,26 +97,40 @@ const CountryHistoryPricesGraph = ({
     markerFill,
     valueAxisLabel,
   } = useMemo(
-    () => prepareGraphData(historyData, colorBlindModeEnabled, electricityMixMode),
-    [historyData, colorBlindModeEnabled, electricityMixMode]
+    () => prepareGraphData(historyData),
+    [historyData],
   );
 
   // Mouse action handlers
-  const backgroundMouseMoveHandler = useMemo(
-    () => createSingleLayerGraphBackgroundMouseMoveHandler(isMobile, setSelectedLayerIndex),
-    [isMobile, setSelectedLayerIndex]
+  const mouseMoveHandler = useMemo(
+    () => (timeIndex) => {
+      dispatchApplication('selectedZoneTimeIndex', timeIndex);
+      setSelectedLayerIndex(0); // Select the first (and only) layer even when hovering over graph background.
+    },
+    [setSelectedLayerIndex],
   );
-  const backgroundMouseOutHandler = useMemo(
-    () => createSingleLayerGraphBackgroundMouseOutHandler(setSelectedLayerIndex),
-    [setSelectedLayerIndex]
+  const mouseOutHandler = useMemo(
+    () => () => {
+      dispatchApplication('selectedZoneTimeIndex', null);
+      setSelectedLayerIndex(null);
+    },
+    [setSelectedLayerIndex],
   );
-  const layerMouseMoveHandler = useMemo(
-    () => createGraphLayerMouseMoveHandler(isMobile, setSelectedLayerIndex),
-    [isMobile, setSelectedLayerIndex]
+  // Graph marker callbacks
+  const markerUpdateHandler = useMemo(
+    () => (position, datapoint) => {
+      setTooltip({
+        position: getTooltipPosition(isMobile, position),
+        zoneData: datapoint.meta,
+      });
+    },
+    [setTooltip, isMobile],
   );
-  const layerMouseOutHandler = useMemo(
-    () => createGraphLayerMouseOutHandler(setSelectedLayerIndex),
-    [setSelectedLayerIndex]
+  const markerHideHandler = useMemo(
+    () => () => {
+      setTooltip(null);
+    },
+    [setTooltip],
   );
 
   return (
@@ -124,16 +144,23 @@ const CountryHistoryPricesGraph = ({
         startTime={startTime}
         endTime={endTime}
         valueAxisLabel={valueAxisLabel}
-        backgroundMouseMoveHandler={backgroundMouseMoveHandler}
-        backgroundMouseOutHandler={backgroundMouseOutHandler}
-        layerMouseMoveHandler={layerMouseMoveHandler}
-        layerMouseOutHandler={layerMouseOutHandler}
+        backgroundMouseMoveHandler={mouseMoveHandler}
+        backgroundMouseOutHandler={mouseOutHandler}
+        layerMouseMoveHandler={mouseMoveHandler}
+        layerMouseOutHandler={mouseOutHandler}
+        markerUpdateHandler={markerUpdateHandler}
+        markerHideHandler={markerHideHandler}
         selectedTimeIndex={selectedTimeIndex}
         selectedLayerIndex={selectedLayerIndex}
         isMobile={isMobile}
         height="6em"
       />
-      <GdpTooltip />
+      {tooltip && (
+        <GdpTooltip
+          position={tooltip.position}
+          zoneData={tooltip.zoneData}
+        />
+      )}
     </React.Fragment>
   );
 };

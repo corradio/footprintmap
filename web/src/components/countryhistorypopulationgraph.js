@@ -14,7 +14,23 @@ import {
 } from '../hooks/redux';
 
 import AreaGraph from './graph/areagraph';
-import PriceTooltip from './tooltips/pricetooltip';
+import Tooltip from './tooltip';
+
+const PopulationTooltip = ({ position, zoneData }) => {
+  if (!zoneData) return null;
+
+  const { year } = zoneData;
+  const value = zoneData.populationMillions;
+  const format = scaleMillions(value);
+  const valueAxisLabel = format.unit;
+  const valueFactor = format.formattingFactor;
+
+  return (
+    <Tooltip id="price-tooltip" position={position}>
+      {year}: {Math.round(value / valueFactor)} {valueAxisLabel}
+    </Tooltip>
+  );
+};
 
 const prepareGraphData = (historyData) => {
   if (!historyData || !historyData[0]) return {};
@@ -137,7 +153,7 @@ const CountryHistoryPricesGraph = ({
         height="6em"
       />
       {tooltip && (
-        <PriceTooltip
+        <PopulationTooltip
           position={tooltip.position}
           zoneData={tooltip.zoneData}
         />

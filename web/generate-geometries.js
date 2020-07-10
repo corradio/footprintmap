@@ -14,7 +14,6 @@ function readNDJSON(path) {
 }
 
 const countryGeos = readNDJSON('./build/tmp_countries.json');
-const stateGeos = readNDJSON('./build/tmp_states.json');
 const thirdpartyGeos = readNDJSON('./build/tmp_thirdparty.json').concat([
     require('./third_party_maps/DK-DK2-without-BHM.json'),
     require('./third_party_maps/NO-NO1.json'),
@@ -347,7 +346,7 @@ const zoneDefinitions = [
   // { zoneName: 'FR-COR', type: 'subunits', subunits: ['FXC']},
   { zoneName: 'GA', type: 'country', id: 'GAB'},
   // see https://github.com/tmrowco/electricitymap-contrib/pull/1615 for how SCT-no-islands is generated
-  { zoneName: 'GB', type: 'country', id: 'GBR' },
+  { zoneName: 'GB', type: 'subunits', subunits: ['ENG', 'SCT', 'WLS', 'NIR'] },
   // { zoneName: 'GB', type: 'subunits', subunits: ['SCT-no-islands', 'ENG', 'WLS']},
   // { zoneName: 'GB-NIR', type: 'subunits', subunits: ['NIR']},
   // { zoneName: 'GB-ORK', type: 'administrations', administrations: ['GBR-2744']},
@@ -913,8 +912,8 @@ function getZoneFeatures(zoneDefinitions, geos) {
   return zoneFeatures
 }
 
-const webGeos = countryGeos.concat(stateGeos, thirdpartyGeos, USSimplifiedGeos);
-const backendGeos = countryGeos.concat(stateGeos, thirdpartyGeos, USSimplifiedGeos); //should be changed back to USOriginalGeos
+const webGeos = countryGeos.concat(thirdpartyGeos, USSimplifiedGeos);
+const backendGeos = countryGeos.concat(thirdpartyGeos, USSimplifiedGeos); //should be changed back to USOriginalGeos
 
 const webZones = getZones(zoneDefinitions, webGeos);
 const backendZones = getZones(zoneDefinitions, backendGeos);

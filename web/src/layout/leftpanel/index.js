@@ -6,7 +6,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-
 import {
   Switch,
   Route,
@@ -17,15 +16,13 @@ import {
 import { dispatchApplication } from '../../store';
 import { useSearchParams } from '../../hooks/router';
 import { usePageViewsTracker } from '../../hooks/tracking';
-import { useSmallLoaderVisible, useCarbonIntensityDomain } from '../../hooks/redux';
+import { useSmallLoaderVisible } from '../../hooks/redux';
 import LastUpdatedTime from '../../components/lastupdatedtime';
 
 import FAQPanel from './faqpanel';
 import MobileInfoTab from './mobileinfotab';
 import ZoneDetailsPanel from './zonedetailspanel';
 import ZoneListPanel from './zonelistpanel';
-
-import { formatCarbonIntensityUnit } from '../../helpers/formatting';
 
 const HandleLegacyRoutes = () => {
   const searchParams = useSearchParams();
@@ -67,7 +64,6 @@ const mapStateToProps = state => ({
 const LeftPanel = ({ isLeftPanelCollapsed, isMobile }) => {
   const isLoaderVisible = useSmallLoaderVisible();
   const location = useLocation();
-  const carbonIntensityDomain = useCarbonIntensityDomain();
 
   usePageViewsTracker();
 
@@ -90,11 +86,6 @@ const LeftPanel = ({ isLeftPanelCollapsed, isMobile }) => {
             {isLoaderVisible && <SmallLoader />}
             <LastUpdatedTime />
           </div>
-        </div>
-        <div
-          className="subtitle"
-        >
-          {`Ranked by carbon intensity of ... (${formatCarbonIntensityUnit(carbonIntensityDomain)})`}
         </div>
       </div>
 

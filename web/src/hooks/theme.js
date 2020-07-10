@@ -30,6 +30,6 @@ export function useCo2ColorScale() {
         .unknown('gray')
         .clamp(true)
     ),
-    [theme],
+    [theme, carbonIntensityDomain],
   );
 }

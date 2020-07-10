@@ -233,13 +233,11 @@ const CountryPanel = ({
 
               {carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.ENERGY ? (
                 <React.Fragment>
+                  <span className="country-history-title">
+                    Energy mix
+                  </span>
                   <CountryHistoryMixGraph />
                   <br />
-                  {null && (
-                    <div className="bysource">
-                      {__('country-panel.bysource')}
-                    </div>
-                  )}
                   <span className="country-history-title">
                     by source
                   </span>
@@ -249,7 +247,6 @@ const CountryPanel = ({
 
               {carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.GDP ? (
                 <React.Fragment>
-                  {null && <div className="loading overlay" />}
                   <span className="country-history-title">
                     Gross domestic product
                   </span>

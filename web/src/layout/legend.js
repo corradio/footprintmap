@@ -11,6 +11,7 @@ import HorizontalColorbar from '../components/horizontalcolorbar';
 import { solarColor, windColor } from '../helpers/scales';
 import { useSolarEnabled, useWindEnabled } from '../hooks/router';
 import { useCo2ColorScale } from '../hooks/theme';
+import { useCarbonIntensityDomain } from '../hooks/redux';
 
 // TODO: Move styles from styles.css to here
 // TODO: Remove all unecessary id and class tags
@@ -31,6 +32,7 @@ const Legend = ({
   const co2ColorScale = useCo2ColorScale();
   const solarEnabled = useSolarEnabled();
   const windEnabled = useWindEnabled();
+  const carbonIntensityDomain = useCarbonIntensityDomain();
 
   const mobileCollapsedClass = !legendVisible ? 'mobile-collapsed' : '';
   const toggleLegend = () => {
@@ -77,7 +79,9 @@ const Legend = ({
           )}
           <div className={`co2-legend floating-legend ${mobileCollapsedClass}`}>
             <div className="legend-header">
-              {__('legends.carbonintensity')} <small>(gCO₂eq/kWh)</small>
+              {__('legends.carbonintensity')} 
+              {' '}
+              <small>{`(${formatCarbonIntensityUnit(carbonIntensityDomain)})`}</small>
             </div>
             <HorizontalColorbar
               id="carbon-intensity-bar"

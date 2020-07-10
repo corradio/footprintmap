@@ -94,7 +94,7 @@ const CountryPanelProductionTooltip = ({
         </React.Fragment>
       )}
       {/* Don't show carbon intensity if we know for sure the zone doesn't use this resource */}
-      {!displayByEmissions && (isFinite(co2Intensity) || usage !== 0) && (
+      {null && !displayByEmissions && (isFinite(co2Intensity) || usage !== 0) && (
         <React.Fragment>
           <br />
           <br />

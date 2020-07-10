@@ -5,9 +5,6 @@ set -eu -o pipefail
 RESOLUTION=10m
 COUNTRIES_FILENAME=ne_${RESOLUTION}_admin_0_map_subunits
 
-STATES_FILENAME=ne_${RESOLUTION}_admin_1_states_provinces_lakes
-STATES_FILTER="['AUS', 'AZE', 'BIH', 'BRA', 'CAN', 'CHL', 'DNK', 'ESP', 'GBR', 'GRC', 'IND', 'ITA', 'JPN', 'MEX', 'MYS', 'RUS', 'USA']"
-
 NODE_MODULES_PATH="node_modules/.bin"
 
 mkdir -p build
@@ -18,12 +15,6 @@ if [ ! -e "build/${COUNTRIES_FILENAME}.zip" ]; then
 fi
 unzip -od build build/${COUNTRIES_FILENAME}.zip
 
-if [ ! -e "build/${STATES_FILENAME}.zip" ]; then
-  echo "Downloading ${STATES_FILENAME}.zip"
-  curl -z build/${STATES_FILENAME}.zip -o build/${STATES_FILENAME}.zip https://naciscdn.org/naturalearth/${RESOLUTION}/cultural/${STATES_FILENAME}.zip
-fi
-unzip -od build build/${STATES_FILENAME}.zip
-
 # Move 3rd party shapes to build
 cp -r third_party_maps/* build
 
@@ -32,10 +23,6 @@ echo "Extract metadata"
 ("$NODE_MODULES_PATH/shp2json" -n build/${COUNTRIES_FILENAME}.shp \
   | "$NODE_MODULES_PATH/ndjson-map" 'd.properties' \
 )> build/world_countries_props.json
-
-("$NODE_MODULES_PATH/shp2json" -n build/${STATES_FILENAME}.shp \
-  | "$NODE_MODULES_PATH/ndjson-map" 'd.properties' \
-)> build/world_states_props.json
 
 ("$NODE_MODULES_PATH/shp2json" -n build/Canary_Islands.shp \
   | "$NODE_MODULES_PATH/ndjson-map" 'd.properties' \
@@ -48,13 +35,6 @@ echo 'Parsing countries..'
   | "$NODE_MODULES_PATH/ndjson-map" '(d.id = (d.properties.ISO_A3 != "-99") ? d.properties.ISO_A3 : d.properties.ADM0_A3, d.oldProps = d.properties, d.properties = {}, d.properties.subid = d.oldProps.SU_A3, d.properties.code_hasc = d.oldProps.code_hasc, delete d.oldProps, d)' \
   | "$NODE_MODULES_PATH/ndjson-filter" "d.id" \
 )> build/tmp_countries.json
-
-# Parse states
-echo 'Parsing states..'
-("$NODE_MODULES_PATH/shp2json" -n build/${STATES_FILENAME}.shp \
-  | "$NODE_MODULES_PATH/ndjson-map" '(d.id = d.properties.adm0_a3, d)' \
-  | "$NODE_MODULES_PATH/ndjson-filter" "d.id && ${STATES_FILTER}.indexOf(d.id) != -1"
-)> build/tmp_states.json
 
 # Parse 3rd party
 echo 'Parsing 3rd party..'
