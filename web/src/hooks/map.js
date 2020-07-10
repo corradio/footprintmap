@@ -23,6 +23,6 @@ export function useZonesWithColors() {
         };
       })
     ),
-    [zones, electricityMixMode, co2ColorScale],
+    [zones, electricityMixMode, co2ColorScale, carbonIntensityDomain],
   );
 }

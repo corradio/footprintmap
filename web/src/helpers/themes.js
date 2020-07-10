@@ -44,7 +44,7 @@ export const themes = {
   },
   colorblindBright: {
     co2Scale: {
-      steps: [0, 150, 600, 750, 800],
+      steps: getCo2Steps,
       colors: ['#FCFAC4', '#FAB484', '#F57965', '#DA4D6B', '#DA4D6B'],
     },
     oceanColor: '#FAFAFA',
