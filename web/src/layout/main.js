@@ -3,6 +3,7 @@
 // TODO(olc): re-enable this rule
 
 import React from 'react';
+import moment from 'moment';
 import { connect, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
@@ -39,6 +40,7 @@ const mapStateToProps = state => ({
   electricityMixMode: state.application.electricityMixMode,
   hasConnectionWarning: state.data.hasConnectionWarning,
   version: state.application.version,
+  currentGridYear: state.data.grid.datetime,
 });
 
 const Main = ({
@@ -46,6 +48,7 @@ const Main = ({
   electricityMixMode,
   hasConnectionWarning,
   version,
+  currentGridYear,
 }) => {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -112,6 +115,9 @@ const Main = ({
               />
             </div>
             <LayerButtons />
+            <div className="text-title" style={{ color: brightModeEnabled ? '#000' : '#fff' }}>
+              {moment(currentGridYear.toString()).format('YYYY')}
+            </div>
           </div>
 
           <div id="connection-warning" className={`flash-message ${hasConnectionWarning ? 'active' : ''}`}>

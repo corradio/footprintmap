@@ -9,6 +9,8 @@ const zonesConfig = require('../../../config/zones.json');
 
 const globalcarbon = require('../globalcarbon.json');
 
+const CURRENT_YEAR = 2018;
+
 // ** Prepare initial zone data
 const zones = constructTopos();
 // Add id to each zone
@@ -16,7 +18,7 @@ Object.keys(zones).forEach((k) => { zones[k].countryCode = k; });
 
 const initialDataState = {
   // Here we will store data items
-  grid: { zones },
+  grid: { zones, datetime: CURRENT_YEAR.toString() },
   hasConnectionWarning: false,
   hasInitializedGrid: true,
   histories: {},
@@ -34,7 +36,7 @@ Object.entries(globalcarbon.countries).forEach(([k, v]) => {
   if (!zones[k]) {
     console.error(`Couldn't copy global carbon data ${k} to zones. Is a geometry missing?`);
   } else {
-    zones[k] = { ...zones[k], ...v.find(d => d.year === 2017) };
+    zones[k] = { ...zones[k], ...v.find(d => d.year === CURRENT_YEAR) };
   }
   initialDataState.histories[k] = v;
 });
@@ -65,9 +67,6 @@ module.exports = (state = initialDataState, action) => {
           delete newState.histories[k];
         }
       });
-
-      // Set date
-      newGrid.datetime = action.payload.datetime;
 
       // Reset all data we want to update (for instance, not maxCapacity)
       Object.keys(newGrid.zones).forEach((key) => {
