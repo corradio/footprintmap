@@ -29,13 +29,7 @@ export function useCurrentZoneHistoryDatetimes() {
 // as we want to make sure we account for the missing data at the end of
 // the graph (when not inferable from historyData timestamps).
 export function useCurrentZoneHistoryEndTime() {
-  const customDatetime = useCustomDatetime();
-  const gridDatetime = useSelector(state => (state.data.grid || {}).datetime);
-
-  return useMemo(
-    () => moment(customDatetime || gridDatetime).format(),
-    [customDatetime, gridDatetime],
-  );
+  return moment().format('YYYY');
 }
 
 // TODO: Likewise, we should be passing an explicit startTime set to 24h

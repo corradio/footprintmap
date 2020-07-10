@@ -6,10 +6,10 @@ var translation = require('./translation');
 const { CARBON_INTENSITY_DOMAIN } = require('../helpers/constants');
 
 module.exports.formatPower = function (d, numDigits) {
-  // Assume MW input
+  // Assume TWh input
   if (d == null || d === NaN) return d;
   if (numDigits == null) numDigits = 3;
-  return d3.format('.' + numDigits + 's')(d * 1e6) + 'W';
+  return d3.format('.' + numDigits + 's')(d * 1e12) + 'Wh';
 };
 module.exports.formatCo2 = function (d, numDigits) {
   // Assume gCO₂ / h input

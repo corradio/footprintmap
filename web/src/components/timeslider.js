@@ -9,6 +9,7 @@ import {
   sortedIndex,
   isNumber,
 } from 'lodash';
+import { connect } from 'react-redux';
 import { scaleTime } from 'd3-scale';
 import moment from 'moment';
 
@@ -44,6 +45,7 @@ const TimeSlider = ({
   datetimes,
   startTime,
   endTime,
+  datetime,
 }) => {
   const ref = useRef(null);
   const width = useWidthObserver(ref, 2 * AXIS_HORIZONTAL_MARGINS);
@@ -61,7 +63,7 @@ const TimeSlider = ({
 
   if (!datetimes || datetimes.length === 0) return null;
 
-  const selectedTimeValue = isNumber(selectedTimeIndex) ? datetimes[selectedTimeIndex].valueOf() : null;
+  const selectedTimeValue = isNumber(selectedTimeIndex) ? datetimes[selectedTimeIndex].valueOf() : moment(datetime).toDate().valueOf();
   const anchoredTimeValue = isNumber(anchoredTimeIndex) ? datetimes[anchoredTimeIndex].valueOf() : null;
   const startTimeValue = timeScale.domain()[0].valueOf();
   const endTimeValue = timeScale.domain()[1].valueOf();
@@ -88,4 +90,4 @@ const TimeSlider = ({
   );
 };
 
-export default TimeSlider;
+export default connect(state => ({ datetime: state.data.grid.datetime }))(TimeSlider);

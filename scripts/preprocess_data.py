@@ -217,44 +217,47 @@ TOE_TO_TWH = 1 / 85985
 
 
 def convert_mtoe_to_twh(f): return f * 1e6 * TOE_TO_TWH  # Mtoe to TWh
+def convert_ej_to_twh(f): return f * 277.7778 # EJ to TWh
 
 
 bp_sheet_mapping = {
     # sheet -> field path
-    'Primary Energy Consumption': {'key': 'totalPrimaryEnergyConsumptionTWh', 'convert': convert_mtoe_to_twh},
+    'Primary Energy Consumption': {'key': 'totalPrimaryEnergyConsumptionTWh', 'convert': convert_ej_to_twh},
     'Electricity Generation ': {'key': 'totalElectricityGenerationTWh'},
     # Note: total primary energy production is not directly accessible
 
-    'Oil Consumption - Mtoe': {'key': 'primaryEnergyConsumptionTWh.oil', 'convert': convert_mtoe_to_twh},
-    'Gas Consumption - Mtoe': {'key': 'primaryEnergyConsumptionTWh.gas', 'convert': convert_mtoe_to_twh},
-    'Coal Consumption - Mtoe': {'key': 'primaryEnergyConsumptionTWh.coal', 'convert': convert_mtoe_to_twh},
-    'Nuclear Consumption - Mtoe': {'key': 'primaryEnergyConsumptionTWh.nuclear', 'convert': convert_mtoe_to_twh},
-    'Hydro Consumption - Mtoe': {'key': 'primaryEnergyConsumptionTWh.hydro', 'convert': convert_mtoe_to_twh},
-    'Solar Consumption - Mtoe': {'key': 'primaryEnergyConsumptionTWh.solar', 'convert': convert_mtoe_to_twh},
-    'Wind Consumption - Mtoe': {'key': 'primaryEnergyConsumptionTWh.wind', 'convert': convert_mtoe_to_twh},
-    'Geo Biomass Other - Mtoe': {'key': 'primaryEnergyConsumptionTWh.biomass', 'convert': convert_mtoe_to_twh},
+    'Oil Consumption - Tonnes': {'key': 'primaryEnergyConsumptionTWh.oil', 'convert': convert_mtoe_to_twh},
+    'Gas Consumption - EJ': {'key': 'primaryEnergyConsumptionTWh.gas', 'convert': convert_ej_to_twh},
+    'Coal Consumption - EJ': {'key': 'primaryEnergyConsumptionTWh.coal', 'convert': convert_ej_to_twh},
+    'Nuclear Consumption - EJ': {'key': 'primaryEnergyConsumptionTWh.nuclear', 'convert': convert_ej_to_twh},
+    'Hydro Consumption - EJ': {'key': 'primaryEnergyConsumptionTWh.hydro', 'convert': convert_ej_to_twh},
+    'Solar Consumption - Exajoules ': {'key': 'primaryEnergyConsumptionTWh.solar', 'convert': convert_ej_to_twh},
+    'Wind Consumption - EJ': {'key': 'primaryEnergyConsumptionTWh.wind', 'convert': convert_ej_to_twh},
+    'Geo Biomass Other - EJ': {'key': 'primaryEnergyConsumptionTWh.biomass', 'convert': convert_ej_to_twh},
 
     'Oil Production - Tonnes': {'key': 'primaryEnergyProductionTWh.oil', 'convert': convert_mtoe_to_twh},
-    'Gas Production - Mtoe': {'key': 'primaryEnergyProductionTWh.gas', 'convert': convert_mtoe_to_twh},
-    'Coal Production - Mtoe': {'key': 'primaryEnergyProductionTWh.coal', 'convert': convert_mtoe_to_twh},
+    'Gas Production - EJ': {'key': 'primaryEnergyProductionTWh.gas', 'convert': convert_ej_to_twh},
+    'Coal Production - EJ': {'key': 'primaryEnergyProductionTWh.coal', 'convert': convert_ej_to_twh},
     'Nuclear Generation - TWh': {'key': 'primaryEnergyProductionTWh.nuclear'},
     'Hydro Generation - TWh': {'key': 'primaryEnergyProductionTWh.hydro'},
     'Solar Generation - TWh': {'key': 'primaryEnergyProductionTWh.solar'},
-    'Wind Generation - TWh ': {'key': 'primaryEnergyProductionTWh.wind'},
+    # Note: the following is not a bug. EJ is written although TWh is given
+    'Wind Generation - EJ': {'key': 'primaryEnergyProductionTWh.wind'},
     'Geo Biomass Other - TWh': {'key': 'primaryEnergyProductionTWh.biomass'}
 
     ## TODO: Add biofuels
     ## TODO: Rename biomass to geoAndBiomass
-    ## TODO: Energy consumption doesn't take into account cross-border import
+    ## TODO: Count biofuels as renewable
+    ## Note: Energy consumption doesn't take into account cross-border import
 }
 """
-'Biofuels Production - Kboed' = Renewable energy -  Biofuels production
-'Biofuels Production - Ktoe' = Renewable energy -  Biofuels production
+'Biofuels Production - PJ'
+'Biofuels Consumption - PJ'
 """
 for sheet_name in bp_sheet_mapping.keys():
     print(f'Reading BP {sheet_name}..')
     df_bp = pd.read_excel(
-        'data/bp-stats-review-2019-all-data.xlsx',
+        'data/bp-stats-review-2020-all-data.xlsx',
         sheet_name=sheet_name,
         header=BP_SKIP_HEADER)
     df_bp = df_bp.rename(

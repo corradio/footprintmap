@@ -9,7 +9,7 @@ const zonesConfig = require('../../../config/zones.json');
 
 const globalcarbon = require('../globalcarbon.json');
 
-const CURRENT_YEAR = 2018;
+const CURRENT_YEAR = 2017;
 
 // ** Prepare initial zone data
 const zones = constructTopos();
