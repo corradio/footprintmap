@@ -35,7 +35,7 @@ import { useTrackEvent } from '../../hooks/tracking';
 import { flagUri } from '../../helpers/flags';
 import { getFullZoneName, __ } from '../../helpers/translation';
 import { getZoneCarbonIntensity, getRenewableRatio, getLowcarbonRatio } from '../../helpers/zonedata';
-import { formatCarbonIntensityUnit, formatCarbonIntensityShortUnit } from '../../helpers/formatting';
+import { formatCarbonIntensityUnit, formatCarbonIntensityShortUnit, formatCarbonIntensityDescription } from '../../helpers/formatting';
 import { CARBON_INTENSITY_DOMAIN } from '../../helpers/constants';
 
 // TODO: Move all styles from styles.css to here
@@ -141,6 +141,8 @@ const CountryPanel = ({
     trackEvent('switchToCountryProduction');
   };
 
+  const [energyMixMode, setEnergyMixMode] = useState(electricityMixMode);
+
   return (
     <div className="country-panel">
       <div id="country-table-header">
@@ -220,28 +222,48 @@ const CountryPanel = ({
         {data && (
           <React.Fragment>
             <div className="country-history">
-              {null && <div className="loading overlay" />}
-              <span className="country-history-title">
-                {!tableDisplayEmissions
-                  ? `Carbon intensity (${electricityMixMode !== 'consumption' ? 'territorial' : 'incl. imported'})`
-                  : `Emissions (${electricityMixMode !== 'consumption' ? 'territorial' : 'incl. imported'})`
-                }
-              </span>
               <br />
+              <span className="country-history-title">
+                {formatCarbonIntensityDescription(carbonIntensityDomain, electricityMixMode)}
+              </span>
+              <CountryHistoryCarbonGraph />
 
-              {tableDisplayEmissions ? <CountryHistoryEmissionsGraph /> : <CountryHistoryCarbonGraph />}
+              <span className="country-history-title">
+                {`Total carbon emissions (${electricityMixMode === 'consumption' ? 'incl. imported' : 'territorial'})`}
+              </span>
+              <CountryHistoryEmissionsGraph />
 
               {carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.ENERGY ? (
                 <React.Fragment>
                   <span className="country-history-title">
-                    Energy mix
+                    Origin of energy
                   </span>
-                  <CountryHistoryMixGraph />
+                  <div className="country-show-emissions-wrap">
+                    <div className="menu">
+                      <a onClick={() => setEnergyMixMode('consumption')} className={energyMixMode === 'consumption' ? 'selected' : null}>
+                        consumed
+                      </a>
+                      |
+                      <a onClick={() => setEnergyMixMode('production')} className={energyMixMode !== 'consumption' ? 'selected' : null}>
+                        produced
+                      </a>
+                    </div>
+                  </div>
+                  <CountryHistoryMixGraph electricityMixMode={energyMixMode} />
+                  <div>
+                    <small>
+                      Note: energy from electricity does not account for electricity imported
+                    </small>
+                  </div>
                   <br />
-                  <span className="country-history-title">
-                    by source
-                  </span>
-                  <CountryTable />
+                  { null && (
+                    <React.Fragment>
+                      <span className="country-history-title">
+                        by source
+                      </span>
+                      <CountryTable />
+                    </React.Fragment>
+                  )}
                 </React.Fragment>
               ) : null}
 
@@ -262,17 +284,6 @@ const CountryPanel = ({
                   <CountryHistoryPopulationGraph />
                 </React.Fragment>
               ) : null}
-            </div>
-            <div className="country-show-emissions-wrap">
-              <div className="menu">
-                <a onClick={switchToZoneProduction} className={!tableDisplayEmissions ? 'selected' : null}>
-                  {__(`country-panel.electricity${electricityMixMode}`)}
-                </a>
-                |
-                <a onClick={switchToZoneEmissions} className={tableDisplayEmissions ? 'selected' : null}>
-                  {__('country-panel.emissions')}
-                </a>
-              </div>
             </div>
           </React.Fragment>
         )}

@@ -5,7 +5,7 @@ import { __ } from '../../helpers/translation';
 import { useCo2ColorScale } from '../../hooks/theme';
 import { useCarbonIntensityDomain } from '../../hooks/redux';
 import { getZoneCarbonIntensity, getRenewableRatio, getLowcarbonRatio } from '../../helpers/zonedata';
-import { formatCarbonIntensityShortUnit } from '../../helpers/formatting';
+import { formatCarbonIntensityShortUnit, formatCarbonIntensityDescription } from '../../helpers/formatting';
 import { CARBON_INTENSITY_DOMAIN } from '../../helpers/constants';
 
 import CircularGauge from '../circulargauge';
@@ -28,9 +28,9 @@ const MapCountryTooltip = ({
 
   const co2intensity = getZoneCarbonIntensity(carbonIntensityDomain, electricityMixMode, zoneData);
 
-  const fossilFuelRatio = getLowcarbonRatio(electricityMixMode, zoneData);
-  const fossilFuelPercentage = fossilFuelRatio !== null
-    ? Math.round(100 * (1 - fossilFuelRatio))
+  const lowCarbonRatio = getLowcarbonRatio(electricityMixMode, zoneData);
+  const lowCarbonPercentage = lowCarbonRatio !== null
+    ? Math.round(100 * lowCarbonRatio)
     : '?';
 
   const renewableRatio = getRenewableRatio(electricityMixMode, zoneData);
@@ -60,13 +60,13 @@ const MapCountryTooltip = ({
                     {formatCarbonIntensityShortUnit(carbonIntensityDomain)}
                   </div>
                 </div>
-                <div className="country-col-headline">{__('country-panel.carbonintensity')}</div>
+                <div className="country-col-headline">{ formatCarbonIntensityDescription(carbonIntensityDomain, electricityMixMode) }</div>
               </div>
               {carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.ENERGY ? (
                 <React.Fragment>
                   <div className="country-col country-lowcarbon-wrap">
                     <div id="tooltip-country-lowcarbon-gauge" className="country-gauge-wrap">
-                      <CircularGauge percentage={fossilFuelPercentage} />
+                      <CircularGauge percentage={lowCarbonPercentage} />
                     </div>
                     <div className="country-col-headline">{__('country-panel.lowcarbon')}</div>
                     <div className="country-col-subtext" />
@@ -83,7 +83,7 @@ const MapCountryTooltip = ({
           </div>
         ) : (
           <div className="temporary-outage-text">
-            {__('tooltips.temporaryDataOutage')}
+            No data available
           </div>
         )
       ) : (

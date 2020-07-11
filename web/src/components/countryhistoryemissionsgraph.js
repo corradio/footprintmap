@@ -16,26 +16,43 @@ import { dispatchApplication } from '../store';
 
 import CountryPanelEmissionsTooltip from './tooltips/countrypanelemissionstooltip';
 import AreaGraph from './graph/areagraph';
+import { scaleMillionsShort } from '../helpers/formatting';
 
 const prepareGraphData = (historyData, colorBlindModeEnabled, electricityMixMode, carbonIntensityDomain) => {
   if (!historyData || !historyData[0]) return {};
+
+  const computeEmissions = d => (electricityMixMode === 'consumption'
+    ? d['totalFootprintMegatonsCO2']
+    : d['totalEmissionsMegatonsCO2']);
+
+  const maxEmissions = d3Max(historyData.map(d => computeEmissions(d)));
+  const colorScale = scaleLinear()
+    .domain([0, maxEmissions])
+    .range(['yellow', 'red']);
+
+  const format = scaleMillionsShort(maxEmissions);
+  const valueAxisLabel = `${format.unit}tCO₂`;
+  const valueFactor = format.formattingFactor;
+
   const data = historyData.map(d => ({
-    emissions: electricityMixMode === 'consumption'
-      ? d['totalFootprintMegatonsCO2']
-      : d['totalEmissionsMegatonsCO2'],
+    emissions: computeEmissions(d) / valueFactor,
     datetime: moment(d.year.toString()).toDate(),
     // Keep a pointer to original data
     meta: d,
   }));
 
-  const maxEmissions = d3Max(data.map(d => d.emissions));
-  const emissionsColorScale = scaleLinear()
-    .domain([0, maxEmissions])
-    .range(['yellow', 'brown']);
-
   const layerKeys = ['emissions'];
-  const layerFill = key => d => emissionsColorScale(d.data[key]);
-  return { data, layerKeys, layerFill };
+  const layerStroke = () => 'darkgray';
+  const layerFill = () => '#616161';
+  const markerFill = key => d => colorScale(d.data[key]);
+  return {
+    data,
+    layerKeys,
+    layerStroke,
+    layerFill,
+    markerFill,
+    valueAxisLabel,
+  };
 };
 
 const mapStateToProps = state => ({
@@ -58,7 +75,14 @@ const CountryHistoryEmissionsGraph = ({
   const endTime = useCurrentZoneHistoryEndTime();
 
   // Recalculate graph data only when the history data is changed
-  const { data, layerKeys, layerFill } = useMemo(
+  const {
+    data,
+    layerKeys,
+    layerStroke,
+    layerFill,
+    markerFill,
+    valueAxisLabel,
+  } = useMemo(
     () => prepareGraphData(historyData),
     [historyData],
   );
@@ -83,7 +107,7 @@ const CountryHistoryEmissionsGraph = ({
     () => (position, datapoint) => {
       setTooltip({
         position: getTooltipPosition(isMobile, position),
-        zoneData: datapoint.meta,
+        data: datapoint,
       });
     },
     [setTooltip, isMobile],
@@ -100,10 +124,12 @@ const CountryHistoryEmissionsGraph = ({
       <AreaGraph
         data={data}
         layerKeys={layerKeys}
+        layerStroke={layerStroke}
         layerFill={layerFill}
+        markerFill={markerFill}
         startTime={startTime}
         endTime={endTime}
-        valueAxisLabel="MtCO2eq / year"
+        valueAxisLabel={valueAxisLabel}
         backgroundMouseMoveHandler={mouseMoveHandler}
         backgroundMouseOutHandler={mouseOutHandler}
         layerMouseMoveHandler={mouseMoveHandler}
@@ -118,7 +144,8 @@ const CountryHistoryEmissionsGraph = ({
       {tooltip && (
         <CountryPanelEmissionsTooltip
           position={tooltip.position}
-          zoneData={tooltip.zoneData}
+          data={tooltip.data}
+          unit={valueAxisLabel}
         />
       )}
     </React.Fragment>

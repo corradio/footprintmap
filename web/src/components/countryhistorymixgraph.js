@@ -103,7 +103,6 @@ const prepareGraphData = (historyData, co2ColorScale, displayByEmissions, electr
 
 const mapStateToProps = state => ({
   displayByEmissions: state.application.tableDisplayEmissions,
-  electricityMixMode: state.application.electricityMixMode,
   isMobile: state.application.isMobile,
   selectedTimeIndex: state.application.selectedZoneTimeIndex,
   carbonIntensityDomain: state.application.carbonIntensityDomain,
@@ -214,6 +213,7 @@ const CountryHistoryMixGraph = ({
             mode={tooltip.mode}
             position={tooltip.position}
             zoneData={tooltip.zoneData}
+            electricityMixMode={electricityMixMode}
           />
         )
       )}

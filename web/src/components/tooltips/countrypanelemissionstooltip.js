@@ -5,14 +5,14 @@ import { getTotalElectricity } from '../../helpers/zonedata';
 import { tonsPerHourToGramsPerMinute } from '../../helpers/math';
 import Tooltip from '../tooltip';
 
-const CountryPanelEmissionsTooltip = ({ position, zoneData }) => {
-  if (!zoneData) return null;
+const CountryPanelEmissionsTooltip = ({ position, data, unit }) => {
+  if (!data) return null;
 
-  const totalEmissions = Math.round(tonsPerHourToGramsPerMinute(getTotalElectricity(zoneData, true)) * 100) / 100;
+  const value = Math.round(data.emissions);
 
   return (
     <Tooltip id="countrypanel-emissions-tooltip" position={position}>
-      <b>{totalEmissions}t</b> {__('ofCO2eqPerMinute')}
+      {data.meta.year}: <b>{value}</b> {unit}
     </Tooltip>
   );
 };

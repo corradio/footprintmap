@@ -17,7 +17,6 @@ import {
 
 const mapStateToProps = state => ({
   displayByEmissions: state.application.tableDisplayEmissions,
-  electricityMixMode: state.application.electricityMixMode,
 });
 
 const CountryPanelProductionTooltip = ({
@@ -73,7 +72,7 @@ const CountryPanelProductionTooltip = ({
 
   return (
     <Tooltip id="countrypanel-production-tooltip" position={position}>
-      <span dangerouslySetInnerHTML={{ __html: headline }} />
+      <span dangerouslySetInnerHTML={{ __html: `${zoneData.year}: ${headline}` }} />
       <br />
       <MetricRatio
         value={usage}

@@ -89,8 +89,8 @@
         "toggleDarkMode": "Toggle dark-mode",
         "noParserInfo": "No data available",
         "temporaryDataOutage": "Live data temporarily unavailable",
-        "production": "territorial",
-        "consumption": "footprint",
+        "production": "production",
+        "consumption": "consumption",
         "cpinfo": "<b>footprint</b> takes imports into account, <b>territorial</b> ignores them",
         "selectLanguage": "Select language",
         "lowCarbDescription": "Includes renewables and nuclear"

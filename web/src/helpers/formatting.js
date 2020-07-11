@@ -39,42 +39,42 @@ module.exports.scaleEnergy = function (maxEnergy) {
       formattingFactor: 1e3
     }
 };
-module.exports.scaleGdp = function (maxGdp) {
-  // Assume million USD input
-  if (maxGdp < 1)
+module.exports.scaleMillionsShort = function (maxValue) {
+  // Assume million input
+  if (maxValue < 1)
     return {
-      unit: "k$ USD",
+      unit: "k",
       formattingFactor: 1e-3
     }
-  if (maxGdp < 1e3)
+  if (maxValue < 1e3)
     return {
-      unit: "M$ USD",
+      unit: "M",
       formattingFactor: 1
     }
-  if (maxGdp < 1e6)
+  if (maxValue < 1e6)
     return {
-      unit: "B$ USD",
+      unit: "B",
       formattingFactor: 1e3
     }
   else return {
-    unit: "T$ USD",
+    unit: "T",
     formattingFactor: 1e6
   }
 };
 
-module.exports.scaleMillions = function (maxGdp) {
-  // Assume million USD input
-  if (maxGdp < 1)
+module.exports.scaleMillions = function (maxValue) {
+  // Assume million input
+  if (maxValue < 1)
     return {
       unit: "Thousand",
       formattingFactor: 1e-3
     }
-  if (maxGdp < 1e3)
+  if (maxValue < 1e3)
     return {
       unit: "Million",
       formattingFactor: 1
     }
-  if (maxGdp < 1e6)
+  if (maxValue < 1e6)
     return {
       unit: "Billion",
       formattingFactor: 1e3
@@ -87,18 +87,38 @@ module.exports.scaleMillions = function (maxGdp) {
 
 module.exports.formatCarbonIntensityUnit = (carbonIntensityDomain) => {
   if (carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.ENERGY) {
-    return 'tCO2/GWh'; // i.e. ktCO2/TWh
+    return 'tCO₂ per GWh'; // i.e. ktCO₂ / TWh
   }
   if (carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.POPULATION) {
-    return 'tCO2/capita';
+    return 'tCO₂ per capita';
   }
   if (carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.GDP) {
-    return 'gCO2/$'; // i.e. tCO2/M$
+    return 'gCO₂ per $'; // i.e. tCO₂ / M$
   }
   throw new Error('Not implemented yet');
 }
 
 module.exports.formatCarbonIntensityShortUnit = (carbonIntensityDomain) => {
   return module.exports.formatCarbonIntensityUnit(carbonIntensityDomain)[0];
+}
+
+module.exports.formatCarbonIntensityDescription = (carbonIntensityDomain, electricityMixMode) => {
+  let desc = '';
+  if (carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.ENERGY) {
+    desc += `Carbon footprint of energy`;
+    desc += ` ${electricityMixMode !== 'consumption' ? 'produced' : 'consumed'}`;
+  }
+  else if (carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.POPULATION) {
+    desc += `Carbon footprint per capita`;
+    desc += ` (${electricityMixMode !== 'consumption' ? 'territorial' : 'incl. imported'})`;
+  }
+  else if (carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.GDP) {
+    desc += `Carbon footprint of the economy`;
+    desc += ` (${electricityMixMode !== 'consumption' ? 'territorial' : 'incl. imported'})`;
+  }
+  else {
+    throw new Error('Not implemented yet');
+  }
+  return desc;
 }
 

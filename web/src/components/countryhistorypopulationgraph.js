@@ -27,7 +27,7 @@ const PopulationTooltip = ({ position, zoneData }) => {
 
   return (
     <Tooltip id="price-tooltip" position={position}>
-      {year}: {Math.round(value / valueFactor)} {valueAxisLabel}
+      {year}: <b>{Math.round(value / valueFactor * 10) / 10}</b> {valueAxisLabel}
     </Tooltip>
   );
 };

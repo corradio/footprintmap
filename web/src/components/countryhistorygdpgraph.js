@@ -5,7 +5,7 @@ import { max as d3Max } from 'd3-array';
 import { scaleLinear } from 'd3-scale';
 
 import { getTooltipPosition } from '../helpers/graph';
-import { scaleGdp } from '../helpers/formatting';
+import { scaleMillions } from '../helpers/formatting';
 import { dispatchApplication } from '../store';
 import {
   useCurrentZoneHistory,
@@ -21,13 +21,13 @@ const GdpTooltip = ({ position, zoneData }) => {
 
   const { year } = zoneData;
   const value = zoneData.gdpMillionsCurrentUSD;
-  const format = scaleGdp(value);
-  const valueAxisLabel = `${format.unit} (current)`;
+  const format = scaleMillions(value);
+  const valueAxisLabel = `${format.unit} $ (current)`;
   const valueFactor = format.formattingFactor;
 
   return (
     <Tooltip id="price-tooltip" position={position}>
-      {year}: {Math.round(value / valueFactor)} {valueAxisLabel}
+      {year}: <b>{Math.round(value / valueFactor)}</b> {valueAxisLabel}
     </Tooltip>
   );
 };
@@ -43,8 +43,8 @@ const prepareGraphData = (historyData) => {
     .range(['yellow', 'red']);
 
 
-  const format = scaleGdp(priceMaxValue);
-  const valueAxisLabel = `${format.unit} (current)`;
+  const format = scaleMillions(priceMaxValue);
+  const valueAxisLabel = `${format.unit}$ USD (current)`;
   const valueFactor = format.formattingFactor;
 
   const data = historyData.map(d => ({
@@ -70,11 +70,8 @@ const prepareGraphData = (historyData) => {
 };
 
 const mapStateToProps = state => ({
-  displayByEmissions: state.application.tableDisplayEmissions,
-  electricityMixMode: state.application.electricityMixMode,
   isMobile: state.application.isMobile,
   selectedTimeIndex: state.application.selectedZoneTimeIndex,
-  carbonIntensityDomain: state.application.carbonIntensityDomain,
 });
 
 const CountryHistoryPricesGraph = ({
