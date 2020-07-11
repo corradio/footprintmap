@@ -44,7 +44,7 @@ const prepareGraphData = (historyData) => {
 
 
   const format = scaleMillions(priceMaxValue);
-  const valueAxisLabel = `${format.unit}$ USD (current)`;
+  const valueAxisLabel = `${format.unit} $ (current)`;
   const valueFactor = format.formattingFactor;
 
   const data = historyData.map(d => ({

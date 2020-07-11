@@ -41,6 +41,11 @@ module.exports.scaleEnergy = function (maxEnergy) {
 };
 module.exports.scaleMillionsShort = function (maxValue) {
   // Assume million input
+  if (maxValue < 1e-3)
+    return {
+      unit: "",
+      formattingFactor: 1e-6
+    }
   if (maxValue < 1)
     return {
       unit: "k",
@@ -64,6 +69,11 @@ module.exports.scaleMillionsShort = function (maxValue) {
 
 module.exports.scaleMillions = function (maxValue) {
   // Assume million input
+  if (maxValue < 1e-3)
+    return {
+      unit: "",
+      formattingFactor: 1e-6
+    }
   if (maxValue < 1)
     return {
       unit: "Thousand",

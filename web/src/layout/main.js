@@ -95,16 +95,6 @@ const Main = ({
             <Legend />
             <div className="controls-container">
               <Toggle
-                infoHTML={__('tooltips.cpinfo')}
-                onChange={value => dispatchApplication('electricityMixMode', value)}
-                options={[
-                  { value: 'production', label: __('tooltips.production') },
-                  { value: 'consumption', label: __('tooltips.consumption') },
-                ]}
-                value={electricityMixMode}
-              />
-              <br />
-              <Toggle
                 onChange={value => dispatchApplication('carbonIntensityDomain', value)}
                 options={[
                   { value: CARBON_INTENSITY_DOMAIN.POPULATION, label: 'population' },

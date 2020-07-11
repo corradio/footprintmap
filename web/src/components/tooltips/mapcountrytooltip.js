@@ -62,7 +62,7 @@ const MapCountryTooltip = ({
                 </div>
                 <div className="country-col-headline">{ formatCarbonIntensityDescription(carbonIntensityDomain, electricityMixMode) }</div>
               </div>
-              {carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.ENERGY ? (
+              {true ? (
                 <React.Fragment>
                   <div className="country-col country-lowcarbon-wrap">
                     <div id="tooltip-country-lowcarbon-gauge" className="country-gauge-wrap">

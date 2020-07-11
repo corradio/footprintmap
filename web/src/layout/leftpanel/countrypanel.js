@@ -23,6 +23,7 @@ import CountryHistoryEmissionsGraph from '../../components/countryhistoryemissio
 import CountryHistoryMixGraph from '../../components/countryhistorymixgraph';
 import CountryHistoryGdpGraph from '../../components/countryhistorygdpgraph';
 import CountryHistoryPopulationGraph from '../../components/countryhistorypopulationgraph';
+import CountryHistoryEnergyIntensity from '../../components/countryhistoryenergyintensity';
 import CountryTable from '../../components/countrytable';
 import LoadingPlaceholder from '../../components/loadingplaceholder';
 
@@ -192,7 +193,7 @@ const CountryPanel = ({
                 </div>
               </div>
 
-              {carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.ENERGY ? (
+              {true ? (
                 <React.Fragment>
                   <div className="country-col country-lowcarbon-wrap">
                     <div id="country-lowcarbon-gauge" className="country-gauge-wrap">
@@ -282,6 +283,15 @@ const CountryPanel = ({
                     Population
                   </span>
                   <CountryHistoryPopulationGraph />
+                </React.Fragment>
+              ) : null}
+
+              {[CARBON_INTENSITY_DOMAIN.GDP, CARBON_INTENSITY_DOMAIN.ENERGY].includes(carbonIntensityDomain) ? (
+                <React.Fragment>
+                  <span className="country-history-title">
+                    Energy intensity of the economy
+                  </span>
+                  <CountryHistoryEnergyIntensity />
                 </React.Fragment>
               ) : null}
             </div>

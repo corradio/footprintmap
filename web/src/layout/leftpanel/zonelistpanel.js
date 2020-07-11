@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import { __ } from '../../helpers/translation';
 import { dispatchApplication } from '../../store';
@@ -8,7 +9,7 @@ import ZoneList from '../../components/zonelist';
 
 import InfoText from './infotext';
 import { useCarbonIntensityDomain } from '../../hooks/redux';
-import { formatCarbonIntensityUnit } from '../../helpers/formatting';
+import { formatCarbonIntensityDescription } from '../../helpers/formatting';
 
 const documentSearchKeyUpHandler = (key, searchRef) => {
   if (key === '/') {
@@ -36,7 +37,10 @@ const ZoneListPanel = () => (
       <div
         className="subtitle"
       >
-        {`Ranked by carbon intensity of ... (${formatCarbonIntensityUnit(useCarbonIntensityDomain())})`}
+        {`Ranked by ${formatCarbonIntensityDescription(
+          useCarbonIntensityDomain(),
+          useSelector(state => state.application.electricityMixMode),
+        ).toLowerCase()}`}
       </div>
     </div>
 

@@ -1,5 +1,6 @@
 const { isEmpty } = require('lodash');
 const moment = require('moment');
+const d3 = require('d3-array');
 
 const { modeOrder } = require('../helpers/constants');
 const constructTopos = require('../helpers/topos');
@@ -9,7 +10,11 @@ const zonesConfig = require('../../../config/zones.json');
 
 const globalcarbon = require('../globalcarbon.json');
 
-const CURRENT_YEAR = 2017;
+const CURRENT_YEAR = Object.values(globalcarbon.countries)
+  .flat()
+  .filter(d => d && d.totalFootprintMegatonsCO2)
+  .map(d => d.year)
+  .reduce((a, b) => Math.max(a, b), 0);
 
 // ** Prepare initial zone data
 const zones = constructTopos();
