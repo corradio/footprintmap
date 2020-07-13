@@ -15,8 +15,6 @@ ADD web/generate-geometries.js web/topogen.sh /home/web/
 ADD web/src/world.json /home/web/src/world.json
 RUN bash topogen.sh
 
-ARG ELECTRICITYMAP_PUBLIC_TOKEN
-
 # Build
 # (note: this will override the world.json that was previously created)
 ADD config /home/config

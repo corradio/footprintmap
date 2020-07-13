@@ -1,7 +1,8 @@
 name: Build and Deploy
 
 on:
-  push:
+  check_run:
+    types: [completed]
     branches:
       - master
 
@@ -42,7 +43,8 @@ jobs:
       run: |        
         docker build -t "$REGISTRY_HOSTNAME"/"$GCP_PROJECT"/"$IMAGE":"$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
-          --build-arg GITHUB_REF="$GITHUB_REF" web
+          --build-arg GITHUB_REF="$GITHUB_REF" \
+          -f web/Dockerfile
 
     # Push the Docker image to Google Container Registry
     - name: Publish
