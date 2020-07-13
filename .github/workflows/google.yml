@@ -53,7 +53,8 @@ jobs:
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |
-        beta run deploy DEPLOYMENT_NAME \
+        gcloud components install beta --quiet
+        gcloud beta run deploy $DEPLOYMENT_NAME \
           --image "$REGISTRY_HOSTNAME"/"$GCP_PROJECT"/"$IMAGE":"$GITHUB_SHA" \
           --project $GCP_PROJECT \
           --region $GCP_ZONE \
