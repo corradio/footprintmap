@@ -1,8 +1,7 @@
 name: Build and Deploy
 
 on:
-  check_run:
-    types: [completed]
+  push:
     branches:
       - master
 
