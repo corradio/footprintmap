@@ -1,7 +1,7 @@
 name: Build and Deploy
 
 on:
-  check_suite:
+  check_run:
     types: [completed]
     branches:
       - master
