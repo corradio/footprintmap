@@ -4,8 +4,6 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { keys, sortBy } from 'lodash';
 
-import { useCustomDatetime } from './router';
-
 export function useCurrentZoneHistory() {
   const { zoneId } = useParams();
   const histories = useSelector(state => state.data.histories);

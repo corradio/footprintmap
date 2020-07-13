@@ -6,7 +6,6 @@ import { useCo2ColorScale } from '../../hooks/theme';
 import { useCarbonIntensityDomain } from '../../hooks/redux';
 import { getZoneCarbonIntensity, getRenewableRatio, getLowcarbonRatio } from '../../helpers/zonedata';
 import { formatCarbonIntensityShortUnit, formatCarbonIntensityDescription } from '../../helpers/formatting';
-import { CARBON_INTENSITY_DOMAIN } from '../../helpers/constants';
 
 import CircularGauge from '../circulargauge';
 import Tooltip from '../tooltip';
@@ -79,7 +78,7 @@ const MapCountryTooltip = ({
                   </div>
                 </React.Fragment>
               ) : null}
-              </div>
+            </div>
           </div>
         ) : (
           <div className="temporary-outage-text">

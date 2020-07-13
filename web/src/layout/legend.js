@@ -79,7 +79,7 @@ const Legend = ({
           )}
           <div className={`co2-legend floating-legend ${mobileCollapsedClass}`}>
             <div className="legend-header">
-              {__('legends.carbonintensity')} 
+              {__('legends.carbonintensity')}
               {' '}
               <small>{`(${formatCarbonIntensityUnit(carbonIntensityDomain)})`}</small>
             </div>

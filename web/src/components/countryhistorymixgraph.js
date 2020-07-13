@@ -2,7 +2,6 @@ import moment from 'moment';
 import React, { useState, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { max as d3Max } from 'd3-array';
-import { forEach } from 'lodash';
 
 import formatting from '../helpers/formatting';
 import { useCo2ColorScale } from '../hooks/theme';
@@ -84,10 +83,10 @@ const prepareGraphData = (historyData, co2ColorScale, displayByEmissions, electr
   // Show the exchange layers (if they exist) on top of the standard sources.
   const layerKeys = modeOrder.concat(exchangeKeys);
 
-  const layerFill = (key) => {
+  const layerFill = (k) => {
     // If exchange layer, set the horizontal gradient by using a different fill for each datapoint.
-    if (exchangeKeys.includes(key)) {
-      return d => co2ColorScale((d.data.meta.exchangeCo2Intensities || {})[key]);
+    if (exchangeKeys.includes(k)) {
+      return d => co2ColorScale((d.data.meta.exchangeCo2Intensities || {})[k]);
     }
     // Otherwise use regular production fill.
     return modeColor[key];
@@ -113,8 +112,6 @@ const CountryHistoryMixGraph = ({
   electricityMixMode,
   isMobile,
   selectedTimeIndex,
-
-  carbonIntensityDomain,
 }) => {
   const [tooltip, setTooltip] = useState(null);
   const [selectedLayerIndex, setSelectedLayerIndex] = useState(null);

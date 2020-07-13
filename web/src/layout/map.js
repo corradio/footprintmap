@@ -21,7 +21,6 @@ import MapCountryTooltip from '../components/tooltips/mapcountrytooltip';
 import ExchangeLayer from '../components/layers/exchangelayer';
 import SolarLayer from '../components/layers/solarlayer';
 import WindLayer from '../components/layers/windlayer';
-import { CarbonIntensity } from '../components/tooltips/common';
 import { useCarbonIntensityDomain } from '../hooks/redux';
 import { getZoneCarbonIntensity } from '../helpers/zonedata';
 

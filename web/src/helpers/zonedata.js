@@ -51,9 +51,9 @@ export function getExchangeCo2Intensity(mode, zoneData, electricityMixMode) {
 
 export function getTotalElectricity(data, displayByEmissions, electricityMixMode) {
   if (electricityMixMode === 'consumption') {
-    return displayByEmissions ? data['totalFootprintMegatonsCO2'] : data['totalPrimaryEnergyConsumptionTWh'];
+    return displayByEmissions ? data.totalFootprintMegatonsCO2 : data.totalPrimaryEnergyConsumptionTWh;
   }
-  return displayByEmissions ? data['totalEmissionsMegatonsCO2'] : data['totalPrimaryEnergyProductionTWh'];
+  return displayByEmissions ? data.totalEmissionsMegatonsCO2 : data.totalPrimaryEnergyProductionTWh;
 }
 
 export function getZoneCarbonIntensity(carbonIntensityDomain, electricityMixMode, data) {
@@ -61,29 +61,26 @@ export function getZoneCarbonIntensity(carbonIntensityDomain, electricityMixMode
   if (carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.ENERGY) {
     if (data.totalPrimaryEnergyConsumptionTWh == null) { return undefined; }
     if (electricityMixMode === 'consumption') {
-      if (data.totalFootprintMegatonsCO2 == null ) { return undefined; }
-      return data['totalFootprintMegatonsCO2'] / data['totalPrimaryEnergyConsumptionTWh'] * 1000;
-    } else {
-      if (data.totalEmissionsMegatonsCO2 == null) { return undefined; }
-      return data['totalEmissionsMegatonsCO2'] / data['totalPrimaryEnergyProductionTWh'] * 1000;
+      if (data.totalFootprintMegatonsCO2 == null) { return undefined; }
+      return data.totalFootprintMegatonsCO2 / data.totalPrimaryEnergyConsumptionTWh * 1000;
     }
+    if (data.totalEmissionsMegatonsCO2 == null) { return undefined; }
+    return data.totalEmissionsMegatonsCO2 / data.totalPrimaryEnergyProductionTWh * 1000;
   }
   if (carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.POPULATION) {
     if (electricityMixMode === 'consumption') {
-      return data['totalFootprintTonsCO2PerCapita'];
-    } else {
-      return data['totalEmissionsTonsCO2PerCapita'];
+      return data.totalFootprintTonsCO2PerCapita;
     }
+    return data.totalEmissionsTonsCO2PerCapita;
   }
   if (carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.GDP) {
     if (data.gdpMillionsCurrentUSD == null) { return undefined; }
     if (electricityMixMode === 'consumption') {
       if (data.totalFootprintMegatonsCO2 == null) { return undefined; }
-      return data['totalFootprintMegatonsCO2'] / data['gdpMillionsCurrentUSD'] * 1e6;
-    } else {
-      if (data.totalEmissionsMegatonsCO2 == null) { return undefined; }
-      return data['totalEmissionsMegatonsCO2'] / data['gdpMillionsCurrentUSD'] * 1e6;
+      return data.totalFootprintMegatonsCO2 / data.gdpMillionsCurrentUSD * 1e6;
     }
+    if (data.totalEmissionsMegatonsCO2 == null) { return undefined; }
+    return data.totalEmissionsMegatonsCO2 / data.gdpMillionsCurrentUSD * 1e6;
   }
   throw new Error('Not implemented yet');
 }

@@ -37,7 +37,6 @@ import { CARBON_INTENSITY_DOMAIN } from '../helpers/constants';
 
 const mapStateToProps = state => ({
   brightModeEnabled: state.application.brightModeEnabled,
-  electricityMixMode: state.application.electricityMixMode,
   hasConnectionWarning: state.data.hasConnectionWarning,
   version: state.application.version,
   currentGridYear: state.data.grid.datetime,
@@ -45,7 +44,6 @@ const mapStateToProps = state => ({
 
 const Main = ({
   brightModeEnabled,
-  electricityMixMode,
   hasConnectionWarning,
   version,
   currentGridYear,

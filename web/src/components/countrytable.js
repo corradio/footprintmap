@@ -226,7 +226,6 @@ const CountryCarbonEmissionsTable = React.memo(({
   onExchangeRowMouseOver,
   onExchangeRowMouseOut,
   width,
-  carbonIntensityDomain,
 }) => {
   const { productionY, exchangeFlagX, exchangeY } = getDataBlockPositions(productionData, exchangeData);
 
@@ -327,7 +326,6 @@ const CountryElectricityProductionTable = React.memo(({
   onExchangeRowMouseOver,
   onExchangeRowMouseOut,
   width,
-  carbonIntensityDomain,
 }) => {
   const co2ColorScale = useCo2ColorScale();
 
@@ -438,15 +436,12 @@ const mapStateToProps = state => ({
   displayByEmissions: state.application.tableDisplayEmissions,
   electricityMixMode: state.application.electricityMixMode,
   isMobile: state.application.isMobile,
-  carbonIntensityDomain: state.application.carbonIntensityDomain,
 });
 
 const CountryTable = ({
   displayByEmissions,
   electricityMixMode,
   isMobile,
-  
-  carbonIntensityDomain,
 }) => {
   const ref = useRef(null);
   const width = useWidthObserver(ref);
@@ -456,7 +451,7 @@ const CountryTable = ({
 
   const productionData = useMemo(
     () => getProductionData(data, electricityMixMode),
-    [data, electricityMixMode]
+    [data, electricityMixMode],
   );
   const exchangeData = useMemo(
     () => getExchangeData(data, exchangeKeys, electricityMixMode),

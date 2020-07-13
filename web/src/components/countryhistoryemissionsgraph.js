@@ -10,20 +10,18 @@ import {
   useCurrentZoneHistoryStartTime,
   useCurrentZoneHistoryEndTime,
 } from '../hooks/redux';
-import { tonsPerHourToGramsPerMinute } from '../helpers/math';
-import { getTotalElectricity } from '../helpers/zonedata';
 import { dispatchApplication } from '../store';
 
 import CountryPanelEmissionsTooltip from './tooltips/countrypanelemissionstooltip';
 import AreaGraph from './graph/areagraph';
 import { scaleMillionsShort } from '../helpers/formatting';
 
-const prepareGraphData = (historyData, colorBlindModeEnabled, electricityMixMode, carbonIntensityDomain) => {
+const prepareGraphData = (historyData, colorBlindModeEnabled, electricityMixMode) => {
   if (!historyData || !historyData[0]) return {};
 
   const computeEmissions = d => (electricityMixMode === 'consumption'
-    ? d['totalFootprintMegatonsCO2']
-    : d['totalEmissionsMegatonsCO2']);
+    ? d.totalFootprintMegatonsCO2
+    : d.totalEmissionsMegatonsCO2);
 
   const maxEmissions = d3Max(historyData.map(d => computeEmissions(d)));
   const colorScale = scaleLinear()
@@ -64,8 +62,6 @@ const mapStateToProps = state => ({
 const CountryHistoryEmissionsGraph = ({
   isMobile,
   selectedTimeIndex,
-
-  carbonIntensityDomain,
 }) => {
   const [tooltip, setTooltip] = useState(null);
   const [selectedLayerIndex, setSelectedLayerIndex] = useState(null);

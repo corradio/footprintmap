@@ -10,9 +10,9 @@ env:
   GCP_EMAIL: ${{ secrets.GCP_EMAIL }}
   GITHUB_SHA: ${{ github.sha }}
   GCP_ZONE: europe-west1
-  IMAGE: carbonmap
+  IMAGE: footprintmap
   REGISTRY_HOSTNAME: eu.gcr.io
-  DEPLOYMENT_NAME: carbonmap
+  DEPLOYMENT_NAME: footprintmap
 
 jobs:
   setup-build-publish-deploy:

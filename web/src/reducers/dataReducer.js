@@ -1,12 +1,9 @@
 const { isEmpty } = require('lodash');
 const moment = require('moment');
-const d3 = require('d3-array');
 
 const { modeOrder } = require('../helpers/constants');
 const constructTopos = require('../helpers/topos');
-const translation = require('../helpers/translation');
 
-const zonesConfig = require('../../../config/zones.json');
 
 const globalcarbon = require('../globalcarbon.json');
 
@@ -37,6 +34,7 @@ const initialDataState = {
 
 // Load initial data
 Object.entries(globalcarbon.countries).forEach(([k, v]) => {
+  // eslint-disable-next-line no-shadow
   const { zones } = initialDataState.grid;
   if (!zones[k]) {
     console.error(`Couldn't copy global carbon data ${k} to zones. Is a geometry missing?`);

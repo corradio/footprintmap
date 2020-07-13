@@ -1,8 +1,5 @@
 import React from 'react';
 
-import { __ } from '../../helpers/translation';
-import { getTotalElectricity } from '../../helpers/zonedata';
-import { tonsPerHourToGramsPerMinute } from '../../helpers/math';
 import Tooltip from '../tooltip';
 
 const CountryPanelEmissionsTooltip = ({ position, data, unit }) => {

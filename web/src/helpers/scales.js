@@ -36,16 +36,3 @@ export const quantizedExchangeSpeedScale = scaleLinear()
   .rangeRound([0, 2])
   .unknown(0)
   .clamp(true);
-
-// ** CO2
-export const getCo2Scale = (colorBlindModeEnabled, carbonIntensityDomain) => {
-  const theme = colorBlindModeEnabled
-    ? themes.colorblindScale
-    : themes.co2Scale;
-
-  return scaleLinear()
-    .domain(theme.steps(carbonIntensityDomain))
-    .range(theme.colors)
-    .unknown('gray')
-    .clamp(true);
-};

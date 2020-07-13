@@ -17,7 +17,6 @@ import moment from 'moment';
 // Components
 import LowCarbonInfoTooltip from '../../components/tooltips/lowcarboninfotooltip';
 import CircularGauge from '../../components/circulargauge';
-import ContributorList from '../../components/contributorlist';
 import CountryHistoryCarbonGraph from '../../components/countryhistorycarbongraph';
 import CountryHistoryEmissionsGraph from '../../components/countryhistoryemissionsgraph';
 import CountryHistoryMixGraph from '../../components/countryhistorymixgraph';
@@ -25,14 +24,11 @@ import CountryHistoryGdpGraph from '../../components/countryhistorygdpgraph';
 import CountryHistoryPopulationGraph from '../../components/countryhistorypopulationgraph';
 import CountryHistoryEnergyIntensity from '../../components/countryhistoryenergyintensity';
 import CountryTable from '../../components/countrytable';
-import LoadingPlaceholder from '../../components/loadingplaceholder';
 
-import { dispatchApplication } from '../../store';
 
 // Modules
 import { useCurrentZoneData } from '../../hooks/redux';
 import { useCo2ColorScale } from '../../hooks/theme';
-import { useTrackEvent } from '../../hooks/tracking';
 import { flagUri } from '../../helpers/flags';
 import { getFullZoneName, __ } from '../../helpers/translation';
 import { getZoneCarbonIntensity, getRenewableRatio, getLowcarbonRatio } from '../../helpers/zonedata';
@@ -81,17 +77,14 @@ const mapStateToProps = state => ({
 const CountryPanel = ({
   electricityMixMode,
   isMobile,
-  tableDisplayEmissions,
   zones,
 
   carbonIntensityDomain,
 }) => {
   const [tooltip, setTooltip] = useState(null);
 
-  const isLoadingHistories = useSelector(state => state.data.isLoadingHistories);
   const co2ColorScale = useCo2ColorScale();
 
-  const trackEvent = useTrackEvent();
   const history = useHistory();
   const location = useLocation();
   const { zoneId } = useParams();
@@ -124,7 +117,6 @@ const CountryPanel = ({
     return <Redirect to={parentPage} />;
   }
 
-  const { hasParser } = data;
   const datetime = data.year.toString();
   const co2Intensity = getZoneCarbonIntensity(
     carbonIntensityDomain,
@@ -132,15 +124,6 @@ const CountryPanel = ({
     data,
   );
 
-  const switchToZoneEmissions = () => {
-    dispatchApplication('tableDisplayEmissions', true);
-    trackEvent('switchToCountryEmissions');
-  };
-
-  const switchToZoneProduction = () => {
-    dispatchApplication('tableDisplayEmissions', false);
-    trackEvent('switchToCountryProduction');
-  };
 
   const [energyMixMode, setEnergyMixMode] = useState(electricityMixMode);
 
@@ -189,7 +172,9 @@ const CountryPanel = ({
                 </div>
                 <div className="country-col-headline">{__('country-panel.carbonintensity')}</div>
                 <div className="country-col-subtext">
-                  ({formatCarbonIntensityUnit(carbonIntensityDomain)})
+                  (
+                  {formatCarbonIntensityUnit(carbonIntensityDomain)}
+)
                 </div>
               </div>
 
