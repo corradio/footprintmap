@@ -10,7 +10,7 @@ class GoogleAnalyticsThirdParty {
     // Permanent values should be set using
     // https://developers.google.com/analytics/devguides/collection/gtagjs/setting-values
 
-    gtag('config', 'UA-79729918-1',
+    gtag('config', 'UA-79729918-13',
       {
         'custom_map': {
           'dimension1': 'clientType',
@@ -26,7 +26,7 @@ class GoogleAnalyticsThirdParty {
       }
     );
     // Remember to add
-    // <script async src="https://www.googletagmanager.com/gtag/js?id=UA-79729918-1"></script>
+    // <script async src="https://www.googletagmanager.com/gtag/js?id=UA-79729918-13"></script>
     // in head
     this.inst = gtag;
 

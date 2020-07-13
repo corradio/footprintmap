@@ -73,32 +73,6 @@
             var isCordova = <%= (typeof isCordova !== 'undefined' && isCordova) %>;
         </script>
 
-        <!-- Add crash reporting early on so we catch all errors -->
-        <script
-          src="https://browser.sentry-cdn.com/5.9.1/bundle.min.js"
-          integrity="sha384-/x1aHz0nKRd6zVUazsV6CbQvjJvr6zQL2CHbQZf3yoLkezyEtZUpqUNnOLW9Nt3v"
-          crossorigin="anonymous"></script>
-        <script>
-            if (bundleHash.indexOf('dev') === -1 && !isCordova) {
-                Sentry.init({
-                    dsn: 'https://bdda83aba5724206bf02a880b14c56d1@sentry.io/1295430',
-                    release: '<%= bundleHash %>',
-                });
-            }
-        </script>
-
-        <!-- Google App Indexing (Android) -->
-        <link rel="alternate" href="android-app://com.tmrow.electricitymap/https/electricitymap.org" />
-        <link rel="alternate" href="android-app://com.tmrow.electricitymap/http/electricitymap.org" />
-        <link rel="alternate" href="android-app://com.tmrow.electricitymap/https/www.electricitymap.org" />
-        <link rel="alternate" href="android-app://com.tmrow.electricitymap/http/www.electricitymap.org" />
-
-        <!-- Google App Indexing (iOS) -->
-        <link rel="alternate" href="ios-app://1224594248/https/electricitymap.org" />
-        <link rel="alternate" href="ios-app://1224594248/http/electricitymap.org" />
-        <link rel="alternate" href="ios-app://1224594248/https/www.electricitymap.org" />
-        <link rel="alternate" href="ios-app://1224594248/http/www.electricitymap.org" />
-
         <% if (typeof isCordova != 'undefined' && isCordova) { %>
         <script src="../cordova.js"></script>
         <% } %>
@@ -106,7 +80,7 @@
         <script defer src="<%= resolvePath('dist/bundle.' + bundleHash + '.js') %>"></script>
 
         <!-- Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-79729918-1"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-79729918-13"></script>
     </head>
     <body lang="<%= locale %>" id="app"></body>
 
