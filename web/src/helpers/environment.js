@@ -1,6 +1,6 @@
 
 export function isProduction() {
-  return window.location.href.includes('electricitymap');
+  return window.location.href.includes('footprintmap');
 }
 
 export function isLocalhost() {
