@@ -71,7 +71,6 @@ const mapStateToProps = state => ({
   zones: state.data.grid.zones,
 
   carbonIntensityDomain: state.application.carbonIntensityDomain,
-  currentYear: state.application.currentYear,
 });
 
 const CountryPanel = ({

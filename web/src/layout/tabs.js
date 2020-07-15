@@ -17,7 +17,7 @@ export default () => {
             className="list-item"
             to={{ pathname: '/map', search: location.search }}
           >
-            <img className="tab-icon-custom" src={resolvePath('images/electricitymap-icon.svg')} alt="" />
+            <i className="material-icons" aria-hidden="true">map</i>
             <span className="tab-label">{__('mobile-main-menu.map')}</span>
           </NavLink>
         )}

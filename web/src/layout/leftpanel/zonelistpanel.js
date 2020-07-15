@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import moment from 'moment';
 
 import { __ } from '../../helpers/translation';
 import { dispatchApplication } from '../../store';
@@ -40,7 +41,7 @@ const ZoneListPanel = () => (
         {`Ranked by ${formatCarbonIntensityDescription(
           useCarbonIntensityDomain(),
           useSelector(state => state.application.electricityMixMode),
-        ).toLowerCase()}`}
+        ).toLowerCase()} in ${moment(useSelector(state => state.data.grid.datetime)).format('YYYY')}`}
       </div>
     </div>
 

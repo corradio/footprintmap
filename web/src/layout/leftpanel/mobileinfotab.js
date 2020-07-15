@@ -26,52 +26,19 @@ const MobileInfoTab = () => {
         <a href="http://www.tmrow.com/mission?utm_source=footprintmap.org&utm_medium=referral&utm_campaign=watermark" target="_blank">
           <img src={resolvePath('images/built-by-tomorrow.svg')} alt="" />
         </a>
-        <div className="socialicons">
-          <div
-            className="fb-like"
-            data-href="https://www.facebook.com/tmrowco"
-            data-layout="button"
-            data-action="like"
-            data-size="small"
-            data-show-faces="false"
-          />
-          <a
-            className="twitter-follow-button"
-            href="https://twitter.com/electricitymap"
-            data-show-screen-name="false"
-            data-show-count="false"
-            data-lang={locale}
-          />
-        </div>
       </div>
 
       <div className="info-text">
         <ColorBlindCheckbox />
         <p>
-          {__('panel-initial-text.thisproject')} <a href="https://github.com/tmrowco/electricitymap-contrib" target="_blank">{__('panel-initial-text.opensource')}</a> ({__('panel-initial-text.see')} <a href="https://github.com/tmrowco/electricitymap-contrib#data-sources" target="_blank">{__('panel-initial-text.datasources')}</a>). <span dangerouslySetInnerHTML={{ __html: __('panel-initial-text.contribute', 'https://github.com/tmrowco/electricitymap-contrib#adding-a-new-region') }} />.
+          {__('panel-initial-text.thisproject')} <a href="https://github.com/corradio/footprintmap" target="_blank">{__('panel-initial-text.opensource')}</a> ({__('panel-initial-text.see')} <a href="https://github.com/corradio/footprintmap#data-sources" target="_blank">{__('panel-initial-text.datasources')}</a>).
         </p>
         <p>
-          {__('footer.foundbugs')} <a href="https://github.com/tmrowco/electricitymap-contrib/issues/new" target="_blank">{__('footer.here')}</a>.<br />
-        </p>
-        <p>
-          {__('footer.likethisvisu')} <a href="https://docs.google.com/forms/d/e/1FAIpQLSc-_sRr3mmhe0bifigGxfAzgh97-pJFcwpwWZGLFc6vvu8laA/viewform?c=0&w=1" target="_blank">{__('footer.loveyourfeedback')}</a>!
+          {__('footer.foundbugs')} <a href="https://github.com/corradio/footprintmap/issues/new" target="_blank">{__('footer.here')}</a>.<br />
         </p>
       </div>
       <div className="social-buttons large-screen-hidden">
         <div>
-          { /* Facebook share */}
-          <div
-            className="fb-share-button"
-            data-href="https://www.footprintmap.org/"
-            data-layout="button_count"
-          />
-          { /* Twitter share */}
-          <a
-            className="twitter-share-button"
-            data-url="https://www.footprintmap.org"
-            data-via="electricitymap"
-            data-lang={locale}
-          />
           { /* Slack */}
           <span className="slack-button">
             <a href="https://slack.tmrow.co" target="_blank" className="slack-btn">
@@ -85,7 +52,6 @@ const MobileInfoTab = () => {
       <div className="mobile-faq-header">
         {__('misc.faq')}
       </div>
-      <FAQ className="mobile-faq" />
     </div>
   );
 };

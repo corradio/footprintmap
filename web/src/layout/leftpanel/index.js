@@ -80,11 +80,7 @@ const LeftPanel = ({ isLeftPanelCollapsed, isMobile }) => {
       <div id="mobile-header" className="large-screen-hidden brightmode">
         <div className="header-content">
           <div className="logo">
-            <div className="image" id="electricitymap-logo" />
-          </div>
-          <div className="right-header large-screen-hidden">
-            {isLoaderVisible && <SmallLoader />}
-            <LastUpdatedTime />
+            footprintMap
           </div>
         </div>
       </div>
