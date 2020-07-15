@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux';
 import { Redirect, useLocation } from 'react-router-dom';
 
 import { __ } from '../../helpers/translation';
-import FAQ from '../../components/faq';
 import ColorBlindCheckbox from '../../components/colorblindcheckbox';
 
 const MobileInfoTab = () => {

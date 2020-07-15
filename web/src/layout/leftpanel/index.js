@@ -4,7 +4,6 @@
 // TODO: re-enable rules
 
 import React from 'react';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 import {
   Switch,
@@ -16,8 +15,6 @@ import {
 import { dispatchApplication } from '../../store';
 import { useSearchParams } from '../../hooks/router';
 import { usePageViewsTracker } from '../../hooks/tracking';
-import { useSmallLoaderVisible } from '../../hooks/redux';
-import LastUpdatedTime from '../../components/lastupdatedtime';
 
 import FAQPanel from './faqpanel';
 import MobileInfoTab from './mobileinfotab';
@@ -47,14 +44,6 @@ const HandleLegacyRoutes = () => {
 
 // TODO: Move all styles from styles.css to here
 
-const SmallLoader = styled.span`
-  background: transparent url(${resolvePath('images/loading/loading64_FA.gif')}) no-repeat center center;
-  background-size: 1.5em;
-  display: inline-block;
-  margin-right: 1em;
-  width: 1.5em;
-  height: 1em;
-`;
 
 const mapStateToProps = state => ({
   isLeftPanelCollapsed: state.application.isLeftPanelCollapsed,
@@ -62,7 +51,6 @@ const mapStateToProps = state => ({
 });
 
 const LeftPanel = ({ isLeftPanelCollapsed, isMobile }) => {
-  const isLoaderVisible = useSmallLoaderVisible();
   const location = useLocation();
 
   usePageViewsTracker();
