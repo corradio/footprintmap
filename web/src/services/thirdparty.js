@@ -19,7 +19,6 @@ class ConnectionsService {
   constructor() {
     this.connections = [];
     if (isProduction()) {
-      this.addConnection(require('./thirdparty/twitter'));
       this._ga = this.addConnection(require('./thirdparty/ga'));
     } else {
       this.addConnection(require('./thirdparty/debugconsole'));
