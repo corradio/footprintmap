@@ -89,7 +89,7 @@ const prepareGraphData = (historyData, co2ColorScale, displayByEmissions, electr
       return d => co2ColorScale((d.data.meta.exchangeCo2Intensities || {})[k]);
     }
     // Otherwise use regular production fill.
-    return modeColor[key];
+    return modeColor[k];
   };
 
   return {

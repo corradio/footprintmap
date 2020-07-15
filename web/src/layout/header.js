@@ -11,7 +11,9 @@ export default connect(mapStateToProps)(props => (
   <div id="header">
     <div id="header-content" className={props.brightModeEnabled ? 'brightmode' : null}>
       <div className="logo">
-        <div className="image" id="electricitymap-logo" />
+        <span className="maintitle small-screen-hidden">
+          <span className="live" style={{ fontWeight: 'bold' }}>footprintMap</span>
+        </span>
       </div>
     </div>
   </div>
