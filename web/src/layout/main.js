@@ -95,9 +95,9 @@ const Main = ({
               <Toggle
                 onChange={value => dispatchApplication('carbonIntensityDomain', value)}
                 options={[
-                  { value: CARBON_INTENSITY_DOMAIN.POPULATION, label: 'population' },
-                  { value: CARBON_INTENSITY_DOMAIN.GDP, label: 'gdp' },
-                  { value: CARBON_INTENSITY_DOMAIN.ENERGY, label: 'energy' },
+                  { value: CARBON_INTENSITY_DOMAIN.POPULATION, label: 'per capita' },
+                  { value: CARBON_INTENSITY_DOMAIN.GDP, label: 'per gdp' },
+                  { value: CARBON_INTENSITY_DOMAIN.ENERGY, label: 'per energy' },
                 ]}
                 value={carbonIntensityDomain}
               />
