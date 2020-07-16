@@ -7,13 +7,13 @@ import { dispatchApplication } from '../store';
 import { useTrackEvent } from '../hooks/tracking';
 
 const views = [{
-  headerImage: resolvePath('images/onboarding/electricymapLogoIcon.svg'),
+  // headerImage: resolvePath('images/onboarding/electricymapLogoIcon.svg'),
   headerCssClass: 'logo-header',
   textCssClass: 'brand-text',
   renderContent: () => (
     <React.Fragment>
       <div>
-        <h1>electricityMap</h1>
+        <h1>footprintMap</h1>
       </div>
       <div>
         <h2>{__('onboarding-modal.view1.subtitle')}</h2>
@@ -31,7 +31,7 @@ const views = [{
     </React.Fragment>
   ),
 }, {
-  headerImage: resolvePath('images/onboarding/exchangeArrows.png'),
+  headerImage: resolvePath('images/onboarding/toggle.png'),
   renderContent: () => (
     <React.Fragment>
       <div>
@@ -41,7 +41,7 @@ const views = [{
     </React.Fragment>
   ),
 }, {
-  headerImage: resolvePath('images/onboarding/splitLayers.png'),
+  headerImage: resolvePath('images/onboarding/mapExtract.png'),
   renderContent: () => (
     <React.Fragment>
       <div>

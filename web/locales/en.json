@@ -12,19 +12,19 @@
     },
     "onboarding-modal": {
         "view1": {
-            "subtitle": "Mapping the climate impact of electricity"
+            "subtitle": "A visualisation of the CO₂ emissions of the global economy"
         },
         "view2": {
-            "header": "See how much CO₂ is emitted to produce your electricity, in real-time.",
-            "text": "We color areas around the world by their Carbon Intensity (includes all greenhouse gases) of electricity consumed there. The greener the color, the more climate-friendly the electricity."
+            "header": "See how much CO₂ is emitted",
+            "text": "We color areas around the world by their Carbon Intensity. The greener the color, the lesser the footprint."
         },
         "view3": {
-            "header": "Know where your electricity comes from",
-            "text": "Arrows on the map indicate flows of electricity between different areas. Click on an area to see more information about the origins of its electricity."
+            "header": "Population, economy and energy",
+            "text": "Explore the footprint of a country per capita, GDP generated, or energy consumed. Click on the toggle to switch mode."
         },
         "view4": {
-            "header": "Real-time wind and solar conditions",
-            "text": "Wind and solar energy production depend on the weather. Press the sun and wind buttons to display the real-time strength of wind and sunshine throughout the world."
+            "header": "Imports are taken into account",
+            "text": "Emissions related to goods manufactured abroad are taken into account, and appear as part of a country's footprint"
         }
     },
     "country-panel": {
