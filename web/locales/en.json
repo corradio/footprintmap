@@ -64,7 +64,7 @@
         "lowCarbDescription": "Includes renewables and nuclear"
     },
     "misc": {
-        "maintitle": "A visualisation of the CO2 emissions of the global economy",
+        "maintitle": "CO₂ emissions of the global economy",
         "oops": "Oops! We are having trouble reaching the server. We will try again in a few seconds.",
         "newversion": "A new version is available! Press <a onClick=\"location.reload(true);\">here</a> to reload.",
         "webgl-not-supported": "The map can't be rendered because this browser does not support WebGL.",
