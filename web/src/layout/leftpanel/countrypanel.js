@@ -32,7 +32,7 @@ import { useCo2ColorScale } from '../../hooks/theme';
 import { flagUri } from '../../helpers/flags';
 import { getFullZoneName, __ } from '../../helpers/translation';
 import { getZoneCarbonIntensity, getRenewableRatio, getLowcarbonRatio } from '../../helpers/zonedata';
-import { formatCarbonIntensityUnit, formatCarbonIntensityShortUnit, formatCarbonIntensityDescription } from '../../helpers/formatting';
+import { formatCarbonIntensityUnit, formatCarbonIntensityDescription } from '../../helpers/formatting';
 import { CARBON_INTENSITY_DOMAIN } from '../../helpers/constants';
 
 // TODO: Move all styles from styles.css to here
@@ -166,15 +166,12 @@ const CountryPanel = ({
                     <span className="country-emission-intensity">
                       {co2Intensity != null ? Math.round(co2Intensity) : '?'}
                     </span>
-                    {formatCarbonIntensityShortUnit(carbonIntensityDomain)}
+                    <div className="country-col-subtext">
+                      {formatCarbonIntensityUnit(carbonIntensityDomain)}
+                    </div>
                   </div>
                 </div>
-                <div className="country-col-headline">{__('country-panel.carbonintensity')}</div>
-                <div className="country-col-subtext">
-                  (
-                  {formatCarbonIntensityUnit(carbonIntensityDomain)}
-)
-                </div>
+                <div className="country-col-headline">Carbon footprint</div>
               </div>
 
               {true ? (

@@ -29,7 +29,6 @@
     },
     "country-panel": {
         "source": "Source",
-        "carbonintensity": "Carbon Intensity",
         "lowcarbon": "Low-carbon",
         "renewable": "Renewable",
         "bysource": "by source",

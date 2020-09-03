@@ -5,7 +5,7 @@ import { __ } from '../../helpers/translation';
 import { useCo2ColorScale } from '../../hooks/theme';
 import { useCarbonIntensityDomain } from '../../hooks/redux';
 import { getZoneCarbonIntensity, getRenewableRatio, getLowcarbonRatio } from '../../helpers/zonedata';
-import { formatCarbonIntensityShortUnit, formatCarbonIntensityDescription } from '../../helpers/formatting';
+import { formatCarbonIntensityUnit, formatCarbonIntensityDescription } from '../../helpers/formatting';
 
 import CircularGauge from '../circulargauge';
 import Tooltip from '../tooltip';
@@ -56,7 +56,9 @@ const MapCountryTooltip = ({
                     <span className="country-emission-intensity">
                       {co2intensity != null ? Math.round(co2intensity) : '?'}
                     </span>
-                    {formatCarbonIntensityShortUnit(carbonIntensityDomain)}
+                    <div className="country-col-subtext">
+                      {formatCarbonIntensityUnit(carbonIntensityDomain)}
+                    </div>
                   </div>
                 </div>
                 <div className="country-col-headline">{ formatCarbonIntensityDescription(carbonIntensityDomain, electricityMixMode) }</div>

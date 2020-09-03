@@ -28,7 +28,7 @@ const prepareGraphData = (historyData, colorBlindModeEnabled, electricityMixMode
     .domain([0, maxEmissions])
     .range(['yellow', 'red']);
 
-  const format = scaleMillionsShort(maxEmissions);
+  const format = scaleMillionsShort(maxEmissions, true);
   const valueAxisLabel = `${format.unit}tCO₂`;
   const valueFactor = format.formattingFactor;
 
