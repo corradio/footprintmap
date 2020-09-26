@@ -38,30 +38,30 @@ import { CARBON_INTENSITY_DOMAIN } from '../../helpers/constants';
 // TODO: Move all styles from styles.css to here
 // TODO: Remove all unecessary id and class tags
 
-const CountryLowCarbonGauge = () => {
+const CountryLowCarbonGauge = (props) => {
   const electricityMixMode = useSelector(state => state.application.electricityMixMode);
 
   const d = useCurrentZoneData();
   if (!d) {
-    return <CircularGauge />;
+    return <CircularGauge {...props} />;
   }
 
   const countryLowCarbonPercentage = getLowcarbonRatio(electricityMixMode, d) * 100;
 
-  return <CircularGauge percentage={countryLowCarbonPercentage} />;
+  return <CircularGauge percentage={countryLowCarbonPercentage} {...props} />;
 };
 
-const CountryRenewableGauge = () => {
+const CountryRenewableGauge = (props) => {
   const electricityMixMode = useSelector(state => state.application.electricityMixMode);
 
   const d = useCurrentZoneData();
   if (!d) {
-    return <CircularGauge />;
+    return <CircularGauge {...props} />;
   }
 
   const countryRenewablePercentage = getRenewableRatio(electricityMixMode, d) * 100;
 
-  return <CircularGauge percentage={countryRenewablePercentage} />;
+  return <CircularGauge percentage={countryRenewablePercentage} {...props} />;
 };
 
 const mapStateToProps = state => ({
@@ -296,7 +296,7 @@ const CountryPanel = ({
             />
             { /* Slack */}
             <span className="slack-button">
-              <a href="https://slack.tmrow.co" target="_blank" className="slack-btn">
+              <a href="https://slack.tmrow.com" target="_blank" className="slack-btn">
                 <span className="slack-ico" />
                 <span className="slack-text">Slack</span>
               </a>

@@ -1,4 +1,4 @@
-# footprintmap [![Slack Status](http://slack.tmrow.co/badge.svg)](http://slack.tmrow.co) [![CircleCI](https://circleci.com/gh/corradio/footprintmap.svg?style=shield)](https://circleci.com/gh/corradio/footprintmap)
+# footprintmap [![Slack Status](https://slack.tmrow.com/badge.svg)](https://slack.tmrow.com) [![CircleCI](https://circleci.com/gh/corradio/footprintmap.svg?style=shield)](https://circleci.com/gh/corradio/footprintmap)
 An interactive visualisation of the CO<sub>2</sub> footprint of the world economy built with [React](https://reactjs.org/) and [mapbox GL](https://github.com/mapbox/mapbox-gl-js/). Try it out at [http://www.footprintmap.org](http://www.footprintmap.org).
 
 ### Data sources

@@ -204,6 +204,10 @@ const CountryHistoryMixGraph = ({
             exchangeKey={tooltip.mode}
             position={tooltip.position}
             zoneData={tooltip.zoneData}
+            onClose={() => {
+              setSelectedLayerIndex(null);
+              setTooltip(null);
+            }}
           />
         ) : (
           <CountryPanelProductionTooltip
@@ -211,6 +215,10 @@ const CountryHistoryMixGraph = ({
             position={tooltip.position}
             zoneData={tooltip.zoneData}
             electricityMixMode={electricityMixMode}
+            onClose={() => {
+              setSelectedLayerIndex(null);
+              setTooltip(null);
+            }}
           />
         )
       )}

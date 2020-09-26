@@ -142,6 +142,11 @@ const CountryHistoryEmissionsGraph = ({
           position={tooltip.position}
           data={tooltip.data}
           unit={valueAxisLabel}
+          zoneData={tooltip.zoneData}
+          onClose={() => {
+            setSelectedLayerIndex(null);
+            setTooltip(null);
+          }}
         />
       )}
     </React.Fragment>

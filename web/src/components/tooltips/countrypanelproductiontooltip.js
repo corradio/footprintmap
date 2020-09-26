@@ -24,6 +24,7 @@ const CountryPanelProductionTooltip = ({
   mode,
   position,
   zoneData,
+  onClose,
 
   electricityMixMode,
 }) => {
@@ -71,7 +72,7 @@ const CountryPanelProductionTooltip = ({
   headline = headline.replace('id="country-flag"', `class="flag" src="${flagUri(zoneData.countryCode)}"`);
 
   return (
-    <Tooltip id="countrypanel-production-tooltip" position={position}>
+    <Tooltip id="countrypanel-production-tooltip" position={position} onClose={onClose}>
       <span dangerouslySetInnerHTML={{ __html: `${zoneData.year}: ${headline}` }} />
       <br />
       <MetricRatio

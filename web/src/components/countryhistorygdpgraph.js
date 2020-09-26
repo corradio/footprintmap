@@ -16,7 +16,7 @@ import {
 import AreaGraph from './graph/areagraph';
 import Tooltip from './tooltip';
 
-const GdpTooltip = ({ position, zoneData }) => {
+const GdpTooltip = ({ position, zoneData, onClose }) => {
   if (!zoneData) return null;
 
   const { year } = zoneData;
@@ -26,7 +26,7 @@ const GdpTooltip = ({ position, zoneData }) => {
   const valueFactor = format.formattingFactor;
 
   return (
-    <Tooltip id="price-tooltip" position={position}>
+    <Tooltip id="price-tooltip" position={position} onClose={onClose}>
       {year}: <b>{Math.round(value / valueFactor)}</b> {valueAxisLabel}
     </Tooltip>
   );
@@ -156,6 +156,10 @@ const CountryHistoryPricesGraph = ({
         <GdpTooltip
           position={tooltip.position}
           zoneData={tooltip.zoneData}
+          onClose={() => {
+            setSelectedLayerIndex(null);
+            setTooltip(null);
+          }}
         />
       )}
     </React.Fragment>
