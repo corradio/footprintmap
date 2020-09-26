@@ -279,6 +279,24 @@ const CountryPanel = ({
           </React.Fragment>
         )}
 
+        <p>
+          {__('panel-initial-text.thisproject')}
+          {' '}
+          <a href="https://github.com/corradio/carbonmap" target="_blank">
+            {__('panel-initial-text.opensource')}
+          </a>
+          {' '}(
+          {__('panel-initial-text.see')}
+          {' '}
+          <a href="https://github.com/corradio/carbonmap#data-sources" target="_blank">
+            {__('panel-initial-text.datasources')}
+          </a>
+          ).{' '}
+        </p>
+        <p>
+          {__('footer.foundbugs')} <a href="https://github.com/corradio/carbonmap/issues/new" target="_blank">{__('footer.here')}</a>.<br />
+        </p>
+
         <div className="social-buttons large-screen-hidden">
           <div>
             { /* Facebook share */}
