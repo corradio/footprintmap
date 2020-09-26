@@ -33,7 +33,7 @@ const getTimeScale = (width, datetimes, startTime, endTime) => scaleTime()
   ])
   .range([0, width]);
 
-const getTotalValues = (layers) => {
+const getTotalValues = (layers, valueAxisMax) => {
   const values = filter(
     flattenDeep(
       layers.map(
@@ -44,7 +44,7 @@ const getTotalValues = (layers) => {
   );
   return {
     min: min(values) || 0,
-    max: max(values) || 0,
+    max: valueAxisMax || max(values) || 0,
   };
 };
 
@@ -105,6 +105,10 @@ const AreaGraph = React.memo(({
   */
   valueAxisLabel,
   /*
+    `valueAxisMax` is an optional integer for the max value (Y-axis) scale.
+  */
+  valueAxisMax,
+  /*
     Mouse event callbacks for the graph background and individual layers respectively.
   */
   backgroundMouseMoveHandler,
@@ -144,7 +148,7 @@ const AreaGraph = React.memo(({
   );
 
   // Generate graph scales
-  const totalValues = useMemo(() => getTotalValues(layers), [layers]);
+  const totalValues = useMemo(() => getTotalValues(layers, valueAxisMax), [layers, valueAxisMax]);
   const valueScale = useMemo(
     () => getValueScale(containerHeight, totalValues),
     [containerHeight, totalValues],

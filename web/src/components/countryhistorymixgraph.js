@@ -19,23 +19,28 @@ import CountryPanelProductionTooltip from './tooltips/countrypanelproductiontool
 import CountryPanelExchangeTooltip from './tooltips/countrypanelexchangetooltip';
 import AreaGraph from './graph/areagraph';
 
-const getValuesInfo = (historyData, displayByEmissions) => {
+const getValuesInfo = (historyData) => {
   const maxTotalValue = d3Max(historyData, d => (
-    displayByEmissions
-      ? (d.totalCo2Production + d.totalCo2Import + d.totalCo2Discharge) / 1e6 / 60.0 // in tCO₂eq/min
-      : (d.totalProduction + d.totalImport + d.totalDischarge) // in MW
+    d3Max([
+      d.totalPrimaryEnergyConsumptionTWh,
+      d.totalPrimaryEnergyProductionTWh,
+    ])
   ));
   const format = formatting.scaleEnergy(maxTotalValue);
 
-  const valueAxisLabel = displayByEmissions ? 'tCO₂eq / min' : format.unit;
+  const valueAxisLabel = format.unit;
   const valueFactor = format.formattingFactor;
-  return { valueAxisLabel, valueFactor };
+  return { valueAxisLabel, valueFactor, maxTotalValue };
 };
 
-const prepareGraphData = (historyData, co2ColorScale, displayByEmissions, electricityMixMode, exchangeKeys) => {
+const prepareGraphData = (historyData, co2ColorScale, displayByEmissions, electricityMixMode, exchangeKeys = []) => {
   if (!historyData || !historyData[0]) return {};
 
-  const { valueAxisLabel, valueFactor } = getValuesInfo(historyData, displayByEmissions);
+  const {
+    valueAxisLabel,
+    valueFactor,
+    maxTotalValue,
+  } = getValuesInfo(historyData);
 
   const key = electricityMixMode === 'consumption'
     ? 'primaryEnergyConsumptionTWh'
@@ -97,6 +102,7 @@ const prepareGraphData = (historyData, co2ColorScale, displayByEmissions, electr
     layerKeys,
     layerFill,
     valueAxisLabel,
+    maxTotalValue: maxTotalValue / valueFactor,
   };
 };
 
@@ -128,9 +134,10 @@ const CountryHistoryMixGraph = ({
     layerKeys,
     layerFill,
     valueAxisLabel,
+    maxTotalValue,
   } = useMemo(
-    () => prepareGraphData(historyData, co2ColorScale, displayByEmissions, electricityMixMode, exchangeKeys),
-    [historyData, co2ColorScale, displayByEmissions, electricityMixMode, exchangeKeys],
+    () => prepareGraphData(historyData, co2ColorScale, displayByEmissions, electricityMixMode),
+    [historyData, co2ColorScale, displayByEmissions, electricityMixMode],
   );
 
   // Mouse action handlers
@@ -197,6 +204,7 @@ const CountryHistoryMixGraph = ({
         selectedLayerIndex={selectedLayerIndex}
         isMobile={isMobile}
         height="10em"
+        valueAxisMax={maxTotalValue}
       />
       {tooltip && (
         exchangeKeys.includes(tooltip.mode) ? (
