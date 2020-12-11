@@ -48,6 +48,7 @@ country_mapping['Iran'] = 'IR'
 country_mapping['Kosovo'] = 'XK'
 country_mapping['Laos'] = 'LA'
 country_mapping['Macedonia (Republic of)'] = 'MK'
+country_mapping['North Macedonia'] = 'MK'
 country_mapping['Bolivia'] = 'BO'
 country_mapping['South Korea'] = 'KR'
 country_mapping['Moldova'] = 'MD'
@@ -74,6 +75,7 @@ IGNORED_COUNTRIES = [
     'OECD',
     'Non-OECD',
     'EU28',
+    'EU27',
     'Africa',
     'Asia',
     'Central America',
@@ -102,10 +104,10 @@ def ensure_year_exists(country_iso2, year):
 
 
 # ** Read emission data
-# Source: https://doi.org/10.18160/GCP-2019
+# Source: https://doi.org/10.18160/GCP-2020
 print('Reading Global Carbon Project..')
 df_terr_emissions = pd.read_excel(
-    'data/National_Carbon_Emissions_2019v1.0.xlsx',
+    'data/National_Carbon_Emissions_2020v1.0.xlsx',
     sheet_name='Territorial Emissions',
     header=16)
 df_terr_emissions = df_terr_emissions.rename(
@@ -117,7 +119,7 @@ df_terr_emissions = df_terr_emissions.melt(
     value_name='territorial_emissions_MtCO2').set_index(['year', 'country'])
 # emissions
 df_cons_emissions = pd.read_excel(
-    'data/National_Carbon_Emissions_2019v1.0.xlsx',
+    'data/National_Carbon_Emissions_2020v1.0.xlsx',
     sheet_name='Consumption Emissions',
     header=8)
 df_cons_emissions = df_cons_emissions.rename(

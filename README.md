@@ -3,7 +3,7 @@ An interactive visualisation of the CO<sub>2</sub> footprint of the world econom
 
 ### Data sources
 - [BP Statistical Review of World Energy 2020](https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy.html) -- published June 17th 2020
-- [Global Carbon Budget 2019](https://doi.org/10.18160/GCP-2019) -- published December 4th 2019
+- [Global Carbon Budget 2019](https://doi.org/10.18160/GCP-2020) -- published December 4th 2019
 - [Worldbank population]() TBD
 
 ### Set up and start your local environment
