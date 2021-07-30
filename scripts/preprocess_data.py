@@ -91,7 +91,7 @@ IGNORED_COUNTRIES = [
 
 
 def is_valid_country(country_name):
-    if country_name in IGNORED_COUNTRIES:
+    if country_name in IGNORED_COUNTRIES or 'Unnamed' in country_name:
         return False
     return True
 
@@ -233,7 +233,7 @@ bp_sheet_mapping = {
     'Coal Consumption - EJ': {'key': 'primaryEnergyConsumptionTWh.coal', 'convert': convert_ej_to_twh},
     'Nuclear Consumption - EJ': {'key': 'primaryEnergyConsumptionTWh.nuclear', 'convert': convert_ej_to_twh},
     'Hydro Consumption - EJ': {'key': 'primaryEnergyConsumptionTWh.hydro', 'convert': convert_ej_to_twh},
-    'Solar Consumption - Exajoules ': {'key': 'primaryEnergyConsumptionTWh.solar', 'convert': convert_ej_to_twh},
+    'Solar Consumption - EJ': {'key': 'primaryEnergyConsumptionTWh.solar', 'convert': convert_ej_to_twh},
     'Wind Consumption - EJ': {'key': 'primaryEnergyConsumptionTWh.wind', 'convert': convert_ej_to_twh},
     'Geo Biomass Other - EJ': {'key': 'primaryEnergyConsumptionTWh.biomass', 'convert': convert_ej_to_twh},
 
@@ -243,8 +243,7 @@ bp_sheet_mapping = {
     'Nuclear Generation - TWh': {'key': 'primaryEnergyProductionTWh.nuclear'},
     'Hydro Generation - TWh': {'key': 'primaryEnergyProductionTWh.hydro'},
     'Solar Generation - TWh': {'key': 'primaryEnergyProductionTWh.solar'},
-    # Note: the following is not a bug. EJ is written although TWh is given
-    'Wind Generation - EJ': {'key': 'primaryEnergyProductionTWh.wind'},
+    'Wind Generation - TWh': {'key': 'primaryEnergyProductionTWh.wind'},
     'Geo Biomass Other - TWh': {'key': 'primaryEnergyProductionTWh.biomass'}
 
     ## TODO: Add biofuels
@@ -259,7 +258,7 @@ bp_sheet_mapping = {
 for sheet_name in bp_sheet_mapping.keys():
     print(f'Reading BP {sheet_name}..')
     df_bp = pd.read_excel(
-        'data/bp-stats-review-2020-all-data.xlsx',
+        'data/bp-stats-review-2021-all-data.xlsx',
         sheet_name=sheet_name,
         header=BP_SKIP_HEADER)
     df_bp = df_bp.rename(
