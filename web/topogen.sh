@@ -36,13 +36,6 @@ echo 'Parsing countries..'
   | "$NODE_MODULES_PATH/ndjson-filter" "d.id" \
 )> build/tmp_countries.json
 
-# Parse 3rd party
-echo 'Parsing 3rd party..'
-("$NODE_MODULES_PATH/shp2json" -n build/Canary_Islands.shp \
-  | "$NODE_MODULES_PATH/ndjson-map" 'd.id = d.properties.NAME, d' \
-  | "$NODE_MODULES_PATH/ndjson-filter" "d.id" \
-)> build/tmp_thirdparty.json
-
 # Generate final geometries
 node generate-geometries.js
 

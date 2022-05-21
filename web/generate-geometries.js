@@ -14,175 +14,6 @@ function readNDJSON(path) {
 }
 
 const countryGeos = readNDJSON('./build/tmp_countries.json');
-const thirdpartyGeos = readNDJSON('./build/tmp_thirdparty.json').concat([
-    require('./third_party_maps/DK-DK2-without-BHM.json'),
-    require('./third_party_maps/NO-NO1.json'),
-    require('./third_party_maps/NO-NO2.json'),
-    require('./third_party_maps/NO-NO3.json'),
-    require('./third_party_maps/NO-NO4.json'),
-    require('./third_party_maps/NO-NO5.json'),
-    require('./third_party_maps/SE-SE1.json'),
-    require('./third_party_maps/SE-SE2.json'),
-    require('./third_party_maps/SE-SE3.json'),
-    require('./third_party_maps/SE-SE4.json'),
-    require('./third_party_maps/sct-no-islands.json'),
-    JSON.parse(fs.readFileSync('./third_party_maps/JP-CB.geojson')),
-    JSON.parse(fs.readFileSync('./third_party_maps/JP-HR.geojson')),
-    JSON.parse(fs.readFileSync('./third_party_maps/JP-KN.geojson')),
-    JSON.parse(fs.readFileSync('./third_party_maps/JP-KY.geojson')),
-    JSON.parse(fs.readFileSync('./third_party_maps/JP-ON.geojson')),
-    JSON.parse(fs.readFileSync('./third_party_maps/JP-TK.geojson')),
-    JSON.parse(fs.readFileSync('./third_party_maps/ES-IB-FO.geojson')),
-    JSON.parse(fs.readFileSync('./third_party_maps/ES-IB-IZ.geojson')),
-    JSON.parse(fs.readFileSync('./third_party_maps/ES-IB-MA.geojson')),
-    JSON.parse(fs.readFileSync('./third_party_maps/ES-IB-ME.geojson')),
-    JSON.parse(fs.readFileSync('./third_party_maps/AUS-TAS.geojson')),
-    JSON.parse(fs.readFileSync('./third_party_maps/AUS-TAS-KI.geojson')),
-    JSON.parse(fs.readFileSync('./third_party_maps/US-HI-HA.geojson')),
-    JSON.parse(fs.readFileSync('./third_party_maps/US-HI-MA.geojson')),
-    JSON.parse(fs.readFileSync('./third_party_maps/US-HI-KA.geojson')),
-    JSON.parse(fs.readFileSync('./third_party_maps/US-HI-KH.geojson')),
-    JSON.parse(fs.readFileSync('./third_party_maps/US-HI-LA.geojson')),
-    JSON.parse(fs.readFileSync('./third_party_maps/US-HI-MO.geojson')),
-    JSON.parse(fs.readFileSync('./third_party_maps/US-HI-NI.geojson')),
-    JSON.parse(fs.readFileSync('./third_party_maps/US-HI-OA.geojson')),
-  ]);
-
-const USSimplifiedGeos = [JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-CAL-BANC.geojson'))].concat([//Balancing Authority Of Northern California
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-CAL-CISO.geojson')), //California Independent System Operator
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-CAL-IID.geojson')), //Imperial Irrigation District
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-CAL-LDWP.geojson')), //Los Angeles Department Of Water And Power
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-CAL-TIDC.geojson')), //Turlock Irrigation District
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-CAR-CPLE.geojson')), //Duke Energy Progress East
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-CAR-CPLW.geojson')), //Duke Energy Progress West
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-CAR-DUK.geojson')), //Duke Energy Carolinas
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-CAR-SC.geojson')), //South Carolina Public Service Authority
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-CAR-SCEG.geojson')), //South Carolina Electric & Gas Company
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-CAR-YAD.geojson')), //Alcoa Power Generating, Inc. - Yadkin Division
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-CENT-SPA.geojson')), //Southwestern Power Administration
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-CENT-SWPP.geojson')), //Southwest Power Pool
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-FLA-FMPP.geojson')), //Florida Municipal Power Pool
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-FLA-FPC.geojson')), //Duke Energy Florida Inc
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-FLA-FPL.geojson')), //Florida Power & Light Company
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-FLA-GVL.geojson')), //Gainesville Regional Utilities
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-FLA-HST.geojson')), //City Of Homestead
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-FLA-JEA.geojson')), //Jea
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-FLA-NSB.geojson')), //New Smyrna Beach, Utilities Commission Of
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-FLA-SEC.geojson')), //Seminole Electric Cooperative
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-FLA-TAL.geojson')), //City Of Tallahassee
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-FLA-TEC.geojson')), //Tampa Electric Company
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-MIDA-OVEC.geojson')), //Ohio Valley Electric Corporation
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-MIDA-PJM.geojson')), //Pjm Interconnection, Llc
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-MIDW-AECI.geojson')), //Associated Electric Cooperative, Inc.
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-MIDW-EEI.geojson')), //Electric Energy, Inc.
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-MIDW-LGEE.geojson')), //Louisville Gas And Electric Company And Kentucky Utilities
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-MIDW-MISO.geojson')), //Midcontinent Independent Transmission System Operator, Inc..
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-NE-ISNE.geojson')), //Iso New England Inc.
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-NW-AVA.geojson')), //Avista Corporation
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-NW-BPAT.geojson')), //Bonneville Power Administration
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-NW-CHPD.geojson')), //Public Utility District No. 1 Of Chelan County
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-NW-DOPD.geojson')), //Pud No. 1 Of Douglas County
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-NW-GCPD.geojson')), //Public Utility District No. 2 Of Grant County, Washington
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-NW-GRID.geojson')), //Gridforce Energy Management, Llc
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-NW-GWA.geojson')), //Naturener Power Watch, Llc (Gwa)
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-NW-IPCO.geojson')), //Idaho Power Company
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-NW-NEVP.geojson')), //Nevada Power Company
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-NW-NWMT.geojson')), //Northwestern Energy (Nwmt)
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-NW-PACE.geojson')), //Pacificorp - East
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-NW-PACW.geojson')), //Pacificorp - West
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-NW-PGE.geojson')), //Portland General Electric Company
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-NW-PSCO.geojson')), //Public Service Company Of Colorado
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-NW-PSEI.geojson')), //Puget Sound Energy
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-NW-SCL.geojson')), //Seattle City Light
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-NW-TPWR.geojson')), //City Of Tacoma, Department Of Public Utilities, Light Division
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-NW-WACM.geojson')), //Western Area Power Administration - Rocky Mountain Region
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-NW-WAUW.geojson')), //Western Area Power Administration Ugp West
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-NW-WWA.geojson')), //Naturener Wind Watch, Llc
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-NY-NYIS.geojson')), //New York Independent System Operator
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-SE-AEC.geojson')), //Powersouth Energy Cooperative
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-SE-SEPA.geojson')), //Southeastern Power Administration
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-SE-SOCO.geojson')), //Southern Company Services, Inc. - Trans
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-SW-AZPS.geojson')), //Arizona Public Service Company
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-SW-DEAA.geojson')), //Arlington Valley, Llc - Avba
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-SW-EPE.geojson')), //El Paso Electric Company
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-SW-GRIF.geojson')), //Griffith Energy, Llc
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-SW-GRMA.geojson')), //Gila River Power, Llc
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-SW-HGMA.geojson')), //New Harquahala Generating Company, Llc - Hgba
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-SW-PNM.geojson')), //Public Service Company Of New Mexico
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-SW-SRP.geojson')), //Salt River Project
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-SW-TEPC.geojson')), //Tucson Electric Power Company
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-SW-WALC.geojson')), //Western Area Power Administration - Desert Southwest Region
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-TEN-TVA.geojson')), //Tennessee Valley Authority
-    JSON.parse(fs.readFileSync('./third_party_maps/US_simplified/US-TEX-ERCO.geojson')), //Electric Reliability Council Of Texas, Inc.
-  ]);
-
-const USOriginalGeos = [JSON.parse(fs.readFileSync('./third_party_maps/US/US-CAL-BANC.geojson'))].concat([//Balancing Authority Of Northern California
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-CAL-CISO.geojson')), //California Independent System Operator
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-CAL-IID.geojson')), //Imperial Irrigation District
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-CAL-LDWP.geojson')), //Los Angeles Department Of Water And Power
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-CAL-TIDC.geojson')), //Turlock Irrigation District
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-CAR-CPLE.geojson')), //Duke Energy Progress East
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-CAR-CPLW.geojson')), //Duke Energy Progress West
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-CAR-DUK.geojson')), //Duke Energy Carolinas
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-CAR-SC.geojson')), //South Carolina Public Service Authority
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-CAR-SCEG.geojson')), //South Carolina Electric & Gas Company
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-CAR-YAD.geojson')), //Alcoa Power Generating, Inc. - Yadkin Division
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-CENT-SPA.geojson')), //Southwestern Power Administration
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-CENT-SWPP.geojson')), //Southwest Power Pool
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-FLA-FMPP.geojson')), //Florida Municipal Power Pool
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-FLA-FPC.geojson')), //Duke Energy Florida Inc
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-FLA-FPL.geojson')), //Florida Power & Light Company
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-FLA-GVL.geojson')), //Gainesville Regional Utilities
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-FLA-HST.geojson')), //City Of Homestead
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-FLA-JEA.geojson')), //Jea
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-FLA-NSB.geojson')), //New Smyrna Beach, Utilities Commission Of
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-FLA-SEC.geojson')), //Seminole Electric Cooperative
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-FLA-TAL.geojson')), //City Of Tallahassee
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-FLA-TEC.geojson')), //Tampa Electric Company
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-MIDA-OVEC.geojson')), //Ohio Valley Electric Corporation
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-MIDA-PJM.geojson')), //Pjm Interconnection, Llc
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-MIDW-AECI.geojson')), //Associated Electric Cooperative, Inc.
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-MIDW-EEI.geojson')), //Electric Energy, Inc.
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-MIDW-LGEE.geojson')), //Louisville Gas And Electric Company And Kentucky Utilities
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-MIDW-MISO.geojson')), //Midcontinent Independent Transmission System Operator, Inc..
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-NE-ISNE.geojson')), //Iso New England Inc.
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-NW-AVA.geojson')), //Avista Corporation
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-NW-BPAT.geojson')), //Bonneville Power Administration
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-NW-CHPD.geojson')), //Public Utility District No. 1 Of Chelan County
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-NW-DOPD.geojson')), //Pud No. 1 Of Douglas County
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-NW-GCPD.geojson')), //Public Utility District No. 2 Of Grant County, Washington
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-NW-GRID.geojson')), //Gridforce Energy Management, Llc
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-NW-GWA.geojson')), //Naturener Power Watch, Llc (Gwa)
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-NW-IPCO.geojson')), //Idaho Power Company
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-NW-NEVP.geojson')), //Nevada Power Company
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-NW-NWMT.geojson')), //Northwestern Energy (Nwmt)
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-NW-PACE.geojson')), //Pacificorp - East
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-NW-PACW.geojson')), //Pacificorp - West
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-NW-PGE.geojson')), //Portland General Electric Company
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-NW-PSCO.geojson')), //Public Service Company Of Colorado
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-NW-PSEI.geojson')), //Puget Sound Energy
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-NW-SCL.geojson')), //Seattle City Light
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-NW-TPWR.geojson')), //City Of Tacoma, Department Of Public Utilities, Light Division
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-NW-WACM.geojson')), //Western Area Power Administration - Rocky Mountain Region
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-NW-WAUW.geojson')), //Western Area Power Administration Ugp West
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-NW-WWA.geojson')), //Naturener Wind Watch, Llc
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-NY-NYIS.geojson')), //New York Independent System Operator
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-SE-AEC.geojson')), //Powersouth Energy Cooperative
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-SE-SEPA.geojson')), //Southeastern Power Administration
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-SE-SOCO.geojson')), //Southern Company Services, Inc. - Trans
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-SW-AZPS.geojson')), //Arizona Public Service Company
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-SW-DEAA.geojson')), //Arlington Valley, Llc - Avba
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-SW-EPE.geojson')), //El Paso Electric Company
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-SW-GRIF.geojson')), //Griffith Energy, Llc
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-SW-GRMA.geojson')), //Gila River Power, Llc
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-SW-HGMA.geojson')), //New Harquahala Generating Company, Llc - Hgba
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-SW-PNM.geojson')), //Public Service Company Of New Mexico
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-SW-SRP.geojson')), //Salt River Project
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-SW-TEPC.geojson')), //Tucson Electric Power Company
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-SW-WALC.geojson')), //Western Area Power Administration - Desert Southwest Region
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-TEN-TVA.geojson')), //Tennessee Valley Authority
-    JSON.parse(fs.readFileSync('./third_party_maps/US/US-TEX-ERCO.geojson')), //Electric Reliability Council Of Texas, Inc.
-  ]);
 
 function geomerge() {
   // Convert both into multipolygon
@@ -242,7 +73,7 @@ const zoneDefinitions = [
   // { zoneName: 'AUS-WA', countryId: 'AUS', stateId: 'AU.WA', type: 'state' },
   { zoneName: 'AW', type: 'country', id: 'ABW', moreDetails: true},
   { zoneName: 'AX', type: 'country', id: 'ALA'},
-  { zoneName: 'AZ', type: 'administrations', administrations: ['AZE-1684', 'AZE-1676', 'AZE-1687', 'AZE-1678', 'AZE-1677', 'AZE-2419', 'AZE-2415', 'AZE-5567', 'AZE-2420', 'AZE-2423', 'AZE-2421', 'AZE-2418', 'AZE-1723', 'AZE-1731', 'AZE-1730', 'AZE-1729', 'AZE-1725', 'AZE-1727', 'AZE-1726', 'AZE-1724', 'AZE-1686', 'AZE-1704', 'AZE-1698', 'AZE-1700', 'AZE-1720', 'AZE-1709', 'AZE-1702', 'AZE-1697', 'AZE-1695', 'AZE-1701', 'AZE-1712', 'AZE-1719', 'AZE-1717', 'AZE-1689', 'AZE-1715', 'AZE-1710', 'AZE-1707', 'AZE-1708', 'AZE-5562', 'AZE-2422', 'AZE-1681', 'AZE-1694', 'AZE-1690', 'AZE-1680', 'AZE-1706', 'AZE-1721', 'AZE-1714', 'AZE-5563', 'AZE-1713', 'AZE-1696', 'AZE-1685', 'AZE-1693', 'AZE-1716', 'AZE-1728', 'AZE-1718', 'AZE-1711', 'AZE-1705', 'AZE-1688', 'AZE-1679', 'AZE-1683', 'AZE-1703', 'AZE-1692', 'AZE-1722', 'AZE-5566', 'AZE-5561', 'AZE-5564']},
+  { zoneName: 'AZ', type: 'country', id: 'AZE'},
   { zoneName: 'BA', type: 'country', id: 'BIH'},
   // { zoneName: 'BA', type: 'administrations', administrations: [
   //     'BIH-4801', 'BIH-4802', 'BIH-2225', 'BIH-2224', 'BIH-2226', 'BIH-2227', 'BIH-2228', 'BIH-4807',
@@ -912,18 +743,11 @@ function getZoneFeatures(zoneDefinitions, geos) {
   return zoneFeatures
 }
 
-const webGeos = countryGeos.concat(thirdpartyGeos, USSimplifiedGeos);
-const backendGeos = countryGeos.concat(thirdpartyGeos, USSimplifiedGeos); //should be changed back to USOriginalGeos
+const webGeos = countryGeos;
 
 const webZones = getZones(zoneDefinitions, webGeos);
-const backendZones = getZones(zoneDefinitions, backendGeos);
 
 const zonesMoreDetails = getZonesMoreDetails(zoneDefinitions, webGeos, webZones);
-const zoneFeatures = getZoneFeatures(zoneDefinitions, backendGeos)
-
-// Write unsimplified list of geojson, without state merges
-// including overlapping US zones
-fs.writeFileSync('public/dist/zonegeometries.json', zoneFeatures.map(JSON.stringify).join('\n'));
 
 // Convert to TopoJSON
 const topojson = require('topojson');
