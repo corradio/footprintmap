@@ -109,7 +109,7 @@ filename = 'National_Carbon_Emissions_2021v1.0.xlsx'
 df_terr_emissions = pd.read_excel(
     f'data/{filename}',
     sheet_name='Territorial Emissions',
-    header=16)
+    header=11)
 df_terr_emissions = df_terr_emissions.rename(
     columns={df_terr_emissions.columns[0]: 'year'})
 # transpose
