@@ -4,6 +4,7 @@ import React, {
   useRef,
   useEffect,
 } from 'react';
+import { useSelector } from 'react-redux';
 import { Portal } from 'react-portal';
 import ReactMapGL, { NavigationControl, Source, Layer } from 'react-map-gl';
 import {
@@ -13,12 +14,15 @@ import {
   noop,
   size,
 } from 'lodash';
+import { getZoneCarbonIntensity } from '../helpers/zonedata';
+import { useCarbonIntensityDomain } from '../hooks/redux';
 
-const interactiveLayerIds = ['zones-clickable'];
+const interactiveLayerIds = ['zones-clickable-layer'];
 const mapStyle = { version: 8, sources: {}, layers: [] };
 
 const ZoneMap = ({
   children = null,
+  co2ColorScale = null,
   hoveringEnabled = true,
   onMapLoaded = noop,
   onMapError = noop,
@@ -30,6 +34,7 @@ const ZoneMap = ({
   onZoneMouseEnter = noop,
   onZoneMouseLeave = noop,
   scrollZoom = true,
+  selectedZoneTimeIndex = null,
   style = {},
   theme = {},
   transitionDuration = 300,
@@ -39,11 +44,15 @@ const ZoneMap = ({
     zoom: 2,
   },
   zones = {},
+  zoneHistories = {},
 }) => {
   const ref = useRef(null);
   const wrapperRef = useRef(null);
   const [hoveredZoneId, setHoveredZoneId] = useState(null);
   const [isSupported, setIsSupported] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const carbonIntensityDomain = useCarbonIntensityDomain();
+  const electricityMixMode = useSelector(state => state.application.electricityMixMode);
 
   const [isDragging, setIsDragging] = useState(false);
   const debouncedSetIsDragging = useMemo(
@@ -63,6 +72,11 @@ const ZoneMap = ({
     },
     [],
   );
+
+  const handleLoad = () => {
+    setIsLoaded(true);
+    onMapLoaded();
+  };
 
   // Generate two sources (clickable and non-clickable zones), based on the zones data.
   const sources = useMemo(
@@ -105,7 +119,14 @@ const ZoneMap = ({
       hover: { 'fill-color': 'white', 'fill-opacity': 0.3 },
       ocean: { 'background-color': theme.oceanColor },
       zonesBorder: { 'line-color': theme.strokeColor, 'line-width': theme.strokeWidth },
-      zonesClickable: { 'fill-color': ['case', ['has', 'color'], ['get', 'color'], theme.clickableFill] },
+      zonesClickable: {
+        'fill-color': [
+          'coalesce', // // https://docs.mapbox.com/mapbox-gl-js/style-spec/expressions/#coalesce
+          ['feature-state', 'color'],
+          ['get', 'color'],
+          theme.clickableFill,
+        ],
+      },
       zonesNonClickable: { 'fill-color': theme.nonClickableFill },
     }),
     [theme],
@@ -121,6 +142,43 @@ const ZoneMap = ({
     },
     [],
   );
+
+  useEffect(() => {
+    if (isLoaded && co2ColorScale) {
+      // TODO: This will only change RENDERED zones, so if you change the time in Europe and zoom out, go to US, it will not be updated!
+      // TODO: Consider using isdragging or similar to update this when new zones are rendered
+      const features = ref.current.queryRenderedFeatures();
+      const map = ref.current.getMap();
+      features.forEach((feature) => {
+        const { color, zoneId } = feature.properties;
+        let fillColor = color;
+
+        const co2intensity = (zoneHistories && zoneHistories[zoneId] && zoneHistories[zoneId][selectedZoneTimeIndex])
+          ? getZoneCarbonIntensity(carbonIntensityDomain, electricityMixMode, zoneHistories[zoneId][selectedZoneTimeIndex])
+          : null;
+
+        // Calculate new color if zonetime is selected and we have a co2intensity
+        if (selectedZoneTimeIndex !== null) {
+          fillColor = co2ColorScale(co2intensity);
+        }
+        const existingColor = feature.id
+          ? map.getFeatureState({ source: 'zones-clickable', id: feature.id }, 'color').color
+          : color;
+
+        if (feature.id && fillColor !== existingColor) {
+          map.setFeatureState(
+            {
+              source: 'zones-clickable',
+              id: feature.id,
+            },
+            {
+              color: fillColor,
+            },
+          );
+        }
+      });
+    }
+  }, [isLoaded, isDragging, zoneHistories, selectedZoneTimeIndex, co2ColorScale, carbonIntensityDomain, electricityMixMode]);
 
   const handleClick = useMemo(
     () => (e) => {
@@ -201,7 +259,7 @@ const ZoneMap = ({
         onBlur={handleMouseOut}
         onClick={handleClick}
         onError={onMapError}
-        onLoad={onMapLoaded}
+        onLoad={handleLoad}
         onMouseMove={handleMouseMove}
         onMouseOut={handleMouseOut}
         onMouseDown={handleDragStart}
@@ -239,8 +297,8 @@ const ZoneMap = ({
         <Source type="geojson" data={sources.zonesNonClickable}>
           <Layer id="zones-static" type="fill" paint={styles.zonesNonClickable} />
         </Source>
-        <Source type="geojson" data={sources.zonesClickable}>
-          <Layer id="zones-clickable" type="fill" paint={styles.zonesClickable} />
+        <Source id="zones-clickable" type="geojson" generateId data={sources.zonesClickable}>
+          <Layer id="zones-clickable-layer" type="fill" paint={styles.zonesClickable} />
           <Layer id="zones-border" type="line" paint={styles.zonesBorder} />
           {/* Note: if stroke width is 1px, then it is faster to use fill-outline in fill layer */}
         </Source>

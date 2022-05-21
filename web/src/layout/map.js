@@ -10,7 +10,7 @@ import { getValueAtPosition } from '../helpers/grib';
 import { calculateLengthFromDimensions } from '../helpers/math';
 import { getCenteredZoneViewport, getCenteredLocationViewport } from '../helpers/map';
 import { useInterpolatedSolarData, useInterpolatedWindData } from '../hooks/layers';
-import { useTheme } from '../hooks/theme';
+import { useTheme, useCo2ColorScale } from '../hooks/theme';
 import { useZonesWithColors } from '../hooks/map';
 import { useTrackEvent } from '../hooks/tracking';
 import { dispatchApplication } from '../store';
@@ -35,6 +35,8 @@ export default () => {
   const isEmbedded = useSelector(state => state.application.isEmbedded);
   const isMobile = useSelector(state => state.application.isMobile);
   const viewport = useSelector(state => state.application.mapViewport);
+  const selectedZoneTimeIndex = useSelector(state => state.application.selectedZoneTimeIndex);
+  const zoneHistories = useSelector(state => state.data.histories);
   const solarData = useInterpolatedSolarData();
   const windData = useInterpolatedWindData();
   const zones = useZonesWithColors();
@@ -42,6 +44,7 @@ export default () => {
   const location = useLocation();
   const history = useHistory();
   const carbonIntensityDomain = useCarbonIntensityDomain();
+  const co2ColorScale = useCo2ColorScale();
   // TODO: Replace with useParams().zoneId once this component gets
   // put in the right render context and has this param available.
   const zoneId = getZoneId();
@@ -195,6 +198,7 @@ export default () => {
         />
       )}
       <ZoneMap
+        co2ColorScale={co2ColorScale}
         hoveringEnabled={hoveringEnabled}
         onMapLoaded={handleMapLoaded}
         onMapError={handleMapError}
@@ -205,11 +209,13 @@ export default () => {
         onZoneClick={handleZoneClick}
         onZoneMouseEnter={handleZoneMouseEnter}
         onZoneMouseLeave={handleZoneMouseLeave}
+        selectedZoneTimeIndex={selectedZoneTimeIndex}
         scrollZoom={!isEmbedded}
         theme={theme}
         transitionDuration={transitionDuration}
         viewport={viewport}
         zones={zones}
+        zoneHistories={zoneHistories}
       >
         <MapLayer component={ExchangeLayer} />
         <MapLayer component={WindLayer} />

@@ -116,7 +116,7 @@ const CountryPanel = ({
     return <Redirect to={parentPage} />;
   }
 
-  const datetime = data.year.toString();
+  const datetime = data.year && data.year.toString();
   const co2Intensity = getZoneCarbonIntensity(
     carbonIntensityDomain,
     electricityMixMode,
