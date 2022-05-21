@@ -1,11 +1,21 @@
 import moment from 'moment';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { matchPath } from 'react-router';
 import { keys, sortBy } from 'lodash';
 
+function useCurrentZoneId() {
+  const match = matchPath(useLocation().pathname, { path: '/zone/:zoneId' });
+  if (match) {
+    const { zoneId } = match.params;
+    return zoneId;
+  }
+  return;
+}
+
 export function useCurrentZoneHistory() {
-  const { zoneId } = useParams();
+  const zoneId = useCurrentZoneId();
   const histories = useSelector(state => state.data.histories);
 
   return useMemo(
@@ -40,7 +50,7 @@ export function useCurrentZoneHistoryStartTime() {
 }
 
 export function useCurrentZoneData() {
-  const { zoneId } = useParams();
+  const zoneId = useCurrentZoneId();
   const zoneHistory = useCurrentZoneHistory();
   const zoneTimeIndex = useSelector(state => state.application.selectedZoneTimeIndex);
   const grid = useSelector(state => state.data.grid);

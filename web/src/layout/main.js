@@ -3,8 +3,7 @@
 // TODO(olc): re-enable this rule
 
 import React from 'react';
-import moment from 'moment';
-import { connect, useDispatch } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
 // Layout
@@ -19,7 +18,7 @@ import Map from './map';
 import { __ } from '../helpers/translation';
 import { isNewClientVersion } from '../helpers/environment';
 import { useCustomDatetime } from '../hooks/router';
-import { useLoadingOverlayVisible, useCarbonIntensityDomain } from '../hooks/redux';
+import { useLoadingOverlayVisible, useCarbonIntensityDomain, useCurrentZoneData } from '../hooks/redux';
 import {
   useClientVersionFetch,
   useGridDataPolling,
@@ -39,14 +38,12 @@ const mapStateToProps = state => ({
   brightModeEnabled: state.application.brightModeEnabled,
   hasConnectionWarning: state.data.hasConnectionWarning,
   version: state.application.version,
-  currentGridYear: state.data.grid.datetime,
 });
 
 const Main = ({
   brightModeEnabled,
   hasConnectionWarning,
   version,
-  currentGridYear,
 }) => {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -54,6 +51,12 @@ const Main = ({
 
   const showLoadingOverlay = useLoadingOverlayVisible();
   const carbonIntensityDomain = useCarbonIntensityDomain();
+
+  const data = useCurrentZoneData();
+  const currentGridData = useSelector(state => state.data.grid.datetime);
+  const currentYear = data
+    ? data.year
+    : currentGridData;
 
   // Check for the latest client version once initially.
   useClientVersionFetch();
@@ -104,7 +107,7 @@ const Main = ({
             </div>
             <LayerButtons />
             <div className="text-title" style={{ color: brightModeEnabled ? '#000' : '#fff' }}>
-              {moment(currentGridYear.toString()).format('YYYY')}
+              {currentYear}
             </div>
           </div>
 
