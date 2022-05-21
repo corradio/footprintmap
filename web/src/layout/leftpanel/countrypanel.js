@@ -208,14 +208,14 @@ const CountryPanel = ({
               <span className="country-history-title">
                 {formatCarbonIntensityDescription(carbonIntensityDomain, electricityMixMode)}
               </span>
-              <CountryHistoryCarbonGraph />
+              <CountryHistoryCarbonGraph electricityMixMode={energyMixMode} />
 
               <span className="country-history-title">
                 {`Total carbon emissions (${electricityMixMode === 'consumption' ? 'incl. imported' : 'territorial'})`}
               </span>
-              <CountryHistoryEmissionsGraph />
+              <CountryHistoryEmissionsGraph electricityMixMode={energyMixMode} />
 
-              {carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.ENERGY ? (
+              {true ? (
                 <React.Fragment>
                   <span className="country-history-title">
                     Origin of energy
@@ -249,7 +249,7 @@ const CountryPanel = ({
                 </React.Fragment>
               ) : null}
 
-              {carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.GDP ? (
+              {true ? (
                 <React.Fragment>
                   <span className="country-history-title">
                     Gross domestic product
@@ -258,21 +258,21 @@ const CountryPanel = ({
                 </React.Fragment>
               ) : null}
 
-              {carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.POPULATION ? (
-                <React.Fragment>
-                  <span className="country-history-title">
-                    Population
-                  </span>
-                  <CountryHistoryPopulationGraph />
-                </React.Fragment>
-              ) : null}
-
-              {[CARBON_INTENSITY_DOMAIN.GDP, CARBON_INTENSITY_DOMAIN.ENERGY].includes(carbonIntensityDomain) ? (
+              {true ? (
                 <React.Fragment>
                   <span className="country-history-title">
                     Energy intensity of the economy
                   </span>
                   <CountryHistoryEnergyIntensity />
+                </React.Fragment>
+              ) : null}
+
+              {true ? (
+                <React.Fragment>
+                  <span className="country-history-title">
+                    Population
+                  </span>
+                  <CountryHistoryPopulationGraph />
                 </React.Fragment>
               ) : null}
             </div>

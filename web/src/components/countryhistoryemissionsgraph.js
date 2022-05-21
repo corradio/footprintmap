@@ -16,7 +16,7 @@ import CountryPanelEmissionsTooltip from './tooltips/countrypanelemissionstoolti
 import AreaGraph from './graph/areagraph';
 import { scaleMillionsShort } from '../helpers/formatting';
 
-const prepareGraphData = (historyData, colorBlindModeEnabled, electricityMixMode) => {
+const prepareGraphData = (historyData, electricityMixMode) => {
   if (!historyData || !historyData[0]) return {};
 
   const computeEmissions = d => (electricityMixMode === 'consumption'
@@ -62,6 +62,7 @@ const mapStateToProps = state => ({
 const CountryHistoryEmissionsGraph = ({
   isMobile,
   selectedTimeIndex,
+  electricityMixMode,
 }) => {
   const [tooltip, setTooltip] = useState(null);
   const [selectedLayerIndex, setSelectedLayerIndex] = useState(null);
@@ -79,8 +80,8 @@ const CountryHistoryEmissionsGraph = ({
     markerFill,
     valueAxisLabel,
   } = useMemo(
-    () => prepareGraphData(historyData),
-    [historyData],
+    () => prepareGraphData(historyData, electricityMixMode),
+    [historyData, electricityMixMode],
   );
 
   // Mouse action handlers
