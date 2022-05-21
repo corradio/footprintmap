@@ -2,9 +2,11 @@
 An interactive visualisation of the CO<sub>2</sub> footprint of the world economy built with [React](https://reactjs.org/) and [mapbox GL](https://github.com/mapbox/mapbox-gl-js/). Try it out at [http://www.footprintmap.org](http://www.footprintmap.org).
 
 ### Data sources
-- [BP Statistical Review of World Energy 2020](https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy.html) -- published June 17th 2020
-- [Global Carbon Budget 2019](https://doi.org/10.18160/GCP-2020) -- published December 4th 2019
-- [Worldbank population]() TBD
+- [BP Statistical Review of World Energy 2021](https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy.html)
+- [Global Carbon Budget 2021](https://doi.org/10.18160/GCP-2021)
+- [Worldbank population and GDP](https://databank.worldbank.org/)
+
+The dataset is merged by a python script [here](scripts) and the resulting dataset can be found [here](web/src/globalcarbon.json).
 
 ### Set up and start your local environment
 First, navigate to the `web` folder. Then, install dependencies:

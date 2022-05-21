@@ -104,10 +104,10 @@ def ensure_year_exists(country_iso2, year):
 
 
 # ** Read emission data
-# Source: https://doi.org/10.18160/GCP-2020
 print('Reading Global Carbon Project..')
+filename = 'National_Carbon_Emissions_2021v1.0.xlsx'
 df_terr_emissions = pd.read_excel(
-    'data/National_Carbon_Emissions_2020v1.0.xlsx',
+    f'data/{filename}',
     sheet_name='Territorial Emissions',
     header=16)
 df_terr_emissions = df_terr_emissions.rename(
@@ -119,7 +119,7 @@ df_terr_emissions = df_terr_emissions.melt(
     value_name='territorial_emissions_MtCO2').set_index(['year', 'country'])
 # emissions
 df_cons_emissions = pd.read_excel(
-    'data/National_Carbon_Emissions_2020v1.0.xlsx',
+    f'data/{filename}',
     sheet_name='Consumption Emissions',
     header=8)
 df_cons_emissions = df_cons_emissions.rename(
@@ -149,6 +149,9 @@ for (year, country_name), row in df_merged.iterrows():
 
 # ** Read Worldbank population & gdp data
 # https://databank.worldbank.org/reports.aspx?ReportId=108394&Type=Table
+# Pick "Population, Total" and "GDP (current US$) and export as excel"
+# You should remove all series and then search "SP.POP.TOTL" and "NY.GDP.MKTP.CD"
+# Remember to take 1960 -> latest
 print('Reading worldbank..')
 df_worldbank = pd.read_excel(
     'data/worldbank_gdp_pop.xlsx',
