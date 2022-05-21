@@ -35,8 +35,6 @@ import { getZoneCarbonIntensity, getRenewableRatio, getLowcarbonRatio } from '..
 import { formatCarbonIntensityUnit, formatCarbonIntensityDescription } from '../../helpers/formatting';
 import { CARBON_INTENSITY_DOMAIN } from '../../helpers/constants';
 
-const __ = () => 'X';
-
 // TODO: Move all styles from styles.css to here
 // TODO: Remove all unecessary id and class tags
 
@@ -186,14 +184,14 @@ const CountryPanel = ({
                       />
                       {tooltip && <LowCarbonInfoTooltip position={tooltip.position} />}
                     </div>
-                    <div className="country-col-headline">{__('country-panel.lowcarbon')}</div>
+                    <div className="country-col-headline">Low-carbon</div>
                     <div className="country-col-subtext" />
                   </div>
                   <div className="country-col country-renewable-wrap">
                     <div id="country-renewable-gauge" className="country-gauge-wrap">
                       <CountryRenewableGauge />
                     </div>
-                    <div className="country-col-headline">{__('country-panel.renewable')}</div>
+                    <div className="country-col-headline">Renewable</div>
                   </div>
                 </React.Fragment>
               ) : null}
@@ -282,21 +280,20 @@ const CountryPanel = ({
         )}
 
         <p>
-          {__('panel-initial-text.thisproject')}
+          This project is
           {' '}
           <a href="https://github.com/corradio/carbonmap" target="_blank">
-            {__('panel-initial-text.opensource')}
+            Open Source
           </a>
-          {' '}(
-          {__('panel-initial-text.see')}
+          {' '}(See
           {' '}
           <a href="https://github.com/corradio/carbonmap#data-sources" target="_blank">
-            {__('panel-initial-text.datasources')}
+            data sources
           </a>
           ).{' '}
         </p>
         <p>
-          {__('footer.foundbugs')} <a href="https://github.com/corradio/carbonmap/issues/new" target="_blank">{__('footer.here')}</a>.<br />
+          Found bugs or have ideas? Report them <a href="https://github.com/corradio/carbonmap/issues/new" target="_blank">here</a>.<br />
         </p>
 
         <div className="social-buttons large-screen-hidden">

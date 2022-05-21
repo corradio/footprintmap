@@ -74,8 +74,10 @@ const ZoneMap = ({
   );
 
   const handleLoad = () => {
-    setIsLoaded(true);
-    onMapLoaded();
+    setTimeout(() => {
+      setIsLoaded(true);
+      onMapLoaded();
+    }, 200);
   };
 
   // Generate two sources (clickable and non-clickable zones), based on the zones data.

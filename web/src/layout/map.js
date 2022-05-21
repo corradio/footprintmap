@@ -79,17 +79,15 @@ export default () => {
     [zones, zoneId, callerLocation],
   );
 
-  const handleMapError = useMemo(
-    () => () => {
-      // Map loading is finished, lower the overlay shield.
-      dispatchApplication('isLoadingMap', false);
+  const handleMapError = (e) => {
+    console.error(e.error);
+    // Map loading is finished, lower the overlay shield.
+    dispatchApplication('isLoadingMap', false);
 
-      // Disable the map and redirect to zones ranking.
-      dispatchApplication('webGLSupported', false);
-      history.push({ pathname: '/ranking', search: location.search });
-    },
-    [history],
-  );
+    // Disable the map and redirect to zones ranking.
+    dispatchApplication('webGLSupported', false);
+    history.push({ pathname: '/ranking', search: location.search });
+  };
 
   const handleMouseMove = useMemo(
     () => ({

@@ -16,7 +16,7 @@ export default () => {
             to={{ pathname: '/map', search: location.search }}
           >
             <i className="material-icons" aria-hidden="true">map</i>
-            <span className="tab-label">About</span>
+            <span className="tab-label">Map</span>
           </NavLink>
         )}
         <NavLink
@@ -31,7 +31,7 @@ export default () => {
           to={{ pathname: '/info', search: location.search }}
         >
           <i className="material-icons" aria-hidden="true">info</i>
-          <span className="tab-label">Map</span>
+          <span className="tab-label">About</span>
         </NavLink>
       </div>
     </div>

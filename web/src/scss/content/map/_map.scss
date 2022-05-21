@@ -124,7 +124,7 @@
 
 /* override mapbox styling */
 .mapboxgl-zoom-controls {
-    right: 16px !important;
+    right: 51px !important;
     top: 170px !important;
 
     @include respond-to('small') {
