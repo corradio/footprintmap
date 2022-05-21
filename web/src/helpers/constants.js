@@ -39,16 +39,18 @@ const FOSSIL_FUEL_KEYS = [
   'coal',
 ];
 
-module.exports = {
+const CARBON_INTENSITY_DOMAIN = {
+  ENERGY: 'ENERGY',
+  POPULATION: 'POPULATION',
+  GDP: 'GDP',
+};
+
+export {
   modeColor,
   modeOrder,
   PRODUCTION_MODES,
   STORAGE_MODES,
   DEFAULT_FLAG_SIZE,
-  CARBON_INTENSITY_DOMAIN: {
-    ENERGY: 'ENERGY',
-    POPULATION: 'POPULATION',
-    GDP: 'GDP',
-  },
+  CARBON_INTENSITY_DOMAIN,
   FOSSIL_FUEL_KEYS,
 };

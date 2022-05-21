@@ -4,7 +4,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { dispatchApplication } from '../store';
-import { __ } from '../helpers/translation';
 import { formatCarbonIntensityUnit } from '../helpers/formatting';
 
 import HorizontalColorbar from '../components/horizontalcolorbar';
@@ -42,44 +41,16 @@ const Legend = ({
   return (
     <div className={`floating-legend-container ${mobileCollapsedClass}`}>
       <div className="floating-legend-mobile-header">
-        <span>{__('misc.legend')}</span>
+        <span>Legend</span>
         <i className="material-icons toggle-legend-button" onClick={toggleLegend}>
           {legendVisible ? 'call_received' : 'call_made'}
         </i>
       </div>
       {legendVisible && (
         <React.Fragment>
-          {windEnabled && (
-            <div className={`wind-potential-legend floating-legend ${mobileCollapsedClass}`}>
-              <div className="legend-header">
-                {__('legends.windpotential')}<small> (m/s)</small>
-              </div>
-              <HorizontalColorbar
-                id="wind-potential-bar"
-                colorScale={windColor}
-                currentValue={windColorbarValue}
-                markerColor="black"
-                ticksCount={6}
-              />
-            </div>
-          )}
-          {solarEnabled && (
-            <div className={`solar-potential-legend floating-legend ${mobileCollapsedClass}`}>
-              <div className="legend-header">
-                {__('legends.solarpotential')}<small> (W/m<span className="sup">2</span>)</small>
-              </div>
-              <HorizontalColorbar
-                id="solar-potential-bar"
-                colorScale={solarColor}
-                currentValue={solarColorbarValue}
-                markerColor="red"
-                ticksCount={5}
-              />
-            </div>
-          )}
           <div className={`co2-legend floating-legend ${mobileCollapsedClass}`}>
             <div className="legend-header">
-              {__('legends.carbonintensity')}
+              Carbon intensity
               {' '}
               <small>{`(${formatCarbonIntensityUnit(carbonIntensityDomain)})`}</small>
             </div>

@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 
-import { __ } from '../../helpers/translation';
 import { dispatchApplication } from '../../store';
 
 import SearchBar from '../../components/searchbar';
@@ -33,7 +32,7 @@ const ZoneListPanel = () => (
     <div className="zone-list-header">
       <div className="title">
         {' '}
-        {__('left-panel.zone-list-header-title')}
+        Climate Impact by Area
       </div>
       <div
         className="subtitle"
@@ -47,7 +46,7 @@ const ZoneListPanel = () => (
 
     <SearchBar
       className="zone-search-bar"
-      placeholder={__('left-panel.search')}
+      placeholder="Search areas"
       documentKeyUpHandler={documentSearchKeyUpHandler}
       searchHandler={query => dispatchApplication('searchQuery', query)}
     />

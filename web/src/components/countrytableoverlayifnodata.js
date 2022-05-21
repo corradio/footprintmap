@@ -2,12 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { __ } from '../helpers/translation';
 import { useCurrentZoneData } from '../hooks/redux';
 
 const mapStateToProps = state => ({
   zoneTimeIndex: state.application.selectedZoneTimeIndex,
 });
+
+const __ = () => 'X';
 
 const CountryTableOverlayIfNoData = ({ zoneTimeIndex }) => {
   const { zoneId } = useParams();

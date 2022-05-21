@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { __, getFullZoneName } from '../../helpers/translation';
+import { getFullZoneName } from '../../helpers/language';
 import { formatCo2, formatPower } from '../../helpers/formatting';
 import { flagUri } from '../../helpers/flags';
 import { getRatioPercent } from '../../helpers/math';
@@ -14,6 +14,8 @@ const mapStateToProps = state => ({
   displayByEmissions: state.application.tableDisplayEmissions,
   electricityMixMode: state.application.electricityMixMode,
 });
+
+const __ = () => 'X';
 
 const CountryPanelExchangeTooltip = ({
   displayByEmissions,

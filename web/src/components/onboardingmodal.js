@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { __ } from '../helpers/translation';
 import { saveKey } from '../helpers/storage';
 import { dispatchApplication } from '../store';
 import { useTrackEvent } from '../hooks/tracking';
 
 const views = [{
-  // headerImage: resolvePath('images/onboarding/electricymapLogoIcon.svg'),
   headerCssClass: 'logo-header',
   textCssClass: 'brand-text',
   renderContent: () => (
@@ -16,38 +14,38 @@ const views = [{
         <h1>footprintMap</h1>
       </div>
       <div>
-        <h2>{__('onboarding-modal.view1.subtitle')}</h2>
+        <h2>A visualisation of the CO₂ emissions of the global economy</h2>
       </div>
     </React.Fragment>
   ),
 }, {
-  headerImage: resolvePath('images/onboarding/mapExtract.png'),
+  headerImage: 'images/onboarding/mapExtract.png',
   renderContent: () => (
     <React.Fragment>
       <div>
-        <h2>{__('onboarding-modal.view2.header')}</h2>
+        <h2>See how much CO₂ is emitted</h2>
       </div>
-      <div>{__('onboarding-modal.view2.text')}</div>
+      <div>We color areas around the world by their Carbon Intensity. The greener the color, the lesser the footprint.</div>
     </React.Fragment>
   ),
 }, {
-  headerImage: resolvePath('images/onboarding/toggle.png'),
+  headerImage: 'images/onboarding/toggle.png',
   renderContent: () => (
     <React.Fragment>
       <div>
-        <h2>{__('onboarding-modal.view3.header')}</h2>
+        <h2>Population, economy and energy</h2>
       </div>
-      <div>{__('onboarding-modal.view3.text')}</div>
+      <div>Explore the footprint of a country per capita, GDP generated, or energy consumed. Click on the toggle to switch mode.</div>
     </React.Fragment>
   ),
 }, {
-  headerImage: resolvePath('images/onboarding/mapExtract.png'),
+  headerImage: 'images/onboarding/mapExtract.png',
   renderContent: () => (
     <React.Fragment>
       <div>
-        <h2>{__('onboarding-modal.view4.header')}</h2>
+        <h2>Imports are taken into account</h2>
       </div>
-      <div>{__('onboarding-modal.view4.text')}</div>
+      <div>Emissions related to goods manufactured abroad are taken into account, and appear as part of a country's footprint</div>
     </React.Fragment>
   ),
 }];

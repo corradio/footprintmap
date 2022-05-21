@@ -24,7 +24,6 @@ import {
   getExchangeCo2Intensity,
 } from '../helpers/zonedata';
 import { flagUri } from '../helpers/flags';
-import { __ } from '../helpers/translation';
 
 import CountryPanelProductionTooltip from './tooltips/countrypanelproductiontooltip';
 import CountryPanelExchangeTooltip from './tooltips/countrypanelexchangetooltip';
@@ -267,7 +266,7 @@ const CountryCarbonEmissionsTable = React.memo(({
           <Row
             key={d.mode}
             index={index}
-            label={__(d.mode)}
+            label={d.mode}
             width={width}
             scale={co2Scale}
             value={Math.abs(d.tCo2eqPerMin)}
@@ -372,7 +371,7 @@ const CountryElectricityProductionTable = React.memo(({
           <Row
             key={d.mode}
             index={index}
-            label={__(d.mode)}
+            label={d.mode}
             width={width}
             scale={powerScale}
             value={getElectricityProductionValue(d)}

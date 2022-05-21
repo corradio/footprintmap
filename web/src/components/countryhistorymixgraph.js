@@ -3,7 +3,7 @@ import React, { useState, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { max as d3Max } from 'd3-array';
 
-import formatting from '../helpers/formatting';
+import { scaleEnergy } from '../helpers/formatting';
 import { useCo2ColorScale } from '../hooks/theme';
 import { getTooltipPosition } from '../helpers/graph';
 import { modeOrder, modeColor } from '../helpers/constants';
@@ -26,7 +26,7 @@ const getValuesInfo = (historyData) => {
       d.totalPrimaryEnergyProductionTWh,
     ])
   ));
-  const format = formatting.scaleEnergy(maxTotalValue);
+  const format = scaleEnergy(maxTotalValue);
 
   const valueAxisLabel = format.unit;
   const valueFactor = format.formattingFactor;

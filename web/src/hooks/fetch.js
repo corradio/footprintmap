@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { isEmpty } from 'lodash';
 
-import { DATA_FETCH_INTERVAL } from '../helpers/constants';
+const DATA_FETCH_INTERVAL = 60;
 
 import { useCustomDatetime, useWindEnabled, useSolarEnabled } from './router';
 import { useCurrentZoneHistory } from './redux';

@@ -1,11 +1,10 @@
-const { isEmpty } = require('lodash');
-const moment = require('moment');
+import { isEmpty } from 'lodash';
+import moment from 'moment';
 
-const { modeOrder } = require('../helpers/constants');
-const constructTopos = require('../helpers/topos');
+import { modeOrder } from '../helpers/constants';
+import constructTopos from '../helpers/topos';
 
-
-const globalcarbon = require('../globalcarbon.json');
+import globalcarbon from '../globalcarbon.json';
 
 const CURRENT_YEAR = Object.values(globalcarbon.countries)
   .flat()
@@ -44,7 +43,7 @@ Object.entries(globalcarbon.countries).forEach(([k, v]) => {
   initialDataState.histories[k] = v;
 });
 
-module.exports = (state = initialDataState, action) => {
+export default (state = initialDataState, action) => {
   switch (action.type) {
     case 'GRID_DATA_FETCH_REQUESTED': {
       return { ...state, hasConnectionWarning: false, isLoadingGrid: true };

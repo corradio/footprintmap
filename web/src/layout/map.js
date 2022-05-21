@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { debounce } from 'lodash';
 
 import thirdPartyServices from '../services/thirdparty';
-import { __ } from '../helpers/translation';
 import { getZoneId } from '../helpers/router';
 import { getValueAtPosition } from '../helpers/grib';
 import { calculateLengthFromDimensions } from '../helpers/math';
@@ -188,7 +187,7 @@ export default () => {
     <React.Fragment>
       <div id="webgl-error" className={`flash-message ${!webGLSupported ? 'active' : ''}`}>
         <div className="inner">
-          {__('misc.webgl-not-supported')}
+          The map can&apos;t be rendered because this browser does not support WebGL.
         </div>
       </div>
       {tooltipPosition && tooltipZoneData && hoveringEnabled && (

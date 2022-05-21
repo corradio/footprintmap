@@ -1,4 +1,4 @@
-const Cookies = require('js-cookie');
+import Cookies from 'js-cookie';
 
 const saveKey = (key, val) => {
   if (window.isCordova) {
@@ -15,7 +15,7 @@ const getKey = (key) => {
   return Cookies.get(key);
 };
 
-module.exports = {
+export {
   saveKey,
   getKey,
 };

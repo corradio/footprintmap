@@ -6,7 +6,6 @@
 import React from 'react';
 import { Redirect, useLocation } from 'react-router-dom';
 
-import { __ } from '../../helpers/translation';
 import { useIsMediumUpScreen } from '../../hooks/viewport';
 import ColorBlindCheckbox from '../../components/colorblindcheckbox';
 
@@ -30,10 +29,10 @@ const MobileInfoTab = () => {
       <div className="info-text">
         <ColorBlindCheckbox />
         <p>
-          {__('panel-initial-text.thisproject')} <a href="https://github.com/corradio/footprintmap" target="_blank">{__('panel-initial-text.opensource')}</a> ({__('panel-initial-text.see')} <a href="https://github.com/corradio/footprintmap#data-sources" target="_blank">{__('panel-initial-text.datasources')}</a>).
+          This project is <a href="https://github.com/corradio/footprintmap" target="_blank">Open Source</a> (See <a href="https://github.com/corradio/footprintmap#data-sources" target="_blank">data sources</a>).
         </p>
         <p>
-          {__('footer.foundbugs')} <a href="https://github.com/corradio/footprintmap/issues/new" target="_blank">{__('footer.here')}</a>.<br />
+          Found bugs or have ideas? Report them <a href="https://github.com/corradio/footprintmap/issues/new" target="_blank">here</a>.<br />
         </p>
       </div>
       <div className="social-buttons large-screen-hidden">

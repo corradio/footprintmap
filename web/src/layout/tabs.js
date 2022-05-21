@@ -2,8 +2,6 @@ import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { __ } from '../helpers/translation';
-
 export default () => {
   const location = useLocation();
 
@@ -18,7 +16,7 @@ export default () => {
             to={{ pathname: '/map', search: location.search }}
           >
             <i className="material-icons" aria-hidden="true">map</i>
-            <span className="tab-label">{__('mobile-main-menu.map')}</span>
+            <span className="tab-label">About</span>
           </NavLink>
         )}
         <NavLink
@@ -26,14 +24,14 @@ export default () => {
           to={{ pathname: '/ranking', search: location.search }}
         >
           <i className="material-icons" aria-hidden="true">view_list</i>
-          <span className="tab-label">{__('mobile-main-menu.areas')}</span>
+          <span className="tab-label">Areas</span>
         </NavLink>
         <NavLink
           className="list-item"
           to={{ pathname: '/info', search: location.search }}
         >
           <i className="material-icons" aria-hidden="true">info</i>
-          <span className="tab-label">{__('mobile-main-menu.about')}</span>
+          <span className="tab-label">Map</span>
         </NavLink>
       </div>
     </div>

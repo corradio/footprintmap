@@ -16,7 +16,6 @@ import { dispatchApplication } from '../../store';
 import { useSearchParams } from '../../hooks/router';
 import { usePageViewsTracker } from '../../hooks/tracking';
 
-import FAQPanel from './faqpanel';
 import MobileInfoTab from './mobileinfotab';
 import ZoneDetailsPanel from './zonedetailspanel';
 import ZoneListPanel from './zonelistpanel';
@@ -90,7 +89,6 @@ const LeftPanel = ({ isLeftPanelCollapsed, isMobile }) => {
         <Route path="/ranking" component={ZoneListPanel} />
         <Route path="/zone/:zoneId" component={ZoneDetailsPanel} />
         <Route path="/info" component={MobileInfoTab} />
-        <Route path="/faq" component={FAQPanel} />
         {/* TODO: Consider adding a 404 page  */}
       </Switch>
     </div>

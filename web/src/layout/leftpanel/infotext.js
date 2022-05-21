@@ -7,38 +7,27 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-import { __ } from '../../helpers/translation';
 import ColorBlindCheckbox from '../../components/colorblindcheckbox';
 
 export default () => (
   <div className="info-text small-screen-hidden">
     <ColorBlindCheckbox />
     <p>
-      {__('panel-initial-text.thisproject')}
+      This project is
       {' '}
       <a href="https://github.com/corradio/carbonmap" target="_blank">
-        {__('panel-initial-text.opensource')}
+        Open Source
       </a>
-      {' '}(
-      {__('panel-initial-text.see')}
+      {' '}(See
       {' '}
       <a href="https://github.com/corradio/carbonmap#data-sources" target="_blank">
-        {__('panel-initial-text.datasources')}
+        data sources
       </a>
       ).{' '}
     </p>
     <p>
-      {__('footer.foundbugs')} <a href="https://github.com/corradio/carbonmap/issues/new" target="_blank">{__('footer.here')}</a>.<br />
+      Found bugs or have ideas? Report them <a href="https://github.com/corradio/carbonmap/issues/new" target="_blank">here</a>.<br />
     </p>
-    { null && (
-      <p>
-        {__('footer.faq-text')}
-        {' '}
-        <Link to={{ pathname: '/faq', search: useLocation().search }}>
-          <span className="faq-link">{__('footer.faq')}</span>
-        </Link>
-      </p>
-    )}
     <div className="social-buttons">
       <div>
         { /* Slack */}

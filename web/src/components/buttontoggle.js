@@ -11,8 +11,8 @@ const Button = styled.button`
   background-color: #FFFFFF;
   background-image: url(${props => (
     props.active
-      ? resolvePath(`images/${props.icon}_active.svg`)
-      : resolvePath(`images/${props.icon}.svg`)
+      ? `images/${props.icon}_active.svg`
+      : `images/${props.icon}.svg`
   )});
 `;
 

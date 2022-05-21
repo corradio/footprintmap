@@ -1,7 +1,7 @@
 import React from 'react';
 import { isFinite } from 'lodash';
 
-import { getFullZoneName } from '../../helpers/translation';
+import { getFullZoneName } from '../../helpers/language';
 import { useCo2ColorScale } from '../../hooks/theme';
 import { flagUri } from '../../helpers/flags';
 

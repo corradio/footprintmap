@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { isFinite } from 'lodash';
+import { vsprintf } from 'sprintf-js';
 
-import { __, getFullZoneName } from '../../helpers/translation';
 import { formatCo2, formatPower } from '../../helpers/formatting';
 import { flagUri } from '../../helpers/flags';
 import { getRatioPercent } from '../../helpers/math';
+import { getFullZoneName } from '../../helpers/language';
 
 import Tooltip from '../tooltip';
 import { CarbonIntensity, MetricRatio } from './common';
@@ -18,6 +19,31 @@ import {
 const mapStateToProps = state => ({
   displayByEmissions: state.application.tableDisplayEmissions,
 });
+
+const localeConfig = {
+  "electricityComesFrom": "<b>%1$s %%</b> of energy %2$s in <img id=\"country-flag\"></img> <b>%3$s</b> comes from %4$s",
+  "electricityExportedTo": "<b>%1$s %%</b> of energy %2$s in <img id=\"country-flag\"></img> <b>%3$s</b> is exported to <img id=\"country-exchange-flag\"></img> <b>%4$s</b>",
+  "electricityImportedFrom": "<b>%1$s %%</b> of energy %2$s in <img id=\"country-flag\"></img> <b>%3$s</b> is imported from <img id=\"country-exchange-flag\"></img> <b>%4$s</b>",
+  "electricityStoredUsing": "<b>%1$s %%</b> of energy %2$s in <img id=\"country-flag\"></img> <b>%3$s</b> is stored using %4$s",
+  "emissionsComeFrom": "<b>%1$s %%</b> of emissions from energy %2$s in <img id=\"country-flag\"></img> <b>%3$s</b> come from %4$s",
+  "emissionsExportedTo": "<b>%1$s %%</b> of emissions from energy %2$s in <img id=\"country-flag\"></img> <b>%3$s</b> are exported to <img id=\"country-exchange-flag\"></img> <b>%4$s</b>",
+  "emissionsImportedFrom": "<b>%1$s %%</b> of emissions from energy %2$s in <img id=\"country-flag\"></img> <b>%3$s</b> are imported from <img id=\"country-exchange-flag\"></img> <b>%4$s</b>",
+  "emissionsStoredUsing": "<b>%1$s %%</b> of emissions from energy %2$s in <img id=\"country-flag\"></img> <b>%3$s</b> are stored using %4$s",
+};
+function __(keyStr) {
+  // const keys = keyStr.split('.');
+  // let result = window.locales[locale];
+  // for (let i = 0; i < keys.length; i += 1) {
+  //   if (result == null) { break; }
+  //   result = result[keys[i]];
+  // }
+  // if (locale !== 'en' && !result) {
+  //   return translateWithLocale('en', keyStr);
+  // }
+  const result = localeConfig[keyStr];
+  const formatArgs = Array.prototype.slice.call(arguments).slice(1); // remove first
+  return result && vsprintf(result, formatArgs);
+};
 
 const CountryPanelProductionTooltip = ({
   displayByEmissions,

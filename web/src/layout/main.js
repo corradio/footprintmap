@@ -15,7 +15,6 @@ import Tabs from './tabs';
 import Map from './map';
 
 // Modules
-import { __ } from '../helpers/translation';
 import { isNewClientVersion } from '../helpers/environment';
 import { useCustomDatetime } from '../hooks/router';
 import { useLoadingOverlayVisible, useCarbonIntensityDomain, useCurrentZoneData } from '../hooks/redux';
@@ -108,28 +107,6 @@ const Main = ({
             <LayerButtons />
             <div className="text-title" style={{ color: brightModeEnabled ? '#000' : '#fff' }}>
               {currentYear}
-            </div>
-          </div>
-
-          <div id="connection-warning" className={`flash-message ${hasConnectionWarning ? 'active' : ''}`}>
-            <div className="inner">
-              {__('misc.oops')}
-              {' '}
-              <a
-                href=""
-                onClick={(e) => {
-                  dispatch({ type: 'GRID_DATA_FETCH_REQUESTED', payload: { datetime } });
-                  e.preventDefault();
-                }}
-              >
-                {__('misc.retrynow')}
-              </a>
-              .
-            </div>
-          </div>
-          <div id="new-version" className={`flash-message ${isNewClientVersion(version) ? 'active' : ''}`}>
-            <div className="inner">
-              {__('misc.newversion')}
             </div>
           </div>
 

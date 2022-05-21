@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { __ } from '../../helpers/translation';
 import { useCo2ColorScale } from '../../hooks/theme';
 import { useCarbonIntensityDomain } from '../../hooks/redux';
 import { getZoneCarbonIntensity, getRenewableRatio, getLowcarbonRatio } from '../../helpers/zonedata';
@@ -43,54 +42,46 @@ const MapCountryTooltip = ({
       <div className="zone-name-header">
         <ZoneName zone={zoneData.countryCode} />
       </div>
-      {true ? (
-        co2intensity ? (
-          <div className="zone-details">
-            <div className="country-table-header-inner">
-              <div className="country-col country-emission-intensity-wrap">
-                <div
-                  id="country-emission-rect"
-                  className="country-col-box emission-rect emission-rect-overview"
-                  style={{ backgroundColor: co2ColorScale(co2intensity) }}
-                >
-                  <div>
-                    <span className="country-emission-intensity">
-                      {co2intensity != null ? Math.round(co2intensity) : '?'}
-                    </span>
-                    <div className="country-col-subtext">
-                      {formatCarbonIntensityUnit(carbonIntensityDomain)}
-                    </div>
+      {co2intensity ? (
+        <div className="zone-details">
+          <div className="country-table-header-inner">
+            <div className="country-col country-emission-intensity-wrap">
+              <div
+                id="country-emission-rect"
+                className="country-col-box emission-rect emission-rect-overview"
+                style={{ backgroundColor: co2ColorScale(co2intensity) }}
+              >
+                <div>
+                  <span className="country-emission-intensity">
+                    {co2intensity != null ? Math.round(co2intensity) : '?'}
+                  </span>
+                  <div className="country-col-subtext">
+                    {formatCarbonIntensityUnit(carbonIntensityDomain)}
                   </div>
                 </div>
-                <div className="country-col-headline">{ formatCarbonIntensityDescription(carbonIntensityDomain, electricityMixMode) }</div>
               </div>
-              {true ? (
-                <React.Fragment>
-                  <div className="country-col country-lowcarbon-wrap">
-                    <div id="tooltip-country-lowcarbon-gauge" className="country-gauge-wrap">
-                      <CircularGauge percentage={lowCarbonPercentage} />
-                    </div>
-                    <div className="country-col-headline">{__('country-panel.lowcarbon')}</div>
-                    <div className="country-col-subtext" />
-                  </div>
-                  <div className="country-col country-renewable-wrap">
-                    <div id="tooltip-country-renewable-gauge" className="country-gauge-wrap">
-                      <CircularGauge percentage={renewablePercentage} />
-                    </div>
-                    <div className="country-col-headline">{__('country-panel.renewable')}</div>
-                  </div>
-                </React.Fragment>
-              ) : null}
+              <div className="country-col-headline">{ formatCarbonIntensityDescription(carbonIntensityDomain, electricityMixMode) }</div>
             </div>
+            <React.Fragment>
+              <div className="country-col country-lowcarbon-wrap">
+                <div id="tooltip-country-lowcarbon-gauge" className="country-gauge-wrap">
+                  <CircularGauge percentage={lowCarbonPercentage} />
+                </div>
+                <div className="country-col-headline">Low-carbon</div>
+                <div className="country-col-subtext" />
+              </div>
+              <div className="country-col country-renewable-wrap">
+                <div id="tooltip-country-renewable-gauge" className="country-gauge-wrap">
+                  <CircularGauge percentage={renewablePercentage} />
+                </div>
+                <div className="country-col-headline">Renewable</div>
+              </div>
+            </React.Fragment>
           </div>
-        ) : (
-          <div className="temporary-outage-text">
-            No data available
-          </div>
-        )
+        </div>
       ) : (
-        <div className="no-parser-text">
-          <span dangerouslySetInnerHTML={{ __html: __('tooltips.noParserInfo', 'https://github.com/tmrowco/electricitymap-contrib#add-a-new-region') }} />
+        <div className="temporary-outage-text">
+          No data available
         </div>
       )}
     </Tooltip>

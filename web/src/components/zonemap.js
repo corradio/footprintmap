@@ -202,7 +202,7 @@ const ZoneMap = ({
 
   const handleClick = useMemo(
     () => (e) => {
-      if (ref.current && !ref.current.state.isDragging) {
+      if (ref.current && !ref.current.state) {
         const features = ref.current.queryRenderedFeatures(e.point);
         if (isEmpty(features)) {
           onSeaClick();

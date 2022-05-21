@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 
 import { dispatchApplication } from '../store';
 import { saveKey } from '../helpers/storage';
-import { __ } from '../helpers/translation';
 
 const ColorBlindCheckbox = () => {
   const colorBlindModeEnabled = useSelector(state => state.application.colorBlindModeEnabled);
@@ -17,7 +16,7 @@ const ColorBlindCheckbox = () => {
   return (
     <p>
       <label className="checkbox-container">
-        {__('legends.colorblindmode')}
+        color blind mode
         <input
           type="checkbox"
           id="checkbox-colorblind"

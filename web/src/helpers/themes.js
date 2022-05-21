@@ -1,4 +1,4 @@
-const { CARBON_INTENSITY_DOMAIN } = require('./constants');
+import { CARBON_INTENSITY_DOMAIN } from './constants';
 
 function getMaxCo2(carbonIntensityDomain) {
   if (carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.POPULATION) {

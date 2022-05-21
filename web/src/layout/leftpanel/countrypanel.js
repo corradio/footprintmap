@@ -30,10 +30,12 @@ import CountryTable from '../../components/countrytable';
 import { useCurrentZoneData } from '../../hooks/redux';
 import { useCo2ColorScale } from '../../hooks/theme';
 import { flagUri } from '../../helpers/flags';
-import { getFullZoneName, __ } from '../../helpers/translation';
+import { getFullZoneName } from '../../helpers/language';
 import { getZoneCarbonIntensity, getRenewableRatio, getLowcarbonRatio } from '../../helpers/zonedata';
 import { formatCarbonIntensityUnit, formatCarbonIntensityDescription } from '../../helpers/formatting';
 import { CARBON_INTENSITY_DOMAIN } from '../../helpers/constants';
+
+const __ = () => 'X';
 
 // TODO: Move all styles from styles.css to here
 // TODO: Remove all unecessary id and class tags

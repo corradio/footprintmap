@@ -1,9 +1,11 @@
-/* eslint-disable global-require */
 /* eslint-disable prefer-rest-params */
 // TODO: remove once refactored
 
 import { store } from '../store';
 import { isProduction } from '../helpers/environment';
+
+import gaConnection from './thirdparty/ga';
+import debugConsoleConnection from './thirdparty/debugconsole';
 
 function reportToSentry(e) {
   if (window.Sentry !== undefined) {
@@ -19,9 +21,9 @@ class ConnectionsService {
   constructor() {
     this.connections = [];
     if (isProduction()) {
-      this._ga = this.addConnection(require('./thirdparty/ga'));
+      this._ga = this.addConnection(gaConnection);
     } else {
-      this.addConnection(require('./thirdparty/debugconsole'));
+      this.addConnection(debugConsoleConnection);
     }
   }
 

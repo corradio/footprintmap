@@ -1,28 +1,27 @@
 /* eslint-disable */
 // TODO: remove once refactored
 
-var d3 = require('d3-format');
-var translation = require('./translation');
-const { CARBON_INTENSITY_DOMAIN } = require('../helpers/constants');
+import { format } from 'd3-format';
+import { CARBON_INTENSITY_DOMAIN } from '../helpers/constants';
 
-module.exports.formatPower = function (d, numDigits) {
+export const formatPower = function (d, numDigits) {
   // Assume TWh input
   if (d == null || d === NaN) return d;
   if (numDigits == null) numDigits = 3;
-  return d3.format('.' + numDigits + 's')(d * 1e12) + 'Wh';
+  return format('.' + numDigits + 's')(d * 1e12) + 'Wh';
 };
-module.exports.formatCo2 = function (d, numDigits) {
+export const formatCo2 = function (d, numDigits) {
   // Assume gCO₂ / h input
   d /= 60; // Convert to gCO₂ / min
   d /= 1e6; // Convert to tCO₂ / min
   if (d == null || d === NaN) return d;
   if (numDigits == null) numDigits = 3;
   if (d >= 1) // a ton or more
-    return d3.format('.' + numDigits + 's')(d) + 't ' + translation.translate('ofCO2eqPerMinute');
+    return format('.' + numDigits + 's')(d) + 't ' + 'ofCO2eqPerMinute';
   else
-    return d3.format('.' + numDigits + 's')(d * 1e6) + 'g ' + translation.translate('ofCO2eqPerMinute');
+    return format('.' + numDigits + 's')(d * 1e6) + 'g ' + 'ofCO2eqPerMinute';
 };
-module.exports.scaleEnergy = function (maxEnergy) {
+export const scaleEnergy = function (maxEnergy) {
   // Assume TWh input
   if (maxEnergy < 1) 
     return {
@@ -39,7 +38,7 @@ module.exports.scaleEnergy = function (maxEnergy) {
       formattingFactor: 1e3
     }
 };
-module.exports.scaleMillionsShort = function (maxValue, useSI = false) {
+export const scaleMillionsShort = function (maxValue, useSI = false) {
   // Assume million input
   if (maxValue < 1e-3)
     return {
@@ -67,7 +66,7 @@ module.exports.scaleMillionsShort = function (maxValue, useSI = false) {
   }
 };
 
-module.exports.scaleMillions = function (maxValue) {
+export const scaleMillions = function (maxValue) {
   // Assume million input
   if (maxValue < 1e-3)
     return {
@@ -95,7 +94,7 @@ module.exports.scaleMillions = function (maxValue) {
   }
 };
 
-module.exports.formatCarbonIntensityUnit = (carbonIntensityDomain) => {
+export const formatCarbonIntensityUnit = (carbonIntensityDomain) => {
   if (carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.ENERGY) {
     return 'tCO₂ per GWh'; // i.e. ktCO₂ / TWh
   }
@@ -108,11 +107,11 @@ module.exports.formatCarbonIntensityUnit = (carbonIntensityDomain) => {
   throw new Error('Not implemented yet');
 }
 
-module.exports.formatCarbonIntensityShortUnit = (carbonIntensityDomain) => {
-  return module.exports.formatCarbonIntensityUnit(carbonIntensityDomain)[0];
+export const formatCarbonIntensityShortUnit = (carbonIntensityDomain) => {
+  return formatCarbonIntensityUnit(carbonIntensityDomain)[0];
 }
 
-module.exports.formatCarbonIntensityDescription = (carbonIntensityDomain, electricityMixMode) => {
+export const formatCarbonIntensityDescription = (carbonIntensityDomain, electricityMixMode) => {
   let desc = '';
   if (carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.ENERGY) {
     desc += `Carbon footprint of energy`;
@@ -131,4 +130,3 @@ module.exports.formatCarbonIntensityDescription = (carbonIntensityDomain, electr
   }
   return desc;
 }
-
