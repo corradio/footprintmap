@@ -54,7 +54,7 @@ const initialApplicationState = {
   webGLSupported: true,
   windColorbarValue: null,
 
-  carbonIntensityDomain: CARBON_INTENSITY_DOMAIN.ENERGY,
+  carbonIntensityDomain: CARBON_INTENSITY_DOMAIN.POPULATION,
   // TODO(olc): move this to countryPanel once all React components have been made
   tableDisplayEmissions: false,
 };
