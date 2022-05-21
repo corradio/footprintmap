@@ -11,7 +11,6 @@ import { calculateLengthFromDimensions } from '../helpers/math';
 import { getCenteredZoneViewport, getCenteredLocationViewport } from '../helpers/map';
 import { useInterpolatedSolarData, useInterpolatedWindData } from '../hooks/layers';
 import { useTheme, useCo2ColorScale } from '../hooks/theme';
-import { useZonesWithColors } from '../hooks/map';
 import { useTrackEvent } from '../hooks/tracking';
 import { dispatchApplication } from '../store';
 
@@ -39,7 +38,7 @@ export default () => {
   const zoneHistories = useSelector(state => state.data.histories);
   const solarData = useInterpolatedSolarData();
   const windData = useInterpolatedWindData();
-  const zones = useZonesWithColors();
+  const zones = useSelector(state => state.data.grid.zones);
   const trackEvent = useTrackEvent();
   const location = useLocation();
   const history = useHistory();
@@ -52,6 +51,8 @@ export default () => {
 
   const [tooltipPosition, setTooltipPosition] = useState(null);
   const [tooltipZoneData, setTooltipZoneData] = useState(null);
+
+  const zoneValues = useMemo(() => Object.values(zones), [zones]);
 
   const handleMapLoaded = useMemo(
     () => () => {
@@ -214,7 +215,7 @@ export default () => {
         theme={theme}
         transitionDuration={transitionDuration}
         viewport={viewport}
-        zones={zones}
+        zones={zoneValues}
         zoneHistories={zoneHistories}
       >
         <MapLayer component={ExchangeLayer} />

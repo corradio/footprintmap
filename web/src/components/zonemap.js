@@ -81,17 +81,17 @@ const ZoneMap = ({
   // Generate two sources (clickable and non-clickable zones), based on the zones data.
   const sources = useMemo(
     () => {
-      const features = map(zones, (zone, zoneId) => ({
+      const features = map(zones, (zone, i) => ({
         type: 'Feature',
         geometry: {
           ...zone.geometry,
           coordinates: zone.geometry.coordinates.filter(size), // Remove empty geometries
         },
+        id: i,
         properties: {
-          color: zone.color,
-          isClickable: zone.isClickable,
+          isClickable: zone.year != null,
           zoneData: zone,
-          zoneId,
+          zoneId: zone.countryCode,
         },
       }));
 
@@ -108,6 +108,24 @@ const ZoneMap = ({
     },
     [zones],
   );
+
+  useMemo(() => {
+    if (isLoaded) {
+      const map = ref.current.getMap();
+      zones.forEach((zone, i) => {
+        const fillColor = co2ColorScale(getZoneCarbonIntensity(carbonIntensityDomain, electricityMixMode, zone))
+        map.setFeatureState(
+          {
+            source: 'zones-clickable',
+            id: i,
+          },
+          {
+            color: fillColor,
+          },
+        );
+      });
+    }
+  }, [isLoaded, zones, co2ColorScale, carbonIntensityDomain, electricityMixMode]);
 
   // Every time the hovered zone changes, update the hover map layer accordingly.
   const hoverFilter = useMemo(() => (['==', 'zoneId', hoveredZoneId || '']), [hoveredZoneId]);
@@ -153,17 +171,19 @@ const ZoneMap = ({
         const { color, zoneId } = feature.properties;
         let fillColor = color;
 
-        const co2intensity = (zoneHistories && zoneHistories[zoneId] && zoneHistories[zoneId][selectedZoneTimeIndex])
-          ? getZoneCarbonIntensity(carbonIntensityDomain, electricityMixMode, zoneHistories[zoneId][selectedZoneTimeIndex])
-          : null;
-
-        // Calculate new color if zonetime is selected and we have a co2intensity
-        if (selectedZoneTimeIndex !== null) {
-          fillColor = co2ColorScale(co2intensity);
+        let co2intensity;
+        if (selectedZoneTimeIndex) {
+          co2intensity = (zoneHistories && zoneHistories[zoneId] && zoneHistories[zoneId][selectedZoneTimeIndex])
+            ? getZoneCarbonIntensity(carbonIntensityDomain, electricityMixMode, zoneHistories[zoneId][selectedZoneTimeIndex])
+            : null;
+        } else {
+          co2intensity = getZoneCarbonIntensity(carbonIntensityDomain, electricityMixMode, zones[feature.id]);
         }
+
+        fillColor = co2ColorScale(co2intensity);
         const existingColor = feature.id
           ? map.getFeatureState({ source: 'zones-clickable', id: feature.id }, 'color').color
-          : color;
+          : null;
 
         if (feature.id && fillColor !== existingColor) {
           map.setFeatureState(
@@ -178,7 +198,7 @@ const ZoneMap = ({
         }
       });
     }
-  }, [isLoaded, isDragging, zoneHistories, selectedZoneTimeIndex, co2ColorScale, carbonIntensityDomain, electricityMixMode]);
+  }, [isLoaded, isDragging, zoneHistories, selectedZoneTimeIndex, co2ColorScale, carbonIntensityDomain, electricityMixMode, zones]);
 
   const handleClick = useMemo(
     () => (e) => {
@@ -297,7 +317,7 @@ const ZoneMap = ({
         <Source type="geojson" data={sources.zonesNonClickable}>
           <Layer id="zones-static" type="fill" paint={styles.zonesNonClickable} />
         </Source>
-        <Source id="zones-clickable" type="geojson" generateId data={sources.zonesClickable}>
+        <Source id="zones-clickable" type="geojson" data={sources.zonesClickable}>
           <Layer id="zones-clickable-layer" type="fill" paint={styles.zonesClickable} />
           <Layer id="zones-border" type="line" paint={styles.zonesBorder} />
           {/* Note: if stroke width is 1px, then it is faster to use fill-outline in fill layer */}
