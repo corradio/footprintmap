@@ -1,15 +1,5 @@
 version: 2
 jobs:
-  lint_json:
-    docker:
-      - image: circleci/node:10.13
-    steps:
-      - checkout
-      - run:
-          command: |
-            sudo npm install -g jsonlint
-            jsonlint config/*.json web/locales/*.json
-
   lint_js:
     docker:
       - image: circleci/node:10.13
@@ -33,4 +23,3 @@ workflows:
   all:
     jobs:
       - lint_js
-      - lint_json

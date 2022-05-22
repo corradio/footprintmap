@@ -73,6 +73,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.14.3",
     "esm": "^3.2.25",
+    "gh-pages": "^4.0.0",
     "mini-css-extract-plugin": "^0.8.0",
     "ndjson-cli": "^0.3.1",
     "node-sass": "^4.13.1",
@@ -92,8 +93,8 @@
   },
   "scripts": {
     "build": "snowpack build",
-    "clean": "rm -rf build",
     "develop": "snowpack dev",
+    "deploy": "touch build/.nojekyll && echo 'globalenergyfootprint.org' > build/CNAME && gh-pages -d build -t",
     "lint": "eslint --quiet src"
   },
   "browserslist": [
