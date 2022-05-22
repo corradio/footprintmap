@@ -1,4 +1,4 @@
-export { m as matchPath } from './common/react-router-9ba56097.js';
+export { m as matchPath } from './common/react-router-c0810246.js';
 import './common/inheritsLoose-978d85dc.js';
 import './common/setPrototypeOf-adc775f4.js';
 import './common/index-8860dfcd.js';

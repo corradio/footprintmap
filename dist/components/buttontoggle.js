@@ -7,7 +7,7 @@ const Wrapper = styled.div`
 `;
 const Button = styled.button`
   background-color: #FFFFFF;
-  background-image: url(${props => props.active ? `/images/${props.icon}_active.svg` : `/images/${props.icon}.svg`});
+  background-image: url(${props => props.active ? `images/${props.icon}_active.svg` : `images/${props.icon}.svg`});
 `;
 
 const ButtonToggle = ({
