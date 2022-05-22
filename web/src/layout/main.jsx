@@ -59,14 +59,6 @@ const Main = ({ brightModeEnabled }) => {
           <LeftPanel />
           <div id="map-container" className={location.pathname !== '/map' ? 'small-screen-hidden' : ''}>
             <Map />
-            <div id="watermark" className={`watermark small-screen-hidden ${brightModeEnabled ? 'brightmode' : ''}`}>
-              <a
-                href="http://www.tmrow.com/mission?utm_source=footprintmap.org&utm_medium=referral&utm_campaign=watermark"
-                target="_blank"
-              >
-                <div id="built-by-tomorrow" />
-              </a>
-            </div>
             <Legend />
             <div className="controls-container">
               <Toggle

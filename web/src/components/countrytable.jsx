@@ -7,11 +7,11 @@ import { noop } from 'lodash';
 
 import { dispatchApplication } from '../store';
 import { useWidthObserver } from '../hooks/viewport';
-import { useCurrentZoneData, useCurrentZoneExchangeKeys } from '../hooks/redux';
+import { useCurrentZoneData } from '../hooks/redux';
 import { useCo2ColorScale } from '../hooks/theme';
 import { getTooltipPosition } from '../helpers/graph';
 import { modeOrder, modeColor, DEFAULT_FLAG_SIZE } from '../helpers/constants';
-import { getElectricityProductionValue, getProductionCo2Intensity, getExchangeCo2Intensity } from '../helpers/zonedata';
+import { getElectricityProductionValue, getProductionCo2Intensity } from '../helpers/zonedata';
 import { flagUri } from '../helpers/flags';
 
 import CountryPanelProductionTooltip from './tooltips/countrypanelproductiontooltip';
@@ -49,26 +49,6 @@ const getProductionData = (data, electricityMixMode) =>
       production,
       capacity,
       mode,
-      tCo2eqPerMin,
-    };
-  });
-
-const getExchangeData = (data, exchangeKeys, electricityMixMode) =>
-  exchangeKeys.map((mode) => {
-    // Power in MW
-    const exchange = (data.exchange || {})[mode];
-    const exchangeCapacityRange = (data.exchangeCapacities || {})[mode];
-
-    // Exchange CO₂ intensity
-    const gCo2eqPerkWh = getExchangeCo2Intensity(mode, data, electricityMixMode);
-    const gCo2eqPerHour = gCo2eqPerkWh * 1e3 * exchange;
-    const tCo2eqPerMin = gCo2eqPerHour / 1e6 / 60.0;
-
-    return {
-      exchange,
-      exchangeCapacityRange,
-      mode,
-      gCo2eqPerkWh,
       tCo2eqPerMin,
     };
   });
@@ -400,14 +380,9 @@ const CountryTable = ({ displayByEmissions, electricityMixMode, isMobile }) => {
   const ref = useRef(null);
   const width = useWidthObserver(ref);
 
-  const exchangeKeys = useCurrentZoneExchangeKeys();
   const data = useCurrentZoneData();
 
   const productionData = useMemo(() => getProductionData(data, electricityMixMode), [data, electricityMixMode]);
-  const exchangeData = useMemo(
-    () => getExchangeData(data, exchangeKeys, electricityMixMode),
-    [data, exchangeKeys, electricityMixMode]
-  );
 
   const [productionTooltip, setProductionTooltip] = useState(null);
 
@@ -421,7 +396,7 @@ const CountryTable = ({ displayByEmissions, electricityMixMode, isMobile }) => {
     setProductionTooltip(null);
   };
 
-  const { exchangeY, exchangeHeight } = getDataBlockPositions(productionData, exchangeData);
+  const { exchangeY, exchangeHeight } = getDataBlockPositions(productionData, null);
   const height = exchangeY + exchangeHeight;
 
   return (
@@ -430,7 +405,6 @@ const CountryTable = ({ displayByEmissions, electricityMixMode, isMobile }) => {
         <CountryCarbonEmissionsTable
           data={data}
           productionData={productionData}
-          exchangeData={exchangeData}
           onProductionRowMouseOver={handleProductionRowMouseOver}
           onProductionRowMouseOut={handleProductionRowMouseOut}
           width={width}
@@ -441,7 +415,6 @@ const CountryTable = ({ displayByEmissions, electricityMixMode, isMobile }) => {
         <CountryElectricityProductionTable
           data={data}
           productionData={productionData}
-          exchangeData={exchangeData}
           onProductionRowMouseOver={handleProductionRowMouseOver}
           onProductionRowMouseOut={handleProductionRowMouseOut}
           width={width}

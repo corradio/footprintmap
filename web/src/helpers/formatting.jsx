@@ -6,7 +6,7 @@ import { CARBON_INTENSITY_DOMAIN } from '../helpers/constants';
 
 export const formatPower = function (d, numDigits) {
   // Assume TWh input
-  if (d == null || d === NaN) return d;
+  if (d == null || !Number.isFinite(d)) return d;
   if (numDigits == null) numDigits = 3;
   return format('.' + numDigits + 's')(d * 1e12) + 'Wh';
 };
@@ -14,7 +14,7 @@ export const formatCo2 = function (d, numDigits) {
   // Assume gCO₂ / h input
   d /= 60; // Convert to gCO₂ / min
   d /= 1e6; // Convert to tCO₂ / min
-  if (d == null || d === NaN) return d;
+  if (d == null || !Number.isFinite(d)) return d;
   if (numDigits == null) numDigits = 3;
   if (d >= 1)
     // a ton or more
