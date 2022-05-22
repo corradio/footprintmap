@@ -89,28 +89,9 @@ export default () => {
     history.push({ pathname: '/ranking', search: location.search });
   };
 
-  const handleMouseMove = useMemo(
-    () => ({
-      longitude,
-      latitude,
-      x,
-      y,
-    }) => {
-      dispatchApplication(
-        'solarColorbarValue',
-        getValueAtPosition(longitude, latitude, solarData),
-      );
-      dispatchApplication(
-        'windColorbarValue',
-        calculateLengthFromDimensions(
-          getValueAtPosition(longitude, latitude, windData && windData[0]),
-          getValueAtPosition(longitude, latitude, windData && windData[1]),
-        ),
-      );
-      setTooltipPosition({ x, y });
-    },
-    [solarData, windData],
-  );
+  const handleMouseMove = ({ longitude, latitude, x, y }) => {
+    setTooltipPosition({ x, y });
+  };
 
   const handleSeaClick = useMemo(
     () => () => {
@@ -214,11 +195,7 @@ export default () => {
         viewport={viewport}
         zones={zoneValues}
         zoneHistories={zoneHistories}
-      >
-        <MapLayer component={ExchangeLayer} />
-        <MapLayer component={WindLayer} />
-        <MapLayer component={SolarLayer} />
-      </ZoneMap>
+      />
     </React.Fragment>
   );
 };

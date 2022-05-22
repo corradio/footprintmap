@@ -233,9 +233,11 @@ const ZoneMap = ({
           // Trigger onZoneMouseEnter if mouse enters a different
           // zone and onZoneMouseLeave when it leaves all zones.
           if (!isEmpty(features) && hoveringEnabled) {
-            const { zoneId } = features[0].properties;
+            const feature = features[0];
+            const zone = zones[feature.id];
+            const zoneId = zone.countryCode;
             if (hoveredZoneId !== zoneId) {
-              onZoneMouseEnter(zones[zoneId], zoneId);
+              onZoneMouseEnter(zone, zoneId);
               setHoveredZoneId(zoneId);
             }
           } else if (hoveredZoneId !== null) {
