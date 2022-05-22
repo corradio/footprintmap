@@ -1,5 +1,5 @@
-import { r as react } from './common/index-8860dfcd.js';
-export { r as default } from './common/index-8860dfcd.js';
+import { r as react } from './common/index-27b27678.js';
+export { r as default } from './common/index-27b27678.js';
 import './common/_commonjsHelpers-eb5a497e.js';
 
 

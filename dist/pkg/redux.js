@@ -1,36 +1,33 @@
 import { g as global } from './common/_polyfill-node:global-acbc543a.js';
-import { r as result, c as compose } from './common/compose-4b8bc961.js';
 
 /** Detect free variable `global` from Node.js. */
 var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
 
 /** Detect free variable `self`. */
-
 var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
-/** Used as a reference to the global object. */
 
+/** Used as a reference to the global object. */
 var root = freeGlobal || freeSelf || Function('return this')();
 
 /** Built-in value references. */
-
 var Symbol = root.Symbol;
 
 /** Used for built-in method references. */
-
 var objectProto = Object.prototype;
-/** Used to check objects for own properties. */
 
+/** Used to check objects for own properties. */
 var hasOwnProperty = objectProto.hasOwnProperty;
+
 /**
  * Used to resolve the
  * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
  * of values.
  */
-
 var nativeObjectToString = objectProto.toString;
-/** Built-in value references. */
 
+/** Built-in value references. */
 var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+
 /**
  * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
  *
@@ -38,7 +35,6 @@ var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
  * @param {*} value The value to query.
  * @returns {string} Returns the raw `toStringTag`.
  */
-
 function getRawTag(value) {
   var isOwn = hasOwnProperty.call(value, symToStringTag),
       tag = value[symToStringTag];
@@ -49,7 +45,6 @@ function getRawTag(value) {
   } catch (e) {}
 
   var result = nativeObjectToString.call(value);
-
   if (unmasked) {
     if (isOwn) {
       value[symToStringTag] = tag;
@@ -57,19 +52,19 @@ function getRawTag(value) {
       delete value[symToStringTag];
     }
   }
-
   return result;
 }
 
 /** Used for built-in method references. */
 var objectProto$1 = Object.prototype;
+
 /**
  * Used to resolve the
  * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
  * of values.
  */
-
 var nativeObjectToString$1 = objectProto$1.toString;
+
 /**
  * Converts `value` to a string using `Object.prototype.toString`.
  *
@@ -77,18 +72,17 @@ var nativeObjectToString$1 = objectProto$1.toString;
  * @param {*} value The value to convert.
  * @returns {string} Returns the converted string.
  */
-
 function objectToString(value) {
   return nativeObjectToString$1.call(value);
 }
 
 /** `Object#toString` result references. */
-
 var nullTag = '[object Null]',
     undefinedTag = '[object Undefined]';
-/** Built-in value references. */
 
+/** Built-in value references. */
 var symToStringTag$1 = Symbol ? Symbol.toStringTag : undefined;
+
 /**
  * The base implementation of `getTag` without fallbacks for buggy environments.
  *
@@ -96,13 +90,13 @@ var symToStringTag$1 = Symbol ? Symbol.toStringTag : undefined;
  * @param {*} value The value to query.
  * @returns {string} Returns the `toStringTag`.
  */
-
 function baseGetTag(value) {
   if (value == null) {
     return value === undefined ? undefinedTag : nullTag;
   }
-
-  return symToStringTag$1 && symToStringTag$1 in Object(value) ? getRawTag(value) : objectToString(value);
+  return (symToStringTag$1 && symToStringTag$1 in Object(value))
+    ? getRawTag(value)
+    : objectToString(value);
 }
 
 /**
@@ -114,13 +108,12 @@ function baseGetTag(value) {
  * @returns {Function} Returns the new function.
  */
 function overArg(func, transform) {
-  return function (arg) {
+  return function(arg) {
     return func(transform(arg));
   };
 }
 
 /** Built-in value references. */
-
 var getPrototype = overArg(Object.getPrototypeOf, Object);
 
 /**
@@ -152,21 +145,21 @@ function isObjectLike(value) {
 }
 
 /** `Object#toString` result references. */
-
 var objectTag = '[object Object]';
-/** Used for built-in method references. */
 
+/** Used for built-in method references. */
 var funcProto = Function.prototype,
     objectProto$2 = Object.prototype;
+
 /** Used to resolve the decompiled source of functions. */
-
 var funcToString = funcProto.toString;
+
 /** Used to check objects for own properties. */
-
 var hasOwnProperty$1 = objectProto$2.hasOwnProperty;
-/** Used to infer the `Object` constructor. */
 
+/** Used to infer the `Object` constructor. */
 var objectCtorString = funcToString.call(Object);
+
 /**
  * Checks if `value` is a plain object, that is, an object created by the
  * `Object` constructor or one with a `[[Prototype]]` of `null`.
@@ -195,21 +188,52 @@ var objectCtorString = funcToString.call(Object);
  * _.isPlainObject(Object.create(null));
  * // => true
  */
-
 function isPlainObject(value) {
   if (!isObjectLike(value) || baseGetTag(value) != objectTag) {
     return false;
   }
-
   var proto = getPrototype(value);
-
   if (proto === null) {
     return true;
   }
-
   var Ctor = hasOwnProperty$1.call(proto, 'constructor') && proto.constructor;
-  return typeof Ctor == 'function' && Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString;
+  return typeof Ctor == 'function' && Ctor instanceof Ctor &&
+    funcToString.call(Ctor) == objectCtorString;
 }
+
+function symbolObservablePonyfill(root) {
+	var result;
+	var Symbol = root.Symbol;
+
+	if (typeof Symbol === 'function') {
+		if (Symbol.observable) {
+			result = Symbol.observable;
+		} else {
+			result = Symbol('observable');
+			Symbol.observable = result;
+		}
+	} else {
+		result = '@@observable';
+	}
+
+	return result;
+}
+
+var root$1;
+
+if (typeof self !== 'undefined') {
+  root$1 = self;
+} else if (typeof window !== 'undefined') {
+  root$1 = window;
+} else if (typeof global !== 'undefined') {
+  root$1 = global;
+} else if (typeof module !== 'undefined') {
+  root$1 = module;
+} else {
+  root$1 = Function('return this')();
+}
+
+var result = symbolObservablePonyfill(root$1);
 
 /**
  * These are private action types reserved by Redux.
@@ -217,9 +241,9 @@ function isPlainObject(value) {
  * If the current state is undefined, you must return the initial state.
  * Do not reference these action types directly in your code.
  */
-
 var ActionTypes = {
   INIT: '@@redux/INIT'
+
   /**
    * Creates a Redux store that holds the state tree.
    * The only way to change the data in the store is to call `dispatch()` on it.
@@ -245,9 +269,7 @@ var ActionTypes = {
    * @returns {Store} A Redux store that lets you read the state, dispatch actions
    * and subscribe to changes.
    */
-
-};
-function createStore(reducer, preloadedState, enhancer) {
+};function createStore(reducer, preloadedState, enhancer) {
   var _ref2;
 
   if (typeof preloadedState === 'function' && typeof enhancer === 'undefined') {
@@ -278,16 +300,16 @@ function createStore(reducer, preloadedState, enhancer) {
       nextListeners = currentListeners.slice();
     }
   }
+
   /**
    * Reads the state tree managed by the store.
    *
    * @returns {any} The current state tree of your application.
    */
-
-
   function getState() {
     return currentState;
   }
+
   /**
    * Adds a change listener. It will be called any time an action is dispatched,
    * and some part of the state tree may potentially have changed. You may then
@@ -311,27 +333,29 @@ function createStore(reducer, preloadedState, enhancer) {
    * @param {Function} listener A callback to be invoked on every dispatch.
    * @returns {Function} A function to remove this change listener.
    */
-
-
   function subscribe(listener) {
     if (typeof listener !== 'function') {
       throw new Error('Expected listener to be a function.');
     }
 
     var isSubscribed = true;
+
     ensureCanMutateNextListeners();
     nextListeners.push(listener);
+
     return function unsubscribe() {
       if (!isSubscribed) {
         return;
       }
 
       isSubscribed = false;
+
       ensureCanMutateNextListeners();
       var index = nextListeners.indexOf(listener);
       nextListeners.splice(index, 1);
     };
   }
+
   /**
    * Dispatches an action. It is the only way to trigger a state change.
    *
@@ -357,8 +381,6 @@ function createStore(reducer, preloadedState, enhancer) {
    * Note that, if you use a custom middleware, it may wrap `dispatch()` to
    * return something else (for example, a Promise you can await).
    */
-
-
   function dispatch(action) {
     if (!isPlainObject(action)) {
       throw new Error('Actions must be plain objects. ' + 'Use custom middleware for async actions.');
@@ -380,7 +402,6 @@ function createStore(reducer, preloadedState, enhancer) {
     }
 
     var listeners = currentListeners = nextListeners;
-
     for (var i = 0; i < listeners.length; i++) {
       var listener = listeners[i];
       listener();
@@ -388,6 +409,7 @@ function createStore(reducer, preloadedState, enhancer) {
 
     return action;
   }
+
   /**
    * Replaces the reducer currently used by the store to calculate the state.
    *
@@ -398,26 +420,21 @@ function createStore(reducer, preloadedState, enhancer) {
    * @param {Function} nextReducer The reducer for the store to use instead.
    * @returns {void}
    */
-
-
   function replaceReducer(nextReducer) {
     if (typeof nextReducer !== 'function') {
       throw new Error('Expected the nextReducer to be a function.');
     }
 
     currentReducer = nextReducer;
-    dispatch({
-      type: ActionTypes.INIT
-    });
+    dispatch({ type: ActionTypes.INIT });
   }
+
   /**
    * Interoperability point for observable/reactive libraries.
    * @returns {observable} A minimal observable of state changes.
    * For more information, see the observable proposal:
    * https://github.com/tc39/proposal-observable
    */
-
-
   function observable() {
     var _ref;
 
@@ -444,21 +461,18 @@ function createStore(reducer, preloadedState, enhancer) {
 
         observeState();
         var unsubscribe = outerSubscribe(observeState);
-        return {
-          unsubscribe: unsubscribe
-        };
+        return { unsubscribe: unsubscribe };
       }
     }, _ref[result] = function () {
       return this;
     }, _ref;
-  } // When a store is created, an "INIT" action is dispatched so that every
+  }
+
+  // When a store is created, an "INIT" action is dispatched so that every
   // reducer returns their initial state. This effectively populates
   // the initial state tree.
+  dispatch({ type: ActionTypes.INIT });
 
-
-  dispatch({
-    type: ActionTypes.INIT
-  });
   return _ref2 = {
     dispatch: dispatch,
     subscribe: subscribe,
@@ -470,29 +484,26 @@ function createStore(reducer, preloadedState, enhancer) {
 function getUndefinedStateErrorMessage(key, action) {
   var actionType = action && action.type;
   var actionName = actionType && '"' + actionType.toString() + '"' || 'an action';
+
   return 'Given action ' + actionName + ', reducer "' + key + '" returned undefined. ' + 'To ignore an action, you must explicitly return the previous state. ' + 'If you want this reducer to hold no value, you can return null instead of undefined.';
 }
 
 function assertReducerShape(reducers) {
   Object.keys(reducers).forEach(function (key) {
     var reducer = reducers[key];
-    var initialState = reducer(undefined, {
-      type: ActionTypes.INIT
-    });
+    var initialState = reducer(undefined, { type: ActionTypes.INIT });
 
     if (typeof initialState === 'undefined') {
       throw new Error('Reducer "' + key + '" returned undefined during initialization. ' + 'If the state passed to the reducer is undefined, you must ' + 'explicitly return the initial state. The initial state may ' + 'not be undefined. If you don\'t want to set a value for this reducer, ' + 'you can use null instead of undefined.');
     }
 
     var type = '@@redux/PROBE_UNKNOWN_ACTION_' + Math.random().toString(36).substring(7).split('').join('.');
-
-    if (typeof reducer(undefined, {
-      type: type
-    }) === 'undefined') {
+    if (typeof reducer(undefined, { type: type }) === 'undefined') {
       throw new Error('Reducer "' + key + '" returned undefined when probed with a random type. ' + ('Don\'t try to handle ' + ActionTypes.INIT + ' or other actions in "redux/*" ') + 'namespace. They are considered private. Instead, you must return the ' + 'current state for any unknown actions, unless it is undefined, ' + 'in which case you must return the initial state, regardless of the ' + 'action type. The initial state may not be undefined, but can be null.');
     }
   });
 }
+
 /**
  * Turns an object whose values are different reducer functions, into a single
  * reducer function. It will call every child reducer, and gather their results
@@ -509,12 +520,9 @@ function assertReducerShape(reducers) {
  * @returns {Function} A reducer function that invokes every reducer inside the
  * passed object, and builds a state object with the same shape.
  */
-
-
 function combineReducers(reducers) {
   var reducerKeys = Object.keys(reducers);
   var finalReducers = {};
-
   for (var i = 0; i < reducerKeys.length; i++) {
     var key = reducerKeys[i];
 
@@ -522,11 +530,9 @@ function combineReducers(reducers) {
       finalReducers[key] = reducers[key];
     }
   }
-
   var finalReducerKeys = Object.keys(finalReducers);
 
   var shapeAssertionError = void 0;
-
   try {
     assertReducerShape(finalReducers);
   } catch (e) {
@@ -543,39 +549,57 @@ function combineReducers(reducers) {
 
     var hasChanged = false;
     var nextState = {};
-
     for (var _i = 0; _i < finalReducerKeys.length; _i++) {
       var _key = finalReducerKeys[_i];
       var reducer = finalReducers[_key];
       var previousStateForKey = state[_key];
       var nextStateForKey = reducer(previousStateForKey, action);
-
       if (typeof nextStateForKey === 'undefined') {
         var errorMessage = getUndefinedStateErrorMessage(_key, action);
         throw new Error(errorMessage);
       }
-
       nextState[_key] = nextStateForKey;
       hasChanged = hasChanged || nextStateForKey !== previousStateForKey;
     }
-
     return hasChanged ? nextState : state;
   };
 }
 
-var _extends = Object.assign || function (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];
+/**
+ * Composes single-argument functions from right to left. The rightmost
+ * function can take multiple arguments as it provides the signature for
+ * the resulting composite function.
+ *
+ * @param {...Function} funcs The functions to compose.
+ * @returns {Function} A function obtained by composing the argument functions
+ * from right to left. For example, compose(f, g, h) is identical to doing
+ * (...args) => f(g(h(...args))).
+ */
 
-    for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
-    }
+function compose() {
+  for (var _len = arguments.length, funcs = Array(_len), _key = 0; _key < _len; _key++) {
+    funcs[_key] = arguments[_key];
   }
 
-  return target;
-};
+  if (funcs.length === 0) {
+    return function (arg) {
+      return arg;
+    };
+  }
+
+  if (funcs.length === 1) {
+    return funcs[0];
+  }
+
+  return funcs.reduce(function (a, b) {
+    return function () {
+      return a(b.apply(undefined, arguments));
+    };
+  });
+}
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 /**
  * Creates a store enhancer that applies middleware to the dispatch method
  * of the Redux store. This is handy for a variety of tasks, such as expressing
@@ -592,7 +616,6 @@ var _extends = Object.assign || function (target) {
  * @param {...Function} middlewares The middleware chain to be applied.
  * @returns {Function} A store enhancer applying the middleware.
  */
-
 function applyMiddleware() {
   for (var _len = arguments.length, middlewares = Array(_len), _key = 0; _key < _len; _key++) {
     middlewares[_key] = arguments[_key];
@@ -603,6 +626,7 @@ function applyMiddleware() {
       var store = createStore(reducer, preloadedState, enhancer);
       var _dispatch = store.dispatch;
       var chain = [];
+
       var middlewareAPI = {
         getState: store.getState,
         dispatch: function dispatch(action) {
@@ -613,6 +637,7 @@ function applyMiddleware() {
         return middleware(middlewareAPI);
       });
       _dispatch = compose.apply(undefined, chain)(store.dispatch);
+
       return _extends({}, store, {
         dispatch: _dispatch
       });

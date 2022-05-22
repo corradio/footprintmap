@@ -1,14 +1,14 @@
-import { R as Router, c as context, m as matchPath } from './common/react-router-c0810246.js';
-export { d as Redirect, e as Route, R as Router, S as Switch, a as useHistory, u as useLocation, b as useParams } from './common/react-router-c0810246.js';
+import { R as Router, c as context, m as matchPath } from './common/react-router-0d000291.js';
+export { d as Redirect, e as Route, R as Router, S as Switch, b as useHistory, a as useLocation, u as useParams } from './common/react-router-0d000291.js';
 import { _ as _inheritsLoose } from './common/inheritsLoose-978d85dc.js';
-import { r as react } from './common/index-8860dfcd.js';
-import { c as createBrowserHistory, a as createHashHistory, i as invariant, d as createLocation, e as createPath } from './common/history-411e6317.js';
+import { r as react } from './common/index-27b27678.js';
+import { c as createBrowserHistory, a as createHashHistory, i as invariant, d as createLocation, e as createPath } from './common/history-fb8a2dff.js';
 import { _ as _extends } from './common/extends-7477639a.js';
 import { _ as _objectWithoutPropertiesLoose } from './common/objectWithoutPropertiesLoose-d5128f55.js';
 import './common/_polyfill-node:global-acbc543a.js';
-import './common/index-9880b243.js';
+import './common/index-ab2d6925.js';
 import './common/_commonjsHelpers-eb5a497e.js';
-import './common/hoist-non-react-statics.cjs-2140ebcd.js';
+import './common/hoist-non-react-statics.cjs-223b93d1.js';
 import './common/setPrototypeOf-adc775f4.js';
 
 /**
@@ -41,10 +41,10 @@ var BrowserRouter = /*#__PURE__*/function (_React$Component) {
 
   return BrowserRouter;
 }(react.Component);
+
 /**
  * The public API for a <Router> that uses window.location.hash.
  */
-
 
 var HashRouter = /*#__PURE__*/function (_React$Component) {
   _inheritsLoose(HashRouter, _React$Component);
@@ -76,7 +76,6 @@ var HashRouter = /*#__PURE__*/function (_React$Component) {
 var resolveToLocation = function resolveToLocation(to, currentLocation) {
   return typeof to === "function" ? to(currentLocation) : to;
 };
-
 var normalizeToLocation = function normalizeToLocation(to, currentLocation) {
   return typeof to === "string" ? createLocation(to, null, null, currentLocation) : to;
 };
@@ -117,9 +116,9 @@ var LinkAnchor = forwardRef(function (_ref, forwardedRef) {
       !target || target === "_self") && // let browser handle "target=_blank" etc.
       !isModifiedEvent(event) // ignore clicks with modifier keys
       ) {
-        event.preventDefault();
-        navigate();
-      }
+          event.preventDefault();
+          navigate();
+        }
     }
   }); // React 15 compat
 

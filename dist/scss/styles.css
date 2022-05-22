@@ -11,7 +11,7 @@
 
 a {
   text-decoration: none;
-  color: #4178AC;
+  color: #4178ac;
 }
 a:hover {
   cursor: pointer;
@@ -48,13 +48,14 @@ body {
 }
 
 hr {
-  background-color: #EFEFEF;
-  color: #EFEFEF;
+  background-color: #efefef;
+  color: #efefef;
   border: none;
   height: 1px;
 }
 
-line, path {
+line,
+path {
   /*shape-rendering: crispEdges;*/
   /* will keep strokes unchanged after css transform (i.e. scale) */
   vector-effect: non-scaling-stroke;
@@ -106,7 +107,7 @@ div::-webkit-scrollbar {
 }
 
 div::-webkit-scrollbar-track-piece {
-  background: #EFEFEF;
+  background: #efefef;
   border-radius: 3px;
 }
 
@@ -132,7 +133,7 @@ div::-webkit-scrollbar-thumb {
   position: fixed;
   right: 0;
   top: 10px;
-  color: #FFFFFF;
+  color: #ffffff;
   min-height: 50px;
   /* required for old Safari */
 }
@@ -195,11 +196,11 @@ div::-webkit-scrollbar-thumb {
   vertical-align: middle;
 }
 #header-content a {
-  color: #FFFFFF;
+  color: #ffffff;
   transition: color 0.4s;
 }
 #header-content a:hover {
-  color: #4178AC !important;
+  color: #4178ac !important;
   text-decoration: none;
 }
 #header-content .logo {
@@ -216,7 +217,7 @@ div::-webkit-scrollbar-thumb {
 }
 #header-content .maintitle,
 #header-content .live {
-  color: #FFFFFF;
+  color: #ffffff;
   transition: color 0.4s;
 }
 #header-content .right-header {
@@ -258,7 +259,7 @@ div::-webkit-scrollbar-thumb {
 
 #tab {
   position: relative;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
   z-index: 2;
   flex: 0 0 auto;
@@ -340,7 +341,7 @@ div::-webkit-scrollbar-thumb {
 }
 
 .panel {
-  background-color: #EFEFEF;
+  background-color: #efefef;
   color: black;
   font-size: 0.8rem;
 }
@@ -351,7 +352,7 @@ div::-webkit-scrollbar-thumb {
   top: 0.5rem;
   position: absolute;
   cursor: pointer;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   width: 1.5rem;
   height: 3rem;
   color: black;
@@ -380,7 +381,7 @@ div::-webkit-scrollbar-thumb {
   color: #000000;
   padding: 0;
   width: calc(14vw + 16rem);
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   position: fixed;
   box-shadow: 0 24px 15px rgba(0, 0, 0, 0.2);
   z-index: 2;
@@ -470,7 +471,7 @@ div::-webkit-scrollbar-thumb {
 }
 .left-panel-toolbar .left-panel-toolbar-back:hover,
 #left-panel-highscore-back:hover {
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .left-panel-back-button {
@@ -480,7 +481,7 @@ div::-webkit-scrollbar-thumb {
   left: 1.25rem;
 }
 .left-panel-back-button:hover {
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .left-panel .left-panel-toolbar-title,
@@ -592,7 +593,7 @@ label[for=checkbox-colorblind] {
 
 .tooltip {
   border: 1px solid lightgray;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   color: black;
   padding: 12px;
   position: absolute;
@@ -646,7 +647,7 @@ label[for=checkbox-colorblind] {
 }
 
 .circular-gauge .background {
-  fill: #EFEFEF;
+  fill: #efefef;
 }
 .circular-gauge .foreground {
   fill: #78cde8;
@@ -692,7 +693,7 @@ label[for=checkbox-colorblind] {
 }
 
 .layer-button {
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   border-radius: 6px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
   width: 35px;
@@ -708,7 +709,7 @@ label[for=checkbox-colorblind] {
   transition: all 0.4s;
 }
 .layer-button:hover {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   box-shadow: 2px 0px 20px 0px rgba(0, 0, 0, 0.25);
 }
 
@@ -741,7 +742,7 @@ label[for=checkbox-colorblind] {
   align-items: center;
 }
 .layer-button-tooltip .tooltip-text {
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   color: black;
   border-radius: 4px;
   text-align: center;
@@ -755,7 +756,7 @@ label[for=checkbox-colorblind] {
   height: 0;
   border-style: solid;
   border-width: 7.5px 0 7.5px 10px;
-  border-color: transparent transparent transparent #FAFAFA;
+  border-color: transparent transparent transparent #fafafa;
 }
 .layer-button-tooltip.hidden {
   visibility: hidden;
@@ -764,7 +765,7 @@ label[for=checkbox-colorblind] {
 }
 
 #language-select-container {
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   color: black;
   border-radius: 4px;
   font-size: 0.9rem;
@@ -881,7 +882,7 @@ label[for=checkbox-colorblind] {
   bottom: 0px;
   right: 0px;
   float: left;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   border-radius: 6px;
   padding: 12px 10px 10px 10px;
   margin: 16px;
@@ -1009,7 +1010,7 @@ label[for=checkbox-colorblind] {
 .country-table-header {
   padding: 0;
   left: 0;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   z-index: 4;
   border-bottom: 1px solid lightgray;
 }
@@ -1159,7 +1160,7 @@ label[for=checkbox-colorblind] {
 @media (max-width: 767px) {
   .zone-time-slider {
     padding-top: 4px;
-    background-color: #FAFAFA;
+    background-color: #fafafa;
   }
 }
 
@@ -1210,7 +1211,7 @@ label[for=checkbox-colorblind] {
   height: 12px;
   border-radius: 4px;
   cursor: pointer;
-  background: #EFEFEF;
+  background: #efefef;
   box-shadow: inset 0 1px 4px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -1264,7 +1265,7 @@ label[for=checkbox-colorblind] {
   width: 100%;
   height: 6px;
   cursor: pointer;
-  background: #EFEFEF;
+  background: #efefef;
   border-radius: 3px;
   margin-left: 10px;
   margin-right: 10px;
@@ -1287,7 +1288,7 @@ label[for=checkbox-colorblind] {
 }
 .zone-search-bar input {
   height: 32px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   color: inherit;
   border: none;
   border-bottom: 1px solid lightgray;
@@ -1388,7 +1389,7 @@ label[for=checkbox-colorblind] {
   margin: 0 auto;
   padding: 10px;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 0.8em;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -1423,7 +1424,7 @@ label[for=checkbox-colorblind] {
   zoom: 1;
   filter: alpha(opacity=50);
   opacity: 0.8;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -1440,7 +1441,7 @@ label[for=checkbox-colorblind] {
 
 .zone-details-no-parser-message {
   display: block;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   height: 100%;
   width: 100%;
   padding-top: 80px;
@@ -1455,7 +1456,7 @@ label[for=checkbox-colorblind] {
 }
 
 #new-version .inner {
-  background-color: #3F51B5;
+  background-color: #3f51b5;
 }
 
 .referral-link {
@@ -1471,7 +1472,7 @@ label[for=checkbox-colorblind] {
   border-radius: 8px;
   padding: 8px;
   color: white;
-  background-image: linear-gradient(to bottom right, #FF4B9B, #EF7B40);
+  background-image: linear-gradient(to bottom right, #ff4b9b, #ef7b40);
   text-decoration: none !important;
   margin: 0;
 }
@@ -1636,7 +1637,7 @@ label[for=checkbox-colorblind] {
   .modal .modal-left-button,
 .modal .modal-right-button {
     background-color: #333333;
-    color: #FFFFFF;
+    color: #ffffff;
     height: 32px;
     width: 32px;
   }
@@ -1647,7 +1648,7 @@ label[for=checkbox-colorblind] {
   .modal .modal-left-button.green,
 .modal .modal-right-button.green {
     background-color: #009800;
-    color: #FFFFFF;
+    color: #ffffff;
   }
   .modal .modal-left-button.green:hover,
 .modal .modal-right-button.green:hover {
@@ -1663,7 +1664,7 @@ label[for=checkbox-colorblind] {
 }
 @media (max-width: 767px) {
   .modal .modal-close-button {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     color: #333333;
   }
 }
@@ -1701,7 +1702,7 @@ label[for=checkbox-colorblind] {
   width: 8px;
 }
 .modal .modal-footer .modal-footer-circle.highlight {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 @media (max-width: 767px) {
   .modal .modal-footer {
@@ -1717,7 +1718,7 @@ label[for=checkbox-colorblind] {
   flex: 1;
   position: relative;
   border-radius: 15px;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   color: white;
   max-width: 700px;
   box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.15);
@@ -1794,9 +1795,6 @@ label[for=checkbox-colorblind] {
 .watermark a:hover {
   text-decoration: none;
 }
-.watermark.brightmode #built-by-tomorrow {
-  background-image: url(../images/built-by-tomorrow.svg);
-}
 
 .mobile-watermark {
   text-align: center;
@@ -1807,13 +1805,6 @@ label[for=checkbox-colorblind] {
 }
 .mobile-watermark img {
   width: 280px;
-}
-
-#built-by-tomorrow {
-  background-image: url(../images/built-by-tomorrow-white.svg);
-  background-size: cover;
-  width: 154px;
-  height: 24px;
 }
 
 .social-buttons {
@@ -1864,19 +1855,26 @@ label[for=checkbox-colorblind] {
   margin-right: 0.4em;
 }
 
-div.fb-share-button, div.fb-like, div.fb-follow, iframe.twitter-share-button, iframe.twitter-follow-button, .slack-button {
+div.fb-share-button,
+div.fb-like,
+div.fb-follow,
+iframe.twitter-share-button,
+iframe.twitter-follow-button,
+.slack-button {
   vertical-align: bottom;
 }
 
 /* In cordova, because we serve from file://, facebook disables their button */
 /* Here we have taken the choice of keeping a fixed width */
-div.fb-like span, div.fb-like span iframe {
+div.fb-like span,
+div.fb-like span iframe {
   width: 51px !important;
   /* should be large enough for all locales. en: 51px */
   height: 20px !important;
 }
 
-div.fb-share-button span, div.fb-share-button span iframe {
+div.fb-share-button span,
+div.fb-share-button span iframe {
   width: 83px !important;
   /* should be large enough for all locales. en: 83px */
   height: 20px !important;

@@ -1,6 +1,6 @@
-import React, { useEffect } from '../../pkg/react.js';
-import { isFinite, isFunction } from '../../pkg/lodash.js';
-const GraphHoverLine = /*#__PURE__*/React.memo(({
+import React, {useEffect} from "../../pkg/react.js";
+import {isFinite, isFunction} from "../../pkg/lodash.js";
+const GraphHoverLine = React.memo(({
   layers,
   datetimes,
   timeScale,
@@ -17,8 +17,7 @@ const GraphHoverLine = /*#__PURE__*/React.memo(({
   const x = datetimes && datetimes[selectedTimeIndex] && timeScale(datetimes[selectedTimeIndex]);
   const y = datapoint && isFinite(datapoint[1]) && valueScale(datapoint[1]);
   const showVerticalLine = isFinite(x);
-  const showMarker = isFinite(x) && isFinite(y); // Marker callbacks
-
+  const showMarker = isFinite(x) && isFinite(y);
   useEffect(() => {
     if (showMarker) {
       if (markerUpdateHandler && svgRef.current) {
@@ -30,25 +29,25 @@ const GraphHoverLine = /*#__PURE__*/React.memo(({
     } else if (markerHideHandler) {
       markerHideHandler();
     }
-  }, [markerUpdateHandler, markerHideHandler, svgRef.current, showMarker, x, y, datapoint, layer]);
-  return /*#__PURE__*/React.createElement(React.Fragment, null, showVerticalLine && /*#__PURE__*/React.createElement("line", {
+  }, [svgRef, markerUpdateHandler, markerHideHandler, showMarker, x, y, datapoint, layer]);
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, showVerticalLine && /* @__PURE__ */ React.createElement("line", {
     className: "vertical-line",
     style: {
-      display: 'block',
-      pointerEvents: 'none',
-      shapeRendering: 'crispEdges'
+      display: "block",
+      pointerEvents: "none",
+      shapeRendering: "crispEdges"
     },
     x1: x,
     x2: x,
     y1: valueScale.range()[0],
     y2: valueScale.range()[1]
-  }), showMarker && /*#__PURE__*/React.createElement("circle", {
+  }), showMarker && /* @__PURE__ */ React.createElement("circle", {
     r: "6",
     style: {
-      display: 'block',
-      pointerEvents: 'none',
-      shapeRendering: 'crispEdges',
-      stroke: 'black',
+      display: "block",
+      pointerEvents: "none",
+      shapeRendering: "crispEdges",
+      stroke: "black",
       strokeWidth: 1.5,
       fill: isFunction(fill) ? fill(datapoint) : fill
     },

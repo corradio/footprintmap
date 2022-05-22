@@ -1,35 +1,25 @@
-import React, { useEffect, useRef } from '../pkg/react.js';
-import { noop } from '../pkg/lodash.js';
-
-const SearchBar = ({
-  className,
-  documentKeyUpHandler,
-  placeholder,
-  searchHandler
-}) => {
-  const ref = useRef(null); // Set up global key up handlers that apply to this search bar
-
+import React, {useEffect, useRef} from "../pkg/react.js";
+import {noop} from "../pkg/lodash.js";
+const SearchBar = ({className, documentKeyUpHandler, placeholder, searchHandler}) => {
+  const ref = useRef(null);
   useEffect(() => {
-    const keyUpHandler = documentKeyUpHandler ? ev => documentKeyUpHandler(ev.key, ref) : noop;
-    document.addEventListener('keyup', keyUpHandler);
+    const keyUpHandler = documentKeyUpHandler ? (ev) => documentKeyUpHandler(ev.key, ref) : noop;
+    document.addEventListener("keyup", keyUpHandler);
     return () => {
-      document.removeEventListener('keyup', keyUpHandler);
+      document.removeEventListener("keyup", keyUpHandler);
     };
-  }); // Apply the search query after every key press
-
-  const handleKeyUp = ev => {
+  });
+  const handleKeyUp = (ev) => {
     if (searchHandler) {
       searchHandler(ev.target.value.toLowerCase());
     }
   };
-
-  return /*#__PURE__*/React.createElement("div", {
-    className: className
-  }, /*#__PURE__*/React.createElement("input", {
-    ref: ref,
-    placeholder: placeholder,
+  return /* @__PURE__ */ React.createElement("div", {
+    className
+  }, /* @__PURE__ */ React.createElement("input", {
+    ref,
+    placeholder,
     onKeyUp: handleKeyUp
   }));
 };
-
 export default SearchBar;

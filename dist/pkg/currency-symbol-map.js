@@ -174,11 +174,11 @@ var map = {
   'ZWD': 'Z$'
 };
 
-var currencySymbolMap_1 = function getSymbolFromCurrency(currencyCode) {
-  if (typeof currencyCode !== 'string') return undefined;
+var currencySymbolMap_1 = function getSymbolFromCurrency (currencyCode) {
+  if (typeof currencyCode !== 'string') return undefined
   var code = currencyCode.toUpperCase();
-  if (!map.hasOwnProperty(code)) return undefined;
-  return map[code];
+  if (!map.hasOwnProperty(code)) return undefined
+  return map[code]
 };
 
 var currencySymbolMap_2 = map;

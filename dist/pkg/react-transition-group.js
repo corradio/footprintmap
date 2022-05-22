@@ -1,8 +1,8 @@
 import { _ as _extends } from './common/extends-7477639a.js';
 import { _ as _objectWithoutPropertiesLoose } from './common/objectWithoutPropertiesLoose-d5128f55.js';
 import { _ as _inheritsLoose } from './common/inheritsLoose-978d85dc.js';
-import { r as react } from './common/index-8860dfcd.js';
-import { r as reactDom } from './common/index-efd0bd93.js';
+import { r as react } from './common/index-27b27678.js';
+import { r as reactDom } from './common/index-b09dec02.js';
 import './common/setPrototypeOf-adc775f4.js';
 import './common/_commonjsHelpers-eb5a497e.js';
 
@@ -53,7 +53,7 @@ var config = {
   disabled: false
 };
 
-var TransitionGroupContext = /*#__PURE__*/react.createContext(null);
+var TransitionGroupContext = react.createContext(null);
 
 var UNMOUNTED = 'unmounted';
 var EXITED = 'exited';
@@ -445,7 +445,7 @@ var Transition = /*#__PURE__*/function (_React$Component) {
       // allows for nested Transitions
       react.createElement(TransitionGroupContext.Provider, {
         value: null
-      }, typeof children === 'function' ? children(status, childProps) : /*#__PURE__*/react.cloneElement(react.Children.only(children), childProps))
+      }, typeof children === 'function' ? children(status, childProps) : react.cloneElement(react.Children.only(children), childProps))
     );
   };
 
