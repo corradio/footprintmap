@@ -3,7 +3,7 @@ module.exports = {
   parser: '@babel/eslint-parser',
   extends: [
     'eslint:recommended',
-    'plugin:you-dont-need-lodash-underscore/all',
+    // 'plugin:you-dont-need-lodash-underscore/all',
     'plugin:react/recommended',
     'plugin:import/errors',
     'plugin:jsx-a11y/recommended',
@@ -49,28 +49,26 @@ module.exports = {
     'no-duplicate-imports': 'error',
     'no-implicit-coercion': 'error',
     'no-param-reassign': 'error',
-    'no-unused-vars': [
-      'error',
-      { args: 'after-used', argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
-    ],
+    'no-unused-vars': ['error', { args: 'after-used', argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
     'no-use-before-define': ['error', { variables: true, functions: false, classes: true }],
     'prefer-const': 'error',
     'prefer-template': 'error',
-    'react/jsx-filename-extension': ['error'],
+    'react/jsx-filename-extension': ['off'],
     'react/self-closing-comp': 'error',
     'import/newline-after-import': 'error',
     'object-shorthand': 'error',
     'react-hooks/exhaustive-deps': 'error',
     'react-hooks/rules-of-hooks': 'error',
-    'curly': 'error',
+    curly: 'error',
     'no-nested-ternary': 'error',
-    'no-underscore-dangle': ['error',
-        {
-        "allowAfterThis": true,
-        "allow": ["__", "__REDUX_DEVTOOLS_EXTENSION__"]
-        }
+    'no-underscore-dangle': [
+      'error',
+      {
+        allowAfterThis: true,
+        allow: ['__', '__REDUX_DEVTOOLS_EXTENSION__'],
+      },
     ],
-    'no-console': ['error', {'allow': ['error', 'warn']}], // if .log is intended, use disable line.
+    'no-console': ['error', { allow: ['error', 'warn'] }], // if .log is intended, use disable line.
     // Rules we want to enable soon!
     'jsx-a11y/anchor-is-valid': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',

@@ -1,19 +1,8 @@
-import React, {
-  useState,
-  useMemo,
-  useRef,
-  useEffect,
-} from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Portal } from 'react-portal';
 import ReactMapGL, { NavigationControl, Source, Layer } from 'react-map-gl';
-import {
-  debounce,
-  isEmpty,
-  map,
-  noop,
-  size,
-} from 'lodash';
+import { debounce, isEmpty, map, noop, size } from 'lodash';
 import { getZoneCarbonIntensity } from '../helpers/zonedata';
 import { useCarbonIntensityDomain } from '../hooks/redux';
 
@@ -52,14 +41,15 @@ const ZoneMap = ({
   const [isSupported, setIsSupported] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
   const carbonIntensityDomain = useCarbonIntensityDomain();
-  const electricityMixMode = useSelector(state => state.application.electricityMixMode);
+  const electricityMixMode = useSelector((state) => state.application.electricityMixMode);
 
   const [isDragging, setIsDragging] = useState(false);
   const debouncedSetIsDragging = useMemo(
-    () => debounce((value) => {
-      setIsDragging(value);
-    }, 200),
-    [],
+    () =>
+      debounce((value) => {
+        setIsDragging(value);
+      }, 200),
+    []
   );
 
   // TODO: Try tying this to internal map state somehow to remove the need for these handlers.
@@ -70,7 +60,7 @@ const ZoneMap = ({
       setIsDragging(true);
       debouncedSetIsDragging(false);
     },
-    [],
+    [debouncedSetIsDragging]
   );
 
   const handleLoad = () => {
@@ -81,41 +71,38 @@ const ZoneMap = ({
   };
 
   // Generate two sources (clickable and non-clickable zones), based on the zones data.
-  const sources = useMemo(
-    () => {
-      const features = map(zones, (zone, i) => ({
-        type: 'Feature',
-        geometry: {
-          ...zone.geometry,
-          coordinates: zone.geometry.coordinates.filter(size), // Remove empty geometries
-        },
-        id: i,
-        properties: {
-          isClickable: zone.year != null,
-          zoneData: zone,
-          zoneId: zone.countryCode,
-        },
-      }));
+  const sources = useMemo(() => {
+    const features = map(zones, (zone, i) => ({
+      type: 'Feature',
+      geometry: {
+        ...zone.geometry,
+        coordinates: zone.geometry.coordinates.filter(size), // Remove empty geometries
+      },
+      id: i,
+      properties: {
+        isClickable: zone.year != null,
+        zoneData: zone,
+        zoneId: zone.countryCode,
+      },
+    }));
 
-      return {
-        zonesClickable: {
-          type: 'FeatureCollection',
-          features: features.filter(f => f.properties.isClickable),
-        },
-        zonesNonClickable: {
-          type: 'FeatureCollection',
-          features: features.filter(f => !f.properties.isClickable),
-        },
-      };
-    },
-    [zones],
-  );
+    return {
+      zonesClickable: {
+        type: 'FeatureCollection',
+        features: features.filter((f) => f.properties.isClickable),
+      },
+      zonesNonClickable: {
+        type: 'FeatureCollection',
+        features: features.filter((f) => !f.properties.isClickable),
+      },
+    };
+  }, [zones]);
 
   useMemo(() => {
     if (isLoaded) {
       const map = ref.current.getMap();
       zones.forEach((zone, i) => {
-        const fillColor = co2ColorScale(getZoneCarbonIntensity(carbonIntensityDomain, electricityMixMode, zone))
+        const fillColor = co2ColorScale(getZoneCarbonIntensity(carbonIntensityDomain, electricityMixMode, zone));
         map.setFeatureState(
           {
             source: 'zones-clickable',
@@ -123,14 +110,14 @@ const ZoneMap = ({
           },
           {
             color: fillColor,
-          },
+          }
         );
       });
     }
   }, [isLoaded, zones, co2ColorScale, carbonIntensityDomain, electricityMixMode]);
 
   // Every time the hovered zone changes, update the hover map layer accordingly.
-  const hoverFilter = useMemo(() => (['==', 'zoneId', hoveredZoneId || '']), [hoveredZoneId]);
+  const hoverFilter = useMemo(() => ['==', 'zoneId', hoveredZoneId || ''], [hoveredZoneId]);
 
   // Calculate layer styles only when the theme changes
   // to keep the stable and prevent excessive rerendering.
@@ -149,19 +136,16 @@ const ZoneMap = ({
       },
       zonesNonClickable: { 'fill-color': theme.nonClickableFill },
     }),
-    [theme],
+    [theme]
   );
 
   // If WebGL is not supported trigger an error callback.
-  useEffect(
-    () => {
-      if (!ReactMapGL.supported()) {
-        setIsSupported(false);
-        onMapError('WebGL not supported');
-      }
-    },
-    [],
-  );
+  useEffect(() => {
+    if (!ReactMapGL.supported()) {
+      setIsSupported(false);
+      onMapError('WebGL not supported');
+    }
+  }, [onMapError]);
 
   useEffect(() => {
     if (isLoaded && co2ColorScale) {
@@ -175,9 +159,14 @@ const ZoneMap = ({
 
         let co2intensity;
         if (selectedZoneTimeIndex) {
-          co2intensity = (zoneHistories && zoneHistories[zoneId] && zoneHistories[zoneId][selectedZoneTimeIndex])
-            ? getZoneCarbonIntensity(carbonIntensityDomain, electricityMixMode, zoneHistories[zoneId][selectedZoneTimeIndex])
-            : null;
+          co2intensity =
+            zoneHistories && zoneHistories[zoneId] && zoneHistories[zoneId][selectedZoneTimeIndex]
+              ? getZoneCarbonIntensity(
+                  carbonIntensityDomain,
+                  electricityMixMode,
+                  zoneHistories[zoneId][selectedZoneTimeIndex]
+                )
+              : null;
         } else {
           co2intensity = getZoneCarbonIntensity(carbonIntensityDomain, electricityMixMode, zones[feature.id]);
         }
@@ -195,12 +184,21 @@ const ZoneMap = ({
             },
             {
               color: fillColor,
-            },
+            }
           );
         }
       });
     }
-  }, [isLoaded, isDragging, zoneHistories, selectedZoneTimeIndex, co2ColorScale, carbonIntensityDomain, electricityMixMode, zones]);
+  }, [
+    isLoaded,
+    isDragging,
+    zoneHistories,
+    selectedZoneTimeIndex,
+    co2ColorScale,
+    carbonIntensityDomain,
+    electricityMixMode,
+    zones,
+  ]);
 
   const handleClick = useMemo(
     () => (e) => {
@@ -213,7 +211,7 @@ const ZoneMap = ({
         }
       }
     },
-    [ref.current, onSeaClick, onZoneClick],
+    [onSeaClick, onZoneClick]
   );
 
   const handleMouseMove = useMemo(
@@ -247,7 +245,7 @@ const ZoneMap = ({
         }
       }
     },
-    [ref.current, hoveringEnabled, isDragging, zones, hoveredZoneId, onMouseMove, onZoneMouseEnter, onZoneMouseLeave],
+    [hoveringEnabled, isDragging, zones, hoveredZoneId, onMouseMove, onZoneMouseEnter, onZoneMouseLeave]
   );
 
   const handleMouseOut = useMemo(
@@ -257,7 +255,7 @@ const ZoneMap = ({
         setHoveredZoneId(null);
       }
     },
-    [hoveredZoneId],
+    [hoveredZoneId, onZoneMouseLeave]
   );
 
   // Don't render map nor any of the layers if WebGL is not supported.
@@ -309,11 +307,7 @@ const ZoneMap = ({
               top: '24px',
             }}
           >
-            <NavigationControl
-              showCompass={false}
-              zoomInLabel=""
-              zoomOutLabel=""
-            />
+            <NavigationControl showCompass={false} zoomInLabel="" zoomOutLabel="" />
           </div>
         </Portal>
         {/* Layers */}

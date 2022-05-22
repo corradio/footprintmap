@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import { useCurrentZoneData } from '../hooks/redux';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   zoneTimeIndex: state.application.selectedZoneTimeIndex,
 });
 
@@ -16,12 +16,16 @@ const CountryTableOverlayIfNoData = ({ zoneTimeIndex }) => {
 
   // TODO: Shouldn't be hardcoded
   const zonesThatCanHaveZeroProduction = ['AX', 'DK-BHM', 'CA-PE', 'ES-IB-FO'];
-  const zoneHasNotProductionDataAtTimestamp = (!zoneData.production || !Object.keys(zoneData.production).length) && !zonesThatCanHaveZeroProduction.includes(zoneId);
+  const zoneHasNotProductionDataAtTimestamp =
+    (!zoneData.production || !Object.keys(zoneData.production).length) &&
+    !zonesThatCanHaveZeroProduction.includes(zoneId);
   const zoneIsMissingParser = !zoneData.hasParser;
   const zoneHasData = zoneHasNotProductionDataAtTimestamp && !zoneIsMissingParser;
   const isRealtimeData = zoneTimeIndex === null;
 
-  if (!zoneHasData) return null;
+  if (!zoneHasData) {
+    return null;
+  }
 
   return (
     <div className="no-data-overlay visible">

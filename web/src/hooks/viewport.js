@@ -8,7 +8,9 @@ export function useWidthObserver(ref, offset = 0) {
     const updateWidth = () => {
       if (ref.current) {
         const newWidth = ref.current.getBoundingClientRect().width - offset;
-        if (newWidth !== width) { setWidth(newWidth); }
+        if (newWidth !== width) {
+          setWidth(newWidth);
+        }
       }
     };
     // Set initial width
@@ -31,7 +33,9 @@ export function useHeightObserver(ref, offset = 0) {
     const updateHeight = () => {
       if (ref.current) {
         const newHeight = ref.current.getBoundingClientRect().height - offset;
-        if (newHeight !== height) { setHeight(newHeight); }
+        if (newHeight !== height) {
+          setHeight(newHeight);
+        }
       }
     };
     // Set initial height
@@ -52,10 +56,7 @@ export function useWindowSize() {
   // Resize hook
   useEffect(() => {
     const updateSize = () => {
-      if (
-        windowSize.width !== window.innerWidth
-        || windowSize.height !== window.innerHeight
-      ) {
+      if (windowSize.width !== window.innerWidth || windowSize.height !== window.innerHeight) {
         setWindowSize({
           width: window.innerWidth,
           height: window.innerHeight,

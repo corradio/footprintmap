@@ -162,7 +162,7 @@ const zoneName = {
   NF: 'Norfolk Island',
   NG: 'Nigeria',
   NI: 'Nicaragua',
-  NKR:'"Nagorno-Karabakh',
+  NKR: '"Nagorno-Karabakh',
   NL: 'Netherlands',
   NO: 'Norway',
   NP: 'Nepal',

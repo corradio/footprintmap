@@ -7,17 +7,15 @@ import { scaleLinear } from 'd3-scale';
 import { getTooltipPosition } from '../helpers/graph';
 import { scaleMillions } from '../helpers/formatting';
 import { dispatchApplication } from '../store';
-import {
-  useCurrentZoneHistory,
-  useCurrentZoneHistoryStartTime,
-  useCurrentZoneHistoryEndTime,
-} from '../hooks/redux';
+import { useCurrentZoneHistory, useCurrentZoneHistoryStartTime, useCurrentZoneHistoryEndTime } from '../hooks/redux';
 
 import AreaGraph from './graph/areagraph';
 import Tooltip from './tooltip';
 
 const PopulationTooltip = ({ position, zoneData, onClose }) => {
-  if (!zoneData) return null;
+  if (!zoneData) {
+    return null;
+  }
 
   const { year } = zoneData;
   const value = zoneData.populationMillions;
@@ -27,27 +25,26 @@ const PopulationTooltip = ({ position, zoneData, onClose }) => {
 
   return (
     <Tooltip id="price-tooltip" position={position} onClose={onClose}>
-      {year}: <b>{Math.round(value / valueFactor * 10) / 10}</b> {valueAxisLabel}
+      {year}: <b>{Math.round((value / valueFactor) * 10) / 10}</b> {valueAxisLabel}
     </Tooltip>
   );
 };
 
 const prepareGraphData = (historyData) => {
-  if (!historyData || !historyData[0]) return {};
+  if (!historyData || !historyData[0]) {
+    return {};
+  }
 
   // const currencySymbol = getSymbolFromCurrency(((first(historyData) || {}).price || {}).currency);
 
-  const maxValue = d3Max(historyData.map(d => d.populationMillions));
-  const colorScale = scaleLinear()
-    .domain([0, maxValue])
-    .range(['yellow', 'red']);
-
+  const maxValue = d3Max(historyData.map((d) => d.populationMillions));
+  const colorScale = scaleLinear().domain([0, maxValue]).range(['yellow', 'red']);
 
   const format = scaleMillions(maxValue);
   const valueAxisLabel = format.unit;
   const valueFactor = format.formattingFactor;
 
-  const data = historyData.map(d => ({
+  const data = historyData.map((d) => ({
     price: d.populationMillions / valueFactor,
     datetime: moment(d.year.toString()).toDate(),
     // Keep a pointer to original data
@@ -57,7 +54,7 @@ const prepareGraphData = (historyData) => {
   const layerKeys = ['price'];
   const layerStroke = () => 'darkgray';
   const layerFill = () => '#616161';
-  const markerFill = key => d => colorScale(d.data[key]);
+  const markerFill = (key) => (d) => colorScale(d.data[key]);
 
   return {
     data,
@@ -69,15 +66,12 @@ const prepareGraphData = (historyData) => {
   };
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isMobile: state.application.isMobile,
   selectedTimeIndex: state.application.selectedZoneTimeIndex,
 });
 
-const CountryHistoryPricesGraph = ({
-  isMobile,
-  selectedTimeIndex,
-}) => {
+const CountryHistoryPricesGraph = ({ isMobile, selectedTimeIndex }) => {
   const [tooltip, setTooltip] = useState(null);
   const [selectedLayerIndex, setSelectedLayerIndex] = useState(null);
 
@@ -86,16 +80,9 @@ const CountryHistoryPricesGraph = ({
   const endTime = useCurrentZoneHistoryEndTime();
 
   // Recalculate graph data only when the history data is changed
-  const {
-    data,
-    layerKeys,
-    layerStroke,
-    layerFill,
-    markerFill,
-    valueAxisLabel,
-  } = useMemo(
+  const { data, layerKeys, layerStroke, layerFill, markerFill, valueAxisLabel } = useMemo(
     () => prepareGraphData(historyData),
-    [historyData],
+    [historyData]
   );
 
   // Mouse action handlers
@@ -104,14 +91,14 @@ const CountryHistoryPricesGraph = ({
       dispatchApplication('selectedZoneTimeIndex', timeIndex);
       setSelectedLayerIndex(0); // Select the first (and only) layer even when hovering over graph background.
     },
-    [setSelectedLayerIndex],
+    [setSelectedLayerIndex]
   );
   const mouseOutHandler = useMemo(
     () => () => {
       dispatchApplication('selectedZoneTimeIndex', null);
       setSelectedLayerIndex(null);
     },
-    [setSelectedLayerIndex],
+    [setSelectedLayerIndex]
   );
   // Graph marker callbacks
   const markerUpdateHandler = useMemo(
@@ -121,13 +108,13 @@ const CountryHistoryPricesGraph = ({
         zoneData: datapoint.meta,
       });
     },
-    [setTooltip, isMobile],
+    [setTooltip, isMobile]
   );
   const markerHideHandler = useMemo(
     () => () => {
       setTooltip(null);
     },
-    [setTooltip],
+    [setTooltip]
   );
 
   return (

@@ -3,7 +3,7 @@
 // TODO(olc): re-enable this rule
 
 import React from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
 // Layout
@@ -15,15 +15,7 @@ import Tabs from './tabs';
 import Map from './map';
 
 // Modules
-import { isNewClientVersion } from '../helpers/environment';
-import { useCustomDatetime } from '../hooks/router';
 import { useLoadingOverlayVisible, useCarbonIntensityDomain, useCurrentZoneData } from '../hooks/redux';
-import {
-  useClientVersionFetch,
-  useGridDataPolling,
-  useConditionalWindDataPolling,
-  useConditionalSolarDataPolling,
-} from '../hooks/fetch';
 import { dispatchApplication } from '../store';
 import OnboardingModal from '../components/onboardingmodal';
 import LoadingOverlay from '../components/loadingoverlay';
@@ -33,52 +25,32 @@ import { CARBON_INTENSITY_DOMAIN } from '../helpers/constants';
 // TODO: Move all styles from styles.css to here
 // TODO: Remove all unecessary id and class tags
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   brightModeEnabled: state.application.brightModeEnabled,
   hasConnectionWarning: state.data.hasConnectionWarning,
   version: state.application.version,
 });
 
-const Main = ({
-  brightModeEnabled,
-  hasConnectionWarning,
-  version,
-}) => {
-  const dispatch = useDispatch();
+const Main = ({ brightModeEnabled }) => {
   const location = useLocation();
-  const datetime = useCustomDatetime();
 
   const showLoadingOverlay = useLoadingOverlayVisible();
   const carbonIntensityDomain = useCarbonIntensityDomain();
 
   const data = useCurrentZoneData();
-  const currentGridData = useSelector(state => state.data.grid.datetime);
-  const currentYear = data
-    ? data.year
-    : currentGridData;
-
-  // Check for the latest client version once initially.
-  useClientVersionFetch();
-
-  // Start grid data polling as soon as the app is mounted.
-  useGridDataPolling();
-
-  // Poll wind data if the toggle is enabled.
-  useConditionalWindDataPolling();
-
-  // Poll solar data if the toggle is enabled.
-  useConditionalSolarDataPolling();
+  const currentGridData = useSelector((state) => state.data.grid.datetime);
+  const currentYear = data ? data.year : currentGridData;
 
   return (
     <React.Fragment>
       <div
         style={{
-          position: 'fixed', /* This is done in order to ensure that dragging will not affect the body */
+          position: 'fixed' /* This is done in order to ensure that dragging will not affect the body */,
           width: '100vw',
           height: 'inherit',
           display: 'flex',
-          flexDirection: 'column', /* children will be stacked vertically */
-          alignItems: 'stretch', /* force children to take 100% width */
+          flexDirection: 'column' /* children will be stacked vertically */,
+          alignItems: 'stretch' /* force children to take 100% width */,
         }}
       >
         <Header />
@@ -88,14 +60,17 @@ const Main = ({
           <div id="map-container" className={location.pathname !== '/map' ? 'small-screen-hidden' : ''}>
             <Map />
             <div id="watermark" className={`watermark small-screen-hidden ${brightModeEnabled ? 'brightmode' : ''}`}>
-              <a href="http://www.tmrow.com/mission?utm_source=footprintmap.org&utm_medium=referral&utm_campaign=watermark" target="_blank">
+              <a
+                href="http://www.tmrow.com/mission?utm_source=footprintmap.org&utm_medium=referral&utm_campaign=watermark"
+                target="_blank"
+              >
                 <div id="built-by-tomorrow" />
               </a>
             </div>
             <Legend />
             <div className="controls-container">
               <Toggle
-                onChange={value => dispatchApplication('carbonIntensityDomain', value)}
+                onChange={(value) => dispatchApplication('carbonIntensityDomain', value)}
                 options={[
                   { value: CARBON_INTENSITY_DOMAIN.POPULATION, label: 'per capita' },
                   { value: CARBON_INTENSITY_DOMAIN.GDP, label: 'per gdp' },
@@ -110,7 +85,7 @@ const Main = ({
             </div>
           </div>
 
-          { /* end #inner */}
+          {/* end #inner */}
         </div>
         <Tabs />
       </div>

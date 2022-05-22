@@ -8,14 +8,16 @@ import globalcarbon from '../globalcarbon.json';
 
 const CURRENT_YEAR = Object.values(globalcarbon.countries)
   .flat()
-  .filter(d => d && d.totalFootprintMegatonsCO2)
-  .map(d => d.year)
+  .filter((d) => d && d.totalFootprintMegatonsCO2)
+  .map((d) => d.year)
   .reduce((a, b) => Math.max(a, b), 0);
 
 // ** Prepare initial zone data
 const zones = constructTopos();
 // Add id to each zone
-Object.keys(zones).forEach((k) => { zones[k].countryCode = k; });
+Object.keys(zones).forEach((k) => {
+  zones[k].countryCode = k;
+});
 
 const initialDataState = {
   // Here we will store data items
@@ -38,7 +40,7 @@ Object.entries(globalcarbon.countries).forEach(([k, v]) => {
   if (!zones[k]) {
     console.error(`Couldn't copy global carbon data ${k} to zones. Is a geometry missing?`);
   } else {
-    zones[k] = { ...zones[k], ...v.find(d => d.year === CURRENT_YEAR) };
+    zones[k] = { ...zones[k], ...v.find((d) => d.year === CURRENT_YEAR) };
   }
   initialDataState.histories[k] = v;
 });
@@ -51,10 +53,13 @@ export default (state = initialDataState, action) => {
 
     case 'GRID_DATA_FETCH_SUCCEEDED': {
       // Create new grid object
-      const newGrid = Object.assign({}, {
-        zones: Object.assign({}, state.grid.zones),
-        exchanges: Object.assign({}, state.grid.exchanges),
-      });
+      const newGrid = Object.assign(
+        {},
+        {
+          zones: Object.assign({}, state.grid.zones),
+          exchanges: Object.assign({}, state.grid.exchanges),
+        }
+      );
       // Create new state
       const newState = Object.assign({}, state);
       newState.grid = newGrid;
@@ -105,9 +110,13 @@ export default (state = initialDataState, action) => {
         // Set date
         zone.datetime = action.payload.datetime;
         // Validate data
-        if (!zone.production) return;
+        if (!zone.production) {
+          return;
+        }
         modeOrder.forEach((mode) => {
-          if (mode === 'other' || mode === 'unknown' || !zone.datetime) { return; }
+          if (mode === 'other' || mode === 'unknown' || !zone.datetime) {
+            return;
+          }
           // Check missing values
           // if (country.production[mode] === undefined && country.storage[mode] === undefined)
           //    console.warn(`${key} is missing production or storage of ' + mode`);
@@ -116,9 +125,11 @@ export default (state = initialDataState, action) => {
             console.warn(`${key} has negative production of ${mode}`);
           }
           // Check load factors > 1
-          if (zone.production[mode] !== undefined
-            && (zone.capacity || {})[mode] !== undefined
-            && zone.production[mode] > zone.capacity[mode]) {
+          if (
+            zone.production[mode] !== undefined &&
+            (zone.capacity || {})[mode] !== undefined &&
+            zone.production[mode] > zone.capacity[mode]
+          ) {
             console.warn(`${key} produces more than its capacity of ${mode}`);
           }
         });
@@ -141,9 +152,6 @@ export default (state = initialDataState, action) => {
         });
       });
 
-      // Debug
-      console.log(newGrid.zones);
-
       newState.hasInitializedGrid = true;
       newState.isLoadingGrid = false;
       return newState;
@@ -164,7 +172,7 @@ export default (state = initialDataState, action) => {
         isLoadingHistories: false,
         histories: {
           ...state.histories,
-          [action.zoneId]: action.payload.map(datapoint => ({
+          [action.zoneId]: action.payload.map((datapoint) => ({
             ...datapoint,
             hasParser: true,
             // Exchange information is not shown in history observations without production data, as the percentages are incorrect

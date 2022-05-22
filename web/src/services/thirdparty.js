@@ -36,7 +36,9 @@ class ConnectionsService {
     this.connections.forEach((conn) => {
       try {
         conn.track(eventName, context);
-      } catch (err) { console.error(`External connection error: ${err}`); }
+      } catch (err) {
+        console.error(`External connection error: ${err}`);
+      }
     });
   }
 
@@ -45,7 +47,9 @@ class ConnectionsService {
     if (this._ga) {
       try {
         this._ga.ga(...arguments);
-      } catch (err) { console.error(`Google analytics track error: ${err}`); }
+      } catch (err) {
+        console.error(`Google analytics track error: ${err}`);
+      }
     }
   }
 

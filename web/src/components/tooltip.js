@@ -16,13 +16,8 @@ const FadedOverlay = styled.div`
   height: 100vh;
 `;
 
-const Tooltip = ({
-  id,
-  children,
-  position,
-  onClose,
-}) => {
-  const isMobile = useSelector(state => state.application.isMobile);
+const Tooltip = ({ id, children, position, onClose }) => {
+  const isMobile = useSelector((state) => state.application.isMobile);
 
   const ref = useRef(null);
   const width = useWidthObserver(ref);
@@ -31,15 +26,19 @@ const Tooltip = ({
   const screenWidth = window.innerWidth;
   const screenHeight = window.innerHeight;
 
-  if (!position) return null;
+  if (!position) {
+    return null;
+  }
 
   const style = {};
   let x = 0;
   let y = 0;
   // Check that tooltip is not larger than screen
   // and that it does fit on one of the sides
-  if (2 * MARGIN + width >= screenWidth
-    || (position.x + width + MARGIN >= screenWidth && position.x - width - MARGIN <= 0)) {
+  if (
+    2 * MARGIN + width >= screenWidth ||
+    (position.x + width + MARGIN >= screenWidth && position.x - width - MARGIN <= 0)
+  ) {
     // TODO(olc): Once the tooltip has taken 100% width, it's width will always be 100%
     // as we base our decision to revert based on the current width
     style.width = '100%';
@@ -52,8 +51,12 @@ const Tooltip = ({
     }
   }
   y = position.y - MARGIN - height;
-  if (y < 0) y = position.y + MARGIN;
-  if (y + height + MARGIN >= screenHeight) y = position.y - height - MARGIN;
+  if (y < 0) {
+    y = position.y + MARGIN;
+  }
+  if (y + height + MARGIN >= screenHeight) {
+    y = position.y - height - MARGIN;
+  }
 
   style.transform = `translate(${x}px,${y}px)`;
 

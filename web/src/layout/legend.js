@@ -7,30 +7,21 @@ import { dispatchApplication } from '../store';
 import { formatCarbonIntensityUnit } from '../helpers/formatting';
 
 import HorizontalColorbar from '../components/horizontalcolorbar';
-import { solarColor, windColor } from '../helpers/scales';
-import { useSolarEnabled, useWindEnabled } from '../hooks/router';
 import { useCo2ColorScale } from '../hooks/theme';
 import { useCarbonIntensityDomain } from '../hooks/redux';
 
 // TODO: Move styles from styles.css to here
 // TODO: Remove all unecessary id and class tags
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   co2ColorbarValue: state.application.co2ColorbarValue,
   legendVisible: state.application.legendVisible,
   solarColorbarValue: state.application.solarColorbarValue,
   windColorbarValue: state.application.windColorbarValue,
 });
 
-const Legend = ({
-  co2ColorbarValue,
-  legendVisible,
-  solarColorbarValue,
-  windColorbarValue,
-}) => {
+const Legend = ({ co2ColorbarValue, legendVisible }) => {
   const co2ColorScale = useCo2ColorScale();
-  const solarEnabled = useSolarEnabled();
-  const windEnabled = useWindEnabled();
   const carbonIntensityDomain = useCarbonIntensityDomain();
 
   const mobileCollapsedClass = !legendVisible ? 'mobile-collapsed' : '';
@@ -50,9 +41,7 @@ const Legend = ({
         <React.Fragment>
           <div className={`co2-legend floating-legend ${mobileCollapsedClass}`}>
             <div className="legend-header">
-              Carbon intensity
-              {' '}
-              <small>{`(${formatCarbonIntensityUnit(carbonIntensityDomain)})`}</small>
+              Carbon intensity <small>{`(${formatCarbonIntensityUnit(carbonIntensityDomain)})`}</small>
             </div>
             <HorizontalColorbar
               id="carbon-intensity-bar"

@@ -15,8 +15,7 @@ function getMaxCo2(carbonIntensityDomain) {
 
 function getCo2Steps(carbonIntensityDomain) {
   const maxCo2 = getMaxCo2(carbonIntensityDomain) || 800;
-  return [0, 150, 600, 750, 800]
-    .map(d => d / 800 * maxCo2);
+  return [0, 150, 600, 750, 800].map((d) => (d / 800) * maxCo2);
 }
 
 export const themes = {

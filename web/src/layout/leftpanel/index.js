@@ -5,12 +5,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  Switch,
-  Route,
-  Redirect,
-  useLocation,
-} from 'react-router-dom';
+import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
 
 import { dispatchApplication } from '../../store';
 import { useSearchParams } from '../../hooks/router';
@@ -23,9 +18,7 @@ import ZoneListPanel from './zonelistpanel';
 const HandleLegacyRoutes = () => {
   const searchParams = useSearchParams();
 
-  const page = (searchParams.get('page') || 'map')
-    .replace('country', 'zone')
-    .replace('highscore', 'ranking');
+  const page = (searchParams.get('page') || 'map').replace('country', 'zone').replace('highscore', 'ranking');
   searchParams.delete('page');
 
   const zoneId = searchParams.get('countryCode');
@@ -43,8 +36,7 @@ const HandleLegacyRoutes = () => {
 
 // TODO: Move all styles from styles.css to here
 
-
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isLeftPanelCollapsed: state.application.isLeftPanelCollapsed,
   isMobile: state.application.isMobile,
 });
@@ -63,12 +55,9 @@ const LeftPanel = ({ isLeftPanelCollapsed, isMobile }) => {
       className={`panel left-panel ${isLeftPanelCollapsed ? 'collapsed' : ''}`}
       style={panelHidden ? { display: 'none' } : {}}
     >
-
       <div id="mobile-header" className="large-screen-hidden brightmode">
         <div className="header-content">
-          <div className="logo">
-            footprintMap
-          </div>
+          <div className="logo">footprintMap</div>
         </div>
       </div>
 

@@ -5,7 +5,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { dispatchApplication } from '../../store';
-import { useConditionalZoneHistoryFetch } from '../../hooks/fetch';
 import {
   useCurrentZoneHistoryDatetimes,
   useCurrentZoneHistoryStartTime,
@@ -19,7 +18,7 @@ const handleZoneTimeIndexChange = (timeIndex) => {
   dispatchApplication('selectedZoneTimeIndex', timeIndex);
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   selectedZoneTimeIndex: state.application.selectedZoneTimeIndex,
 });
 
@@ -27,9 +26,6 @@ const ZoneDetailsPanel = ({ selectedZoneTimeIndex }) => {
   const datetimes = useCurrentZoneHistoryDatetimes();
   const startTime = useCurrentZoneHistoryStartTime();
   const endTime = useCurrentZoneHistoryEndTime();
-
-  // Fetch history for the current zone if it hasn't been fetched yet.
-  useConditionalZoneHistoryFetch();
 
   return (
     <div className="left-panel-zone-details">
@@ -45,20 +41,11 @@ const ZoneDetailsPanel = ({ selectedZoneTimeIndex }) => {
         />
         <div className="social-buttons small-screen-hidden">
           <div>
-            { /* Facebook share */}
-            <div
-              className="fb-share-button"
-              data-href="https://www.electricitymap.org/"
-              data-layout="button_count"
-            />
-            { /* Twitter share */}
-            <a
-              className="twitter-share-button"
-              data-url="https://www.electricitymap.org"
-              data-via="electricitymap"
-              data-lang={locale}
-            />
-            { /* Slack */}
+            {/* Facebook share */}
+            <div className="fb-share-button" data-href="https://www.electricitymap.org/" data-layout="button_count" />
+            {/* Twitter share */}
+            <a className="twitter-share-button" data-url="https://www.electricitymap.org" data-via="electricitymap" />
+            {/* Slack */}
             <span className="slack-button">
               <a href="https://slack.tmrow.com" target="_blank" className="slack-btn">
                 <span className="slack-ico" />

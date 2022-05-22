@@ -8,25 +8,21 @@ const Wrapper = styled.div`
 `;
 
 const Button = styled.button`
-  background-color: #FFFFFF;
-  background-image: url(${props => (
-    props.active
-      ? `/images/${props.icon}_active.svg`
-      : `/images/${props.icon}.svg`
-  )});
+  background-color: #ffffff;
+  background-image: url(${(props) =>
+    props.active ? `/images/${props.icon}_active.svg` : `/images/${props.icon}.svg`});
 `;
 
-const ButtonToggle = ({
-  active,
-  icon,
-  onChange,
-  tooltip,
-}) => {
-  const isMobile = useSelector(state => state.application.isMobile);
+const ButtonToggle = ({ active, icon, onChange, tooltip }) => {
+  const isMobile = useSelector((state) => state.application.isMobile);
 
   const [tooltipVisible, setTooltipVisible] = useState(false);
-  const showTooltip = () => { setTooltipVisible(true); };
-  const hideTooltip = () => { setTooltipVisible(false); };
+  const showTooltip = () => {
+    setTooltipVisible(true);
+  };
+  const hideTooltip = () => {
+    setTooltipVisible(false);
+  };
 
   return (
     <Wrapper>

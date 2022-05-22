@@ -16,82 +16,85 @@ export const formatCo2 = function (d, numDigits) {
   d /= 1e6; // Convert to tCO₂ / min
   if (d == null || d === NaN) return d;
   if (numDigits == null) numDigits = 3;
-  if (d >= 1) // a ton or more
+  if (d >= 1)
+    // a ton or more
     return format('.' + numDigits + 's')(d) + 't ' + 'ofCO2eqPerMinute';
-  else
-    return format('.' + numDigits + 's')(d * 1e6) + 'g ' + 'ofCO2eqPerMinute';
+  else return format('.' + numDigits + 's')(d * 1e6) + 'g ' + 'ofCO2eqPerMinute';
 };
 export const scaleEnergy = function (maxEnergy) {
   // Assume TWh input
-  if (maxEnergy < 1) 
+  if (maxEnergy < 1)
     return {
-      unit: "GWh",
-      formattingFactor: 1e-3
-    }
-  if (maxEnergy < 1e3) 
+      unit: 'GWh',
+      formattingFactor: 1e-3,
+    };
+  if (maxEnergy < 1e3)
     return {
-      unit: "TWh",
-      formattingFactor: 1
-    }
-  else return {
-      unit: "PWh",
-      formattingFactor: 1e3
-    }
+      unit: 'TWh',
+      formattingFactor: 1,
+    };
+  else
+    return {
+      unit: 'PWh',
+      formattingFactor: 1e3,
+    };
 };
 export const scaleMillionsShort = function (maxValue, useSI = false) {
   // Assume million input
   if (maxValue < 1e-3)
     return {
-      unit: "",
-      formattingFactor: 1e-6
-    }
+      unit: '',
+      formattingFactor: 1e-6,
+    };
   if (maxValue < 1)
     return {
-      unit: "k",
-      formattingFactor: 1e-3
-    }
+      unit: 'k',
+      formattingFactor: 1e-3,
+    };
   if (maxValue < 1e3)
     return {
-      unit: "M",
-      formattingFactor: 1
-    }
+      unit: 'M',
+      formattingFactor: 1,
+    };
   if (maxValue < 1e6)
     return {
-      unit: useSI ? "G" : "B",
-      formattingFactor: 1e3
-    }
-  else return {
-    unit: "T",
-    formattingFactor: 1e6
-  }
+      unit: useSI ? 'G' : 'B',
+      formattingFactor: 1e3,
+    };
+  else
+    return {
+      unit: 'T',
+      formattingFactor: 1e6,
+    };
 };
 
 export const scaleMillions = function (maxValue) {
   // Assume million input
   if (maxValue < 1e-3)
     return {
-      unit: "",
-      formattingFactor: 1e-6
-    }
+      unit: '',
+      formattingFactor: 1e-6,
+    };
   if (maxValue < 1)
     return {
-      unit: "Thousand",
-      formattingFactor: 1e-3
-    }
+      unit: 'Thousand',
+      formattingFactor: 1e-3,
+    };
   if (maxValue < 1e3)
     return {
-      unit: "Million",
-      formattingFactor: 1
-    }
+      unit: 'Million',
+      formattingFactor: 1,
+    };
   if (maxValue < 1e6)
     return {
-      unit: "Billion",
-      formattingFactor: 1e3
-    }
-  else return {
-    unit: "Trillion",
-    formattingFactor: 1e6
-  }
+      unit: 'Billion',
+      formattingFactor: 1e3,
+    };
+  else
+    return {
+      unit: 'Trillion',
+      formattingFactor: 1e6,
+    };
 };
 
 export const formatCarbonIntensityUnit = (carbonIntensityDomain) => {
@@ -105,28 +108,25 @@ export const formatCarbonIntensityUnit = (carbonIntensityDomain) => {
     return 'gCO₂ per $'; // i.e. tCO₂ / M$
   }
   throw new Error('Not implemented yet');
-}
+};
 
 export const formatCarbonIntensityShortUnit = (carbonIntensityDomain) => {
   return formatCarbonIntensityUnit(carbonIntensityDomain)[0];
-}
+};
 
 export const formatCarbonIntensityDescription = (carbonIntensityDomain, electricityMixMode) => {
   let desc = '';
   if (carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.ENERGY) {
     desc += `Carbon footprint of energy`;
     desc += ` ${electricityMixMode !== 'consumption' ? 'produced' : 'consumed'}`;
-  }
-  else if (carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.POPULATION) {
+  } else if (carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.POPULATION) {
     desc += `Carbon footprint per capita`;
     desc += ` (${electricityMixMode !== 'consumption' ? 'territorial' : 'incl. imported'})`;
-  }
-  else if (carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.GDP) {
+  } else if (carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.GDP) {
     desc += `Carbon footprint of the economy`;
     desc += ` (${electricityMixMode !== 'consumption' ? 'territorial' : 'incl. imported'})`;
-  }
-  else {
+  } else {
     throw new Error('Not implemented yet');
   }
   return desc;
-}
+};

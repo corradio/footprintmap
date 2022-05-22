@@ -10,32 +10,25 @@ import CircularGauge from '../circulargauge';
 import Tooltip from '../tooltip';
 import { ZoneName } from './common';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   electricityMixMode: state.application.electricityMixMode,
 });
 
-const MapCountryTooltip = ({
-  electricityMixMode,
-  position,
-  zoneData,
-  onClose,
-}) => {
+const MapCountryTooltip = ({ electricityMixMode, position, zoneData, onClose }) => {
   const co2ColorScale = useCo2ColorScale();
   const carbonIntensityDomain = useCarbonIntensityDomain();
 
-  if (!zoneData) return null;
+  if (!zoneData) {
+    return null;
+  }
 
   const co2intensity = getZoneCarbonIntensity(carbonIntensityDomain, electricityMixMode, zoneData);
 
   const lowCarbonRatio = getLowcarbonRatio(electricityMixMode, zoneData);
-  const lowCarbonPercentage = lowCarbonRatio !== null
-    ? Math.round(100 * lowCarbonRatio)
-    : '?';
+  const lowCarbonPercentage = lowCarbonRatio !== null ? Math.round(100 * lowCarbonRatio) : '?';
 
   const renewableRatio = getRenewableRatio(electricityMixMode, zoneData);
-  const renewablePercentage = renewableRatio !== null
-    ? Math.round(100 * renewableRatio)
-    : '?';
+  const renewablePercentage = renewableRatio !== null ? Math.round(100 * renewableRatio) : '?';
 
   return (
     <Tooltip id="country-tooltip" position={position} onClose={onClose}>
@@ -55,12 +48,12 @@ const MapCountryTooltip = ({
                   <span className="country-emission-intensity">
                     {co2intensity != null ? Math.round(co2intensity) : '?'}
                   </span>
-                  <div className="country-col-subtext">
-                    {formatCarbonIntensityUnit(carbonIntensityDomain)}
-                  </div>
+                  <div className="country-col-subtext">{formatCarbonIntensityUnit(carbonIntensityDomain)}</div>
                 </div>
               </div>
-              <div className="country-col-headline">{ formatCarbonIntensityDescription(carbonIntensityDomain, electricityMixMode) }</div>
+              <div className="country-col-headline">
+                {formatCarbonIntensityDescription(carbonIntensityDomain, electricityMixMode)}
+              </div>
             </div>
             <React.Fragment>
               <div className="country-col country-lowcarbon-wrap">
@@ -80,9 +73,7 @@ const MapCountryTooltip = ({
           </div>
         </div>
       ) : (
-        <div className="temporary-outage-text">
-          No data available
-        </div>
+        <div className="temporary-outage-text">No data available</div>
       )}
     </Tooltip>
   );

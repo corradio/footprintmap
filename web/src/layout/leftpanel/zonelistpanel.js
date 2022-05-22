@@ -30,17 +30,12 @@ const documentSearchKeyUpHandler = (key, searchRef) => {
 const ZoneListPanel = () => (
   <div className="left-panel-zone-list">
     <div className="zone-list-header">
-      <div className="title">
-        {' '}
-        Climate Impact by Area
-      </div>
-      <div
-        className="subtitle"
-      >
+      <div className="title"> Climate Impact by Area</div>
+      <div className="subtitle">
         {`Ranked by ${formatCarbonIntensityDescription(
           useCarbonIntensityDomain(),
-          useSelector(state => state.application.electricityMixMode),
-        ).toLowerCase()} in ${moment(useSelector(state => state.data.grid.datetime)).format('YYYY')}`}
+          useSelector((state) => state.application.electricityMixMode)
+        ).toLowerCase()} in ${moment(useSelector((state) => state.data.grid.datetime)).format('YYYY')}`}
       </div>
     </div>
 
@@ -48,7 +43,7 @@ const ZoneListPanel = () => (
       className="zone-search-bar"
       placeholder="Search areas"
       documentKeyUpHandler={documentSearchKeyUpHandler}
-      searchHandler={query => dispatchApplication('searchQuery', query)}
+      searchHandler={(query) => dispatchApplication('searchQuery', query)}
     />
 
     <ZoneList />

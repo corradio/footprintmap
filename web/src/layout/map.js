@@ -5,39 +5,32 @@ import { debounce } from 'lodash';
 
 import thirdPartyServices from '../services/thirdparty';
 import { getZoneId } from '../helpers/router';
-import { getValueAtPosition } from '../helpers/grib';
-import { calculateLengthFromDimensions } from '../helpers/math';
 import { getCenteredZoneViewport, getCenteredLocationViewport } from '../helpers/map';
-import { useInterpolatedSolarData, useInterpolatedWindData } from '../hooks/layers';
 import { useTheme, useCo2ColorScale } from '../hooks/theme';
 import { useTrackEvent } from '../hooks/tracking';
 import { dispatchApplication } from '../store';
 
 import ZoneMap from '../components/zonemap';
-import MapLayer from '../components/maplayer';
 import MapCountryTooltip from '../components/tooltips/mapcountrytooltip';
-import ExchangeLayer from '../components/layers/exchangelayer';
-import SolarLayer from '../components/layers/solarlayer';
-import WindLayer from '../components/layers/windlayer';
 import { useCarbonIntensityDomain } from '../hooks/redux';
 import { getZoneCarbonIntensity } from '../helpers/zonedata';
 
-const debouncedReleaseMoving = debounce(() => { dispatchApplication('isMovingMap', false); }, 200);
+const debouncedReleaseMoving = debounce(() => {
+  dispatchApplication('isMovingMap', false);
+}, 200);
 
 export default () => {
-  const webGLSupported = useSelector(state => state.application.webGLSupported);
-  const isHoveringExchange = useSelector(state => state.application.isHoveringExchange);
-  const electricityMixMode = useSelector(state => state.application.electricityMixMode);
-  const callerLocation = useSelector(state => state.application.callerLocation);
-  const isLoadingMap = useSelector(state => state.application.isLoadingMap);
-  const isEmbedded = useSelector(state => state.application.isEmbedded);
-  const isMobile = useSelector(state => state.application.isMobile);
-  const viewport = useSelector(state => state.application.mapViewport);
-  const selectedZoneTimeIndex = useSelector(state => state.application.selectedZoneTimeIndex);
-  const zoneHistories = useSelector(state => state.data.histories);
-  const solarData = useInterpolatedSolarData();
-  const windData = useInterpolatedWindData();
-  const zones = useSelector(state => state.data.grid.zones);
+  const webGLSupported = useSelector((state) => state.application.webGLSupported);
+  const isHoveringExchange = useSelector((state) => state.application.isHoveringExchange);
+  const electricityMixMode = useSelector((state) => state.application.electricityMixMode);
+  const callerLocation = useSelector((state) => state.application.callerLocation);
+  const isLoadingMap = useSelector((state) => state.application.isLoadingMap);
+  const isEmbedded = useSelector((state) => state.application.isEmbedded);
+  const isMobile = useSelector((state) => state.application.isMobile);
+  const viewport = useSelector((state) => state.application.mapViewport);
+  const selectedZoneTimeIndex = useSelector((state) => state.application.selectedZoneTimeIndex);
+  const zoneHistories = useSelector((state) => state.data.histories);
+  const zones = useSelector((state) => state.data.grid.zones);
   const trackEvent = useTrackEvent();
   const location = useLocation();
   const history = useHistory();
@@ -57,10 +50,8 @@ export default () => {
     () => () => {
       // Center the map initially based on the focused zone and the user geolocation.
       if (zoneId) {
-        console.log(`Centering on zone ${zoneId}`);
         dispatchApplication('mapViewport', getCenteredZoneViewport(zones[zoneId]));
       } else if (callerLocation) {
-        console.log(`Centering on browser location (${callerLocation})`);
         dispatchApplication('mapViewport', getCenteredLocationViewport(callerLocation));
       }
 
@@ -72,11 +63,13 @@ export default () => {
 
       // Track and notify that WebGL is supported.
       dispatchApplication('webGLSupported', true);
+      // eslint-disable-next-line no-underscore-dangle
       if (thirdPartyServices._ga) {
+        // eslint-disable-next-line no-underscore-dangle
         thirdPartyServices._ga.timingMark('map_loaded');
       }
     },
-    [zones, zoneId, callerLocation],
+    [zones, zoneId, callerLocation]
   );
 
   const handleMapError = (e) => {
@@ -89,7 +82,7 @@ export default () => {
     history.push({ pathname: '/ranking', search: location.search });
   };
 
-  const handleMouseMove = ({ longitude, latitude, x, y }) => {
+  const handleMouseMove = ({ x, y }) => {
     setTooltipPosition({ x, y });
   };
 
@@ -97,7 +90,7 @@ export default () => {
     () => () => {
       history.push({ pathname: '/map', search: location.search });
     },
-    [history, location],
+    [history, location]
   );
 
   const handleZoneClick = useMemo(
@@ -106,18 +99,15 @@ export default () => {
       dispatchApplication('isLeftPanelCollapsed', false);
       history.push({ pathname: `/zone/${id}`, search: location.search });
     },
-    [trackEvent, history, location],
+    [trackEvent, history, location]
   );
 
   const handleZoneMouseEnter = useMemo(
     () => (data) => {
-      dispatchApplication(
-        'co2ColorbarValue',
-        getZoneCarbonIntensity(carbonIntensityDomain, electricityMixMode, data),
-      );
+      dispatchApplication('co2ColorbarValue', getZoneCarbonIntensity(carbonIntensityDomain, electricityMixMode, data));
       setTooltipZoneData(data);
     },
-    [electricityMixMode],
+    [electricityMixMode, carbonIntensityDomain]
   );
 
   const handleZoneMouseLeave = useMemo(
@@ -125,37 +115,33 @@ export default () => {
       dispatchApplication('co2ColorbarValue', null);
       setTooltipZoneData(null);
     },
-    [],
+    []
   );
 
   const handleViewportChange = useMemo(
-    () => ({
-      width,
-      height,
-      latitude,
-      longitude,
-      zoom,
-    }) => {
-      dispatchApplication('isMovingMap', true);
-      dispatchApplication('mapViewport', {
-        width,
-        height,
-        latitude,
-        longitude,
-        zoom,
-      });
-      // TODO: Try tying this to internal map state
-      // somehow to remove the need for debouncing.
-      debouncedReleaseMoving();
-    },
-    [],
+    () =>
+      ({ width, height, latitude, longitude, zoom }) => {
+        dispatchApplication('isMovingMap', true);
+        dispatchApplication('mapViewport', {
+          width,
+          height,
+          latitude,
+          longitude,
+          zoom,
+        });
+        // TODO: Try tying this to internal map state
+        // somehow to remove the need for debouncing.
+        debouncedReleaseMoving();
+      },
+    []
   );
 
   const handleResize = useMemo(
-    () => ({ width, height }) => {
-      handleViewportChange({ ...viewport, width, height });
-    },
-    [viewport],
+    () =>
+      ({ width, height }) => {
+        handleViewportChange({ ...viewport, width, height });
+      },
+    [viewport, handleViewportChange]
   );
 
   // Animate map transitions only after the map has been loaded.
@@ -165,9 +151,7 @@ export default () => {
   return (
     <React.Fragment>
       <div id="webgl-error" className={`flash-message ${!webGLSupported ? 'active' : ''}`}>
-        <div className="inner">
-          The map can&apos;t be rendered because this browser does not support WebGL.
-        </div>
+        <div className="inner">The map can&apos;t be rendered because this browser does not support WebGL.</div>
       </div>
       {tooltipPosition && tooltipZoneData && hoveringEnabled && (
         <MapCountryTooltip

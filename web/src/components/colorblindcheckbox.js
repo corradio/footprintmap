@@ -7,7 +7,7 @@ import { dispatchApplication } from '../store';
 import { saveKey } from '../helpers/storage';
 
 const ColorBlindCheckbox = () => {
-  const colorBlindModeEnabled = useSelector(state => state.application.colorBlindModeEnabled);
+  const colorBlindModeEnabled = useSelector((state) => state.application.colorBlindModeEnabled);
   const toggleColorBlindMode = () => {
     dispatchApplication('colorBlindModeEnabled', !colorBlindModeEnabled);
     saveKey('colorBlindModeEnabled', !colorBlindModeEnabled);

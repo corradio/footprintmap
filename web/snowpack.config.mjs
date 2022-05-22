@@ -7,22 +7,8 @@ export default {
     public: { url: '/', static: true },
     src: '/dist',
   },
-  routes: [
-    { match: 'routes', src: '.*', dest: '/index.html' },
-  ],
-  plugins: [
-    [
-      '@snowpack/plugin-babel',
-      {
-        input: ['.js', '.mjs', '.ts', '.tsx'],
-        transformOptions: {
-          presets: ['@babel/preset-react'],
-        },
-      },
-    ],
-    '@snowpack/plugin-react-refresh',
-    '@snowpack/plugin-sass',
-  ],
+  routes: [{ match: 'routes', src: '.*', dest: '/index.html' }],
+  plugins: ['@snowpack/plugin-react-refresh', '@snowpack/plugin-sass'],
   packageOptions: {
     polyfillNode: true,
   },

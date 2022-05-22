@@ -28,16 +28,12 @@ const modeOrder = [
   'oil',
   'unknown',
 ];
-const PRODUCTION_MODES = modeOrder.filter(d => d.indexOf('storage') === -1);
-const STORAGE_MODES = modeOrder.filter(d => d.indexOf('storage') !== -1).map(d => d.replace(' storage', ''));
+const PRODUCTION_MODES = modeOrder.filter((d) => d.indexOf('storage') === -1);
+const STORAGE_MODES = modeOrder.filter((d) => d.indexOf('storage') !== -1).map((d) => d.replace(' storage', ''));
 
 const DEFAULT_FLAG_SIZE = 16;
 
-const FOSSIL_FUEL_KEYS = [
-  'oil',
-  'gas',
-  'coal',
-];
+const FOSSIL_FUEL_KEYS = ['oil', 'gas', 'coal'];
 
 const CARBON_INTENSITY_DOMAIN = {
   ENERGY: 'ENERGY',

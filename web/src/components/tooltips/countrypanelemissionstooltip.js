@@ -2,10 +2,10 @@ import React from 'react';
 
 import Tooltip from '../tooltip';
 
-const CountryPanelEmissionsTooltip = ({
-  position, data, unit, onClose,
-}) => {
-  if (!data) return null;
+const CountryPanelEmissionsTooltip = ({ position, data, unit, onClose }) => {
+  if (!data) {
+    return null;
+  }
 
   const value = Math.round(data.emissions);
 

@@ -16,11 +16,7 @@ const LastUpdatedTime = () => {
     }, 0);
   }, [timestamp]);
 
-  return (
-    <span style={style}>
-      {moment(timestamp).fromNow()}
-    </span>
-  );
+  return <span style={style}>{moment(timestamp).fromNow()}</span>;
 };
 
 export default LastUpdatedTime;

@@ -7,25 +7,16 @@ import { scaleEnergy } from '../helpers/formatting';
 import { useCo2ColorScale } from '../hooks/theme';
 import { getTooltipPosition } from '../helpers/graph';
 import { modeOrder, modeColor } from '../helpers/constants';
-import {
-  useCurrentZoneHistory,
-  useCurrentZoneHistoryStartTime,
-  useCurrentZoneHistoryEndTime,
-  useCurrentZoneExchangeKeys,
-} from '../hooks/redux';
+import { useCurrentZoneHistory, useCurrentZoneHistoryStartTime, useCurrentZoneHistoryEndTime } from '../hooks/redux';
 import { dispatchApplication } from '../store';
 
 import CountryPanelProductionTooltip from './tooltips/countrypanelproductiontooltip';
-import CountryPanelExchangeTooltip from './tooltips/countrypanelexchangetooltip';
 import AreaGraph from './graph/areagraph';
 
 const getValuesInfo = (historyData) => {
-  const maxTotalValue = d3Max(historyData, d => (
-    d3Max([
-      d.totalPrimaryEnergyConsumptionTWh,
-      d.totalPrimaryEnergyProductionTWh,
-    ])
-  ));
+  const maxTotalValue = d3Max(historyData, (d) =>
+    d3Max([d.totalPrimaryEnergyConsumptionTWh, d.totalPrimaryEnergyProductionTWh])
+  );
   const format = scaleEnergy(maxTotalValue);
 
   const valueAxisLabel = format.unit;
@@ -34,17 +25,13 @@ const getValuesInfo = (historyData) => {
 };
 
 const prepareGraphData = (historyData, co2ColorScale, displayByEmissions, electricityMixMode, exchangeKeys = []) => {
-  if (!historyData || !historyData[0]) return {};
+  if (!historyData || !historyData[0]) {
+    return {};
+  }
 
-  const {
-    valueAxisLabel,
-    valueFactor,
-    maxTotalValue,
-  } = getValuesInfo(historyData);
+  const { valueAxisLabel, valueFactor, maxTotalValue } = getValuesInfo(historyData);
 
-  const key = electricityMixMode === 'consumption'
-    ? 'primaryEnergyConsumptionTWh'
-    : 'primaryEnergyProductionTWh';
+  const key = electricityMixMode === 'consumption' ? 'primaryEnergyConsumptionTWh' : 'primaryEnergyProductionTWh';
 
   // Format history data received by the API
   // TODO: Simplify this function and make it more readable
@@ -55,9 +42,7 @@ const prepareGraphData = (historyData, co2ColorScale, displayByEmissions, electr
     // Add production
     modeOrder.forEach((k) => {
       const isStorage = k.indexOf('storage') !== -1;
-      const value = isStorage
-        ? -1 * Math.min(0, (d.storage || {})[k.replace(' storage', '')])
-        : (d[key] || {})[k];
+      const value = isStorage ? -1 * Math.min(0, (d.storage || {})[k.replace(' storage', '')]) : (d[key] || {})[k];
       // in GW or MW
       obj[k] = value / valueFactor;
       if (Number.isFinite(value) && displayByEmissions && obj[k] != null) {
@@ -91,7 +76,7 @@ const prepareGraphData = (historyData, co2ColorScale, displayByEmissions, electr
   const layerFill = (k) => {
     // If exchange layer, set the horizontal gradient by using a different fill for each datapoint.
     if (exchangeKeys.includes(k)) {
-      return d => co2ColorScale((d.data.meta.exchangeCo2Intensities || {})[k]);
+      return (d) => co2ColorScale((d.data.meta.exchangeCo2Intensities || {})[k]);
     }
     // Otherwise use regular production fill.
     return modeColor[k];
@@ -106,38 +91,26 @@ const prepareGraphData = (historyData, co2ColorScale, displayByEmissions, electr
   };
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   displayByEmissions: state.application.tableDisplayEmissions,
   isMobile: state.application.isMobile,
   selectedTimeIndex: state.application.selectedZoneTimeIndex,
   carbonIntensityDomain: state.application.carbonIntensityDomain,
 });
 
-const CountryHistoryMixGraph = ({
-  displayByEmissions,
-  electricityMixMode,
-  isMobile,
-  selectedTimeIndex,
-}) => {
+const CountryHistoryMixGraph = ({ displayByEmissions, electricityMixMode, isMobile, selectedTimeIndex }) => {
   const [tooltip, setTooltip] = useState(null);
   const [selectedLayerIndex, setSelectedLayerIndex] = useState(null);
   const co2ColorScale = useCo2ColorScale();
 
   const historyData = useCurrentZoneHistory();
-  const exchangeKeys = useCurrentZoneExchangeKeys();
   const startTime = useCurrentZoneHistoryStartTime();
   const endTime = useCurrentZoneHistoryEndTime();
 
   // Recalculate graph data only when the history data is changed
-  const {
-    data,
-    layerKeys,
-    layerFill,
-    valueAxisLabel,
-    maxTotalValue,
-  } = useMemo(
+  const { data, layerKeys, layerFill, valueAxisLabel, maxTotalValue } = useMemo(
     () => prepareGraphData(historyData, co2ColorScale, displayByEmissions, electricityMixMode),
-    [historyData, co2ColorScale, displayByEmissions, electricityMixMode],
+    [historyData, co2ColorScale, displayByEmissions, electricityMixMode]
   );
 
   // Mouse action handlers
@@ -145,27 +118,27 @@ const CountryHistoryMixGraph = ({
     () => (timeIndex) => {
       dispatchApplication('selectedZoneTimeIndex', timeIndex);
     },
-    [],
+    []
   );
   const backgroundMouseOutHandler = useMemo(
     () => () => {
       dispatchApplication('selectedZoneTimeIndex', null);
     },
-    [],
+    []
   );
   const layerMouseMoveHandler = useMemo(
     () => (timeIndex, layerIndex) => {
       dispatchApplication('selectedZoneTimeIndex', timeIndex);
       setSelectedLayerIndex(layerIndex);
     },
-    [setSelectedLayerIndex],
+    [setSelectedLayerIndex]
   );
   const layerMouseOutHandler = useMemo(
     () => () => {
       dispatchApplication('selectedZoneTimeIndex', null);
       setSelectedLayerIndex(null);
     },
-    [setSelectedLayerIndex],
+    [setSelectedLayerIndex]
   );
   // Graph marker callbacks
   const markerUpdateHandler = useMemo(
@@ -176,13 +149,13 @@ const CountryHistoryMixGraph = ({
         zoneData: datapoint.meta,
       });
     },
-    [setTooltip, isMobile],
+    [setTooltip, isMobile]
   );
   const markerHideHandler = useMemo(
     () => () => {
       setTooltip(null);
     },
-    [setTooltip],
+    [setTooltip]
   );
 
   return (
@@ -207,28 +180,16 @@ const CountryHistoryMixGraph = ({
         valueAxisMax={maxTotalValue}
       />
       {tooltip && (
-        exchangeKeys.includes(tooltip.mode) ? (
-          <CountryPanelExchangeTooltip
-            exchangeKey={tooltip.mode}
-            position={tooltip.position}
-            zoneData={tooltip.zoneData}
-            onClose={() => {
-              setSelectedLayerIndex(null);
-              setTooltip(null);
-            }}
-          />
-        ) : (
-          <CountryPanelProductionTooltip
-            mode={tooltip.mode}
-            position={tooltip.position}
-            zoneData={tooltip.zoneData}
-            electricityMixMode={electricityMixMode}
-            onClose={() => {
-              setSelectedLayerIndex(null);
-              setTooltip(null);
-            }}
-          />
-        )
+        <CountryPanelProductionTooltip
+          mode={tooltip.mode}
+          position={tooltip.position}
+          zoneData={tooltip.zoneData}
+          electricityMixMode={electricityMixMode}
+          onClose={() => {
+            setSelectedLayerIndex(null);
+            setTooltip(null);
+          }}
+        />
       )}
     </React.Fragment>
   );

@@ -5,52 +5,65 @@ import { saveKey } from '../helpers/storage';
 import { dispatchApplication } from '../store';
 import { useTrackEvent } from '../hooks/tracking';
 
-const views = [{
-  headerCssClass: 'logo-header',
-  textCssClass: 'brand-text',
-  renderContent: () => (
-    <React.Fragment>
-      <div>
-        <h1>footprintMap</h1>
-      </div>
-      <div>
-        <h2>A visualisation of the CO₂ emissions of the global economy</h2>
-      </div>
-    </React.Fragment>
-  ),
-}, {
-  headerImage: 'images/onboarding/mapExtract.png',
-  renderContent: () => (
-    <React.Fragment>
-      <div>
-        <h2>See how much CO₂ is emitted</h2>
-      </div>
-      <div>We color areas around the world by their Carbon Intensity. The greener the color, the lesser the footprint.</div>
-    </React.Fragment>
-  ),
-}, {
-  headerImage: 'images/onboarding/toggle.png',
-  renderContent: () => (
-    <React.Fragment>
-      <div>
-        <h2>Population, economy and energy</h2>
-      </div>
-      <div>Explore the footprint of a country per capita, GDP generated, or energy consumed. Click on the toggle to switch mode.</div>
-    </React.Fragment>
-  ),
-}, {
-  headerImage: 'images/onboarding/mapExtract.png',
-  renderContent: () => (
-    <React.Fragment>
-      <div>
-        <h2>Imports are taken into account</h2>
-      </div>
-      <div>Emissions related to goods manufactured abroad are taken into account, and appear as part of a country's footprint</div>
-    </React.Fragment>
-  ),
-}];
+const views = [
+  {
+    headerCssClass: 'logo-header',
+    textCssClass: 'brand-text',
+    renderContent: () => (
+      <React.Fragment>
+        <div>
+          <h1>footprintMap</h1>
+        </div>
+        <div>
+          <h2>A visualisation of the CO₂ emissions of the global economy</h2>
+        </div>
+      </React.Fragment>
+    ),
+  },
+  {
+    headerImage: '/images/onboarding/mapExtract.png',
+    renderContent: () => (
+      <React.Fragment>
+        <div>
+          <h2>See how much CO₂ is emitted</h2>
+        </div>
+        <div>
+          We color areas around the world by their Carbon Intensity. The greener the color, the lesser the footprint.
+        </div>
+      </React.Fragment>
+    ),
+  },
+  {
+    headerImage: '/images/onboarding/toggle.png',
+    renderContent: () => (
+      <React.Fragment>
+        <div>
+          <h2>Population, economy and energy</h2>
+        </div>
+        <div>
+          Explore the footprint of a country per capita, GDP generated, or energy consumed. Click on the toggle to
+          switch mode.
+        </div>
+      </React.Fragment>
+    ),
+  },
+  {
+    headerImage: '/images/onboarding/mapExtract.png',
+    renderContent: () => (
+      <React.Fragment>
+        <div>
+          <h2>Imports are taken into account</h2>
+        </div>
+        <div>
+          Emissions related to goods manufactured abroad are taken into account, and appear as part of a country&apos;s
+          footprint
+        </div>
+      </React.Fragment>
+    ),
+  },
+];
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   // Show onboarding modal only if it's not been seen yet and if the app is not embedded
   visible: !state.application.onboardingSeen && !state.application.isEmbedded,
 });
@@ -95,9 +108,11 @@ const OnboardingModal = ({ visible }) => {
     if (visible) {
       trackEvent('onboardingModalShown');
     }
-  }, [visible]);
+  }, [visible, trackEvent]);
 
-  if (!visible) return null;
+  if (!visible) {
+    return null;
+  }
 
   return (
     <React.Fragment>

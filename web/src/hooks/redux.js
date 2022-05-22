@@ -3,7 +3,6 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { matchPath } from 'react-router';
-import { keys, sortBy } from 'lodash';
 
 function useCurrentZoneId() {
   const match = matchPath(useLocation().pathname, { path: '/zone/:zoneId' });
@@ -16,21 +15,15 @@ function useCurrentZoneId() {
 
 export function useCurrentZoneHistory() {
   const zoneId = useCurrentZoneId();
-  const histories = useSelector(state => state.data.histories);
+  const histories = useSelector((state) => state.data.histories);
 
-  return useMemo(
-    () => histories[zoneId] || [],
-    [histories, zoneId],
-  );
+  return useMemo(() => histories[zoneId] || [], [histories, zoneId]);
 }
 
 export function useCurrentZoneHistoryDatetimes() {
   const zoneHistory = useCurrentZoneHistory();
 
-  return useMemo(
-    () => zoneHistory.map(d => moment(d.year.toString()).toDate()),
-    [zoneHistory],
-  );
+  return useMemo(() => zoneHistory.map((d) => moment(d.year.toString()).toDate()), [zoneHistory]);
 }
 
 // Use current time as the end time of the graph time scale explicitly
@@ -52,48 +45,35 @@ export function useCurrentZoneHistoryStartTime() {
 export function useCurrentZoneData() {
   const zoneId = useCurrentZoneId();
   const zoneHistory = useCurrentZoneHistory();
-  const zoneTimeIndex = useSelector(state => state.application.selectedZoneTimeIndex);
-  const grid = useSelector(state => state.data.grid);
+  const zoneTimeIndex = useSelector((state) => state.application.selectedZoneTimeIndex);
+  const grid = useSelector((state) => state.data.grid);
 
-  return useMemo(
-    () => {
-      if (!zoneId || !grid) {
-        return null;
-      }
-      if (zoneTimeIndex === null) {
-        return grid.zones[zoneId];
-      }
-      return zoneHistory[zoneTimeIndex];
-    },
-    [zoneId, zoneHistory, zoneTimeIndex, grid],
-  );
-}
-
-export function useCurrentZoneExchangeKeys() {
-  const zoneData = useCurrentZoneData();
-  const isConsumption = useSelector(state => state.application.electricityMixMode === 'consumption');
-
-  return useMemo(
-    () => (isConsumption ? sortBy(keys(zoneData.exchange)) : []),
-    [isConsumption, zoneData],
-  );
+  return useMemo(() => {
+    if (!zoneId || !grid) {
+      return null;
+    }
+    if (zoneTimeIndex === null) {
+      return grid.zones[zoneId];
+    }
+    return zoneHistory[zoneTimeIndex];
+  }, [zoneId, zoneHistory, zoneTimeIndex, grid]);
 }
 
 export function useLoadingOverlayVisible() {
-  const mapInitializing = useSelector(state => state.application.isLoadingMap);
-  const gridInitializing = useSelector(state => state.data.isLoadingGrid && !state.data.hasInitializedGrid);
-  const solarInitializing = useSelector(state => state.data.isLoadingSolar && !state.data.solar);
-  const windInitializing = useSelector(state => state.data.isLoadingWind && !state.data.wind);
+  const mapInitializing = useSelector((state) => state.application.isLoadingMap);
+  const gridInitializing = useSelector((state) => state.data.isLoadingGrid && !state.data.hasInitializedGrid);
+  const solarInitializing = useSelector((state) => state.data.isLoadingSolar && !state.data.solar);
+  const windInitializing = useSelector((state) => state.data.isLoadingWind && !state.data.wind);
   return mapInitializing || gridInitializing || solarInitializing || windInitializing;
 }
 
 export function useSmallLoaderVisible() {
-  const gridLoading = useSelector(state => state.data.isLoadingGrid);
-  const solarLoading = useSelector(state => state.data.isLoadingSolar);
-  const windLoading = useSelector(state => state.data.isLoadingWind);
+  const gridLoading = useSelector((state) => state.data.isLoadingGrid);
+  const solarLoading = useSelector((state) => state.data.isLoadingSolar);
+  const windLoading = useSelector((state) => state.data.isLoadingWind);
   return gridLoading || solarLoading || windLoading;
 }
 
 export function useCarbonIntensityDomain() {
-  return useSelector(state => state.application.carbonIntensityDomain);
+  return useSelector((state) => state.application.carbonIntensityDomain);
 }

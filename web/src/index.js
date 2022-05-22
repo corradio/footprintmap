@@ -9,9 +9,7 @@ import 'url-search-params-polyfill'; // For IE 11 support
 
 import thirdPartyServices from './services/thirdparty';
 import { history } from './helpers/router';
-import { store, sagaMiddleware } from './store';
-import { cordovaApp } from './cordova';
-import sagas from './sagas';
+import { store } from './store';
 
 import Main from './layout/main';
 import GlobalStyle from './globalstyle';
@@ -20,16 +18,15 @@ import GlobalStyle from './globalstyle';
 import './scss/styles.scss';
 
 // Track how long it took to start executing the JS code
+// eslint-disable-next-line no-underscore-dangle
 if (thirdPartyServices._ga) {
+  // eslint-disable-next-line no-underscore-dangle
   thirdPartyServices._ga.timingMark('start_executing_js');
 }
 
 // Set proper locale
 window.locale = 'en';
 moment.locale(window.locale.toLowerCase());
-
-// Plug in the sagas
-sagaMiddleware.run(sagas);
 
 // Render DOM
 ReactDOM.render(
@@ -41,15 +38,10 @@ ReactDOM.render(
       <Main />
     </Router>
   </Provider>,
-  document.querySelector('#app'),
+  document.querySelector('#app')
 );
 
-// Initialise mobile app (cordova)
-if (window.isCordova) {
-  cordovaApp.initialize();
-}
-
 // HMR
-if (import.meta.hot) {
-  import.meta.hot.accept();
-}
+// if (import.meta.hot) {
+//   import.meta.hot.accept();
+// }

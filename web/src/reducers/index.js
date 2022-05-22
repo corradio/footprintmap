@@ -33,8 +33,7 @@ const initialApplicationState = {
   isLeftPanelCollapsed: false,
   isMovingMap: false,
   isLoadingMap: true,
-  isMobile:
-    (/android|blackberry|iemobile|ipad|iphone|ipod|opera mini|webos/i).test(navigator.userAgent),
+  isMobile: /android|blackberry|iemobile|ipad|iphone|ipod|opera mini|webos/i.test(navigator.userAgent),
   isProduction: isProduction(),
   isLocalhost: isLocalhost(),
   legendVisible: true,

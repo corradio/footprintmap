@@ -9,13 +9,9 @@ export function getRatioPercent(value, total) {
   if (!isFinite(value) || !isFinite(total)) {
     return '?';
   }
-  return Math.round(value / total * 10000) / 100;
+  return Math.round((value / total) * 10000) / 100;
 }
 
 export function tonsPerHourToGramsPerMinute(value) {
   return value / 1e6 / 60.0;
-}
-
-export function calculateLengthFromDimensions(x, y) {
-  return isFinite(x) && isFinite(y) ? Math.sqrt(x * x + y * y) : null;
 }

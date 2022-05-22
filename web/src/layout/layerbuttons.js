@@ -7,7 +7,7 @@ import { dispatchApplication } from '../store';
 import ButtonToggle from '../components/buttontoggle';
 
 export default () => {
-  const brightModeEnabled = useSelector(state => state.application.brightModeEnabled);
+  const brightModeEnabled = useSelector((state) => state.application.brightModeEnabled);
   const toggleBrightMode = () => {
     dispatchApplication('brightModeEnabled', !brightModeEnabled);
     saveKey('brightModeEnabled', !brightModeEnabled);

@@ -1,14 +1,5 @@
-import React, {
-  useRef,
-  useMemo,
-  useState,
-} from 'react';
-import {
-  first,
-  last,
-  sortedIndex,
-  isNumber,
-} from 'lodash';
+import React, { useRef, useMemo, useState } from 'react';
+import { first, last, sortedIndex, isNumber } from 'lodash';
 import { connect } from 'react-redux';
 import { scaleTime } from 'd3-scale';
 import moment from 'moment';
@@ -18,16 +9,20 @@ import { useWidthObserver } from '../hooks/viewport';
 
 const AXIS_HORIZONTAL_MARGINS = 12;
 
-const getTimeScale = (width, datetimes, startTime, endTime) => scaleTime()
-  .domain([
-    startTime ? moment(startTime).toDate() : first(datetimes),
-    endTime ? moment(endTime).toDate() : last(datetimes),
-  ])
-  .range([0, width]);
+const getTimeScale = (width, datetimes, startTime, endTime) =>
+  scaleTime()
+    .domain([
+      startTime ? moment(startTime).toDate() : first(datetimes),
+      endTime ? moment(endTime).toDate() : last(datetimes),
+    ])
+    .range([0, width]);
 
 const createChangeAndInputHandler = (datetimes, onChange, setAnchoredTimeIndex) => (ev) => {
   const value = parseInt(ev.target.value, 10);
-  let index = sortedIndex(datetimes.map(t => t.valueOf()), value);
+  let index = sortedIndex(
+    datetimes.map((t) => t.valueOf()),
+    value
+  );
   // If the slider is past the last datetime, we set index to null in order to use the scale end time.
   if (index >= datetimes.length) {
     index = null;
@@ -38,32 +33,28 @@ const createChangeAndInputHandler = (datetimes, onChange, setAnchoredTimeIndex) 
   }
 };
 
-const TimeSlider = ({
-  className,
-  onChange,
-  selectedTimeIndex,
-  datetimes,
-  startTime,
-  endTime,
-  datetime,
-}) => {
+const TimeSlider = ({ className, onChange, selectedTimeIndex, datetimes, startTime, endTime, datetime }) => {
   const ref = useRef(null);
   const width = useWidthObserver(ref, 2 * AXIS_HORIZONTAL_MARGINS);
   const [anchoredTimeIndex, setAnchoredTimeIndex] = useState(null);
 
   const timeScale = useMemo(
     () => getTimeScale(width, datetimes, startTime, endTime),
-    [width, datetimes, startTime, endTime],
+    [width, datetimes, startTime, endTime]
   );
 
   const handleChangeAndInput = useMemo(
     () => createChangeAndInputHandler(datetimes, onChange, setAnchoredTimeIndex),
-    [datetimes, onChange, setAnchoredTimeIndex],
+    [datetimes, onChange, setAnchoredTimeIndex]
   );
 
-  if (!datetimes || datetimes.length === 0) return null;
+  if (!datetimes || datetimes.length === 0) {
+    return null;
+  }
 
-  const selectedTimeValue = isNumber(selectedTimeIndex) ? datetimes[selectedTimeIndex].valueOf() : moment(datetime).toDate().valueOf();
+  const selectedTimeValue = isNumber(selectedTimeIndex)
+    ? datetimes[selectedTimeIndex].valueOf()
+    : moment(datetime).toDate().valueOf();
   const anchoredTimeValue = isNumber(anchoredTimeIndex) ? datetimes[anchoredTimeIndex].valueOf() : null;
   const startTimeValue = timeScale.domain()[0].valueOf();
   const endTimeValue = timeScale.domain()[1].valueOf();
@@ -90,4 +81,4 @@ const TimeSlider = ({
   );
 };
 
-export default connect(state => ({ datetime: state.data.grid.datetime }))(TimeSlider);
+export default connect((state) => ({ datetime: state.data.grid.datetime }))(TimeSlider);

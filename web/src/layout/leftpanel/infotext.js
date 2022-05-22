@@ -5,7 +5,6 @@
 // TODO: re-enable rules
 
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
 
 import ColorBlindCheckbox from '../../components/colorblindcheckbox';
 
@@ -13,24 +12,26 @@ export default () => (
   <div className="info-text small-screen-hidden">
     <ColorBlindCheckbox />
     <p>
-      This project is
-      {' '}
+      This project is{' '}
       <a href="https://github.com/corradio/carbonmap" target="_blank">
         Open Source
-      </a>
-      {' '}(See
-      {' '}
+      </a>{' '}
+      (See{' '}
       <a href="https://github.com/corradio/carbonmap#data-sources" target="_blank">
         data sources
       </a>
       ).{' '}
     </p>
     <p>
-      Found bugs or have ideas? Report them <a href="https://github.com/corradio/carbonmap/issues/new" target="_blank">here</a>.<br />
+      Found bugs or have ideas? Report them{' '}
+      <a href="https://github.com/corradio/carbonmap/issues/new" target="_blank">
+        here
+      </a>
+      .<br />
     </p>
     <div className="social-buttons">
       <div>
-        { /* Slack */}
+        {/* Slack */}
         <span className="slack-button">
           <a href="https://slack.tmrow.com" target="_blank" className="slack-btn">
             <span className="slack-ico" />

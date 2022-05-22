@@ -21,7 +21,10 @@ const MobileInfoTab = () => {
   return (
     <div className="mobile-info-tab">
       <div className="mobile-watermark brightmode">
-        <a href="http://www.tmrow.com/mission?utm_source=footprintmap.org&utm_medium=referral&utm_campaign=watermark" target="_blank">
+        <a
+          href="http://www.tmrow.com/mission?utm_source=footprintmap.org&utm_medium=referral&utm_campaign=watermark"
+          target="_blank"
+        >
           <img src={'/images/built-by-tomorrow.svg'} alt="" />
         </a>
       </div>
@@ -29,15 +32,27 @@ const MobileInfoTab = () => {
       <div className="info-text">
         <ColorBlindCheckbox />
         <p>
-          This project is <a href="https://github.com/corradio/footprintmap" target="_blank">Open Source</a> (See <a href="https://github.com/corradio/footprintmap#data-sources" target="_blank">data sources</a>).
+          This project is{' '}
+          <a href="https://github.com/corradio/footprintmap" target="_blank">
+            Open Source
+          </a>{' '}
+          (See{' '}
+          <a href="https://github.com/corradio/footprintmap#data-sources" target="_blank">
+            data sources
+          </a>
+          ).
         </p>
         <p>
-          Found bugs or have ideas? Report them <a href="https://github.com/corradio/footprintmap/issues/new" target="_blank">here</a>.<br />
+          Found bugs or have ideas? Report them{' '}
+          <a href="https://github.com/corradio/footprintmap/issues/new" target="_blank">
+            here
+          </a>
+          .<br />
         </p>
       </div>
       <div className="social-buttons large-screen-hidden">
         <div>
-          { /* Slack */}
+          {/* Slack */}
           <span className="slack-button">
             <a href="https://slack.tmrow.com" target="_blank" className="slack-btn">
               <span className="slack-ico" />

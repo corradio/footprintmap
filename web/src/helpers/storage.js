@@ -15,7 +15,4 @@ const getKey = (key) => {
   return Cookies.get(key);
 };
 
-export {
-  saveKey,
-  getKey,
-};
+export { saveKey, getKey };

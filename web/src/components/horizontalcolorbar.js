@@ -10,24 +10,16 @@ const PADDING_Y = 10;
 
 const spreadOverDomain = (scale, count) => {
   const [x1, x2] = extent(scale.domain());
-  return range(count).map(v => x1 + (x2 - x1) * v / (count - 1));
+  return range(count).map((v) => x1 + ((x2 - x1) * v) / (count - 1));
 };
 
-const HorizontalColorbar = ({
-  colorScale,
-  currentValue,
-  id,
-  markerColor,
-  ticksCount = 5,
-}) => {
+const HorizontalColorbar = ({ colorScale, currentValue, id, markerColor, ticksCount = 5 }) => {
   const ref = useRef(null);
   const width = useWidthObserver(ref, 2 * PADDING_X);
   const height = useHeightObserver(ref, 2 * PADDING_Y);
 
   const className = `${id} colorbar`;
-  const linearScale = scaleLinear()
-    .domain(extent(colorScale.domain()))
-    .range([0, width]);
+  const linearScale = scaleLinear().domain(extent(colorScale.domain())).range([0, width]);
 
   // Render an empty SVG if the dimensions are not positive
   if (width <= 0 || height <= 0) {
@@ -42,12 +34,7 @@ const HorizontalColorbar = ({
             <stop key={value} offset={index / 9} stopColor={colorScale(value)} />
           ))}
         </linearGradient>
-        <rect
-          className="gradient"
-          fill={`url(#${id}-gradient)`}
-          width={width}
-          height={height}
-        />
+        <rect className="gradient" fill={`url(#${id}-gradient)`} width={width} height={height} />
         {isFinite(currentValue) && (
           <line
             className="marker"
@@ -74,9 +61,11 @@ const HorizontalColorbar = ({
           fontFamily="sans-serif"
           textAnchor="middle"
         >
-          {spreadOverDomain(linearScale, ticksCount).map(t => (
+          {spreadOverDomain(linearScale, ticksCount).map((t) => (
             <g key={`tick-${t}`} className="tick" transform={`translate(${linearScale(t)},0)`}>
-              <text fill="currentColor" y="8" dy="0.81em">{Math.round(t)}</text>
+              <text fill="currentColor" y="8" dy="0.81em">
+                {Math.round(t)}
+              </text>
             </g>
           ))}
         </g>

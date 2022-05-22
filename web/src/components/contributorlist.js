@@ -10,7 +10,7 @@ const ContributorList = () => {
 
   return (
     <div className="contributors">
-      {contributors.map(contributor => (
+      {contributors.map((contributor) => (
         <a key={contributor} href={contributor} rel="noopener noreferrer" target="_blank">
           <img src={`${contributor}.png`} alt={contributor} />
         </a>
