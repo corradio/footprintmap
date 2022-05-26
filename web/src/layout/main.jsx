@@ -28,10 +28,11 @@ import { CARBON_INTENSITY_DOMAIN } from '../helpers/constants';
 const mapStateToProps = (state) => ({
   brightModeEnabled: state.application.brightModeEnabled,
   hasConnectionWarning: state.data.hasConnectionWarning,
+  electricityMixMode: state.application.electricityMixMode,
   version: state.application.version,
 });
 
-const Main = ({ brightModeEnabled }) => {
+const Main = ({ brightModeEnabled, electricityMixMode }) => {
   const location = useLocation();
 
   const showLoadingOverlay = useLoadingOverlayVisible();
@@ -69,6 +70,15 @@ const Main = ({ brightModeEnabled }) => {
                   { value: CARBON_INTENSITY_DOMAIN.ENERGY, label: 'per energy' },
                 ]}
                 value={carbonIntensityDomain}
+                style={{ marginBottom: '.5em' }}
+              />
+              <Toggle
+                onChange={(value) => dispatchApplication('electricityMixMode', value)}
+                options={[
+                  { value: 'production', label: 'territorial' },
+                  { value: 'consumption', label: 'with imports' },
+                ]}
+                value={electricityMixMode}
               />
             </div>
             <LayerButtons />

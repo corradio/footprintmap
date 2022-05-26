@@ -27,6 +27,7 @@ import { getFullZoneName } from '../../helpers/language';
 import { getZoneCarbonIntensity, getRenewableRatio, getLowcarbonRatio } from '../../helpers/zonedata';
 import { formatCarbonIntensityUnit, formatCarbonIntensityDescription } from '../../helpers/formatting';
 // import { CARBON_INTENSITY_DOMAIN } from '../../helpers/constants';
+import { dispatchApplication } from '../../store';
 
 // TODO: Move all styles from styles.css to here
 // TODO: Remove all unecessary id and class tags
@@ -102,8 +103,6 @@ const CountryPanel = ({
     };
   }, [history, parentPage]);
 
-  const [energyMixMode, setEnergyMixMode] = useState(electricityMixMode);
-
   // Redirect to the parent page if the zone is invalid.
   if (!zones[zoneId]) {
     return <Redirect to={parentPage} />;
@@ -111,6 +110,8 @@ const CountryPanel = ({
 
   const datetime = data.year && data.year.toString();
   const co2Intensity = getZoneCarbonIntensity(carbonIntensityDomain, electricityMixMode, data);
+
+  const setEnergyMixMode = (m) => dispatchApplication('electricityMixMode', m);
 
   return (
     <div className="country-panel">
@@ -188,12 +189,12 @@ const CountryPanel = ({
               <span className="country-history-title">
                 {formatCarbonIntensityDescription(carbonIntensityDomain, electricityMixMode)}
               </span>
-              <CountryHistoryCarbonGraph electricityMixMode={energyMixMode} />
+              <CountryHistoryCarbonGraph electricityMixMode={electricityMixMode} />
 
               <span className="country-history-title">
                 {`Total carbon emissions (${electricityMixMode === 'consumption' ? 'incl. imported' : 'territorial'})`}
               </span>
-              <CountryHistoryEmissionsGraph electricityMixMode={energyMixMode} />
+              <CountryHistoryEmissionsGraph electricityMixMode={electricityMixMode} />
 
               <React.Fragment>
                 <span className="country-history-title">Origin of energy</span>
@@ -201,20 +202,20 @@ const CountryPanel = ({
                   <div className="menu">
                     <a
                       onClick={() => setEnergyMixMode('consumption')}
-                      className={energyMixMode === 'consumption' ? 'selected' : null}
+                      className={electricityMixMode === 'consumption' ? 'selected' : null}
                     >
                       consumed
                     </a>
                     |
                     <a
                       onClick={() => setEnergyMixMode('production')}
-                      className={energyMixMode !== 'consumption' ? 'selected' : null}
+                      className={electricityMixMode !== 'consumption' ? 'selected' : null}
                     >
                       produced
                     </a>
                   </div>
                 </div>
-                <CountryHistoryMixGraph electricityMixMode={energyMixMode} />
+                <CountryHistoryMixGraph electricityMixMode={electricityMixMode} />
                 <div>
                   <small>Note: energy from electricity does not account for electricity imported</small>
                 </div>
@@ -247,18 +248,18 @@ const CountryPanel = ({
 
         <p>
           This project is{' '}
-          <a href="https://github.com/corradio/carbonmap" target="_blank">
+          <a href="https://github.com/corradio/footprintmap" target="_blank">
             Open Source
           </a>{' '}
           (See{' '}
-          <a href="https://github.com/corradio/carbonmap#data-sources" target="_blank">
+          <a href="https://github.com/corradio/footprintmap#data-sources" target="_blank">
             data sources
           </a>
           ).{' '}
         </p>
         <p>
           Found bugs or have ideas? Report them{' '}
-          <a href="https://github.com/corradio/carbonmap/issues/new" target="_blank">
+          <a href="https://github.com/corradio/footprintmap/issues/new" target="_blank">
             here
           </a>
           .<br />

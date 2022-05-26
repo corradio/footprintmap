@@ -40,6 +40,8 @@
   position: absolute;
   top: 70px;
   right: 16px;
+  max-width: 400px;
+  text-align: right;
 
   @include respond-to('small') {
     top: 16px;
