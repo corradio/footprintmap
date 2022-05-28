@@ -88,7 +88,7 @@
   "scripts": {
     "build": "snowpack build",
     "develop": "snowpack dev",
-    "deploy": "touch build/.nojekyll && echo 'globalenergyfootprint.org' > build/CNAME && gh-pages -d build -t",
+    "deploy": "touch build/.nojekyll && echo 'footprintmap.org' > build/CNAME && gh-pages -d build -t",
     "lint": "eslint --quiet src --ext jsx",
     "prepare": "cd .. && husky install web/.husky"
   },
