@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
   box-sizing: border-box;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   height: 36px;
   justify-content: flex-end;
   outline: none;
@@ -69,9 +69,11 @@ const InfoButton = styled.div`
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.2);
   }
 `;
-export default ({infoHTML, onChange, options, value}) => {
+export default ({infoHTML, onChange, options, value, style}) => {
   const [tooltipVisible, setTooltipVisible] = useState(false);
-  return /* @__PURE__ */ React.createElement(Wrapper, null, /* @__PURE__ */ React.createElement(Options, null, options.map((o) => /* @__PURE__ */ React.createElement(OptionItem, {
+  return /* @__PURE__ */ React.createElement(Wrapper, {
+    style
+  }, /* @__PURE__ */ React.createElement(Options, null, options.map((o) => /* @__PURE__ */ React.createElement(OptionItem, {
     key: o.value,
     active: o.value === value,
     onClick: () => onChange(o.value)

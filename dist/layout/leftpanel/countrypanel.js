@@ -17,6 +17,7 @@ import {flagUri} from "../../helpers/flags.js";
 import {getFullZoneName} from "../../helpers/language.js";
 import {getZoneCarbonIntensity, getRenewableRatio, getLowcarbonRatio} from "../../helpers/zonedata.js";
 import {formatCarbonIntensityUnit, formatCarbonIntensityDescription} from "../../helpers/formatting.js";
+import {dispatchApplication} from "../../store.js";
 const CountryLowCarbonGauge = (props) => {
   const electricityMixMode = useSelector((state) => state.application.electricityMixMode);
   const d = useCurrentZoneData();
@@ -77,7 +78,6 @@ const CountryPanel = ({
       document.removeEventListener("keyup", keyHandler);
     };
   }, [history, parentPage]);
-  const [energyMixMode, setEnergyMixMode] = useState(electricityMixMode);
   if (!zones[zoneId]) {
     return /* @__PURE__ */ React.createElement(Redirect, {
       to: parentPage
@@ -85,6 +85,7 @@ const CountryPanel = ({
   }
   const datetime = data.year && data.year.toString();
   const co2Intensity = getZoneCarbonIntensity(carbonIntensityDomain, electricityMixMode, data);
+  const setEnergyMixMode = (m) => dispatchApplication("electricityMixMode", m);
   return /* @__PURE__ */ React.createElement("div", {
     className: "country-panel"
   }, /* @__PURE__ */ React.createElement("div", {
@@ -157,11 +158,11 @@ const CountryPanel = ({
   }, /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement("span", {
     className: "country-history-title"
   }, formatCarbonIntensityDescription(carbonIntensityDomain, electricityMixMode)), /* @__PURE__ */ React.createElement(CountryHistoryCarbonGraph, {
-    electricityMixMode: energyMixMode
+    electricityMixMode
   }), /* @__PURE__ */ React.createElement("span", {
     className: "country-history-title"
   }, `Total carbon emissions (${electricityMixMode === "consumption" ? "incl. imported" : "territorial"})`), /* @__PURE__ */ React.createElement(CountryHistoryEmissionsGraph, {
-    electricityMixMode: energyMixMode
+    electricityMixMode
   }), /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("span", {
     className: "country-history-title"
   }, "Origin of energy"), /* @__PURE__ */ React.createElement("div", {
@@ -170,12 +171,12 @@ const CountryPanel = ({
     className: "menu"
   }, /* @__PURE__ */ React.createElement("a", {
     onClick: () => setEnergyMixMode("consumption"),
-    className: energyMixMode === "consumption" ? "selected" : null
+    className: electricityMixMode === "consumption" ? "selected" : null
   }, "consumed"), "|", /* @__PURE__ */ React.createElement("a", {
     onClick: () => setEnergyMixMode("production"),
-    className: energyMixMode !== "consumption" ? "selected" : null
+    className: electricityMixMode !== "consumption" ? "selected" : null
   }, "produced"))), /* @__PURE__ */ React.createElement(CountryHistoryMixGraph, {
-    electricityMixMode: energyMixMode
+    electricityMixMode
   }), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("small", null, "Note: energy from electricity does not account for electricity imported")), /* @__PURE__ */ React.createElement("br", null), null), /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("span", {
     className: "country-history-title"
   }, "Gross domestic product"), /* @__PURE__ */ React.createElement(CountryHistoryGdpGraph, null)), /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("span", {
@@ -183,13 +184,13 @@ const CountryPanel = ({
   }, "Energy intensity of the economy"), /* @__PURE__ */ React.createElement(CountryHistoryEnergyIntensity, null)), /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("span", {
     className: "country-history-title"
   }, "Population"), /* @__PURE__ */ React.createElement(CountryHistoryPopulationGraph, null)))), /* @__PURE__ */ React.createElement("p", null, "This project is", " ", /* @__PURE__ */ React.createElement("a", {
-    href: "https://github.com/corradio/carbonmap",
+    href: "https://github.com/corradio/footprintmap",
     target: "_blank"
   }, "Open Source"), " ", "(See", " ", /* @__PURE__ */ React.createElement("a", {
-    href: "https://github.com/corradio/carbonmap#data-sources",
+    href: "https://github.com/corradio/footprintmap#data-sources",
     target: "_blank"
   }, "data sources"), ").", " "), /* @__PURE__ */ React.createElement("p", null, "Found bugs or have ideas? Report them", " ", /* @__PURE__ */ React.createElement("a", {
-    href: "https://github.com/corradio/carbonmap/issues/new",
+    href: "https://github.com/corradio/footprintmap/issues/new",
     target: "_blank"
   }, "here"), ".", /* @__PURE__ */ React.createElement("br", null)), /* @__PURE__ */ React.createElement("div", {
     className: "social-buttons large-screen-hidden"

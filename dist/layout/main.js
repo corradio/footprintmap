@@ -16,9 +16,10 @@ import {CARBON_INTENSITY_DOMAIN} from "../helpers/constants.js";
 const mapStateToProps = (state) => ({
   brightModeEnabled: state.application.brightModeEnabled,
   hasConnectionWarning: state.data.hasConnectionWarning,
+  electricityMixMode: state.application.electricityMixMode,
   version: state.application.version
 });
-const Main = ({brightModeEnabled}) => {
+const Main = ({brightModeEnabled, electricityMixMode}) => {
   const location = useLocation();
   const showLoadingOverlay = useLoadingOverlayVisible();
   const carbonIntensityDomain = useCarbonIntensityDomain();
@@ -50,7 +51,15 @@ const Main = ({brightModeEnabled}) => {
       {value: CARBON_INTENSITY_DOMAIN.GDP, label: "per gdp"},
       {value: CARBON_INTENSITY_DOMAIN.ENERGY, label: "per energy"}
     ],
-    value: carbonIntensityDomain
+    value: carbonIntensityDomain,
+    style: {marginBottom: ".5em"}
+  }), /* @__PURE__ */ React.createElement(Toggle, {
+    onChange: (value) => dispatchApplication("electricityMixMode", value),
+    options: [
+      {value: "production", label: "territorial"},
+      {value: "consumption", label: "with imports"}
+    ],
+    value: electricityMixMode
   })), /* @__PURE__ */ React.createElement(LayerButtons, null), /* @__PURE__ */ React.createElement("div", {
     className: "text-title",
     style: {color: brightModeEnabled ? "#000" : "#fff"}

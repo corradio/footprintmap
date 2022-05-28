@@ -717,6 +717,8 @@ label[for=checkbox-colorblind] {
   position: absolute;
   top: 70px;
   right: 16px;
+  max-width: 400px;
+  text-align: right;
 }
 @media (max-width: 767px) {
   .controls-container {
