@@ -2,7 +2,7 @@
 An interactive visualisation of the CO<sub>2</sub> footprint of the world economy built with [React](https://reactjs.org/) and [mapbox GL](https://github.com/mapbox/mapbox-gl-js/). Try it out at [http://www.footprintmap.org](http://www.footprintmap.org).
 
 ### Data sources
-- [BP Statistical Review of World Energy 2021](https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy.html)
+- [BP Statistical Review of World Energy 2022](https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy.html)
 - [Global Carbon Budget 2021](https://doi.org/10.18160/GCP-2021)
 - [Worldbank population and GDP](https://databank.worldbank.org/)
 

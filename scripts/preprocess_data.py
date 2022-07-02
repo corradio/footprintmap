@@ -228,7 +228,7 @@ def convert_ej_to_twh(f): return f * 277.7778 # EJ to TWh
 bp_sheet_mapping = {
     # sheet -> field path
     'Primary Energy Consumption': {'key': 'totalPrimaryEnergyConsumptionTWh', 'convert': convert_ej_to_twh},
-    'Electricity Generation ': {'key': 'totalElectricityGenerationTWh'},
+    'Electricity Generation': {'key': 'totalElectricityGenerationTWh'},
     # Note: total primary energy production is not directly accessible
 
     'Oil Consumption - Tonnes': {'key': 'primaryEnergyConsumptionTWh.oil', 'convert': convert_mtoe_to_twh},
@@ -261,7 +261,7 @@ bp_sheet_mapping = {
 for sheet_name in bp_sheet_mapping.keys():
     print(f'Reading BP {sheet_name}..')
     df_bp = pd.read_excel(
-        'data/bp-stats-review-2021-all-data.xlsx',
+        'data/bp-stats-review-2022-all-data.xlsx',
         sheet_name=sheet_name,
         header=BP_SKIP_HEADER)
     df_bp = df_bp.rename(
