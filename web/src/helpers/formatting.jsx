@@ -117,8 +117,11 @@ export const formatCarbonIntensityShortUnit = (carbonIntensityDomain) => {
 export const formatCarbonIntensityDescription = (carbonIntensityDomain, electricityMixMode) => {
   let desc = '';
   if (carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.ENERGY) {
-    desc += `Carbon footprint of energy`;
-    desc += ` ${electricityMixMode !== 'consumption' ? 'produced' : 'consumed'}`;
+    if (electricityMixMode === 'consumption') {
+      desc += 'Carbon footprint of energy consumed';
+    } else {
+      desc += 'Territorial footprint of energy produced';
+    }
   } else if (carbonIntensityDomain === CARBON_INTENSITY_DOMAIN.POPULATION) {
     desc += `Carbon footprint per capita`;
     desc += ` (${electricityMixMode !== 'consumption' ? 'territorial' : 'incl. imported'})`;

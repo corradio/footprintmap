@@ -108,7 +108,7 @@ const CountryHistoryMixGraph = ({ displayByEmissions, electricityMixMode, isMobi
   const endTime = useCurrentZoneHistoryEndTime();
 
   // Recalculate graph data only when the history data is changed
-  const { data, layerKeys, layerFill, valueAxisLabel, maxTotalValue } = useMemo(
+  const { data, layerKeys, layerFill, valueAxisLabel } = useMemo(
     () => prepareGraphData(historyData, co2ColorScale, displayByEmissions, electricityMixMode),
     [historyData, co2ColorScale, displayByEmissions, electricityMixMode]
   );
@@ -177,7 +177,7 @@ const CountryHistoryMixGraph = ({ displayByEmissions, electricityMixMode, isMobi
         selectedLayerIndex={selectedLayerIndex}
         isMobile={isMobile}
         height="10em"
-        valueAxisMax={maxTotalValue}
+        // valueAxisMax={maxTotalValue}
       />
       {tooltip && (
         <CountryPanelProductionTooltip

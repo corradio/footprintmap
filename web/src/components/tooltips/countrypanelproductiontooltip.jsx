@@ -92,7 +92,7 @@ const CountryPanelProductionTooltip = ({
     getRatioPercent(usage, totalElectricity),
     electricityMixMode === 'consumption' ? 'consumed' : 'produced',
     getFullZoneName(zoneData.countryCode),
-    __(mode)
+    mode
   );
   headline = headline.replace('id="country-flag"', `class="flag" src="${flagUri(zoneData.countryCode)}"`);
 
