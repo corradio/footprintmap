@@ -56,7 +56,7 @@ const CountryPanelProductionTooltip = ({
   const usage = Math.abs(displayByEmissions ? electricity * co2Intensity * 1e3 : electricity);
   const totalElectricity = getTotalElectricity(zoneData, displayByEmissions, electricityMixMode);
   const co2IntensitySource = isStorage ? (zoneData.dischargeCo2IntensitySources || {})[resource] : (zoneData.productionCo2IntensitySources || {})[resource];
-  let headline = __(isExport ? displayByEmissions ? "emissionsStoredUsing" : "electricityStoredUsing" : displayByEmissions ? "emissionsComeFrom" : "electricityComesFrom", getRatioPercent(usage, totalElectricity), electricityMixMode === "consumption" ? "consumed" : "produced", getFullZoneName(zoneData.countryCode), __(mode));
+  let headline = __(isExport ? displayByEmissions ? "emissionsStoredUsing" : "electricityStoredUsing" : displayByEmissions ? "emissionsComeFrom" : "electricityComesFrom", getRatioPercent(usage, totalElectricity), electricityMixMode === "consumption" ? "consumed" : "produced", getFullZoneName(zoneData.countryCode), mode);
   headline = headline.replace('id="country-flag"', `class="flag" src="${flagUri(zoneData.countryCode)}"`);
   return /* @__PURE__ */ React.createElement(Tooltip, {
     id: "countrypanel-production-tooltip",

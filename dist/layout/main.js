@@ -57,7 +57,7 @@ const Main = ({brightModeEnabled, electricityMixMode}) => {
     onChange: (value) => dispatchApplication("electricityMixMode", value),
     options: [
       {value: "production", label: "territorial"},
-      {value: "consumption", label: "with imports"}
+      {value: "consumption", label: "with import/exports"}
     ],
     value: electricityMixMode
   })), /* @__PURE__ */ React.createElement(LayerButtons, null), /* @__PURE__ */ React.createElement("div", {

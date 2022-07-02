@@ -67,7 +67,7 @@ const CountryHistoryMixGraph = ({displayByEmissions, electricityMixMode, isMobil
   const historyData = useCurrentZoneHistory();
   const startTime = useCurrentZoneHistoryStartTime();
   const endTime = useCurrentZoneHistoryEndTime();
-  const {data, layerKeys, layerFill, valueAxisLabel, maxTotalValue} = useMemo(() => prepareGraphData(historyData, co2ColorScale, displayByEmissions, electricityMixMode), [historyData, co2ColorScale, displayByEmissions, electricityMixMode]);
+  const {data, layerKeys, layerFill, valueAxisLabel} = useMemo(() => prepareGraphData(historyData, co2ColorScale, displayByEmissions, electricityMixMode), [historyData, co2ColorScale, displayByEmissions, electricityMixMode]);
   const backgroundMouseMoveHandler = useMemo(() => (timeIndex) => {
     dispatchApplication("selectedZoneTimeIndex", timeIndex);
   }, []);
@@ -108,8 +108,7 @@ const CountryHistoryMixGraph = ({displayByEmissions, electricityMixMode, isMobil
     selectedTimeIndex,
     selectedLayerIndex,
     isMobile,
-    height: "10em",
-    valueAxisMax: maxTotalValue
+    height: "10em"
   }), tooltip && /* @__PURE__ */ React.createElement(CountryPanelProductionTooltip, {
     mode: tooltip.mode,
     position: tooltip.position,
