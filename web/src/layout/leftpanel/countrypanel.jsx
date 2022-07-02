@@ -264,22 +264,6 @@ const CountryPanel = ({
           </a>
           .<br />
         </p>
-
-        <div className="social-buttons large-screen-hidden">
-          <div>
-            {/* Facebook share */}
-            <div className="fb-share-button" data-href="https://www.electricitymap.org/" data-layout="button_count" />
-            {/* Twitter share */}
-            <a className="twitter-share-button" data-url="https://www.electricitymap.org" data-via="electricitymap" />
-            {/* Slack */}
-            <span className="slack-button">
-              <a href="https://slack.tmrow.com" target="_blank" className="slack-btn">
-                <span className="slack-ico" />
-                <span className="slack-text">Slack</span>
-              </a>
-            </span>
-          </div>
-        </div>
       </div>
     </div>
   );

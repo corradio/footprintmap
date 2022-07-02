@@ -41,17 +41,6 @@ const MobileInfoTab = () => {
           .<br />
         </p>
       </div>
-      <div className="social-buttons large-screen-hidden">
-        <div>
-          {/* Slack */}
-          <span className="slack-button">
-            <a href="https://slack.tmrow.com" target="_blank" className="slack-btn">
-              <span className="slack-ico" />
-              <span className="slack-text">Slack</span>
-            </a>
-          </span>
-        </div>
-      </div>
     </div>
   );
 };
