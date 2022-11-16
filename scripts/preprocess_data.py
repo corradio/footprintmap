@@ -105,7 +105,7 @@ def ensure_year_exists(country_iso2, year):
 
 # ** Read emission data
 print('Reading Global Carbon Project..')
-filename = 'National_Carbon_Emissions_2021v1.0.xlsx'
+filename = 'National_Fossil_Carbon_Emissions_2022v1.0.xlsx'
 df_terr_emissions = pd.read_excel(
     f'data/{filename}',
     sheet_name='Territorial Emissions',

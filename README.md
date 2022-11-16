@@ -3,7 +3,7 @@ An interactive visualisation of the CO<sub>2</sub> footprint of the world econom
 
 ### Data sources
 - [BP Statistical Review of World Energy 2022](https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy.html)
-- [Global Carbon Budget 2021](https://doi.org/10.18160/GCP-2021)
+- [Global Carbon Budget 2022](https://doi.org/10.5194/essd-14-4811-2022)
 - [Worldbank population and GDP](https://databank.worldbank.org/)
 
 The dataset is merged by a python script [here](scripts) and the resulting dataset can be found [here](web/src/globalcarbon.json).
