@@ -1,5 +1,5 @@
-import { R as Router, c as context, m as matchPath } from './common/react-router-0d000291.js';
-export { d as Redirect, e as Route, R as Router, S as Switch, b as useHistory, a as useLocation, u as useParams } from './common/react-router-0d000291.js';
+import { R as Router, c as context, m as matchPath } from './common/react-router-f4388c3a.js';
+export { d as Redirect, e as Route, R as Router, S as Switch, a as useHistory, u as useLocation, b as useParams } from './common/react-router-f4388c3a.js';
 import { _ as _inheritsLoose } from './common/inheritsLoose-978d85dc.js';
 import { r as react } from './common/index-27b27678.js';
 import { c as createBrowserHistory, a as createHashHistory, i as invariant, d as createLocation, e as createPath } from './common/history-fb8a2dff.js';

@@ -25,7 +25,7 @@ Object.entries(globalcarbon.countries).forEach(([k, v]) => {
   if (!zones2[k]) {
     console.error(`Couldn't copy global carbon data ${k} to zones. Is a geometry missing?`);
   } else {
-    zones2[k] = {...zones2[k], ...v.find((d) => d.year === CURRENT_YEAR)};
+    zones2[k] = {...zones2[k], ...v.find((d) => d && d.year === CURRENT_YEAR)};
   }
   initialDataState.histories[k] = v;
 });
