@@ -1152,4 +1152,4 @@ function useParams() {
   return match ? match.params : {};
 }
 
-export { Router as R, Switch as S, useHistory as a, useParams as b, context as c, Redirect as d, Route as e, matchPath as m, useLocation as u };
+export { Router as R, Switch as S, useLocation as a, useHistory as b, context as c, Redirect as d, Route as e, matchPath as m, useParams as u };
